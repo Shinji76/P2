@@ -20,6 +20,8 @@ private:
     nodo* first;
     static nodo* copia(nodo*);
     static void distruggi(nodo*);
+    static nodo* copia_rec(nodo*);
+    static void distruggi_rec(nodo*);
 };
 #endif
 
