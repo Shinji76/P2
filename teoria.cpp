@@ -174,7 +174,7 @@ public:
     telefonata();
     orario Inizio() const;
     orario Fine() const;
-    int Numero() const;
+    int Numero() const; 
     bool operator== (const telefonata&) const;
 };
 
