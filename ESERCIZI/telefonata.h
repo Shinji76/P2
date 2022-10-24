@@ -8,11 +8,11 @@ private:
     orario inizio, fine;
     int numero;
 public:
-    telefonata(orario, orario, int);
     telefonata();
+    telefonata(orario, orario, int);
     orario Inizio() const;
     orario Fine() const;
-    int numero() const;
+    int Numero() const;
     bool operator== (const telefonata&) const;
 };
 

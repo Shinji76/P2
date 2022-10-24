@@ -37,6 +37,6 @@ int main() {
     C x, y(1), z(2);
     const C v(2);
     z = x.F(y); /* x è un oggetto di tipo C che viene creato con il costruttore di default ridefinito, chiamo il metodo F sull'oggetto C, il metodo F richiede come parametro un oggetto C passato per valore quindi il tipo va bene. */
-    v.F(y); /* v è un oggetto di tipo const C, mentre il metodo F richiede come parametro un oggetto C passato per valore, non tipa perchè verrebbe perso il const e restituisce ERRORE */
+    //v.F(y); /* v è un oggetto di tipo const C, mentre il metodo F richiede come parametro un oggetto C passato per valore, non tipa perchè verrebbe perso il const e restituisce ERRORE */
     v.G(y); /* v è un oggetto di tipo const C, G è un metodo che richiede una variabile di tipo C */
 }

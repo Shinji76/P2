@@ -42,6 +42,18 @@ void orario::StampaSecondi() const {
     std::cout << sec << std::endl;
 }
 
+orario orario::operator+(orario o) const {
+    orario aux;
+    aux.sec = (sec + o.sec) % 86400;
+    return aux;
+}
+
+orario orario::operator-(orario o) const {
+    orario aux;
+    aux.sec = (sec - o.sec) % 86400;
+    return aux;
+}
+
 int main() {
     orario mezzanotte;
     orario adesso(14, 25);

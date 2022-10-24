@@ -11,7 +11,7 @@ bool byConstReference(const C& x) {
     return true;
 }
 
-int main() {
+int main() { 
     C obj;
     for(int i=0; i<10000000; i++)
         byValue(obj);
