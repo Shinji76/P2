@@ -22,10 +22,8 @@ int telefonata::Numero() const{
     return numero;
 }
 
-bool telefonata::operator==(const telefonata& t) const {
-    return  inizio = t.inizio &&
-            fine = t.fine &&
-            numero = t.numero;
+bool telefonata::operator==(const telefonata& t) {
+    return  inizio = t.inizio && fine = t.fine && numero = t.numero;
 }
 
 std::ostream& operator<<(std::ostream& s, const telefonata& t) {

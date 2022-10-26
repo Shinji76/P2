@@ -11,5 +11,6 @@ public:
     orario UnOraPiuTardi();
     void AvanzaUnOra();
     void StampaSecondi() const;
-
+    orario operator+ (orario) const; 
+    orario operator- (orario) const; 
 };

@@ -13,7 +13,7 @@ public:
     orario Inizio() const;
     orario Fine() const;
     int Numero() const;
-    bool operator== (const telefonata&) const;
+    bool operator==(const telefonata&);
 };
 
 std::ostream operator<<(std::ostream&, const telefonata&);

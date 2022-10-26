@@ -4,15 +4,6 @@
 #include "telefonata.h"
 
 class bolletta {
-public:
-    bolletta();
-    bool Vuota() const;
-    void Aggiungi_telefonata(const telefonata&);
-    void Togli_telefonata(const telefonata&);
-    telefonata Estrai_una();
-    bolletta& operator= (const bolletta&);
-    bolletta (const bolletta&);          //ridefinizione costtruttore di copia
-    ~bolletta();        //distruttore bolletta (~ = alt+1+2+6)
 private:
     class nodo {        //classe annidata nodo
     public:
@@ -22,6 +13,28 @@ private:
         nodo* next;
         ~nodo();
     };
+public:
+    class iteratore {
+    friend class bolletta;
+    private:
+        bolletta::nodo* punt;
+    public:
+        bool operator== (const iteratore&) const;
+        bool operator!= (const iteratore&) const;
+        iteratore& operator++();        //operator++ prefisso
+        iteratore operator++(int);      //operator++ postfisso
+    };
+    bolletta();
+    ~bolletta();        //distruttore bolletta (~ = alt+1+2+6)
+    bolletta (const bolletta&);          //ridefinizione costtruttore di copia
+    bolletta& operator= (const bolletta&);      //assegnazione profonda
+    bool Vuota() const;
+    void Aggiungi_telefonata(const telefonata&);
+    void Togli_telefonata(const telefonata&);
+    telefonata Estrai_una();
+    iteratore begin() const;
+    iteratore end() const;
+    telefonata& operator[] (const iteratore&) const;
     nodo* first;
     static nodo* copia(nodo*);
     static void distruggi(nodo*);

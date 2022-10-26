@@ -1,3 +1,4 @@
+#include<iostream>
 #include "bolletta.h"
 
 bolletta::nodo::nodo() : next(0) { }     //costruttore di default per campo dati info  
@@ -28,7 +29,7 @@ void bolletta::Aggiungi_telefonata(const telefonata& t) {
 }
 
 void bolletta::Togli_telefonata(const telefonata& t) {
-    nodo* p = first, *prec = nullptr;
+    nodo* p = first, *prec = 0;
     while(p && !(p->info==t)) {
         prec = p;
         p = p->next;
@@ -52,7 +53,7 @@ telefonata bolletta::Estrai_una() {     //PRE: la bolletta non deve essere vuota
 
 bolletta::nodo* bolletta::copia(nodo* p) {
     if (!p)
-        return nullptr;
+        return 0;
     nodo* primo = new nodo(p->info, 0);
     nodo* q = primo;
     while(p->next) {
@@ -64,9 +65,9 @@ bolletta::nodo* bolletta::copia(nodo* p) {
 }
 
 void bolletta::distruggi(nodo* p) {
-    if(p!=nullptr) {
+    if(p!=0) {
         nodo*q = p;
-        while(p!=nullptr) {
+        while(p!=0) {
             p = p->next;
             delete q;
             q = p;
@@ -76,7 +77,7 @@ void bolletta::distruggi(nodo* p) {
 
 bolletta::nodo* bolletta::copia_rec(nodo*p) {
     if(!p)
-        return nullptr;
+        return 0;
     else
         return new nodo(p->info, copia_rec(p->next));
 }
@@ -116,6 +117,27 @@ bolletta Chiamate_a(int num, bolletta& b) {
     }
     b = resto;
     return selezionate;
+}
+
+bool bolletta::iteratore::operator==(const iteratore& i) const {
+    return punt == i.punt;
+}
+
+bool bolletta::iteratore::operator!=(const iteratore& i) const {
+    return punt != i.punt;
+}
+
+bolletta::iteratore& bolletta::iteratore::operator++() {
+    if(punt)
+        punt = punt->next;
+        return *this;
+}
+
+bolletta::iteratore bolletta::iteratore::operator++(int) {
+    iteratore aux = *this;
+    if(punt)
+        punt = punt->next;
+    return aux;
 }
 
 int main () {
