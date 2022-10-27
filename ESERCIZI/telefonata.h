@@ -16,5 +16,5 @@ public:
     bool operator==(const telefonata&);
 };
 
-std::ostream operator<<(std::ostream&, const telefonata&);
+std::ostream& operator<<(std::ostream&, const telefonata&);
 #endif

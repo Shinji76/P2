@@ -1,7 +1,6 @@
 #include "telefonata.h"
 #include <iostream>
 
-
 telefonata::telefonata(orario i, orario f, int n) {
     inizio = i;
     fine = f;
@@ -23,9 +22,13 @@ int telefonata::Numero() const{
 }
 
 bool telefonata::operator==(const telefonata& t) {
-    return  inizio = t.inizio && fine = t.fine && numero = t.numero;
+    return inizio == t.inizio && fine == t.fine && numero == t.numero;
 }
 
 std::ostream& operator<<(std::ostream& s, const telefonata& t) {
     return s << "INIZIO" << t.Inizio() << "FINE" << t.Fine() << "NUMERO" << t.Numero() << std::endl;
+}
+
+int main() {
+    
 }

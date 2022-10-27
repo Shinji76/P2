@@ -18,13 +18,13 @@ orario::orario(int o, int m, int s) {
         sec = o * 3600 + m * 60 + s;
 }
 
-int orario::Ore() {
+int orario::Ore() const {
     return sec / 3600;
 }
-int orario::Minuti() {
+int orario::Minuti() const {
     return (sec/60) % 60;
 }
-int orario::Secondi() {
+int orario::Secondi() const {
     return sec % 60;
 }
 
@@ -54,6 +54,14 @@ orario orario::operator-(orario o) const {
     return aux;
 }
 
+bool orario::operator==(const orario& o) const {
+    return o.sec == sec;
+}
+
+std::ostream& operator<<(std::ostream& s, const orario& o) {
+    return s << o.Ore() << o.Minuti() << o.Secondi();
+}
+/*
 int main() {
     orario mezzanotte;
     orario adesso(14, 25);
@@ -61,3 +69,4 @@ int main() {
     std::cout << adessoPreciso.Secondi() << std::endl;
     std::cout << mezzanotte.Ore() << std::endl;
 }
+*/
