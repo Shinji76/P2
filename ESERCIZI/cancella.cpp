@@ -1,20 +1,18 @@
 #include <iostream>
 
 class C {
-    int A[1000];
+private:
+    int dato;
+public:
+    C(int);
+    static int cont;
 };
 
-bool byValue(C x) {
-    return true;
-}
-bool byConstReference(const C& x) {
-    return true;
-}
+//file.cpp
+int C::cont = 0;
+C::C(int n) {cont++; dato = n;}
 
-int main() { 
-    C obj;
-    for(int i=0; i<10000000; i++)
-        byValue(obj);
-    for(int i=0; i<10000000; i++)
-        byConstReference(obj);
+int main() {
+    C c1(1), c2(2);
+    std::cout << C::cont << std::endl;
 }

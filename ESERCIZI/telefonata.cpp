@@ -1,11 +1,7 @@
 #include "telefonata.h"
 #include <iostream>
 
-telefonata::telefonata(orario i, orario f, int n) {
-    inizio = i;
-    fine = f;
-    numero = n;
-}
+telefonata::telefonata(orario i, orario f, int n) : inizio(i), fine(f), numero(n) { }
 
 telefonata::telefonata() : numero(0) { }
 
