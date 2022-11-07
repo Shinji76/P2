@@ -377,14 +377,14 @@ int main() {
 ``` 
 
 L'istanziazione del template della funzione **min** può avvenire in 2 modi:  
-- Istanziazione implicita
+- ***Istanziazione implicita***
 
 ``` cpp
 k = min(i, j);
 t = min(r, s);
 ```
 
-- Istanziazione esplicita
+- ***Istanziazione esplicita***
 
 ``` cpp
 k = min<int>(i, j);
@@ -393,7 +393,26 @@ t = min<orario>(r, s);
 
 I template possono accettare sia ***parametri di tipo*** che ***parametri valore*** di qualche tipo.  
 
+I template come le funzioni possono avere dei valori di default.  
+Ad esempio:
+
+```cpp
+template <class Tipo = int, usingned int size = 1024>
+class Buffer {
+	...	
+};
+```
+Che produce questo risultato:
+
+``` cpp
+Buffer <> ib;				//Buffer <int, 1024> entrambi di default
+Buffer <string> sb;			//Buffer <string, 1024>	secondo par di default
+Buffer <string, 500> sbs;	//Buffer <string, 500> nessuno di default
+```
+
 Quando viene usata l'istanziazione implicita del template il tipo di ritorno dell'istanza del template non viene considerato nella *deduzione degli argomenti*.  
+
+## ALGORITMO DI DEDUZIONE
 
 L'***algoritmo di deduzione degli argomenti di template*** esamina da sinistra a destra i parametri attuali passati all'istanza di template, se i parametri attuali hanno tipo concorde, allora il programma compila e restituisce un tipo concorde ai parametri attuali, se i parametri non hanno tipo concorde il programma non compila.  
 Ad esempio:
@@ -410,3 +429,137 @@ int main() {
 ``` 
 
 **d** è di tipo *double*, **i** è di tipo *int* e quindi NON compila.  
+
+Nei template non esiste il concetto di compilazione separata, questo comporta 2 problemi:  
+- Information hiding.
+- Gestione delle istanze multiple di template.
+
+Per l'information hiding non si può fare niente, con l'utilizzo di template non è possibile usare il principio dell'information hiding.  
+Per risolvere l'istanziazione multipla di template invece basta usare la dichiarazione esplicita del template.  
+Ad esempio:  
+
+``` cpp
+//template
+template <class Tipo>
+Tipo min(Tipo a, Tipo b) {
+	return a < b ? a : b;
+}
+
+//istanza
+template int min(int, int);
+```
+
+Devo inoltre ricordarmi di specificare al momento della compilazione il flag  
+	
+	-fno-implicit-templates  
+
+che impedirà al compilatore di istanziare le dichiarazioni implicite di template, ed eviterà così che l'istanziazione dello stesso identico template venga effettuata più volte.  
+
+**N.B:** Nonostante il template vada messo in un header file è good practice separare sempre la dichiarazione di template dalla sua definizione.  
+
+# TEMPLATE DRAWBACKS
+
+L'utilizzo di template come già detto ha il vantaggio principale di rendere il codice più generico e quindi riutilizzabile, ma ha anche dei grossi drawback che richiedono una maggiore attenzione in fase di scrittura rispetto ad altri tipi di programmazione.  
+
+- CODE BLOATING: Avviene quando ci sono istanziazioni implicite multiple di template, si risolve come detto prima, ma se non gestita può far *"esplodere"* il programma.  
+
+- DEBUGGING: l'uso di template rende difficile l'operazione di debugging, si potrebbero avere bug nei template o addirittura solo in specifiche istanziazioni dei template, quindi la programmazione generica con template è più complessa.  
+
+- NESTING: Fare il nesting di template all interno di altri template è difficoltoso sia concettualmente che per il debugging.  
+
+- INFORMATION HIDING: Non esiste l'information hiding se si utilizzano template.  
+
+- BUILD: essendo contenuto nell header ogni minimo cambio del template richiede il rebuilding di tutti i file, per progetti di grosse dimensioni può essere una grossa perdita di tempo e in ogni caso aumenta la complessità.  
+
+# QUEUE
+
+Le code sono un particolare tipo di ADT (*Abstract Data Type*) dove le "entità" sono tenute in ordine e le 2 operazioni principali sono l'aggiunta di un dato alla coda, e la rimozione di un dato dalla testa.  
+Vediamo un esempio di coda templetizzato: 
+
+``` cpp
+template <class T>
+class Queue {
+public:
+	Queue();
+	~Queue();
+	bool empty() const;
+	void add(const T&);
+	T remove();
+private:
+	...
+};
+```
+
+Nelle code si usa **SOLO** l'instaziazione esplicita del template di classe.  
+
+# LIBRERIA STL
+
+La libreria **STL** (*Standard Template Library*) fa parte della libreria **STD**, è composta di:
+- Classi di collezione (*Contenitori*)
+- Template di funzione: (*Algoritmi generici*)  
+
+# VECTOR
+
+Il vettore è una forma di contenitore dinamico implementato nella libreria STL. È un template di classe che generalizza gli array dinamici.  
+
+Caratteristiche principali di vector:  
+- È un contenitore che supporta l'**accesso casuale** agli elementi.
+- L'inserimento e rimozione in **coda** vengono effettuati in tempo "armonizzato" costante.
+- Inserimento e rimozione **arbitraria** in tempo lineare ammortizzato.
+- La capacità di un vector può variare dinamicamente.
+- La gestione della memoria è **automatica**  
+
+**Def:** *Tempo ammortizzato*  
+Il tempo ammortizzato coincide con il tempo medio di n esecuzioni.  
+
+**Vector** è un template di classe con due parametri di tipo ed un parmetro di default per il secondo parametro di tipo (*Allocatore*) ma non ci interessa per l'implementazione.  
+
+``` cpp
+template <class _Tp, class _Alloc = __STL_DEFAULT_ALLOCATOR(_TP)>
+class vector {
+	...
+}
+```
+
+Ci sono 2 modi per utilizzare il **vector** della libreria, quello ereditario dal C e quello del C++.  
+
+``` cpp
+int a[10];				//array stile C
+vector <int> v(10);		//costruttore ad 1 argomento stile C++
+```
+
+Per accedere agli elementi del **vector** invece si usa l'operator [] come nel C
+
+``` cpp
+int n = 5;
+vector <int> v(n);
+int a[n] = {2,4,5,2,-2};
+for(int i=0; i<n; i++) {
+	v[i] = a[i] + 1;
+}
+```
+Oltre al costruttore di default ***vector(size_type)*** è disponibile un costruttore a 2 parametri ***vector(size_type n, const T& t)*** che permette di specificare un valore **t** da cui costruire di copia tutti gli altri elementi.  
+
+# METODI DI VECTOR
+
+### PUSH BACK
+
+**void push_back(const T&):** È il principale metodo di inserimento in coda ad un vettore, il nuovo elemento inserito è creato con il costruttore di copia.  
+
+``` cpp
+int main() {
+	vector <string> sv; string x;
+	while(cin >> x)
+		sv.push_back(x);
+	cout << endl << "Abbiamo letto: " << endl;
+	for(int i=0; i<sv.size; i++)
+		cout << sv[i] << endl;
+}
+```
+
+Ad ogni classe contenitore **C** della libreria **STL** sono associati 2 tipi di iteratore: 
+- **C::iterator**
+- **C::const_iterator**  
+
+Il primo viene usato quando si necessita un accesso agli elementi del contenitore come *L-value*, mentre se basta un accesso come *R-value* è meglio usare l'iteratore costante.  
+
