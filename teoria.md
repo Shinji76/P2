@@ -491,6 +491,15 @@ private:
 ```
 
 Nelle code si usa **SOLO** l'instaziazione esplicita del template di classe.  
+La definizioni di metodi dei template avviene esternamente alla classe, quindi per il template della classe coda la definizione di due metodi *primo* e *ultimo*, avviene così:  
+
+``` cpp
+template <class T>
+Queue<T>::Queue(): primo(0), ultimo(0) { }
+```
+
+I metodi di template di classe non vengono istanziati quando viene istanziata la classe, ma vengono istanziati solo quando strettamente necessario, ovvero se il programma usa quel metodo.  
+
 
 # LIBRERIA STL
 
@@ -562,4 +571,98 @@ Ad ogni classe contenitore **C** della libreria **STL** sono associati 2 tipi di
 - **C::const_iterator**  
 
 Il primo viene usato quando si necessita un accesso agli elementi del contenitore come *L-value*, mentre se basta un accesso come *R-value* è meglio usare l'iteratore costante.  
+
+Gli iteratori sono bidirezionali, ossia funziona sia *i++* che *++i*  
+
+Il const Iterator restituisce un tipo **const T&**  
+
+Ricordo che gli iteratori non hanno costruttori, ma hanno dei metodi *begin()* e *end()* che fungono da tali.  
+
+**N.B:** Un vettore marcato ***const*** ha bisogno per forza di un iteratore costante, mentre se ho un vettore non costante, accetta sia iteratori costanti che non.  
+
+Su ogni tipo di iteratore di qualche istanza sono sempre disponibili le seguenti funzionalità:  
+
+``` cpp
+Cont<Tipo> x;
+Cont<Tipo>::[const_]iterator i;
+
+x.begin();
+x.end();
+*i;
+i++;
+++i;
+i--;
+--i;
+```
+
+Gli iteratori per contenitori **vector** e **deque** permettono di avanzare e retrocedere di un numero arbitrario di elementi in tempo costante.  
+Sono disponibili anche gli operatori di confronto per questi iteratori.  
+
+Tipicamente gli iteratori vengono usati per scorrere gli elementi di un contenitore.  
+
+``` cpp
+Cont<Tipo> x;
+...
+for(Cont<Tipo>::iterator i = x.begin(); i != x.end; i++) {
+	...
+}
+```
+
+Esiste un costruttore che permette di inizializzare un vettore copiando parte di un altro vettore.  
+
+## INSERIMENTI IN VECTOR
+
+Solitamente gli inserimenti negli array e vettori viene fatta in coda con la resize del vettore nel caso non sia abbastanza capiente, nonostante questo è possibile inserire in qualsiasi posizione dell'array.  
+Esistono 3 overloading di *insert* per l'inserimento in posizioni diverse dalla coda.  
+Si può inserire  
+
+Le operazioni di insert possono essere più o meno efficienti a seconda dell'implementazione della classe **vector** usata.  
+
+
+## RIMOZIONE IN VECTOR
+
+Normalmente la rimozione viene fatta all'ultimo elemento del vettore con la funzione ***void pop_back()***  
+Esiste anche un metodo per effettuare la rimozione di un elemento in una posizione arbitraria del vettore e si chiama ***erase(i,j)*** questa funzione è sconsigliata in quanto aumenta la complessità della rimozione da costante a lineare.  
+
+## ACCESSO A TESTA E CODA
+
+Esistono 2 metodi, **front()** e **back()** che servono per accedere a primo e ultimo elemento del contenitore, come per gli iteratori questi 2 metodi sono disponibili sia in versione "standard" che in versione **costante**.  
+Se si prova ad accedere a front() o back() di un contenitore vuoto, il compilatore ritorna un ***Undefined Behavior***.  
+
+## OPERATORE DI INDICIZZAZIONE
+
+L'overloading dell'operatore di indicizzazione **operator []** è disponibile solamente per i contetitori ad accesso casuale come **vector** e **deque**.  
+
+# CONTENITORE LIST
+
+Il contenitore **list** definito nella libreria STL, è una lista doppiamente linkata, ovvia ha il link sia al next che al prev.  
+Questo ha come vantaggio di permettere le operazioni di inserimento e rimozione in posizioni arbtrarie della lista in tempo costante.  
+Un downside dell'utilizzo delle liste è che non è disponibile l'operatore **[]** quindi per arrivare ad una determinata posizione della lista bisogna scorrerla dall'inizio.  
+
+# CONTENITORE BIDIREZIONALE "DEQUE"
+
+Il contenitore **Deque** (*Double Ended QUEue*) unisce alcuni vantaggi delle liste e dei vettori:  
+- Accesso indicizzato efficiente per lettura e scrittura
+- Inserimento ed eliminazione agli estremi del contenitore sono efficienti come in una list  
+- Riallocazione più efficiente rispetto a vector  
+
+# CONTENITORE INSIEME
+
+
+
+# CONTENITORI ASSOCIATIVI
+
+I contenitori associativi differiscono da altri tipi di contenitore in quanto hanno 2 campi dati, il campo "info" e un campo **chiave**, differisce dalle *Hash Tables* perchè le chiavi venogno sempre mantenute ordinate, cosa che nelle Tabelle Hash non succede (*Unordered Map*).  
+
+Nella libreria STL del c++ viene garantita un'efficienza/complessità media di **O(N logN)**.  
+
+# FOR_EACH
+
+Nella libreria STL esiste un template di **for_each** che permette sintassi molto compatte.  
+
+``` cpp
+for_each(InputIterator first, InputIterator last, UnaryFunction f)
+//permette di fare:
+std::for_each(v.begin(), v.end(), print);
+```
 
