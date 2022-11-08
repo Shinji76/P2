@@ -59,7 +59,6 @@ T Queue<T>::remove() {
 }
 
 template <class T>
-
 Queue<T>::~Queue() {
     while(!empty())
         remove();
