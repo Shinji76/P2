@@ -9,13 +9,12 @@ Il template albero<T> deve soddisfare i seguenti vincoli:
 */
 #ifndef TMP_ALBERO
 #define TMP_ALBERO
+#include<iostream>
 
 template <class T>
 class albero {
-    
 private:
     class nodo {
-
     public:
         T info;
         nodo *sx, *cx, *dx;
@@ -45,6 +44,10 @@ private:
         else
             return (t==p->info) || (rec_search(t->sx)) || (rec_search(t->cx)) || (rec_search(t->dx)); 
     }
+
+    static bool equal(nodo* n1, nodo* n2) {
+        
+    }
     nodo<T>* root;
 public:
     albero() : root(nullptr) { }
@@ -71,8 +74,13 @@ public:
     }
 
     bool operator==(const albero& a) const {
-        
+        return 
     }
 };
+
+template <class T>
+std::ostream& operator<<(std::ostream& t, const albero<T>& a) {
+    return t << "Figlio sx: " << a.sx() << " Figlio cx: " << a.cx() << " Figlio dx: " << a.dx() << std::endl;
+}
 
 #endif

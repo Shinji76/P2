@@ -13,20 +13,21 @@ template <class T>
 class Queue {
 public:
     Queue();
+    ~Queue();
     bool empty() const;
     void add(const T&);
     T remove();
-    ~Queue();
     Queue(const Queue&);
     Queue& operator=(const Queue&);
-
+	static void destroy(Queue&);
+	static Queue copia(Queue*);
 private:
     QueueItem<T>* primo;
     QueueItem<T>* ultimo;
 };
 
 template <class T>
-Queue<T>::Queue() : primo(0), ultimo(0) {}
+Queue<T>::Queue() : primo(0), ultimo(0) { }
 
 template <class T>
 bool Queue<T>::empty() const {
@@ -51,7 +52,7 @@ T Queue<T>::remove() {
     }
     QueueItem<T>* p = primo;
     primo = primo->next;
-    if(primo == 0)
+    if(primo == nullptr)
         ultimo = primo;
     T aux = p->info;
     delete p;
@@ -62,6 +63,31 @@ template <class T>
 Queue<T>::~Queue() {
     while(!empty())
         remove();
+}
+
+template <class T>
+void Queue<T>::destroy(Queue& c) {
+	if(c != nullptr) {
+		destroy(c->next);
+		delete c;
+	}
+}
+
+template <class T>
+Queue<T> Queue<T>::copia(Queue* c) {
+    if(c == nullptr)
+        return nullptr;
+    return new QueueItem(c->info, copia(c->next))
+        
+}
+
+template <class T>
+Queue<T>& Queue<T>::operator=(const Queue& c) {
+    if(this != &c) {
+		destroy(primo);
+		c = copy(c.primo);
+    }
+	return *this;
 }
 
 #endif

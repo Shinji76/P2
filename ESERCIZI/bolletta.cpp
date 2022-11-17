@@ -9,7 +9,6 @@ bolletta::bolletta() : first(0) { }
 
 bolletta::bolletta(const bolletta& b) : first(copia(b.first)) { }
 
-
 bolletta::~bolletta() {
     if(first)
         delete first;

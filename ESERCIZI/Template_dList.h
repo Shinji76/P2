@@ -18,14 +18,13 @@ Il template dList<T> deve soddisfare i seguenti vincoli:
 
 template <class T>
 class dList {
-private:
+private:		//PRIVATE dLIST
     class nodo {
-    public:
+    public:		//PUBLIC NODO
         T info;
         nodo *prev;
         nodo *next;
         nodo(const T& i, nodo* p = 0, nodo* n = 0) : info(i), prev(p), next(n) { }
-    
     };
 	nodo* first;
 	nodo* last;
@@ -60,11 +59,11 @@ private:
 		2 CASO BASE: vuota < !vuota => true
 		3 CASO BASE: !vuota < vuota => falso
 		*/
-		if(!f && !s)
+		if(!f && !s)	//se passo il primo check vuol dire che una delle 2 non è vuota, altrimenti do FALSE
 			return false;
-		if(!f)		//se passo il primo check vuol dire che la seconda è vuota quindi true
+		if(!f)			//se f non è vuota vuol dire che s è vuota e ritorno TRUE 
 			return true;
-		if(!s)
+		if(!s)			//se arrivo qua vuol dire per forza che f è vuota e quindi FALSE
 			return false;
 		//CASO COMPLESSO
 		if(f->info < s->info)
@@ -74,55 +73,174 @@ private:
 		return f->info == s->info && lessic_compare(f->next, s->next);
 	}
 
-public:
-    dList(const T& d) : copy(d.first, first, last) { }
-
-	~dList() {
-		if(first) 
-			destroy(first);
-	}
-	
-	void insertFront(const T& t) {
-		first = new nodo(f, nullptr, first);
-		if(last == nullptr)
-			last = first;
-		if(first->next != nullptr)
-			first->next->prev = first;
-	}
-
-	void insertBack(const T& t) {
-
-	}
-
-	bool operator<(const dList d) const {
-		//1 CASO BASE: vuota < vuota => falso
-		//2 CASO BASE: vuota < !vuota => true
-		//3 CASO BASE: !vuota < vuota => falso
-		return lessic_compare(first, d.first);
-	}
-
-	dList(unsigned int k, const T& t) : first(nullptr), last(nullptr) {
-		for(unsigned int i=0; i<k; i++)
-			insertFront(t);
-	}
-	
-	dList& operator=(const dList& d) {
-		if(this != &d) {
-			destroy(first);
-			copy(d.first, first, last);
-		}
-		return *this;
-	}
+public:			//PUBLIC dLIST
+    dList(const T&);
+	~dList();
+	void insertFront(const T&);
+	void insertBack(const T&);
+	bool operator<(const dList) const;
+	dList(unsigned int, const T&);
+	dList& operator=(const dList& d);
 
 	class const_iterator {
+		friend class dList<T>;
 	private:
 		const nodo* ptr;
 		bool EndFlag;
+		//iteratore indefinito IFF  ptr == nullptr && EndFlag == false
+		const_iterator(const nodo* p, bool ef=false) : ptr(p), EndFlag(ef) { }
 	public:
-
-	}
+		const_iterator();
 	
+		const_iterator& operator++();	
+		const_iterator operator++(int);
+		const_iterator& operator--();
+		const_iterator operator--(int);
+
+		const T& operator*() const;
+		const T* operator->() const;
+	};
+
+	const_iterator begin() const;
+	const_iterator end() const;
 };
 
+template <class T>
+dList<T>::dList(const T& d) : copy(d.first, first, last) {}
+
+template <class T>
+dList<T>::~dList() {
+	if(first) 
+		destroy(first);
+}
+
+template <class T>
+dList<T>::dList(const T& d) : copy(d.first, first, last) {}
+	
+template <class T>
+void dList<T>::insertFront(const T& t) {
+	first = new nodo(t, nullptr, first);
+	if(last == nullptr)
+		last = first;
+	if(first->next != nullptr)
+		first->next->prev = first;
+}
+
+template <class T>
+void dList<T>::insertBack(const T& t) {
+	last = new nodo(t, last, nullptr)
+	if(first == nullptr)
+		first == last;
+	if(last->prev != nullptr)
+		last->prev->next = last;
+}
+
+template <class T>
+bool dList<T>::operator<(const dList d) const {
+	return lessic_compare(first, d.first);
+}
+
+template <class T>
+dList<T>::dList(unsigned int k, const T& t) : first(nullptr), last(nullptr) {
+	for(unsigned int i=0; i<k; i++)
+		insertFront(t);
+}
+
+template <class T>
+dList<T>& dList<T>::operator=(const dList& d) {
+	if(this != &d) {
+		destroy(first);
+		copy(d.first, first, last);
+	}
+	return *this;
+}
+
+template <class T>
+dList<T>::const_iterator::const_iterator() : ptr(nullptr), EndFlag(false) { }
+
+template <class T>
+dList<T>::const_iterator& dList<T>::const_iterator::operator++() {		
+	//const_iterator indefinito non faccio azioni
+	if(ptr && !EndFlag) {
+		if(ptr->next == nullptr) {
+			ptr = ptr+1;
+			EndFlag = true;
+		}
+		else {
+			ptr = ptr->next;
+		}
+	}
+	return *this;
+}
+	
+template <class T>
+dList<T>::const_iterator dList<T>::const_iterator::operator++(int) {
+	const_iterator tmp(*this);
+	if(ptr && !EndFlag) {
+		if(ptr->next == nullptr) {
+			ptr = ptr+1;
+			EndFlag = true;
+		}
+		else {
+			ptr = ptr->next;
+		}
+	}
+	return tmp;
+}
+
+template <class T>
+dList<T>::const_iterator& dList<T>::const_iterator::operator--() {
+	if(ptr) {
+		if(ptr->prev == nullptr)
+			ptr = nullptr;
+		else if(EndFlag == true) {
+			ptr = ptr-1;
+			EndFlag =false;
+		}
+		else
+			ptr = ptr->prev;					
+	}
+	return *this;	
+}
+
+template <class T>
+dList<T>::const_iterator dList<T>::const_iterator::operator--(int) {
+	const_iterator tmp(*this);
+	if(ptr) {
+		if(ptr->prev == nullptr)
+			ptr = nullptr;
+		else if(EndFlag == true) {
+			ptr = ptr-1;
+			EndFlag =false;
+		}
+		else
+			ptr = ptr->prev;					
+	}
+	return tmp;
+}
+
+template <class T>
+const T& dList<T>::const_iterator::operator*() const {
+	return ptr->info;
+}
+
+template <class T>
+const T* dList<T>::const_iterator::operator->() const {
+	return &(ptr->info);
+}
+
+template <class T>
+dList<T>::const_iterator dList<T>::begin() const {
+	if(first != nullptr)					//Caso lista vuota
+		return const_iterator(first);
+	return const_iterator();				//Caso lista non vuota
+}
+
+template <class T>
+dList<T>::const_iterator dList<T>::end() const {
+	if(first == nullptr)					//Caso lista vuota
+		return const_iterator();
+	return const_iterator(last+1, true);	//Caso lista non vuota
+}	
 
 #endif

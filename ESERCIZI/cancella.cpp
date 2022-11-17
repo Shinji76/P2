@@ -1,33 +1,31 @@
-/* Definire un template di classe albero<T> i cui oggetti rappresentano un albero 3-ario ove i nodi memorizzano dei valori di tipo T ed hanno 3 figli (invece dei 2 figli di un usuale albero binario).
-Il template albero<T> deve soddisfare i seguenti vincoli:
-1. Deve essere disponibile un costruttore di default che costruisce l’albero vuoto.
-2. Gestione della memoria senza condivisione.
-3. Metodo void insert(const T&): a.insert(t) inserisce nell'albero a una nuova radice che memorizza il valore t ed avente come figli 3 copie di a 
-4. Metodo bool search(const T&): a.search(t) ritorna true se t occorre nell'albero a, altrimenti ritorna false.
-5. Overloading dell'operatore di uguaglianza.
-6. Overloading dell'operatore di output
-*/
+using namespace std;
+#include <iostream>
 
-template <class T>
-class albero3ario {
-private:
-    class nodo
-    {
-    private:
-        int info;
-        nodo* sx, cx, dx;
-    public:
-        nodo();
-        ~nodo();
-    };
-    
-    nodo::nodo() : info(0), *sx(nullptr), *cx(nullptr), *dx(nullptr) {}
-
-    nodo::~nodo()
-    {
-		if()
-    }
-    nodo<T>* root;
+class Z {
 public:
-    albero3ario() : root(nullptr);
+    Z() { cout << "Z0 ";}
+    Z(double d) { cout << "Z1 ";}
 };
+
+class C {
+private:
+    int x;
+    Z w;
+public:
+    C() : w(6.28), x(8) {cout << x << " C0 ";}   //costruttore C default
+    C(int z) : x(z) {cout << x << " C1 ";}       //costruttore C interi
+};
+
+class D : public C {
+private:
+    int y;
+    Z z;
+public:
+    D() : y(0) {cout << "D0 ";}
+    D(int a) : y(a), z(3.14), C(a) {cout << "D1 ";}
+};
+
+int main() {
+    D d; cout << "UNO\n";
+    D e(4); cout << "DUE\n";    
+}
