@@ -1260,3 +1260,23 @@ public:
 
 # DISTRUTTORE STANDARD NELLE CLASSI DERIVATE
 
+Analogamente a quanto succede con il distruttore standard, il distruttore per oggetti di classi derivate distrugge i campi in ordine inverso rispetto a quello di dichiarazione.  
+Avendo il sottooggetto in prima poisizione al momento della dichiarazione, quando viene chiamato il distruttore prima vengono distrutti i campi dati della derivata e poi viene distrutto il sottooggetto.  
+L'ordine per il distruttore è quindi il seguente:  
+- Eseguo il corpo del distruttore della derivata **D** (se presente).  
+- Distruggo i campi dati dell'oggetto derivato **D**.
+- Eseguo il corpo del distruttore del sottooggetto della classe base **B** (se presente).
+- Distruggo i campi dati del sottooggetto di classe base **B**.  
+
+**N.B:** Come per le classi normali senza derivazioni, se non ci sono puntatori nella classe derivata, tipicamente NON serve ridefinire il distruttore, e va bene quello in versione standard.  
+
+# LATE BINDING
+
+Se ho bisogno di un metodo che indifferentemente dal tipo dell'oggetto chiamante faccia quello che ci si aspetta ho bisogno di utilizzare il alte binding.  
+Se ad esempio volessimo usare un metodo **stampaInfo()** che funzioni sia per **orario** che per **dataOra** con il binding statico lasceremmo al compilatore il compito di capire se l'oggetto a cui si riferisce la stampa è un **orario** o un **dataOra** e il compilatore non ha modo di capire a quale tipo riferirsi quindi si riferirà sempre al tipo statico dei puntatori/riferimenti a quell'oggetto.  
+.  
+.  
+.  
+.  
+.  
+**LEZ 15-11-2022 h: 57:40**
