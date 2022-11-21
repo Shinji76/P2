@@ -1272,11 +1272,106 @@ L'ordine per il distruttore è quindi il seguente:
 
 # LATE BINDING
 
-Se ho bisogno di un metodo che indifferentemente dal tipo dell'oggetto chiamante faccia quello che ci si aspetta ho bisogno di utilizzare il alte binding.  
-Se ad esempio volessimo usare un metodo **stampaInfo()** che funzioni sia per **orario** che per **dataOra** con il binding statico lasceremmo al compilatore il compito di capire se l'oggetto a cui si riferisce la stampa è un **orario** o un **dataOra** e il compilatore non ha modo di capire a quale tipo riferirsi quindi si riferirà sempre al tipo statico dei puntatori/riferimenti a quell'oggetto.  
-.  
-.  
-.  
-.  
-.  
-**LEZ 15-11-2022 h: 57:40**
+Se ho bisogno di un metodo che indifferentemente dal tipo dell'oggetto chiamante faccia quello che ci si aspetta ho bisogno di utilizzare il late binding.  
+Se ad esempio volessimo usare un metodo **stampaInfo()** che funzioni sia per **orario** che per **dataOra** con il binding statico lasceremmo al compilatore il compito di capire se l'oggetto a cui si riferisce la stampa è un **orario** o un **dataOra** e il compilatore non ha modo di capire a quale tipo riferirsi, quindi si riferirà sempre al tipo statico dei puntatori/riferimenti a quell'oggetto.  
+
+A questo proposito appunto viene usato il **late binding**, ossia il tipo su cui viene poi chiamato il metodo viene deciso a *run time*.  
+
+Per definire il late binding si usa la keyword ***virtual***
+
+``` cpp
+    class orario {
+        virtual void Stampa();
+        ...
+    };
+
+void G(const orario& o) {
+    o.Stampa();     //chiamata polimorfa
+}
+```
+
+```cpp
+dataora d;
+orario* p = &d;
+p->stampa();
+```
+
+Quello che fa il compilatore è controllare il tipo statico del puntatore, in questo caso è un orario, va dentro la classe orario e controlla se c'è un contratto che si chiama **stampa ( )**, non guarda il tipo di ritorno a meno che il contesto non utilizzi l'espressione ritornata.  
+Il compilatore va a controllare il contratto di stampa e si accorge che è **virtual** e quindi polimorfo, fa il binding lasciando un riferimento ritardato.  
+Questo riferimento punta ad una lista di eventuali funzioni che possono ridefinire il contratto virtuale, e poi a *run time* a seconda del tipo dinamico del puntatore si deciderà quale funzione verrà effettivamente invocata.  
+
+Quando una classe contiene almeno un metodo *virtual*, la classe si definisce come ***classe polimorfa***, mentre i metodi dichiarati *virtual* all'interno di una classe polimorfa si possono definire come ***contratti polimorfi***.  
+
+# OVERRIDING
+
+Nella programmazione orientata agli oggetti, l'**overriding** è una caratteristica del linguaggio che permette a un sottotipo di fornire un'implementazione specifica di un metodo che è già fornita da una delle sue superclassi.  
+L'implementazione del sottotipo *overrida* (rimpiazza) l'implementazione della superclasse fornendo un metodo che ha stesso nome, ma soprattutto **stessi parametri e stesso tipo di ritorno**.  
+
+La versione dell'implementazione del metodo virtuale che sarà utilizzata sarà quella che viene decisa con il late binding a run time. 
+
+### DIFFERENZA OVERRIDING/RIDEFINIZIONE
+
+Se non c'è identica segnatura nel tipo di ritorno (**const** incluso), e nella lista dei parametri non si può parlare di overriding, ma si parlerà di ridefinizione.
+
+
+# DISTRUTTORI VIRTUALI
+
+Il distruttore standard per un tipo derivato dealloca il sottooggetto ma non gestisce i campi dati/metodi del derivato.  
+Per evitare di lasciare garbage in memoria ho bisogno di un distruttore ridefinito che supporti il polimorfismo fra i tipi.
+
+Come per i metodi anche il distruttore può essere definito come virtual così da gestire meglio i tipi dinamici.  
+
+**N.B:** Se definisco come **virtual** il distruttore della base, a cascata tutti i distruttori dei derivati lo "ereditano" e quindi non è strettamente necessario marcare i distruttori derivati come *virtual*, è good practice farlo.  
+
+**N.B:** Se la classe può essere estesa è sempre bene marcare il distruttore come **virtual ~C()**.  
+
+# ABSTRACT BASE CLASS
+
+Un *ABC (Abstract Base Class)*, è una classe "pura" che non può essere istanziata e viene definita tale quando al suo interno ha almeno un metodo virtuale puro, ossia con la sola firma.  
+
+Una *PABC(Pure Abstract Base Class)* è una classe che consiste solo di metodi virtuali puri (detta anche **Interfaccia**).  
+
+Vicevera una classe si dice **concreta** quando fornisce l'implementazione per tutti i metodi della classe.  
+
+**N.B:** Per identificare un metodo virtuale puro si usa la seguente sintassi:  
+
+    virtual void f() = 0;  
+
+È possibile dichiarare puntatori e riferimenti alle **ABC**.  
+Un puntatore o riferimento a queste classi non può **MAI** avere il tipo statico corrispondente al tipo dinamico.  
+I puntatori e riferimenti alle **ABC** vengono detti puntatori *SUPERPOLIMORFI*.  
+
+# DISTRUTTORE VIRTUALE PURO
+
+La sinstassi è simile a quella della definizione dei metodi virtuali puri:  
+
+    virtual ~Base() = 0;
+
+**N.B:** Il distruttore ha bisogno di una definizione, quindi dobbiamo **PER FORZA** ridefinire il distruttore fuori dalla classe, anche se il distruttore standard è sufficiente.  
+
+```cpp
+//classe astratta
+class Base {
+public:
+    virtual ~Base() =0;
+};
+
+Base::~Base() {}       //ridefinizione distruttore
+```
+
+# RTTI
+
+L'acronimo **RTTI** sta per *Run-Time Type Information*.  
+
+L'RTTI serve per capire a run time il tipo dinamico degli oggetti.  
+
+L'RTTI usa 2 operatori: *typeid* e **  
+
+L'operator **typeid** permette di determinare il tipo di un'espressione qualsiasi a tempo di esecuzione.  
+
+Per usare la keyword **typeid** è necessario:
+
+    #include <typeinfo>
+
+**N.B:** Se l'espressione a cui viene applicato il typeid è un *riferimento polimorfo* o un *puntatore polimorfo dereferenziato* allora **typeid** ritorna il tipo dinamico.  
+
