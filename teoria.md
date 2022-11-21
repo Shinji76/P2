@@ -1313,6 +1313,9 @@ La versione dell'implementazione del metodo virtuale che sarà utilizzata sarà 
 
 Se non c'è identica segnatura nel tipo di ritorno (**const** incluso), e nella lista dei parametri non si può parlare di overriding, ma si parlerà di ridefinizione.
 
+# TIPO COVARIANTE
+
+Nella programmazione orientata agli oggetti, un tipo di ritorno covariante di un metodo è uno che può essere rimpiazzato da un tipo *"narrower"* ossia un sottotipo quando un metodo è overridato in una sottoclasse.  
 
 # DISTRUTTORI VIRTUALI
 
