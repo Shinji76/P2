@@ -1378,3 +1378,72 @@ Per usare la keyword **typeid** è necessario:
 
 **N.B:** Se l'espressione a cui viene applicato il typeid è un *riferimento polimorfo* o un *puntatore polimorfo dereferenziato* allora **typeid** ritorna il tipo dinamico.  
 
+# UPCASTING E DOWNCASTING
+
+L'upcasting è la stessa cosa del subtyping, vediamo quindi il downcasting.  
+
+Nella programmazione orientata agli oggetti il **downcasting** è l'atto di convertire un riferimento di una classe base ad uno dei suoi tipi derivati.  
+
+Quindi se una variabile della classe base **B** ha un valore della classe derivata **D**, il *downcasting* è possibile.  
+
+L'operatore usato è il **dynamic_cast**, può essere usato sia per puntatori che per riferimenti, ma viene usato molto più spesso per i primi.  
+
+    B* p puntatore polimorfo
+
+**Downcast:** B* => D*
+
+```cpp
+dynamic_cast<D*>(p) != 0
+//funziona sse
+TD(p) <= D*
+//ossia vuol dire che il tipo dinamico di p è compatibile con il tipo target D*
+```
+
+Se il test precedente viene eseguito su un puntatore che non è compatibile con il target **D** il puntatore diventa *nullptr* e il test fallisce.  
+
+```cpp
+//copiare resto codice file 34
+int main() {
+    B* p = fun();
+    if(dynamic_cast<D*>(p))
+        (static_cast<D*>(p))->f();  //faccio static e non dynamic perchè non mi costa niente
+    E* q = dynamic_cast<E*>(p);
+    if(q)
+        q->g();
+}
+```
+
+# DOWNCASTING vs METODI VIRTUALI
+
+```cpp
+//copiare slide 18 file 33_RTTI
+```
+
+La versione con dynanmic cast risulta poco estensibile perchè se la gerarchia dovesse cambiare (riducendo la gerarchia stessa), dovrei riscrivere tutto.  
+
+La versione con il metodo virtuale invece aggiunge un metodo virtuale che al suo interno chiama il metodo della classe base, se dovessimo estendere il codice potremmo aggiungere e togliere classi derivate e la chiamata finale resterebbe la stessa.  
+
+# SOLID
+
+In programmazione, **SOLID** (*Single responsibility Open-closed, Liskov substitution, Interface segregation Dependency inversion*) è un acronimo che riassume in 5 termini i principi della buona programmazione ad oggetti.  
+
+## SINGLE RESPONSIBILITY PRINCIPLE
+
+Una classe dovrebbe avere una sola "responsabilità", un solo compito e non dovremmo avere classi che risolvono più problemi diversi.  
+
+## OPEN/CLOSED PRINCIPLE
+
+Questo principio dice che un tipo dovrebe essere **aperto** alle estensioni (derivazioni di classe), ma dovrebbe essere **chiuso** per le modifiche, e applicare quindi i principi dell'information hiding.  
+
+## LISKOV SUBSTITUTION PRINCIPLE
+
+Il principio **LSB** dice che rimpiazzare oggetti con istanze dei loro sottotipi non dovrebbe alterare la correttezza del programma.  
+
+## INTERFACE SEGREGATION PRINCIPLE
+
+Questo principio dice che molte interfacce con dei compiti specifici sono meglio di un'unica interfaccia con molte funzionalità.  
+
+## DEPENDENCY INVERSION PRINCIPLE
+
+Questo principio dice che l'astrazione non dovrebbe mai dipendere dai dettagli, ossia le classi vanno progettate guardando il più in alto, il più astrattamente possibile e non guardando ai dettagli implementativi.  
+
