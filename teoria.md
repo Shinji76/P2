@@ -1402,7 +1402,23 @@ TD(p) <= D*
 Se il test precedente viene eseguito su un puntatore che non è compatibile con il target **D** il puntatore diventa *nullptr* e il test fallisce.  
 
 ```cpp
-//copiare resto codice file 34
+class B {
+public:
+    virtual void m();
+};
+
+class D : public B {
+public:
+    virtual void f();
+};
+
+class E : public D {
+public:
+    void g();
+};
+
+B* fun() { }
+
 int main() {
     B* p = fun();
     if(dynamic_cast<D*>(p))
@@ -1416,14 +1432,87 @@ int main() {
 # DOWNCASTING vs METODI VIRTUALI
 
 ```cpp
-//copiare slide 18 file 33_RTTI
+//VERSIONE DYNAMIC_CAST
+class Base {
+public:
+    virtual ~Base() {}
+    void do_Base_thing() {}
+};
+
+class D1 : public Base {
+public:
+    void do_D1_things() {}
+};
+
+class D2 : public Base {
+public:
+    void do_D2_things() {}
+};
+
+class D3 : public Base {
+public:
+    void do_D3_things() {}
+};
+    
+void fun(Base& rb) {
+    rb.do_Base_things();
+    if(D1* p1 = dynamic_cast<D1*> (&rb))
+        p1->do_D1_things();
+    else if(D2* p2 = dynamic_cast<D2*> (&rb))
+        p2->do_D2_things();
+    if(D3* p3 = dynamic_cast<D3*> (&rb))
+        p3->do_D3_things();
+}
 ```
 
-La versione con dynanmic cast risulta poco estensibile perchè se la gerarchia dovesse cambiare (riducendo la gerarchia stessa), dovrei riscrivere tutto.  
+La versione con dynanmic cast risulta poco estensibile perchè se la gerarchia dovesse cambiare (sia riducendo che estendendo la gerarchia stessa), dovrei riscrivere il **main**.  
 
-La versione con il metodo virtuale invece aggiunge un metodo virtuale che al suo interno chiama il metodo della classe base, se dovessimo estendere il codice potremmo aggiungere e togliere classi derivate e la chiamata finale resterebbe la stessa.  
+```cpp
+//VERSIONE METODI VIRTUALI
+class Base {
+public:
+    virtual ~Base() {}
+    void do_Base_thing() {}
+    virtual void do_polymorphic_things() {  //metodo virtuale della base
+        do_Base_things();
+    }
+};
 
-# SOLID
+class D1 : public Base {
+public:
+    void do_D1_things() {}
+    virtual void do_polymorphic_things() {  //overriding del metodo della base
+    do_Base_things();
+    do_D1_things();
+    }
+};
+
+class D2 : public Base {
+public:
+    void do_D2_things() {}
+    virtual void do_polymorphic_things() {  //overriding del metodo virtuale della base 
+    do_Base_things();
+    do_D2_things();
+    }
+};
+
+class D3 : public Base {
+public:
+    void do_D3_things() {}
+    virtual void do_polymorphic_things() {  //overriding del metodo virtuale della base
+    do_Base_things();
+    do_D3_things();
+    }
+};
+    
+void fun(Base& rb) {
+    rb.do_polymorphic_things();     //nel main è necessaria solo una chiamata polimorfa
+}
+```
+
+La versione con il metodo virtuale invece aggiunge un metodo virtuale alla **Base** che al suo interno chiama il metodo della classe base, se dovessimo estendere il codice potremmo aggiungere e togliere classi derivate facendo overriding sul metodo virtuale della **Base** e la chiamata finale resterebbe la stessa.  
+
+# S.O.L.I.D.
 
 In programmazione, **SOLID** (*Single responsibility Open-closed, Liskov substitution, Interface segregation Dependency inversion*) è un acronimo che riassume in 5 termini i principi della buona programmazione ad oggetti.  
 
@@ -1447,3 +1536,63 @@ Questo principio dice che molte interfacce con dei compiti specifici sono meglio
 
 Questo principio dice che l'astrazione non dovrebbe mai dipendere dai dettagli, ossia le classi vanno progettate guardando il più in alto, il più astrattamente possibile e non guardando ai dettagli implementativi.  
 
+# EREDITARIETÀ MULTIPLA
+
+L'ereditarietà multipla è una caratteristica tipica del C++.  
+
+Tornando all'esempio delle classi **orario** e **dataOra**, con l'ereditarietà multipla dovremmo definire una nuova classe **data** che si occupa solo di quello e **dataOra** eredita SIA da **orario** che da **data**.  
+
+Nella rappresentazione di un oggetto di **dataOra** vengono rappresentati prima i sottooggetti (nell'ordine in cui li dichiariamo), e poi eventualmente i campi dati della classe derivata.  
+
+    class dataOra : public data : public orario {
+        ...
+    }
+
+Per definire dalle classi in cui si eredita vanno messe in sequenza con : *public/protected* <*nome_classe*>.  
+
+### PROBLEMA
+
+Se all'interno delle classi da cui ereditiamo ci sono dei metodi con stesso nome e stessa segnatura questo può creare dei conflitti, ad esempio sia in **orario** che in **stampa** può avere un metodo ***Stampa( )***.  
+
+Il compilatore segnalerebbe un'ambiguità, ma verrebbe segnalato solamente al momento di invocazione della chiamata che crea ambiguità.  
+
+Se il nome della funzione fosse uguale, ma la segnatura diversa (ad esempio **void f() vs int f(int)**), il problema di ambiguità resterebbe.  
+Bisogna usare l'operatore di scoping per riferire esattamente alla classe che vogliamo.  
+
+# DERIVAZIONE A DIAMANTE
+
+Si ha quando ho dell'ereditarietà multipla su una classe, ma le classi da cui eredita hanno un antenato comune.  
+
+Supponiamo di avere una classe base **A**, e 2 classi derivate **B** e **C**, infine una classe **D** che eredita da **B** e da **C**, a questo punto un oggetto **D** è costituito dal sottooggetto di **B**, dal sottooggetto di **C** e dai suoi campi dati, ma allo stesso tempo sia **B** che **C** hanno dei sottooggetti di tipo **A**.  
+
+**PROBLEMA N°1:** Ambiguità  
+I campi dati dei sottooggetti di **B** e **C** sono entrambi di tipo **A**, ma io non posso sapere a quale dei due riferisco.  
+
+**PROBLEMA N°2:** Spreco di memoria  
+Se anche non ci fossero problemi di ambiguità avrei due copie di sottooggetti di tipo **A** che occupano spazio in memoria inutilmente.  
+
+**SOLUZIONE:** Base virtuale  
+Per risolvere questi 2 problemi quello che viene fatto è definire una ***Base Astratta*** e poi la classe derivata **D** deciderà come gestire i sottooggetti.  
+
+Quando vado a definire una derivata di una classe devo quindi definire se le classi derivate che sto creando possono creare una situazione di *derivazione a diamante*.  
+Per definire una base come *virtuale*, la keyword usata è sempre *virtual*,ma il significato è **DIVERSO** dal virtual dei metodi delle classi.  
+
+```cpp
+    class A {
+        ...
+    };
+
+    class B : virtual public A {
+        ...
+    };
+```
+
+# PUNTATORE CLASSE BASE VIRTUALE
+.  
+.  
+.  
+**SLIDE 28 FILE 41**
+.  
+.  
+.  
+Quando vado a definire un oggetto di tipo **D** viene costruito
