@@ -1,28 +1,24 @@
-using namespace std;
 #include <iostream>
 
-class Z {
-public:
-    Z() {cout << "Z0 ";}
-    Z(const Z& x) { cout << "Zc ";}
+class A {
+    double d;
 };
 
-class C {
-private:
-    Z w;
-public:
-    C() {cout << " C0 ";}   //costruttore C default
-    C(const C& x) : w(x.w) {cout << "Cc ";}       //costruttore C interi
+class B : virtual public A{
+
 };
 
-class D : public C {
-private:
-    Z z;
-public:
-    D() {cout << "D0 ";}
+class C : virtual public A {
+
+};
+
+class D : public B, public C {
+
 };
 
 int main() {
-    D d; cout << "UNO\n";
-    D e = d; cout << "DUE\n";    
+    std::cout << "size_of(A) ==" << sizeof(A) << std::endl;
+    std::cout << "size_of(B) ==" << sizeof(B) << std::endl;
+    std::cout << "size_of(C) ==" << sizeof(C) << std::endl;
+    std::cout << "size_of(D) ==" << sizeof(D) << std::endl;
 }
