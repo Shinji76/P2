@@ -13,7 +13,7 @@ Definire una classe VETTORE i cui oggetti rappresentano array di interi. Vettore
 #include <iostream>
 #include "Esericizio_vettore.h"
 
-explicit Vettore::Vettore(int v, unsigned int dim) : A(dim == 0 ? nullptr : new int(dim)), size(dim) {
+explicit Vettore::Vettore(int v, unsigned int dim) : A(dim == 0 ? nullptr : new int[dim]), size(dim) {
     for(unsigned int k=0; k<size; k++) {
         A[k] = v;
     }
@@ -49,10 +49,11 @@ unsigned int Vettore::getSize() const {
     return size;
 }
 
-std::ostream& operator<<(std::ostream&, const Vettore& v) {
-    for(unsigned int k=0; k<; k++) {
-        ;
+std::ostream& operator<<(std::ostream& s, const Vettore& v) {
+    for(unsigned int k=0; k<v.getSize(); k++) {
+        s << v[k] << ' ';
     }
+    return s;
 }
 
 Vettore::~Vettore() {
@@ -63,10 +64,10 @@ Vettore::~Vettore() {
 Vettore Vettore::operator+(const Vettore& v) const {        //DA SISTEMARE
     Vettore aux(size + v.size);
     unsigned int k=0;
-    for(; k<size; k++) {
+    for(k; k<size; k++) {
         aux.A[k] = A[k];
     }
-    for(;k<v.size; k++){
+    for(k ;k<v.size; k++){
         aux.A[k] = v.A[k-size];
     }
     return aux;
@@ -74,6 +75,4 @@ Vettore Vettore::operator+(const Vettore& v) const {        //DA SISTEMARE
 
 void Vettore::append(const Vettore& v) {     //assegnazione profonda
     *this = this->operator+(v);
-}    
-
-//diversi studi mostrano come oggi chi vive in una famiglia agiata abbia una chance in più per recuperare le lacune di un sistema scolastico appiattito al ribasso, mentre gli studenti dotati di minori risorse vengono danneggiati da un insegnamento che non dovesse per premiare il merito
+}

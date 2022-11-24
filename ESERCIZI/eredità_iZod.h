@@ -18,15 +18,15 @@
 	Ogni oggetto Brano èrappresentato da un puntatore polimorfo ad un FileAudio.
 		• La classe Brano deve essere dotata di un opportuno costruttore Brano(FileAudio*) con il seguente comportamento:Brano(p) costruisce un oggetto Brano il cui puntatore polimorfo punta ad una copia dell’oggetto *p.
 		• La classe Brano ridefinisce costruttore di copia profonda, assegnazione profonda e distruttore profondo.
-	2. Un oggetto di iZod è quindi caratterizzato da un vector di oggetti di tipo Brano che contiene tutti ibrani memorizzati nell’iZod.
+	2. Un oggetto di iZod è quindi caratterizzato da un vector di oggetti di tipo Brano che contiene tutti i brani memorizzati nell’iZod.
 	3. La classe iZod rende disponibili i seguenti metodi:
-		• Un metodo vector<Mp3> mp3(double, int) con il seguente comportamento: una invocazione iz.mp3(dim,br)ritorna un vector di oggetti Mp3 contenente tutti e soli i file audio in formato mp3 memorizzati nell’iZodiz che:
+		• Un metodo vector<Mp3> mp3(double, int) con il seguente comportamento: una invocazione iz.mp3(dim,br)ritorna un vector di oggetti Mp3 contenente tutti e soli i file audio in formato mp3 memorizzati nell’iZod iz che:
 			(i) hanno una dimensione ≥ dim e 
 			(ii) hanno un bitrate ≥ br.
 		• Un metodo vector<FileAudio*> braniQual() con il seguente comportamento: una invocazione iz.braniQual()ritorna il vector dei puntatori ai FileAudio memorizzati nell’iZod iz che:
 			(i) sono considerati di qualità e
 			(ii) se sono dei file audio WAV allora devono essere lossless.
-		• Un metodo void insert(Mp3*) con il seguente comportamento: una invocazione iz.insert(p) inserisce il nuovooggetto Brano(p) nel vector dei brani memorizzati nell’iZod iz se il file audio mp3 *p non è già memorizzatoin iz, mentre se il file audio *p risulta già memorizzato non provoca alcun effetto.*/
+		• Un metodo void insert(Mp3*) con il seguente comportamento: una invocazione iz.insert(p) inserisce il nuovo oggetto Brano(p) nel vector dei brani memorizzati nell’iZod iz se il file audio mp3 *p non è già memorizzatoin iz, mentre se il file audio *p risulta già memorizzato non provoca alcun effetto.*/
 
 #include<iostream>
 #include<vector>
@@ -81,6 +81,9 @@ private:
 	};
 	std::vector<Brano> v;
 public:
+    std::vector<Mp3> mp3(double, int) const;
+	std::vector<FileAudio*> braniQual() const;
+	void insert(Mp3*);
 };
 
 iZod::Brano::~Brano() {
@@ -88,7 +91,29 @@ iZod::Brano::~Brano() {
 		delete p;
 }
 
-iZod::Brano& iZod::Brano::operator=(const Brano&) {
+iZod::Brano& iZod::Brano::operator=(const Brano& b) {
+	if(this != &b) {
+		delete p;
+		p = b.p;
+	}
+	return *this;
+}
+
+/*std::vector<Mp3> iZod::mp3(double dim, int br) const {
+	std::vector<Mp3> aux;
+	while(v) {
+		if()
+	}
+	return aux;
+}*/
+
+std::vector<FileAudio*> iZod::braniQual() const {
+
+}
+
+/* Un metodo void insert(Mp3*) con il seguente comportamento: 
+una invocazione iz.insert(p) inserisce il nuovo oggetto Brano(p) nel vector dei brani memorizzati nell’iZod iz se il file audio mp3 *p non è già memorizzato in iz, mentre se il file audio *p risulta già memorizzato non provoca alcun effetto.*/
+void iZod::insert(Mp3* p) {
 	
 }
 

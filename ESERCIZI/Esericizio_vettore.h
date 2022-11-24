@@ -29,7 +29,7 @@ private:
     //vettore vuoto IFF A == nullptr && size == 0.
 public:
     //blocco la conversione da unsigned int => vettore con explicit
-    explicit Vettore(int, unsigned int);
+    explicit Vettore(int = 0, unsigned int = 0);
 
     Vettore(const Vettore&);       //costruttore di copia profonda
 
