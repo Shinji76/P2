@@ -1588,11 +1588,68 @@ Per definire una base come *virtuale*, la keyword usata è sempre *virtual*,ma i
 ```
 
 # PUNTATORE CLASSE BASE VIRTUALE
-.  
-.  
-.  
-**SLIDE 28 FILE 41**
-.  
-.  
-.  
-Quando vado a definire un oggetto di tipo **D** viene costruito
+
+Quando viene eseguito un passo di derivazione virtuale, il compilatore aggiunge un puntatore alla base virtuale.  
+
+La composizione di una derivata **B** ad esempio è:
+- Costruzione sottooggetto.
+- Costruzione campi dati **B**.
+- Puntatore alla base virtuale.
+
+Fino a che non si chiude la struttura *"a diamante"* il puntatore punta a qualche valore indefinito, ad esempio *nullPtr*, e non ha alcuna utilità.  
+Quando invece la struttura si "chiude" il puntatore diventa importante, perchè al momento della costruzione di un sottooggetto di tipo **D**, che dovrebbe creare 2 sottooggetti di tipo **B** e **C** che a loro volta dovrebbero creare 2 sottooggetti di tipo **A**, evita appunto questa ultima costruzione doppia, creando un solo sottooggetto di tipo **A** e lasciando i 2 puntatori ad __A*__ dei sottooggetti **B** e **C**.  
+A questo punto un sottooggetto **D** è costruito come segue:
+- Costruzione campi dati base virtuale **A**
+- Costruzione campi dati sottooggetto **B**
+    - Puntatore __A*__
+- Costruzione campi dati sottooggetto **C**
+    - Puntatore __A*__
+- Campi dati **D** 
+
+I due puntatori __A*__ quindi puntano al sottooggetto **A** costruito da **D**.  
+
+**N.B:** Questo ragionamento funziona solo per la costruzione dell'oggetto di tipo **D** che "chiude" il diagramma a diamante, se io dovessi costruire un oggetto di tipo **B** o **C**, verrebbe creato il rispettivo sottooggetto **A** come nella norma.  
+
+# UNIQUE FINAL OVERRIDER
+
+Se ho ereditarietà multipla, e nelle mie basi ci sono dei metodi virtuali con la stessa segnatura, sono obbligato a dare l'override della classe derivata.  
+Ad esempio:  
+
+```cpp
+class A {
+public:
+    virtual void print() =0;
+};
+
+class B : virtual public A {
+public:
+    void print() override {
+        std::cout << "B";
+    }
+};
+
+class C : virtual public A {
+public:
+    void print() override {
+        std::cout << "C";
+    }
+};
+
+class D : public B, public C {
+    //Se non mettessi l'override qui, il programma non compilerebbe:
+    //"no unique final overrider for A::print()
+    void print() override {
+        std::cout<< "D";
+    }
+}
+    
+int main() {
+    D d;
+    A* p = &d;
+    p->print();
+}
+```
+
+Nello specifico quindi la regola dello ***Unique Final Overrider***, vale quando i padri della classe derivata **D** (in questo caso **B** e **C**), forniscono entrambi un overriding della stessa funzione.  
+A quel punto il programmatore ha la responsabilità di dare il Final overrider alla classe **D**.  
+
