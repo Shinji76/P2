@@ -39,6 +39,12 @@ public:
 	virtual FileAudio* clone() const =0;
 	virtual bool qualita() const =0;
 	virtual ~FileAudio() {}
+    double getSize() const {
+        return dim;
+    }
+	virtual bool operator==(const FileAudio& f) const {
+		return titolo == f.titolo && dim==f.dim;
+	}
 };
 
 class Mp3 : public FileAudio {
@@ -53,12 +59,20 @@ public:
 	bool qualita() const override {
 		return bitRate >= QualityBitRate;
 	}
+    unsigned int getBitRate() const {
+        return bitRate;
+    }
+	bool operator==(const FileAudio* f) const override {
+		return typeid(f) == typeid(*this) && FileAudio::operator==(f) && bitRate == static_cast<const Mp3&>(f).bitRate;
+	}
+
 };
 
 class WAV : public FileAudio {
 private:
 	unsigned int freq;
 	static unsigned int QualityFreq;
+	bool LossLess;
 public:
 	WAV* clone() const override {
 		return new WAV(*this);
@@ -66,6 +80,9 @@ public:
 
 	bool qualita() const override {
 		return freq >= QualityFreq;
+	}
+	bool isLossLess() const {
+		return LossLess;
 	}
 };
 
@@ -78,6 +95,12 @@ private:
 		Brano(const Brano& b) : p(b.p->clone()) {}
 		Brano& operator=(const Brano& b);
 		~Brano();
+		FileAudio* operator->() const {
+			return p;
+		}
+		FileAudio& operator*() const {
+			return *p;
+		}
 	};
 	std::vector<Brano> v;
 public:
@@ -93,28 +116,41 @@ iZod::Brano::~Brano() {
 
 iZod::Brano& iZod::Brano::operator=(const Brano& b) {
 	if(this != &b) {
-		delete p;
-		p = b.p;
+        if(p)
+    		delete p;
+		p = b.p->clone();
 	}
 	return *this;
 }
 
-/*std::vector<Mp3> iZod::mp3(double dim, int br) const {
+std::vector<Mp3> iZod::mp3(double dim, int br) const {
 	std::vector<Mp3> aux;
-	while(v) {
-		if()
+	std::vector<Brano>::const_iterator cit = v.begin();
+	for(cit; cit != v.end(); ++cit) {
+		Mp3* tmp = dynamic_cast<Mp3*> (cit->p);
+		if(tmp && tmp->getBitRate() >= br && tmp->getSize() >= dim)
+			aux.push_back(*tmp);
 	}
 	return aux;
-}*/
+}
 
 std::vector<FileAudio*> iZod::braniQual() const {
-
+	std::vector<FileAudio*> aux;
+	std::vector<Brano>::const_iterator cit = v.begin();
+	for(cit; cit != v.end(); ++cit) {
+		if((*cit)->qualita() && (!(dynamic_cast<WAV*> (cit->p))) || (static_cast<WAV*> (cit->p))->isLossLess())
+			aux.push_back(cit->p);
+	}
+	return aux;
 }
 
 /* Un metodo void insert(Mp3*) con il seguente comportamento: 
 una invocazione iz.insert(p) inserisce il nuovo oggetto Brano(p) nel vector dei brani memorizzati nell’iZod iz se il file audio mp3 *p non è già memorizzato in iz, mentre se il file audio *p risulta già memorizzato non provoca alcun effetto.*/
-void iZod::insert(Mp3* p) {
-	
+void iZod::insert(Mp3* q) {
+	auto it = v.begin();
+	for(it; it != v.end() && !(*(it->p) == *q); ++it) {
+		
+	}
 }
 
 unsigned int Mp3::QualityBitRate = 192;
