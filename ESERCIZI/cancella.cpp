@@ -1,10 +1,15 @@
 #include <iostream>
 
+
 class A {
-    double d;
+private:
+    class nested {
+    public:
+        std::string nome;
+    };
 };
 
-class B : virtual public A{
+class B : public nested {
 
 };
 

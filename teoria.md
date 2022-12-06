@@ -1653,3 +1653,12 @@ int main() {
 Nello specifico quindi la regola dello ***Unique Final Overrider***, vale quando i padri della classe derivata **D** (in questo caso **B** e **C**), forniscono entrambi un overriding della stessa funzione.  
 A quel punto il programmatore ha la responsabilità di dare il Final overrider alla classe **D**.  
 
+.  
+.  
+.  
+.  
+.  
+.  
+.  
+# **PROGETTO QT**
+

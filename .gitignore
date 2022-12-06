@@ -1,6 +1,12 @@
 # cartelle
 LEZIONI/
-
+Teoria/
+PROGETTO QT/*
+/*/
+!/Progetto/
 
 #file
 *.dia
+*.dia~
+*.ova
+*.tex
