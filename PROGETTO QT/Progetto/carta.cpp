@@ -1,6 +1,10 @@
 #include "carta.h"
 
-carta::~carta()
+Carta::~Carta()
 {
+    delete this;
 }
 
+unsigned int Carta::getID() const {
+    return ID;
+}
