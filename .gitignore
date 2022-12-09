@@ -1,9 +1,8 @@
 # cartelle
 LEZIONI/
 Teoria/
-PROGETTO QT/*
-/*/
-!/Progetto/
+Esercizi Qt/
+PROGETTO QT/build*
 
 #file
 *.dia

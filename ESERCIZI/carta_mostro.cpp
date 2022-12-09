@@ -6,4 +6,6 @@ Carta_mostro::Carta_mostro(
     const unsigned int mana, const Rarita rarita, const Classe classe,
     const unsigned int attacco, const unsigned int difesa):
     Carta(ID, nome, effetto, mana, rarita, classe), 
-    attacco(attacco), difesa(difesa) {}
+    attacco(attacco), difesa(difesa) {
+        std::cout << "prova" << std::endl;
+    }

@@ -1280,10 +1280,10 @@ A questo proposito appunto viene usato il **late binding**, ossia il tipo su cui
 Per definire il late binding si usa la keyword ***virtual***
 
 ``` cpp
-    class orario {
-        virtual void Stampa();
-        ...
-    };
+class orario {
+    virtual void Stampa();
+    ...
+};
 
 void G(const orario& o) {
     o.Stampa();     //chiamata polimorfa
@@ -1481,7 +1481,7 @@ public:
 class D1 : public Base {
 public:
     void do_D1_things() {}
-    virtual void do_polymorphic_things() {  //overriding del metodo della base
+    virtual void do_polymorphic_things() {  //overriding del metodo virtuale della base
     do_Base_things();
     do_D1_things();
     }
@@ -1652,13 +1652,4 @@ int main() {
 
 Nello specifico quindi la regola dello ***Unique Final Overrider***, vale quando i padri della classe derivata **D** (in questo caso **B** e **C**), forniscono entrambi un overriding della stessa funzione.  
 A quel punto il programmatore ha la responsabilità di dare il Final overrider alla classe **D**.  
-
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-# **PROGETTO QT**
 
