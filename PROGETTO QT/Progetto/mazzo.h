@@ -8,8 +8,11 @@
 	
 class Mazzo {
 private:
-	unsigned int numCopie [5] = {0};		//creare getsize di album
+	unsigned int numCopie [50];		//creare getsize di album
 public:
+
+	Mazzo();
+	
 	void addCard(const Carta&);
 	
 	void removeCard(const Carta&);

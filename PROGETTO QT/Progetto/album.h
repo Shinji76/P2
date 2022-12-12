@@ -6,10 +6,10 @@
 
 class Album {
 private:
-    std::vector<Carta*> cards;
-    unsigned int size;
+	std::vector<Carta*> cards;
+	const unsigned int size = 50;
 public:
-    unsigned int getSize() const;
+	unsigned int getSize() const;
 };
 
 #endif //ALBUM_H
