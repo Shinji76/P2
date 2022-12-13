@@ -1653,3 +1653,60 @@ int main() {
 Nello specifico quindi la regola dello ***Unique Final Overrider***, vale quando i padri della classe derivata **D** (in questo caso **B** e **C**), forniscono entrambi un overriding della stessa funzione.  
 A quel punto il programmatore ha la responsabilità di dare il Final overrider alla classe **D**.  
 
+# C++ 11
+
+```cpp
+    vector< vector<int> >::const_iterator cit = v.begin();
+```
+
+In questo esempio il tipo dell'iteratore si capisce dal tipo del vettore *v*, se questo è **costante** va usato il *const_iterator*, altrimenti iterator normale.  
+
+Con la keyword **auto** il compilatore trova automaticamente il tipo.  
+Il precedente verrebbe quindi sostituito da:  
+
+```cpp
+    auto ci=vi.begin()
+```
+
+Si può inoltre utilizzare come sostituto del tipo di dichiarazione, ad esempio:  
+
+```cpp
+auto x = 1;
+auto y = "f";
+auto z = 1.5;
+```
+
+# INIZIALIZZAZIONE UNIFORME AGGREGATA CON {}
+
+Rende possibile inizializzare i valori in un array costruito dinamicamente nello **heap**, prima di C++11 era possibile solo per array statici.  
+
+```cpp
+int* a = new int[3] {1, 2, 3};
+```
+
+# DEFAULT & DELETE
+
+Se devo definire un costruttore di default perchè ho definito un altro costruttore dovrei scrivere:  
+
+    A() {}
+
+Con la keyword **default** invece posso scrivere esplicitamente che voglio mantenere il costruttore standard rendendo più leggibile il codice.  
+
+    A() = default;
+
+La keyword **delete** invece serve ad impedire di fare qualcosa, accoppiato a un costruttore, ad esempio di copia, dice che il costruttore di copia in versione standard non è più disponibile all'utilizzo.  
+
+Usato nei template invece rende impossibile la conversione di tipo.  
+
+# OVERRIDE ESPLICITO
+
+Serve a definire esplicitamente quando si definisce un **override** per aumentare la leggibilità del codice e rendere più chiara la distinzione fra *overriding* e *ridefinition*.  
+
+# FINAL
+
+Un metodo virtuale marcato **final** proibisce alle classi derivate di effettuare overriding.  
+In pratica un metodo marcato **final** non può essere overridato ulteriormente dalle classi derivate.  
+Marcando **final** un metodo si permette al compilatore di togliere dell'overhead limitando il suo late binding.  
+
+**N.B:** *Override* e *final* non sono delle **keyword**, quindi se si volesse sarebbe possibile definire delle variabili con quel nome.  
+
