@@ -5,7 +5,7 @@ Esercizi Qt/
 PROGETTO QT/build*
 
 #file
-*.dia
+#*.dia
 *.dia~
 *.ova
 *.tex
