@@ -10,6 +10,9 @@ private:
 	const unsigned int size = 50;
 public:
 	unsigned int getSize() const;
+
+    Album();
+    ~Album();
 };
 
 #endif //ALBUM_H
