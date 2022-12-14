@@ -9,10 +9,13 @@
 class Mazzo {
 private:
 	unsigned int numCopie [50];		//creare getsize di album
-public:
+    unsigned int counter = 0;
+    void upCounter();
+    void downCounter();
 
+public:
 	Mazzo();
-	
+    
 	void addCard(const Carta&);
 	
 	void removeCard(const Carta&);

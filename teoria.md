@@ -1710,3 +1710,42 @@ Marcando **final** un metodo si permette al compilatore di togliere dell'overhea
 
 **N.B:** *Override* e *final* non sono delle **keyword**, quindi se si volesse sarebbe possibile definire delle variabili con quel nome.  
 
+# DELEGATION
+
+Questo meccanismo consente di chiamare un costruttore all'interno di un altro costruttore, se ad esempio ho un cosruttore a 5 parametri che ha al suo interno gli stessi identici parametri di un costruttore già definito con quei 3 parametri, io posso chiamare quel costruttore e gestire separatamente gli altri 2 senza dover riscrivere tutto.  
+
+# FUNTORI
+
+Un funtore è un oggetto di una classe che può essere trattato come fosse una funzione.  
+
+```cpp
+FunctorClass fun;
+fun(1,4,5);
+```
+
+Per fare ciò è necessario fare l'overloading dell'operatore di *chiamata a funzione*, ossia **operator ( )**.  
+Può avere un qualsiasi numero di parametri di qualsiasi tipo, e può ritornare qualsiasi tipo, e il tipo di ritorno deve essere sempre presente.  
+
+# LAMBDA ESPRESSIONI
+
+La sintass di una *lambda expression* è come segue:  
+
+**[capture list] (lista paramtetri) ->return type {corpo funzione}**  
+dove **(lista paramtetri)** e **->return type** sono opzionali.  
+
+# CLOSURE
+
+**[capture lsit]** elenca la lista delle variabili della closure, cioè variabili all'esteno della lambda expression usate come l-value o r-value dalla lambda espressione.  
+
+le possibilità sono:  
+
+```cpp
+[]          //
+[x, &y]     // x passata per valore, y per riferimento
+[&]         // tutto passato per riferimento
+[=]         // tutto passato per valore
+[&, x]      // tutto per riferimento tranne x che viene passata per valore
+```
+
+**N.B:** il *this* non è "catturabile" per riferimento ma solo per valore.  
+

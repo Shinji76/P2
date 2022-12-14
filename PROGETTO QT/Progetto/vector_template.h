@@ -16,7 +16,7 @@ public:
 
 	Fixed_vector operator=(const Fixed_vector&);
 	
-	Fixed_vector operator[](const Fixed_vector&);
+	T& operator[](const Fixed_vector&);
 	
 };
 
@@ -31,6 +31,16 @@ Fixed_vector<T>::~Fixed_vector() {
 
 template <class T>
 Fixed_vector<T>::Fixed_vector(const Fixed_vector& v) {
+
+}
+
+template <class T>
+T& Fixed_vector<T>::operator[](const Fixed_vector& v) {
+
+}
+
+template <class T>
+Fixed_vector<T> Fixed_vector<T>::operator=(const Fixed_vector& v) {
 
 }
 	
