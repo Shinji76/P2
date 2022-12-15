@@ -5,43 +5,77 @@
 template <class T>
 class Fixed_vector {
 private:
-	T info;
+	T* V;
 	unsigned int size;
+	T* copy() const {
+		T* tmp = new T(size);
+	if(size == 0)
+		return nullptr;
+	for(unsigned int i=0; i<size; i++) {
+		tmp[i] = V[i];
+	}
+	return tmp;
+	}
 public:
 	Fixed_vector();
+
+	Fixed_vector(unsigned int);
 
 	~Fixed_vector();
 	
 	Fixed_vector(const Fixed_vector&);
 
-	Fixed_vector operator=(const Fixed_vector&);
+	Fixed_vector& operator=(const Fixed_vector&);
 	
-	T& operator[](const Fixed_vector&);
+	T& operator[](unsigned int);
+	
+	bool checkIfNull();
+	
+	unsigned int getSize() {
+		return size;
+	}
 	
 };
 
+template <class T>
+Fixed_vector<T>::Fixed_vector() : V(0), size(0) {}
 
 template <class T>
-Fixed_vector<T>::Fixed_vector() : info(0), size(1) {}
+Fixed_vector<T>::Fixed_vector(unsigned int s)
+	: V(s == 0 ? nullptr : new T[s]), size(s) {
+		for(unsigned int i = 0; i<size; i++)
+			V[i] = 0;
+	}
 
 template <class T>
 Fixed_vector<T>::~Fixed_vector() {
-
+	if(V != nullptr)
+		delete V;
 }
 
 template <class T>
-Fixed_vector<T>::Fixed_vector(const Fixed_vector& v) {
+Fixed_vector<T>::Fixed_vector(const Fixed_vector& v): V(v.copy()), size(v.size) {}
 
+template <class T>
+T& Fixed_vector<T>::operator[](unsigned int k) {
+	return V[k];
 }
 
 template <class T>
-T& Fixed_vector<T>::operator[](const Fixed_vector& v) {
-
+Fixed_vector<T>& Fixed_vector<T>::operator=(const Fixed_vector& v) {
+	if(this != &v) {        //controllo che siano diversi per evitare copie inutili
+		delete V;
+		size = v.size;
+		V = v.copy();
+	}
+	return *this;
 }
 
 template <class T>
-Fixed_vector<T> Fixed_vector<T>::operator=(const Fixed_vector& v) {
-
+bool Fixed_vector<T>::checkIfNull() {
+	if(this != nullptr)
+		return false; 
+	return true;
 }
-	
+
 #endif //F_VECTOR_H

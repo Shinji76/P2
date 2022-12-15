@@ -1,12 +1,35 @@
 #include <iostream>
-#include<unordered_map>
-#include "carta.h"
-#include "carta_mostro.h"
 
-int main() {
-    std::unordered_map<unsigned int, unsigned int> map;
+class prova {
+private:
+    unsigned int counter ;
+public:
+    prova(): counter(0) {}
+    void upCounter();
+    void downCounter();
+    unsigned int getCounter();
+};
 
-    Carta_mostro::Carta_mostro dragone(15, "drago", "nessuno", 3, "epico", "mago", 5, 6);
+void prova::upCounter() {
+    counter++;
+}
 
-    map[Carta::getID()] = 1;
+void prova::downCounter() {
+    counter--;
+}
+
+unsigned int prova::getCounter() {
+    return counter;
+}
+
+main() {
+    prova x;
+    for(int i=0; i<10; i++) {
+        x.upCounter();
+        std::cout << x.getCounter() << std::endl;
+    }
+    for(int i=0; i<10; i++) {
+        x.downCounter();
+        std::cout << x.getCounter() << std::endl;
+    }
 }

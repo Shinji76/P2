@@ -41,9 +41,9 @@ public:
 
     bool operator==(const Vettore& v) const;
 
-    unsigned int getSize() const;
-
     int& operator[](unsigned int k) const;
 
     void append(const Vettore&);   //assegnazione profonda
+
+    unsigned int getSize() const;
 };
