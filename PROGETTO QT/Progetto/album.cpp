@@ -1,5 +1,10 @@
+#include "vector_template.h"
 #include "album.h"
 
-unsigned int Album::getSize() const {
-    return size;
+Album::Album() {
+
+}
+
+unsigned int Album::getASize() const {
+	return ASize;
 }

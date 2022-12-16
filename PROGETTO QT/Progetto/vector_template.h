@@ -7,6 +7,7 @@ class Fixed_vector {
 private:
 	T* V;
 	unsigned int size;
+
 	T* copy() const {
 		T* tmp = new T(size);
 	if(size == 0)
@@ -31,14 +32,11 @@ public:
 	
 	bool checkIfNull();
 	
-	unsigned int getSize() {
-		return size;
-	}
-	
+	unsigned int getSize();
 };
 
 template <class T>
-Fixed_vector<T>::Fixed_vector() : V(0), size(0) {}
+Fixed_vector<T>::Fixed_vector() : V(new T[50]), size(50) {}
 
 template <class T>
 Fixed_vector<T>::Fixed_vector(unsigned int s)
@@ -73,9 +71,14 @@ Fixed_vector<T>& Fixed_vector<T>::operator=(const Fixed_vector& v) {
 
 template <class T>
 bool Fixed_vector<T>::checkIfNull() {
-	if(this != nullptr)
-		return false; 
+	if(this->V != nullptr)
+		return false;
 	return true;
+}
+
+template <class T>
+unsigned int Fixed_vector<T>::getSize() {
+	return size;
 }
 
 #endif //F_VECTOR_H

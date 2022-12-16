@@ -14,36 +14,37 @@ Definire una classe VETTORE i cui oggetti rappresentano array di interi. Vettore
 
 class Vettore {
 private:
-    int* A; 
-    unsigned int size;
-    int* copia() const {
-        int* B = new int(size);
-        if(size == 0)
-            return nullptr;
-        for(unsigned int k=0; k<size; k++)
-        {
-            B[k] = A[k];
-        }
-        return B;
-    }
-    //vettore vuoto IFF A == nullptr && size == 0.
+	int* A;
+	unsigned int size;
+	
+	int* copia() const {
+		int* B = new int(size);
+		if(size == 0)
+			return nullptr;
+		for(unsigned int k=0; k<size; k++)
+		{
+			B[k] = A[k];
+		}
+		return B;
+	}
+	//vettore vuoto IFF A == nullptr && size == 0.
 public:
-    //blocco la conversione da unsigned int => vettore con explicit
-    explicit Vettore(int = 0, unsigned int = 0);
+	//blocco la conversione da unsigned int => vettore con explicit
+	explicit Vettore(int = 0, unsigned int = 0);
 
-    Vettore(const Vettore&);       //costruttore di copia profonda
+	Vettore(const Vettore&);       //costruttore di copia profonda
 
-    Vettore& operator=(const Vettore&);
-    
-    ~Vettore();
+	Vettore& operator=(const Vettore&);
+	
+	~Vettore();
 
-    Vettore operator+(const Vettore&) const;
+	Vettore operator+(const Vettore&) const;
 
-    bool operator==(const Vettore& v) const;
+	bool operator==(const Vettore& v) const;
 
-    int& operator[](unsigned int k) const;
+	int& operator[](unsigned int k) const;
 
-    void append(const Vettore&);   //assegnazione profonda
+	void append(const Vettore&);   //assegnazione profonda
 
-    unsigned int getSize() const;
+	unsigned int getSize() const;
 };

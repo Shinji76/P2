@@ -1,14 +1,20 @@
 #include <iostream>
 #include "vector_template.h"
+#include "album.h"
+
+using std::cout;
+using std::endl;
 
 int main() {
 	Fixed_vector<int> prova;
-
 	Fixed_vector<int> prova2(5);
+	//Album nuovo;
 
-	std::cout << prova.getSize() << std::endl;
-	std::cout << prova2.getSize() << std::endl;
+	cout << prova.getSize() << endl;
+	cout << prova2.getSize() << endl;
 
-	std::cout << prova.checkIfNull() << std::endl;
-	std::cout << prova2.checkIfNull() << std::endl;
+	cout << prova.checkIfNull() << endl;
+	cout << prova2.checkIfNull() << endl;
+
+	cout << prova2[3];
 }

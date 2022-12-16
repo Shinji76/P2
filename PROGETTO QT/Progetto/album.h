@@ -1,15 +1,15 @@
 #ifndef ALBUM_H
 #define ALBUM_H
 
-#include<vector>
+#include "vector_template.h"
 #include "carta.h"
 
 class Album {
 private:
-	std::vector<Carta*> cards;
-	const unsigned int size = 50;
+	Fixed_vector<Carta> cards;
+	const unsigned int ASize = cards.getSize();
 public:
-	unsigned int getSize() const;
+	unsigned int getASize() const;
     Album();
     ~Album();
 };
