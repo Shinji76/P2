@@ -1221,7 +1221,7 @@ int main() {
 Per quanto riguarda il primo oggetto il procedimento è uguale a quello visto per l'esercizio precedente, devo costruire un'oggetto **D**, costruisco prima i campi dati del sottooggetto **C**.  
 Ho bisogno di creare un campo dati **Z** di default, nel farlo stampo ***Z0***, poi uso il costruttore **C( )** che stampa ***C0***, ritorna in **D** e deve costruire il campo dati che è di nuovo **Z** quindi stampo ***Z0*** e il corpo del costruttore **D( )** che stampa ***D0***, seguito da ***UNO***.  
 
-Per il primo oggetto devo costruire un **D** copiandolo da un altro oggetto di tipo **D**, per farlo vado nella classe **D** che utilizza il costruttore di copia in versione standard, questa richiedere di costruire di copia il sottooggetto di tipo **C**.  
+Per il secondo oggetto devo costruire un **D** copiandolo da un altro oggetto di tipo **D**, per farlo vado nella classe **D** che utilizza il costruttore di copia in versione standard, questa richiedere di costruire di copia il sottooggetto di tipo **C**.  
 Per costruire di copia l'oggetto di **C** che è di tipo **Z** uso il costruttore di copia di **Z** che stampa ***Zc***.  
 Uso quel campo dati per il comando **w(x.w)** e stampo ***Cc***.  
 A questo punto devo costruire di copia il campo dati di **D**, che esegue quindi un'altra chiamata al costruttore di copia di **Z** e stampa ***Zc***.  
