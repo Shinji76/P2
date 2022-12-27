@@ -20,7 +20,7 @@ public:
 	void f(const bool&){cout<< "B::f(const bool&) ";}
 	void f(const int&){cout<< "B::f(const int&) ";}
 	virtual B* f(Z) {cout <<"B::f(Z) "; return this;}          
-	virtual  ~B() {cout << "~B() ";}
+	virtual ~B() {cout << "~B() ";}
 };
 
 class C: virtual public A {
@@ -36,12 +36,12 @@ public:
 	virtual void f(bool) const {cout <<"D::f(bool) ";}
 	A*f(Z) {cout << "D::f(Z) "; return this;}
 };
-	
+
 class E: public C {
 public:
-	C*f(Z){cout <<"E::f(Z) "; return this;}
 	~E() {cout <<"~E() ";}
 	E() {cout <<"E() ";}
+	C*f(Z){cout <<"E::f(Z) "; return this;}
 };
 
 class F: public B, public E, public D {
@@ -52,28 +52,34 @@ public:
 	F*f(Z){cout <<"F::f(Z) "; return this;}
 };
 
-B*pb=new B;
-C*pc = new C;
-D*pd = new D;
-E*pe = new E;
-F*pf = new F;
+//B*pb = new B;
+//C*pc = new C;
+//D*pd = new D;
+//E*pe = new E;
+//F*pf = new F;
 B*pb1= new F;
-A*pa1=pb,*pa2=pc,*pa3=pd,*pa4=pe,*pa5=pf;
+//A*pa1=pb;
+//A*pa2=pc;
+//A*pa3=pd;
+//A*pa4=pe;
+//A*pa5=pf;
 
 int main() {
-//	pa3->f(3);								//STAMPA: 
-//	pa5->f(3);								//STAMPA: 
-//	pb1->f(true);							//STAMPA: 
-//	pa4->f(true);							//STAMPA: 
-//	pa2->f(Z(2));							//STAMPA: 
-//	pa5->f(Z(2));							//STAMPA: 
-//	(dynamic_cast<E*>(pa4))->f(Z(2));		//STAMPA: 
-//	(dynamic_cast<C*>(pa5))->f(Z(2));		//STAMPA: 
-//	pb->f(3);								//STAMPA: 
-//	pc->f(3);								//STAMPA: 
-//	(pa4->f(Z(3)))->f(4);					//STAMPA: 
-//	(pc->f(Z(3)))->f(4);					//STAMPA: 
-//	E*puntE = new F;						//STAMPA: 
-//	delete pa5;								//STAMPA: 
-//	delete pb1;								//STAMPA: 
+//	pa3->f(3);								//STAMPA: A::f(int) A::f(bool)								/
+//	pa5->f(3);								//STAMPA: A::f(int) F::f(bool)								/
+//	pb1->f(true);							//STAMPA: B::f(const bool&)									/
+//	pa4->f(true);							//STAMPA: A::f(bool)										/
+//	pa2->f(Z(2));							//STAMPA: C::f(Z)											ERRORE(corretto)
+//	pa5->f(Z(2));							//STAMPA: F::f(Z)											ERRORE(corretto)
+//	(dynamic_cast<E*>(pa4))->f(Z(2));		//STAMPA: E::f(Z)											/
+//	(dynamic_cast<C*>(pa5))->f(Z(2));		//STAMPA: F::f(Z)											ERRORE(corretto)
+//	pb->f(3);								//STAMPA: B::f(const int&)									/
+//	pc->f(3);								//STAMPA: C::f(Z)											ERRORE(corretto)
+//	(pa4->f(Z(3)))->f(4);					//STAMPA: E::f(Z) A::f(int) A::f(bool)						ERRORE(corretto)
+//	(pc->f(Z(3)))->f(4);					//STAMPA: C::f(Z) C::f(Z)									ERRORE(corretto)
+//	E*puntE = new F;						//STAMPA: A() B() C() E() D() F()							/
+//	delete pa5;								//STAMPA: 													ERRORE(corretto)
+	delete pb1;								//STAMPA: ~F() ~D() ~E() ~B()								/
 }
+
+// RISULTATO: 8/15
