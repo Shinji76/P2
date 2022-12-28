@@ -31,7 +31,7 @@ public:
 	
 class E: public C {
 protected:
-void h() {cout <<"E::h ";}
+    void h() {cout <<"E::h ";}
 public:
 	void m() {cout <<"E::m "; g(); h();}
 	C* n() {cout <<"E::n "; return this;}
@@ -53,7 +53,7 @@ int main() {
 //	p3->f();						// STAMPA: B::f B::g D::h
 //	(p3->n())->m();					// STAMPA: B::n B::m B::g D::h			
 //	(p3->n())->n()->g();			// STAMPA: B::n B::n B::g				
-	(p4->n())->m();					// STAMPA: C::n B::m B::g E::h			ERRORE
+	(p4->n())->m();					// STAMPA: E::n B::m B::g E::h			ERRORE
 //	p5->g();						// STAMPA: C::g							ERRORE
 //	p5->k();						// STAMPA: C::k B::n					ERRORE
 //	(dynamic_cast<C*>(p5))->m();	// STAMPA: E::m C::g E::h

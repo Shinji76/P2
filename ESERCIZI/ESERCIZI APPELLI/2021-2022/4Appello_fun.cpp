@@ -33,7 +33,7 @@ in ogni invocazione Fun(v) la funzione deve soddisfare le seguenti specifiche:
 
 #include<vector>
 #include<iostream>
-#include "4Appello_io.h"
+#include "4Appello_fun.h"
 using std::vector;
 
 vector<fstream*> Fun(const vector<const ios*>& v) {
