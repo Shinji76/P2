@@ -37,18 +37,18 @@ B *pb1 = dynamic_cast<B*>(pa1);
 B *pb2 = dynamic_cast<B*>(pa2);
 
 int main() {
-//	Fun(&c);			// STAMPA: C	
-	Fun(&d);			// STAMPA: C
-//	Fun(pa1);			// STAMPA: 
-//	Fun(pa2);			// STAMPA: 
-//	Fun(pb1);			// STAMPA: 
-//	Fun(pb2);			// STAMPA: 
-//	Fun<A>(pb1);		// STAMPA: 
-//	Fun<A>(pa2);		// STAMPA: 
-//	Fun<B>(pb1);		// STAMPA: 
-//	Fun<C>(pa2);		// STAMPA: 
-//	Fun<C>(&d);			// STAMPA: 
-//	Fun<D>(pa2);		// STAMPA: 
+//	Fun(&c);			// STAMPA: C
+//	Fun(&d);			// STAMPA: C
+//	Fun(pa1);			// STAMPA: A
+//	Fun(pa2);			// STAMPA: A
+//	Fun(pb1);			// STAMPA: B
+//	Fun(pb2);			// STAMPA: B
+//	Fun<A>(pb1);		// STAMPA: A
+//	Fun<A>(pa2);		// STAMPA: A
+//	Fun<B>(pb1);		// STAMPA: B
+//	Fun<C>(pa2);		// STAMPA: NON COMPILA
+//	Fun<C>(&d);			// STAMPA: C
+//	Fun<D>(pa2);		// STAMPA: NON COMPILA
 }
  
 //	RISULTATO /12

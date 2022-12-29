@@ -22,26 +22,101 @@ Il provider Wireless Internet (WI) offre abbonamenti Internet con tariffa a sogl
 
 (D) Definire una classe FilialeWI i cui oggetti rappresentano l'insieme di abbonati ad una filiale del provider WI.
 	Una FilialeWI è inoltre caratterizzata dal numero massimo di abbonati che la filiale può accettare (per garantire una connessione di qualità). Devono essere disponibili nella classe FilialeWI le seguenti funzionalità: 
+	
 		• Un metodo void aggiungiAbbonato(cosnt Abbonato&) con il seguente comportamento: una invocazione f.aggiungiAbbonato(a) aggiunge l'abbonato a all'insieme degli abbonati alla filiale f se f non ha già raggiunto il numero massimo di abbonati: altrimenti, a non viene aggiunto tra gli abbonati di f e viene sollevata una eccezione Exc(M) dove Exc è una classe di eccezioni da definire all'uopo e M è il numero massimo di abbonati della filiale f.
+
 		• Un metodo list<const Abbonato*> abbonatiOltreSoglia() con il seguente comportamento: una invocazione f.abbonatiOltreSoglia() ritorna la lista di tutti gli abbonati che hanno un costo attualmente da pagare per il mese corrente superiore a 50€ e degli abbonati con tariffazione mensile a soglia di tempo che hanno correntemente ecceduto la loro soglia di tempo.
 */
 
+#include<iostream>
+#include<list>
+using std::list;
+
 class Abbonato {
+private:
+	unsigned int trafficoMB;
+	double tempoConnessione;
+	static unsigned int costoBase;
+	static unsigned int extraCosto;
 public:
-	
+	virtual double costoMeseCorrente() = 0;
+	unsigned int getCostoBase() const {
+		return costoBase;
+	}
+	unsigned int getExtraCosto() const {
+		return extraCosto;
+	}
+	unsigned int getTrafficoMB() const {
+		return trafficoMB;
+	}
+	double getTempoConnessione() const {
+		return tempoConnessione;
+	}
 };
 
-class AbbonatoTraffico : public Abbonato {
-public:
+unsigned int Abbonato::extraCosto = 5;
+unsigned int Abbonato::costoBase = 15;
 
+class AbbonatoTraffico : public Abbonato {
+private:
+	unsigned int sogliaTrafficoGB;
+public:
+	double costoMeseCorrente() override {
+		if(getTrafficoMB() <= sogliaTrafficoGB/1024)
+			return getCostoBase();
+		else
+			return getExtraCosto() * ((getTrafficoMB() - sogliaTrafficoGB/1024) * 1024);
+	}
 };
 
 class AbbonatoTempo : public Abbonato {
+private:
+	double sogliaTempo;
 public:
+	bool sforaSoglia() {
+		if(getTempoConnessione() > sogliaTempo)
+			return true;
+		return false;
+	}
 
+	double costoMeseCorrente() override {
+		if(getTempoConnessione() <= sogliaTempo) 
+			return getCostoBase();
+		else
+			return getExtraCosto()*(getTempoConnessione() - sogliaTempo);
+	}
 };
 
 class FilialeWI {
+private:
+	unsigned int maxAbbonati;
+	list<Abbonato*> listaAbbonati;
 public:
+	void aggiungiAbbonato(const Abbonato& a) {
+		if(listaAbbonati.size() <= maxAbbonati)
+			listaAbbonati.push_back(const_cast<Abbonato*>(&a));
+		else
+			//throw Exc(maxAbbonati);
+		std::cout << "sistemare";
+	}
 
+	list<const Abbonato*> abbonatiOltreSoglia()	{
+		list<const Abbonato*> aux;
+		for(auto it = listaAbbonati.begin(); it != listaAbbonati.end(); it++) {
+			if((*it)->costoMeseCorrente() > 50) {
+				aux.push_back(*it);
+			}
+			if(dynamic_cast<AbbonatoTempo*>(*it)->sforaSoglia())
+				aux.push_back(*it);
+		}
+		return aux;
+	}
 };
+
+/*
+class Exc {
+	catch(Exc) {
+
+	}
+};
+*/
