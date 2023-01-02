@@ -19,12 +19,22 @@ char F(A*pa, B& rb) {
 	C*q = dynamic_cast<C*> (pa);
 
 	if(dynamic_cast<E*> (&rb)) {
-    }
+		if(p && q)
+			return 'M';
+		else
+			return 'I';
+	}
+	if(dynamic_cast<C*> (&rb))
+		return 'L';
+	if(q)
+		return 'A';
+	if(p)
+		return 'N';
+	return 'O';
 }
 
 int main() {
-    A a; B b; C c; D d; E e;
-    if(dynamic_cast<B*> (&e))
-        cout << "ciao";
-    
+	A a; B b; C c; D d; E e;
+	cout << F(&e, e) << F(&a, e) << F(&a, c) << F(&c, b) << F(&b, b) << F(&a, d); 
+	//			M			I			L			A			N			O
 }
