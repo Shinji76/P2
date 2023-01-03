@@ -30,7 +30,7 @@ public:
 	void n() const {C<int,double> c; cout << c.t1 << c.t2 << c.a;}
 	void o() const {C<char,double> c(6); cout << c.a;}
 	void p() const {C<Z,T,7> c(7); cout << c.t2 << c.a;}
-};
+}; 
 
 //  int main() { D<char> d1; d1.f(); }				//STAMPA: 
 //  int main() { D<std::string> d2; d2.f(); }		//STAMPA: 
