@@ -37,7 +37,7 @@ public:
 //A* q1 = new D(); 
 //A* q2 = new B(); 
 //A* q3 = new C(); 
-//B* q4 = new D(); 
+B* q4 = new D(); 
 //const A* q5 = new C();
 
 int main() {
@@ -51,11 +51,11 @@ int main() {
 //	q4->g();								//STAMPA: B::g A::n
 //	(q3->n())->m();							//STAMPA: A::n A::m A::f
 //	(q3->n())->n()->f();					//STAMPA: A::n A::n A::f
-//	(q4->n())->m();							//STAMPA: D::n D::m B::f D::r		ERRORE
+	(q4->n())->m();							//STAMPA: D::n D::m B::f D::r		ERRORE
 //	(q5->n())->f();							//STAMPA: NON COMPILA
 //	(dynamic_cast<B*>(q1))->m();			//STAMPA: D::m B::f D::r
 //	(static_cast<C*>(q2))->g();				//STAMPA: RUNTIME ERROR
 //	(static_cast<B*>(q3->n()))->f();		//STAMPA: RUNTIME ERROR				ERRORE
 }
 
-// RISULTATO /15
+// RISULTATO 13/15
