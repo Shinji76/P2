@@ -56,36 +56,36 @@ public:
 
 
 int main() {
-B *p1 = new E();
+//B *p1 = new E();
 B *p2 = new C();
-B *p3 = new D();
-C *p4 = new E();
-const B *p5 = new D();
-const B *p6=new E();
-const B *p7=new F();
-F f;
+//B *p3 = new D();
+//C *p4 = new E();
+//const B *p5 = new D();
+//const B *p6 = new E();
+//const B *p7 = new F();
+//F f;
 cout << endl << endl;
 
 //	F x;													//STAMPA: B() C() D() E() F()
-//	C*p = new F(f);											//STAMPA: B() C() D() E() Fc
+//	C*p = new F(f);											//STAMPA: C() D() E() Fc				ERRORE(corretto)
 //	p1->f();												//STAMPA: B::f E::g E::j
 //	p1->m();												//STAMPA: B::m E::g E::j
-//	(p1->j())->k();											//STAMPA: E::j C::k B::n
-	(dynamic_cast<const F*>(p1->j()));						//STAMPA: E::j 
-//	p2->f();												//STAMPA: 
-//	p2->m();												//STAMPA: 
-//	(p2->j())->g();											//STAMPA: 
-//	p3->f();												//STAMPA: 
-//	p3->k();												//STAMPA: 
-//	(p3->n()).m();											//STAMPA: 
-//	(dynamic_cast<D&>(p3->n())).g();						//STAMPA: 
-//	p4->f();												//STAMPA: 
-//	p4->k();												//STAMPA: 
-//	(p4->n()).m();											//STAMPA: 
-//	(p5->n()).g();											//STAMPA: 
-//	(dynamic_cast<E*>(p6))->j();							//STAMPA: 
-//	(dynamic_cast<C*>(const_cast<B*>(p7)))->k();			//STAMPA: 
-//	delete p7;												//STAMPA: 
+//	(p1->j())->k();											//STAMPA: NON COMPILA					ERRORE(correto)
+//	(dynamic_cast<const F*>(p1->j()))->g();					//STAMPA: RunTimeError					ERRORE(corretto)
+//	p2->f();												//STAMPA: B::f C::g B::j
+//	p2->m();												//STAMPA: B::m C::g B::j
+//	(p2->j())->g();											//STAMPA: B::j C::g
+//	p3->f();												//STAMPA: B::f B::g D::j
+//	p3->k();												//STAMPA: B::k D::j B::m B::g D::j
+//	(p3->n()).m();											//STAMPA: B::n B::m B::g D::j
+//	(dynamic_cast<D&>(p3->n())).g();						//STAMPA: B::n D::g
+//	p4->f();												//STAMPA: B::f E::g E::j
+//	p4->k();												//STAMPA: C::k B::n
+//	(p4->n()).m();											//STAMPA: E::n B::m E::g E::j
+//	(p5->n()).g();											//STAMPA: NON COMPILA
+//	(dynamic_cast<E*>(p6))->j();							//STAMPA: NON COMPILA
+//	(dynamic_cast<C*>(const_cast<B*>(p7)))->k();			//STAMPA: F::k E::g
+//	delete p7;												//STAMPA: ~F() ~E() ~D() ~C() ~B()
 }
 
-// RISULTATO: /19
+// RISULTATO: 16/19

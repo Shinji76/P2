@@ -62,7 +62,7 @@ public:
     unsigned int getBitRate() const {
         return bitRate;
     }
-	bool operator==(const FileAudio* f) const override {
+	bool operator==(const FileAudio& f) const override {
 		return typeid(f) == typeid(*this) && FileAudio::operator==(f) && bitRate == static_cast<const Mp3&>(f).bitRate;
 	}
 

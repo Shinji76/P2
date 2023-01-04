@@ -7,17 +7,13 @@ private:
 public:
 	virtual void g() {cout << "A::g";}
 	
-	virtual void f() {cout << "A::f";
-	g(); h();}
+	virtual void f() {cout << "A::f"; g(); h();}
 	
-	void m() {cout << "A::m";
-	g(); h();}
+	void m() {cout << "A::m"; g(); h();}
 	
-	virtual void k() {cout << "A::k"; 
-	g(); h(); m();}
+	virtual void k() {cout << "A::k"; g(); h(); m();}
 
-	A* n() {cout << "A::n";
-	return this;}
+	A* n() {cout << "A::n";	return this;}
 };
 
 class B : public A {
@@ -26,14 +22,11 @@ private:
 public:
 	virtual void g() {cout << "B::g";}
 
-	void m() {cout << "B::m";
-	g(); h();}
+	void m() {cout << "B::m"; g(); h();}
 	
-	void k() {cout << "B::k";
-		g(); h(); m();}
+	void k() {cout << "B::k"; g(); h(); m();}
 		
-	B* n() {cout << "B::n";
-	return this;}
+	B* n() {cout << "B::n"; return this;}
 };
 
 B* b = new B();
