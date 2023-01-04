@@ -28,8 +28,8 @@ public:
 
 template<class T>
 void Fun(const T& ref) {
-	const B* pB=dynamic_cast<const B*>(&ref);
-	const E* pE=dynamic_cast<const E*>(&ref);
+	const B* pB = dynamic_cast<const B*>(&ref);
+	const E* pE = dynamic_cast<const E*>(&ref);
 
 	if(dynamic_cast<const C*>(&ref)) {
 		cout << "C ";
@@ -67,10 +67,10 @@ int main() {
 //	Fun<A>(c); 				//STAMPA: NON COMPILA
 //	Fun(a1); 				//STAMPA: NON COMPILA
 	Fun(b1); 				//STAMPA: B D::f
-//	Fun<D>(e); 				//STAMPA: 
-//	Fun(b2); 				//STAMPA: 
-//	Fun<E>(e); 				//STAMPA: 
-//	Fun(*b3); 				//STAMPA: 
-//	Fun(*pd1); 				//STAMPA: 
-//	Fun(e); 				//STAMPA: 
+//	Fun<D>(e); 				//STAMPA: E E::f
+//	Fun(b2); 				//STAMPA: E E::f
+//	Fun<E>(e); 				//STAMPA: E E::f
+//	Fun(*b3); 				//STAMPA: B B::f
+	Fun(*pd1); 				//STAMPA: E E::f
+//	Fun(e); 				//STAMPA: E E::f
 }
