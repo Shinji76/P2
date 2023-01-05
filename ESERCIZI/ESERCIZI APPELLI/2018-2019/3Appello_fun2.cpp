@@ -5,14 +5,17 @@ Scrivere un programma che consista esattamente di 3 classi A, B, C dove B è sot
 
 class A {
 public:
-    ~A() {}
-    
+    virtual ~A();
 };
 
-class B : public A {
+A::~A() {}
 
+class B : public A {
 };
 
 class C {
-
+public:
+    B* fun(A* parameter) {
+        return dynamic_cast<B*>(parameter);
+    }
 };

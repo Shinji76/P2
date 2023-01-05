@@ -17,7 +17,7 @@ Si assumano le seguenti specifiche riguardanti la libreria Qt (ATTENZIONE: non s
     Entrambe le classi definiscono il proprio overriding di Qwidget::sizeHint().
 
 Definire una funzione vector<QAbstractButton*> fun(list<QWidget*>&, const QSize&, vector<const Qwidget*>&) con il seguente comportamento:
-in ogni invocazione fun(lst, sz, w), per ogni puntatore p elemento (di tipo Qwidget*) della lista list:
+in ogni invocazione fun(list, sz, w), per ogni puntatore p elemento (di tipo Qwidget*) della lista list:
     
     (a) Se p non è nullo e *p ha una dimensione raccomandata uguale a sz allora inserisce nel vector w un puntatore ad una copia di *p:
 
@@ -27,4 +27,31 @@ in ogni invocazione fun(lst, sz, w), per ogni puntatore p elemento (di tipo Qwid
 
 La funzione infine ritorna il vector di QAbstractButton* che è stato popolato come specificato al punto (c). 
 */
+#include "3Appello_fun.h"
+#include <vector>
+#include <list>
+using std::vector;
+using std::list;
 
+vector<QAbstractButton*> fun(list<QWidget*>& list, const QSize& sz, vector<const QWidget*>& w) {
+    vector<QAbstractButton*> aux;
+    for(auto it = list.begin(); it != list.end(); it++) {
+        if(*it) {
+            if((*it)->sizeHint() < sz) {
+                w.push_back((*it)->clone());
+            }
+            if( !(dynamic_cast<QSlider&>(*(*it))) && (*it)->sizeHint() == sz ) {
+                delete *it;
+                list.erase(*it);
+                it--;
+            }
+            else if( dynamic_cast<QCheckBox&>(**it) || dynamic_cast<QPushButton&>(**it) ) {
+                QAbstractButton* temp = nullptr;
+                temp = static_cast<QAbstractButton*>(*it);
+                list.erase(**it);
+                aux.push_back(temp);
+            }
+        }
+    }
+    return aux;
+}

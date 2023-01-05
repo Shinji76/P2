@@ -1,5 +1,4 @@
 /*
-TESTO:
 Si assumano le seguenti specifiche riguardanti la libreria Qt.
 (a) Un oggetto della classe QString rappresenta una stringa e fornisce un costruttore QString(const char*) con il seguente comportamento: QString(str) costruisce una QString inizializzata con l'array di char str.
 (b) QPaintDevice è la classe base polimorfa di tutti gli oggetti che possono essere "dipinti". La classe QPaintDevice rende disponibile un metodo int width() const con il seguente comportamento: pd.width() ritorna la larghezza in pixel del QPaintDevice pd.
@@ -17,7 +16,7 @@ Definire una funzione vector<Qwidget> fun(const vector<const QPaintDevice*>&) ta
 
 #include <iostream>
 #include <vector>
-#include <1Appello_qt.h>
+#include "1Appello_fun.h"
 using std::vector;
 
 vector<QWidget> fun(const vector<const QPaintDevice*>& v) {
