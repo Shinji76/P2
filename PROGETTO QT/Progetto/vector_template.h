@@ -10,12 +10,12 @@ private:
 
 	T* copy() const {
 		T* tmp = new T(size);
-	if(size == 0)
-		return nullptr;
-	for(unsigned int i=0; i<size; i++) {
-		tmp[i] = V[i];
-	}
-	return tmp;
+        if(size == 0)
+            return nullptr;
+        for(unsigned int i=0; i<size; i++) {
+            tmp[i] = V[i];
+        }
+	    return tmp;
 	}
 public:
 	Fixed_vector();

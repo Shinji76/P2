@@ -35,6 +35,7 @@ class FileAudio {
 private:
 	std::string titolo;
 	double dim;
+    
 public:
 	virtual FileAudio* clone() const =0;
 	virtual bool qualita() const =0;

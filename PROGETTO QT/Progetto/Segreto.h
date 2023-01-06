@@ -1,11 +1,11 @@
-#ifndef CARTA_SEGRETO_H
-#define CARTA_SEGRETO_H
+#ifndef SEGRETO_H
+#define SEGRETO_H
 
-#include "carta.h"
+#include "AbstractCard.h"
 
-class Carta_segreto : public Carta {
+class Segreto : public AbstractCard {
 public:
-Carta_segreto(
+Segreto(
     const unsigned int ID, const std::string nome, const std::string effetto,
     const unsigned int mana, const Rarita rarita, const Classe classe);
 };

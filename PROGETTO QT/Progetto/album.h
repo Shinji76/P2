@@ -1,12 +1,12 @@
 #ifndef ALBUM_H
 #define ALBUM_H
 
-#include "vector_template.h"
-#include "carta.h"
+#include "Vector_template.h"
+#include "AbstractCard.h"
 
 class Album {
 private:
-	Fixed_vector<Carta> cards;
+	Fixed_vector<AbstractCard*> cards;
 	const unsigned int ASize = cards.getSize();
 public:
 	unsigned int getASize() const;

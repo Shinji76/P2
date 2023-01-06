@@ -1,14 +1,14 @@
-#ifndef CARTA_MAGIA_H
-#define CARTA_MAGIA_H
+#ifndef MAGIA_H
+#define MAGIA_H
 
-#include "carta.h"
+#include "AbstractCard.h"
 
-class Carta_magia : public Carta {
+class Magia : public AbstractCard {
 private:
 
 public:
     //costruttore magia
-    Carta_magia(
+    Magia(
         const unsigned int ID,
         const std::string nome,
         const std::string effetto,
@@ -18,4 +18,4 @@ public:
     );
 };
 
-#endif // CARTA_MAGIA_H
+#endif // MAGIA_H

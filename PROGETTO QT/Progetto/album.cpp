@@ -1,5 +1,5 @@
-#include "vector_template.h"
-#include "album.h"
+#include "Vector_template.h"
+#include "Album.h"
 
 Album::Album() {
 
