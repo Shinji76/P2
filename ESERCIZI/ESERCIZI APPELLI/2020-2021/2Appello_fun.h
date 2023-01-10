@@ -14,7 +14,7 @@ public:
 class QLabel : public QFrame {
 public:
     int heightDefault() const override;
-    void setWordWrap(bool);
+    void setWordWrap(bool) {}
 };
 
 class QSplitter: public QFrame {

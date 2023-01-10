@@ -25,7 +25,7 @@ vector<QWidget> fun(const vector<const QPaintDevice*>& v) {
 	for(auto cit = v.begin(); cit!=v.end(); cit++) {
 		p = dynamic_cast<const QWidget*>(*cit);
 		if(p && (*cit)->width() > 80)
-			throw string("TooBig");
+			throw QString("TooBig");
 		if(p && (*cit)->width() < 80 && p->hasFocus())
 			const_cast<QWidget*>(p)->clearFocus();
 		if(p) {

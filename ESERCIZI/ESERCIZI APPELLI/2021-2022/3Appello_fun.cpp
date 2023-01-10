@@ -19,7 +19,7 @@ una invocazione Fun(s):
 		(b) se s è un ifstream ed il file associato non è aperto ritorna -1;
 		(c) se s è un ifstream ed il file associato è aperto ritorna la posizione della cella corrente di input di s.
 */
-#include "3Appello_io.h"
+#include "3Appello_fun.h"
 #include <iostream>
 #include <typeinfo>
 

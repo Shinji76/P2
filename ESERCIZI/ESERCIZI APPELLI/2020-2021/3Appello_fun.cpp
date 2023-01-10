@@ -18,7 +18,7 @@ Il provider Wireless Internet (WI) offre abbonamenti Internet con tariffa a sogl
 (C) Definire una classe AbbonatoTempo derivata da Abbonato i cui oggetti rappresentano un abbonato a WI con tariffa mensile a soglia di tempo di connessione.
 	Ogni AbbonatoTempo è caratterizzato da una propria soglia di tempo mensile (in ore) di connessione oltre la quale scatta un extra costo.
 	La classe AbbonatoTempo implementa quindi costoMeseCorrente() nel seguente modo:
-	In una invocazione a.costoMeseCorrente() se il tempo da connessione nel mese corrente dell'abbonato a è minore o uguale alla soglia di tempo mensile per a allora ritorna il costo mensile base: altrimenti il tempo eccedente la soglia di tempo mensile comporta un ulteriore costo pari a C € all'ora da aggiungersi al costo mensile base.
+	In una invocazione a.costoMeseCorrente() se il tempo di connessione nel mese corrente dell'abbonato a è minore o uguale alla soglia di tempo mensile per a allora ritorna il costo mensile base: altrimenti il tempo eccedente la soglia di tempo mensile comporta un ulteriore costo pari a C € all'ora da aggiungersi al costo mensile base.
 
 (D) Definire una classe FilialeWI i cui oggetti rappresentano l'insieme di abbonati ad una filiale del provider WI.
 	Una FilialeWI è inoltre caratterizzata dal numero massimo di abbonati che la filiale può accettare (per garantire una connessione di qualità). Devono essere disponibili nella classe FilialeWI le seguenti funzionalità: 
@@ -39,7 +39,7 @@ private:
 	static unsigned int costoBase;
 	static unsigned int extraCosto;
 public:
-	virtual double costoMeseCorrente() = 0;
+	virtual double costoMeseCorrente() const = 0;
 	unsigned int getCostoBase() const {
 		return costoBase;
 	}
@@ -61,11 +61,11 @@ class AbbonatoTraffico : public Abbonato {
 private:
 	unsigned int sogliaTrafficoGB;
 public:
-	double costoMeseCorrente() override {
+	double costoMeseCorrente() const override {
 		if(getTrafficoMB() <= sogliaTrafficoGB/1024)
 			return getCostoBase();
 		else
-			return getExtraCosto() * ((getTrafficoMB() - sogliaTrafficoGB/1024) * 1024);
+			return getCostoBase() + (getTrafficoMB()/1024 - sogliaTrafficoGB)*getExtraCosto();
 	}
 };
 
@@ -73,50 +73,44 @@ class AbbonatoTempo : public Abbonato {
 private:
 	double sogliaTempo;
 public:
-	bool sforaSoglia() {
-		if(getTempoConnessione() > sogliaTempo)
-			return true;
-		return false;
-	}
-
-	double costoMeseCorrente() override {
+	double costoMeseCorrente() const override {
 		if(getTempoConnessione() <= sogliaTempo) 
 			return getCostoBase();
 		else
-			return getExtraCosto()*(getTempoConnessione() - sogliaTempo);
+			return getCostoBase() + getExtraCosto()*(getTempoConnessione() - sogliaTempo);
 	}
 };
 
 class FilialeWI {
 private:
 	unsigned int maxAbbonati;
-	list<Abbonato*> listaAbbonati;
+	list<Abbonato> l;
 public:
+
 	void aggiungiAbbonato(const Abbonato& a) {
-		if(listaAbbonati.size() <= maxAbbonati)
-			listaAbbonati.push_back(const_cast<Abbonato*>(&a));
+		if(l.size() <= maxAbbonati)
+			l.push_back(a);
 		else
-			//throw Exc(maxAbbonati);
-		std::cout << "sistemare";
+			throw Exc(maxAbbonati);
 	}
 
 	list<const Abbonato*> abbonatiOltreSoglia()	{
 		list<const Abbonato*> aux;
-		for(auto it = listaAbbonati.begin(); it != listaAbbonati.end(); it++) {
-			if((*it)->costoMeseCorrente() > 50) {
-				aux.push_back(*it);
+		for(auto it = l.begin(); it != l.end(); it++) {
+            const Abbonato *ptr = &(*it);
+			if(ptr->costoMeseCorrente() > 50) {
+				aux.push_back(ptr);
 			}
-			if(dynamic_cast<AbbonatoTempo*>(*it)->sforaSoglia())
-				aux.push_back(*it);
+			else if(dynamic_cast<const AbbonatoTempo*>(ptr)->costoMeseCorrente() > 50)
+				aux.push_back(ptr);
 		}
 		return aux;
 	}
 };
 
-/*
 class Exc {
-	catch(Exc) {
-
-	}
+private:
+    unsigned int m;
+public:
+    Exc(unsigned int e) : m(e) {}
 };
-*/

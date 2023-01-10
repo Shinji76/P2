@@ -24,67 +24,67 @@ La classe Tel implementa costoMeseCorrente() nel seguente modo:
 #include <iostream>
 #include <list>
 #include <vector>
+using std::list;
+using std::vector;
 
 class SIM {
 private:
-	unsigned int tempoTelefonate;
-	unsigned int trafficoDati;
-	double const static costoTelefonate;
-	double const static costoDati;
+    unsigned int tempoTelefonateMese;
+    unsigned int trafficoDatiMese;
+    static double costoDati;
+    static double costoTelefonate;
 public:
-	unsigned int getTrafficoDati() const {return trafficoDati;}
-	unsigned int getTempoTelefonate() const {return tempoTelefonate;}
-	double getCostoDati() const {return costoDati;}
-	double getCostoTelefonate() const {return costoTelefonate;}
-	virtual double costoMeseCorrente() const = 0;
+   virtual double costoMeseCorrente() const =0;
+    double getCostoDati() const {return costoDati;}
+    double getCostoTelefonate() const {return costoTelefonate;}
+    unsigned int getTempo() const { return tempoTelefonateMese;}
+    unsigned int getTraffico() const { return trafficoDatiMese;}
 };
 
-double const SIM::costoTelefonate = 0.03;
-double const SIM::costoDati = 0.04;
+double SIM::costoTelefonate = 0.03;
+double SIM::costoDati = 0.04;
 
 class Tel : public SIM {
 private:
-	double costoBaseMensile;
+    double costoBaseTel;
 public:
-    double geCostoBaseMensile() const {return costoBaseMensile;}
-	double costoMeseCorrente() const override {
-		return costoBaseMensile + getCostoDati() * getTrafficoDati();
-	}
+    double getCostoBaseTel() const {return costoBaseTel;}
+    double costoMeseCorrente() const override {
+        return costoBaseTel + getTraffico() * getCostoDati();
+    }
 };
 
-class Dati : public SIM {
+class Dati: public SIM {
 private:
-	static const double costoBaseMensile; 
+    static double costoBaseDati;
 public:
-	double costoMeseCorrente() const override {
-		return costoBaseMensile + getTempoTelefonate() * getCostoTelefonate();
-	}
+    double costoMeseCorrente() const override {
+        return costoBaseDati + getTempo() * getCostoTelefonate();
+    }
 };
-
-const double Dati::costoBaseMensile = 13.99;
+double Dati::costoBaseDati = 13.99;
 
 class PAO {
 private:
-	std::list<const SIM*> sim;
+    list<const SIM*> l;
 public:
-	std::vector<Dati> fun1(double x) {
-		std::vector<Dati> aux;
-		for(auto cit = sim.begin(); cit != sim.end(); cit++) {
-			const Dati* p = dynamic_cast<const Dati*>(*cit);
-			if(p && p->getTrafficoDati() > x) {
-				aux.push_back(*p);
-			}
-		}
-		return aux;
-	}
-
-	std::vector<Tel*> fun2() {
-        std::vector<Tel*> v;
-        for(auto cit = sim.begin(); cit != sim.end(); cit++) {
-            const Tel* t = dynamic_cast<const Tel*>(*cit);
-            if(t && t->costoMeseCorrente() > 2*t->geCostoBaseMensile())
-                v.push_back(const_cast<Tel*>(t));
+    vector<Dati> Fun1(double x) {
+        vector<Dati> aux;
+        for(auto cit = l.begin(); cit != l.end(); cit++) {
+            if(dynamic_cast<const Dati*>(*cit) && (*cit)->getTraffico() >= x) {
+                aux.push_back(*(const_cast<Dati*>(static_cast<const Dati*>(*cit))));
+            }
         }
-        return v;
-	}
+        return aux;
+    }
+
+    list<Tel*> Fun2() {
+        list<Tel*> aux;
+        for(auto cit = l.begin(); cit != l.end(); cit++) {
+            auto *ptr = dynamic_cast<const Tel*>(*cit);
+            if(ptr && ptr->costoMeseCorrente() > 2 * ptr->getCostoBaseTel())
+                aux.push_back(const_cast<Tel*>(ptr));
+        }
+        return aux;
+    }
 };

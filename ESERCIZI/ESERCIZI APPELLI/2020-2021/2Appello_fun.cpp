@@ -2,7 +2,7 @@
 Si assumano le seguenti specifiche riguardanti la libreria Qt:
 – Come noto, QWidget è la classe base polimorfa di tutte le classi GUI della libreria Qt.
 La classe QWidget rende disponibile un metodo virtuale int heightDefault() const con il seguente comportamento:
-	w.heightDefault() ritorna l’altezza di default del widgetw.
+	w.heightDefault() ritorna l’altezza di default del widget w.
 
 – La classe QFrame deriva direttamente e pubblicamente da QWidget.
 La classe QFrame rende disponibile un metodo void setLineWidth(int) con il seguente comportamento:
@@ -21,7 +21,9 @@ La classe QLCDNumber rende disponibile un metodo void setDigitCount(int) con il 
 
 Definire una funzione fun di segnatura list<QFrame*> fun(vector<QWidget*>&) con il seguente comportamento: in ogni invocazione fun(v):
 1. Per ogni puntatore p elemento del vector v:
-	– Se *p è un QLabel allora imposta la larghezza della sua cornice al valore 8 ed imposta a false la proprietà di word-wrapping della label *p;– Se *p è un QLCDNumber allora imposta al valore 3 il numero di cifre dell’intero memorizzato dal lcdNumber *p.
+	– Se *p è un QLabel allora imposta la larghezza della sua cornice al valore 8 ed imposta a false la proprietà di word-wrapping della label *p;
+    – Se *p è un QLCDNumber allora imposta al valore 3 il numero di cifre dell’intero memorizzato dal lcdNumber *p.
+    
 2. fun(v) deve ritornare una lista contenente tutti e soli i puntatori p non nulli contenuti nel vector v che puntano ad un QFrame che non è un QSplitter e la cui altezza di default è minore di 10.
 */
 

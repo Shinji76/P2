@@ -2,8 +2,8 @@
 #define MAZZO_H
 
 #include "vector_template.h"
-#include "carta.h"
-#include "album.h"
+#include "AbstractCard.h"
+#include "Album.h"
 #include <iostream>
 
 class Mazzo {

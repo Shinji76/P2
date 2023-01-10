@@ -1,23 +1,23 @@
+#include <string>
+using std::string;
+
 class ios {
-private:
-    int failBit;
 public:
-    const bool fail() {
-        if(failBit == 1)
-            return true;
-        return false;
-    }
+    bool fail() const {}
     virtual ~ios();
 };
 
-
 class istream : public ios {
 public:
-    long tellg();
+    long tellg() const {}
 };
-
 
 class ifstream : public istream {
 public:
-    const bool is_open();
+    bool is_open() const {}
+};
+
+class Fallimento {
+public:
+    Fallimento() {}
 };

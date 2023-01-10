@@ -4,8 +4,8 @@ Si ricordano le seguenti specifiche riguardanti la libreria standard di IO.
 (1)	La classe ios è la classe base polimorfa della gerarchia di tipi per I/O. 
 	Un oggetto di ios rappresenta un generico stream. Lo stato di uno stream è un intero in [0,7], dove lo stato 0 significa stato privo di errori, mentre lo stato 2 significa stato di fallimento recuperabile. 
 	ios rende disponibile un metodo costante int rdstate() con il comportamento: s.rdstate() ritorna lo stato di s.
-	Inoltre ios rende disponibile un metodo void setstate (int) con il comportamento: 
-	s.setstate(x) modifica al valore x lo stato di s.
+	Inoltre ios rende disponibile un metodo void setState (int) con il comportamento: 
+	s.setState(x) modifica al valore x lo stato di s.
 
 (2)	La classe istream è derivata direttamente e virtualmente da ios ed i suoi oggetti rappresentano un generico stream di input.
 	La classe istream rende disponibile un metodo costante int tellg() con il seguente comportamento:

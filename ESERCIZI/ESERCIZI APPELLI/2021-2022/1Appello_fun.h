@@ -1,6 +1,11 @@
 using std::string;
 #include <string>
 
+class QString {
+public:
+    QString(const char*) {}
+};
+
 class QPaintDevice {
 public:
 	int width() const {}

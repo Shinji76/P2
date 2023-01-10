@@ -1,4 +1,4 @@
-#include "mazzo.h"
+#include "Mazzo.h"
 
 Mazzo::Mazzo() : numCopie{0} {}
 

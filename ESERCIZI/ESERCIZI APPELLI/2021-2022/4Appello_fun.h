@@ -1,18 +1,18 @@
 class ios {
 public:
-    const int rdstate() {}
+    int rdstate() const {}
     void setState(int) {}
     virtual ~ios() {}
 }; 
 
 class istream : virtual public ios {
 public:
-    const int tellg() {}
+    int tellg() const {}
 };
 
 class ostream : virtual public ios {
 public:
-    const int tellp() {}
+    int tellp() const {}
 };
 
 class iostream : public istream, public ostream {
@@ -21,6 +21,6 @@ class iostream : public istream, public ostream {
 
 class fstream : public iostream {
 public:
-    const bool is_open() {}
+    bool is_open() const {}
     void close() {}
 };
