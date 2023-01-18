@@ -8,6 +8,7 @@ Il template di classe Vettore<T,sz> deve includere:
 	overloading dell’operatore di output.
 	Ad esempio, il seguente codice dovrà compilare correttamente e l’esecuzione dovrà provocare esattamente le stampe riportate nei commenti.
 */
+
 #include <iostream>
 
 template <class T = int, unsigned int size = 0>
@@ -16,40 +17,40 @@ private:
 	T* ptr;
 
 public:
-	Vettore(const T& x = T()) : ptr(size == 0 ? nullptr : new T[size]) {
+	Vettore(const T& x = T()) : ptr(size ? new T[size] : nullptr) {
 		for(int i = 0; i < size; i++) {
 			ptr[i] = x; 
 		}
 	}
 	
-	Vettore(const Vettore& v) : ptr(size == 0 ? nullptr : new T[size]) {
-		for(int i = 0; i< size; i++) {
+	Vettore(const Vettore& v) : ptr(size ? new T[size] : nullptr) {
+		for(int i = 0; i < size; i++) {
 			ptr[i] = v.ptr[i];
 		}
 	}
 	
 	Vettore& operator=(const Vettore& v) {
-		if(this != &v) {
+		if(this != &v && ptr != nullptr) {
 			delete[] ptr;
-			ptr = size == 0 ? nullptr : new T[size];
+			ptr = new T[size];
 			for(int i = 0; i < size; i++) {
 				ptr[i] = v.ptr[i];
 			}
 		}
-		return *this;
+        return *this;
 	}
 	
 	~Vettore() {
 		if(ptr)
-			delete ptr;
+			delete[] ptr;
 	}
 	
 	const T& operator*() const {
-		return ptr[0];
+		return *ptr;
 	}
 	
 	T& operator*() {
-		return ptr[0];
+		return *ptr;
 	}
 
 	const T& operator[](unsigned int x) const {
@@ -80,6 +81,8 @@ int main() {
 	v4 = v1;
 	v4[3] = 5;
 	std::cout << v1 << std::endl;	// 9 2 2 2
+    std::cout << "prova1\n";
+    std::cout << "prova2\n";
 	std::cout << v2 << std::endl;	// 3 3 3  3 3 3  3 3 3
 	std::cout << v3 << std::endl;	// 2 2 6 2
 	std::cout << v4 << std::endl;	// 9 2 2 5

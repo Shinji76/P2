@@ -43,24 +43,25 @@ public:
 	}
 };
 
-int main(){
-//C x1; cout << endl << endl;
+int main() {
+C x1; cout << endl << endl;
 //C x2; cout << endl << endl;
-//E y1; cout << endl << endl;
+E y1; cout << endl << endl;
 //E y2; cout << endl << endl;
-//F z1; cout << endl << endl;
+F z1; cout << endl << endl;
 //F z2; cout << endl << endl;
 
-//	D d1;					//STAMPA: C0 D0 			
-//	D d2(d1);				//STAMPA: C0 Dc				ERRORE(corretto)
-//	E e1;					//STAMPA: C0 C0 E0			
-//	E e2 = y1;				//STAMPA: Cc				ERRORE(corretto)
-//	y1 = y2;				//STAMPA: RunTimeError		ERRORE(corretto)				
-//	F*pF = new F();			//STAMPA: C0 F0				
-//	F f = z1;				//STAMPA: C0 Fc				
-//	z1 = z2;				//STAMPA: C= F=				
-//	x1 = y1;				//STAMPA: C=				ERRORE(corretto)
-//	z1 = x1; 				//STAMPA: NON COMPILA		ERRORE(corretto)
+
+//	D d1;					//STAMPA: C0 D0
+//	D d2(d1);				//STAMPA: C0 Dc
+//	E e1;					//STAMPA: C0 C0 E0
+//	E e2 = y1;				//STAMPA: Cc Cc
+//	y1 = y2;				//STAMPA: run time error
+//	F *pF = new F();		//STAMPA: C0 F0
+//	F f = z1;				//STAMPA: C0 Fc
+//	z1 = z2;				//STAMPA: C= F=
+//	x1 = y1;				//STAMPA: C=
+//	z1 = x1; 	            //STAMPA: non comp
 }
 
 // RISULTATO: 5/10

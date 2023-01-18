@@ -31,13 +31,16 @@ La classe Amazonia deve soddisfare le seguenti specifiche:
 5. Un oggetto di Amazonia è caratterizzato da un contenitore di oggetti di tipo SmartP che memorizza i puntatori smart a tutti e soli gli specialisti ICT che lavorano in Amazonia.
 
 6. La classe Amazonia rende disponibili i seguenti metodi: 
-	6.1 Un metodo bool insert(SwEngineer*, unsigned int) con il seguente comportamento:
+	
+    6.1 Un metodo bool insert(SwEngineer*, unsigned int) con il seguente comportamento:
 	una invocazione am.insert(p,k) inserisce un puntatore smart ad una copia di *p nel contenitore di am se il numero di ingegneri software di Amazonia che si occupano di sicurezza è minore di k, altrimenti non viene effettuato l’inserimento;
-		Se l’inserimento viene effettuato allora si ritorna true, altrimenti false.
-	6.2 Un metodo vector<HwEngineer> fire(double) con il seguente comportamento:
+	Se l’inserimento viene effettuato allora si ritorna true, altrimenti false.
+	
+    6.2 Un metodo vector<HwEngineer> fire(double) con il seguente comportamento:
 	una invocazione am.fire(s) elimina dal contenitore di am tutti gli specialisti ICT di Amazonia che hanno uno stipendio mensile maggiore di s;
 	inoltre ritorna un vector di HwEngineer che contiene tutti e soli gli ingegneri hardware eliminati.
-	6.3 Un metodo vector<SwEngineer*> masterInf() con il seguente comportamento: una invocazione am.masterInf() ritorna un vector di puntatori ordinari a SwEngineer contenente tutti e soli gli ingegneri software di Amazonia in possesso di una LaureaMagistrale in Informatica.
+	
+    6.3 Un metodo vector<SwEngineer*> masterInf() con il seguente comportamento: una invocazione am.masterInf() ritorna un vector di puntatori ordinari a SwEngineer contenente tutti e soli gli ingegneri software di Amazonia in possesso di una LaureaMagistrale in Informatica.
 */
 
 #include <vector>
@@ -56,8 +59,8 @@ private:
 
 public:
 	double getStipendio() const {return stipendioMensile;}
-	bool getGradoLaurea() {return gradoLaurea;}
-	Laurea getTipoLaurea() {return tipoLaurea;}
+	bool getGradoLaurea() const {return gradoLaurea;}
+	Laurea getTipoLaurea() const {return tipoLaurea;}
 	virtual ICTstaff* clone() const = 0;
 	virtual double salary() = 0;
 };
@@ -103,7 +106,7 @@ private:
 					delete ptr;
 					ptr = (s.ptr)->clone();
 				}
-				return;
+				return *this;
 			}
 			~SmartP() {
 				if(ptr)
@@ -121,12 +124,16 @@ public:
 	bool insert(SwEngineer* sw, unsigned int k) {
 		unsigned int counter = 0;
 		for(auto it = specialistiAmazonia.begin(); it != specialistiAmazonia.end(); it++) {
-			if(dynamic_cast<SwEngineer*>((*it)->ptr)->getDoSecurity() && counter < k) {
+			if(dynamic_cast<SwEngineer*>((*it)->ptr)->getDoSecurity()) {
 				counter++;
-				specialistiAmazonia.push_back(dynamic_cast<SmartP*>(sw));
 			}
 		}
-		return counter<k;
+        if(counter < k) {
+            SwEngineer* tmp = sw->clone(); 
+            specialistiAmazonia.push_back(dynamic_cast<SmartP*>(tmp));
+            return true;
+        }
+        return false;
 	}
 
 	vector<HwEngineer> fire(double s) {
@@ -134,18 +141,17 @@ public:
 		for(auto it = specialistiAmazonia.begin(); it != specialistiAmazonia.end(); it++) {
 			if(dynamic_cast<HwEngineer*>((*it)->ptr)->salary() > s) {
 				aux.push_back(*(static_cast<HwEngineer*>((*it)->ptr)));
-				it = specialistiAmazonia.erase(it);
-				it--;
+				specialistiAmazonia.erase(it);
 			}
 		}
+        return aux;
 	}
 
 	// 6.3 Un metodo vector<SwEngineer*> masterInf() con il seguente comportamento: una invocazione am.masterInf() ritorna un vector di puntatori ordinari a SwEngineer contenente tutti e soli gli ingegneri software di Amazonia in possesso di una LaureaMagistrale in Informatica.
 	vector<SwEngineer*> masterInf() {
 		vector<SwEngineer*> aux;
-		SwEngineer* temp;
 		for(auto it = specialistiAmazonia.begin(); it != specialistiAmazonia.end(); it++) {
-			temp = dynamic_cast<SwEngineer*>((*it)->ptr);
+			SwEngineer *temp = dynamic_cast<SwEngineer*>((*it)->ptr);
 			if(temp->getGradoLaurea() && temp->getTipoLaurea() == 0) {
 				aux.push_back(temp);
 			}

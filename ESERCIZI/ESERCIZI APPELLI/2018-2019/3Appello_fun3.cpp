@@ -27,5 +27,5 @@ public: // ridefinizione del costruttore di copia di F };
     F(const F& f) : pz(f.pz) {}
 };
 /*
-Si considerino le definizioni nel riquadro sopra. Ridefinire (ovviamente senza usare la keyword default) nel riquadro sottostante il costruttore di copia della classe E' in modo tale che il suo comportamento coincida esattamente con quello del costruttore di copia standard di F. 
+Si considerino le definizioni nel riquadro sopra. Ridefinire (ovviamente senza usare la keyword default) nel riquadro sottostante il costruttore di copia della classe F in modo tale che il suo comportamento coincida esattamente con quello del costruttore di copia standard di F. 
 */

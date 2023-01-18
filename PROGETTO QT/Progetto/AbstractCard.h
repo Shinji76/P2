@@ -6,11 +6,11 @@
 class AbstractCard {
 public:     //definisco enum
     enum Rarita {
-        comune, raro, epico, leggendario
+        Comune, Rara, Epica, Leggendaria
     };
     enum Classe {
-        Guerriero, Ladro, Cacciatore, Mago, 
-        Paladino, Sciamano, Druido, Stregone, Sacerdote
+        Cacciatore, Guerriero, Druido, Ladro, Mago, 
+        Paladino, Sacerdote, Sciamano, Stregone
     };
 private:
     const unsigned int ID;

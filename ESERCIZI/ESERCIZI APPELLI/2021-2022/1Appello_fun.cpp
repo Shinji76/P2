@@ -1,8 +1,11 @@
 /*
 Si assumano le seguenti specifiche riguardanti la libreria Qt.
 (a) Un oggetto della classe QString rappresenta una stringa e fornisce un costruttore QString(const char*) con il seguente comportamento: QString(str) costruisce una QString inizializzata con l'array di char str.
+
 (b) QPaintDevice è la classe base polimorfa di tutti gli oggetti che possono essere "dipinti". La classe QPaintDevice rende disponibile un metodo int width() const con il seguente comportamento: pd.width() ritorna la larghezza in pixel del QPaintDevice pd.
+
 (c) Qwidget è una sottoclasse di QPaintDevice i cui oggetti rappresentano delle componenti di un' interfaccia grafica Qt. La classe Qwidget rende disponibile un metodo bool hasFocus() const con il seguente comportamento: w.hasFocus() ritorna true quando la componente w detiene il keyboard focus. Inoltre Qwidget rende disponibile un metodo void clearFocus() con il seguente comportamento: w.clearFocus toglie il keyboard focus alla Qwidget w.
+
 (d) QAbstractButton è derivata direttamente da Qwidget ed è la classe base astratta dei widget pulsante. La classe QAbstractButton rende disponibile un metodo void setText(const QString&) con il seguente comportamento: b.setText(s) setta l'etichetta testuale del QAbstractButton b alla stringa s.
 
 RICHIESTA:
@@ -21,7 +24,7 @@ using std::vector;
 
 vector<QWidget> fun(const vector<const QPaintDevice*>& v) {
 	const QWidget* p;
-	vector<QWidget> ret; 
+	vector<QWidget> aux; 
 	for(auto cit = v.begin(); cit!=v.end(); cit++) {
 		p = dynamic_cast<const QWidget*>(*cit);
 		if(p && (*cit)->width() > 80)
@@ -33,10 +36,10 @@ vector<QWidget> fun(const vector<const QPaintDevice*>& v) {
 			if(ab)
 				ab->setText("-Button");
 			else
-				ret.push_back(*p);
+				aux.push_back(*p);
 		}
 	}
-	return ret;
+	return aux;
 }
 
 int main() {

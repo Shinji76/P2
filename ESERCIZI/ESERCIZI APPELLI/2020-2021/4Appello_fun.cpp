@@ -10,18 +10,26 @@ Definire una unica gerarchia di classi che includa:
 
 class A {       		//base polimorfa
 public:
+	virtual ~A() {}
 };
 
-class B : public A {	//derivata astratta
-	virtual ~B();
+class B : virtual public A {	//derivata astratta
+public:
+	virtual void Fun() = 0;
 };
 
 class C : public B {	//derivata concreta
-
+	void Fun() override {}
 };
 
-class D {
-	
+class D : virtual public A {
+	D() {}
 };
 
-class E {};
+class E : public C, public D {
+	E& operator=(const E& e) {
+		C::operator=(e);
+		D::operator=(e);
+		return *this;
+	}
+};

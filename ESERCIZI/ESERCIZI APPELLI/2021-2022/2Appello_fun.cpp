@@ -30,14 +30,21 @@ class F: public D, public E {
 private:
 	Z*fz;
 public:
-    // ridefinizione del costruttore di copia profonda di F
+	// ridefinizione del costruttore di copia profonda di F
 	F(const F& f): B(f), D(f), E(f), fz(f.fz != nullptr ? new Z(*f.fz) : nullptr)  {}
 	
-    ~F() {						// ridefinizione del distruttore profondo di F
-        delete fz;
+	~F() {						// ridefinizione del distruttore profondo di F
+		delete fz;
 	}
 
-	F& clone(const F& f) {		// definizione del metodo di clonazione di F
-        
+	virtual F* clone() const {		// definizione del metodo di clonazione di F
+		new F(*this);
+	}
+
+	F& operator=(const F& f) {		//ridefinizione standard di F
+		B::operator=(f);
+		D::operator=(f);
+		E::operator=(f);
+		fz = f.fz;
 	}
 };

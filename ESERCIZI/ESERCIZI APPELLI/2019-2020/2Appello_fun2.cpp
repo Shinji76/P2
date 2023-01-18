@@ -35,6 +35,6 @@ char F(A*pa, B& rb) {
 
 int main() {
 	A a; B b; C c; D d; E e;
-	cout << F(&e, e) << F(&a, e) << F(&a, c) << F(&c, b) << F(&b, b) << F(&a, d); 
+	cout << F(&c, e) << F(&d, e) << F(&a, c) << F(&c, d) << F(&b, d) << F(&a, d); 
 	//			M			I			L			A			N			O
 }

@@ -10,9 +10,9 @@ using std::endl;
 template <class T>
 class SmartP {
 private:
-	T* ptr;
+	T *ptr;
 public:
-	SmartP(const T* t = 0) : ptr( t ? new T(*t) : 0) {}
+	SmartP(const T* t = 0) : ptr( t ? new T(*t) : nullptr) {}
 	SmartP(const SmartP& s) : ptr(new T(*s.ptr)) {}
 	SmartP& operator=(const SmartP& s) {
 		if(this != &s) {
@@ -26,13 +26,9 @@ public:
 			delete ptr;
 	}
 	T& operator*() const { return *ptr;}
-	T* operator->() const { return ptr;}
 
 	bool operator==(const SmartP& s) const {
 		return ptr == s.ptr;
-	}
-	bool operator!=(const SmartP& s) const{
-		return ptr != s.ptr;
 	}
 };
 

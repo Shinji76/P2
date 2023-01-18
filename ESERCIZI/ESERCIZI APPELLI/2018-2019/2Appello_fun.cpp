@@ -95,7 +95,7 @@ public:
 			v.push_back(&f);
 			return copy;
 		}
-		throw Exc();
+		throw Exc("ERRORE");
 	}
 
 	list<Audio*> audioCopy() {
@@ -132,9 +132,9 @@ public:
 
 class Exc {
 private:
-	int err;
+	std::string err;
 public:
-	Exc(int e = 0) : err(e) {
+	Exc(std::string e = 0) : err(e) {
 		std::cout << "ERRORE";
 	}
 };
