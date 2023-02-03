@@ -41,7 +41,7 @@ public:
 		new F(*this);
 	}
 
-	F& operator=(const F& f) {		//ridefinizione standard di F
+	F& operator=(const F& f) {		//ridefinizione standard assegnazione di F
 		B::operator=(f);
 		D::operator=(f);
 		E::operator=(f);

@@ -1,48 +1,26 @@
-//#include "2020-2021/2Appello_fun.h"
+#include "ESERCIZI APPELLI/2021-2022/1Appello_fun.h"
 #include <iostream>
 #include <vector>
 #include <list>
-#include <string>
 using std::vector;
 using std::list;
 using std::cout;
 
-
-
-class Z {
-public:
-    Z() {cout << "Z0 ";}
-    Z(const Z& x) { cout << "Zc ";}
-};
-
-class C {
-private:
-    Z w;
-public:
-    C() {cout << "C0 ";}   //costruttore C default
-    C(const C& x) : w(x.w) {cout << "Cc ";}       //costruttore C interi
-};
-
-class D : public C {
-private:
-    Z z;
-public:
-    D() {cout << "D0 ";}
-    D(const D& d) : C(d), z(d.z) {cout << "Dc ";}
-};
-
-class E : public D {
-private:
-    Z k;
-public:
-    E() {cout << "E0 ";}
-    E(const E& e) : D(e), k(e.k) {cout << "Ec ";}
-};
-
-
-int main() {
-    D d; cout << "UNO\n";
-    D e = d; cout << "DUE\n";   
-    E standard; cout << "TRE\n"; 
-    E copia = standard; cout << "QUATTRO\n"; 
+vector<QWidget> fun(const vector<const QPaintDevice*>& v) {
+    vector<QWidget> aux;
+    for(auto cit = v.begin(); cit != v.end(); cit++) {
+        const QPaintDevice *ptr = *cit;
+        if(dynamic_cast<const QWidget*>(ptr)->width() > 80)
+            throw QString("TooBig");
+        else if(dynamic_cast<const QWidget*>(ptr)->width() < 80 && static_cast<const QWidget*>(ptr)->hasFocus())
+            static_cast<QWidget*>(const_cast<QPaintDevice*>(ptr))->clearFocus();
+        if(dynamic_cast<const QAbstractButton*>(ptr))
+            static_cast<QAbstractButton*>(const_cast<QPaintDevice*>(ptr))->setText("Button");
+        if(!dynamic_cast<const QAbstractButton*>(ptr) && dynamic_cast<const QWidget*>(ptr)) {
+            QWidget *insert = new QWidget();
+            insert = static_cast<QWidget*>(const_cast<QPaintDevice*>(ptr));
+            aux.push_back(*insert);
+        }
+    }
+    return aux;
 }

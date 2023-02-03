@@ -36,27 +36,28 @@ public:
 	void m() {cout <<"E::m "; g(); h();}
 	C* n() {cout <<"E::n "; return this;}
 };
-	
+
 //const B* p1 = new D();
 //B* p2 = new C();
 //B* p3 = new D();
-C* p4 = new E();
+//C* p4 = new E();
 //B* p5 = new E();
 
 int main() {
 //	p1->g();						// STAMPA: B::g
-//	(p1->n())->g();					// STAMPA: non compila
-//	p2->f();						// STAMPA: B::f C::g B::h 
+//	(p1->n())->g();					// STAMPA: NON COMPILA
+//	p2->f();						// STAMPA: B::f C::g B::h
 //	p2->m();						// STAMPA: B::m C::g B::h
-//	(static_cast<D*>(p2))->k();		// STAMPA: undefined behaviour
-//	p3->k();						// STAMPA: B::k D::h B::m B::g D::h		ERRORE
+//	(static_cast<D*>(p2))->k();		// STAMPA: ERRORE
+//	p3->k();						// STAMPA: B::k D::h B::m B::g D::h
 //	p3->f();						// STAMPA: B::f B::g D::h
-//	(p3->n())->m();					// STAMPA: B::n B::m B::g D::h			
-//	(p3->n())->n()->g();			// STAMPA: B::n B::n B::g				
-	(p4->n())->m();					// STAMPA: E::n B::m B::g E::h			ERRORE
-//	p5->g();						// STAMPA: C::g							ERRORE
-//	p5->k();						// STAMPA: C::k B::n					ERRORE
+//	(p3->n())->m();					// STAMPA: B::n B::m B::g D::h
+//	(p3->n())->n()->g();			// STAMPA: B::n B::n B::g
+//	(p4->n())->m();					// STAMPA: E::n B::m C::g E::h              //ERRORE
+//	p5->g();						// STAMPA: C::g
+//	p5->k();						// STAMPA: C::k B::n
 //	(dynamic_cast<C*>(p5))->m();	// STAMPA: E::m C::g E::h
 }
 
 // RISULTATO: 10/14
+// RISULTATO: 13/14

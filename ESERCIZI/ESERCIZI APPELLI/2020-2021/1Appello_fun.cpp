@@ -34,7 +34,7 @@ private:
     static double costoDati;
     static double costoTelefonate;
 public:
-   virtual double costoMeseCorrente() const =0;
+   virtual double costoMeseCorrente() const = 0;
     double getCostoDati() const {return costoDati;}
     double getCostoTelefonate() const {return costoTelefonate;}
     unsigned int getTempo() const { return tempoTelefonateMese;}

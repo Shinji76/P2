@@ -81,8 +81,6 @@ int main() {
 	v4 = v1;
 	v4[3] = 5;
 	std::cout << v1 << std::endl;	// 9 2 2 2
-    std::cout << "prova1\n";
-    std::cout << "prova2\n";
 	std::cout << v2 << std::endl;	// 3 3 3  3 3 3  3 3 3
 	std::cout << v3 << std::endl;	// 2 2 6 2
 	std::cout << v4 << std::endl;	// 9 2 2 5

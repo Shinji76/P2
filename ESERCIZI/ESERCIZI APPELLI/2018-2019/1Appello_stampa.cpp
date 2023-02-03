@@ -12,7 +12,7 @@ public:
 	virtual const B* j() {cout << "B::j " ; return this;}
 	virtual void k() {cout << "B::k "; j(); m(); }
 	void m() {cout << "B::m "; g(); j();}
-	virtual B& n() { cout << "B::n "; return *this;}
+	virtual B& n() {cout << "B::n "; return *this;}
 };
 
 class C: virtual public B {
@@ -60,7 +60,7 @@ int main() {
 B *p2 = new C();
 //B *p3 = new D();
 //C *p4 = new E();
-//const B *p5 = new D();
+const B *p5 = new D();
 //const B *p6 = new E();
 //const B *p7 = new F();
 //F f;

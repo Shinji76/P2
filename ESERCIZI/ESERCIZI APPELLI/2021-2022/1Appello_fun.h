@@ -1,9 +1,11 @@
-using std::string;
 #include <string>
+using std::string;
 
 class QString {
+private:
+    string str;
 public:
-    QString(const char*) {}
+    QString(const string s) : str(s) {}
 };
 
 class QPaintDevice {

@@ -47,38 +47,40 @@ class F: public E {
 public:
 	F() {cout<< "F() ";}
 	~F() {cout<< "~F() ";}
-	F(const F& x): B(x) {cout<< "Fc ";}
+	F(const F& x): B(x) {cout << "Fc ";}
 	void k() {cout <<"F::k "; g();}
 	void m() {cout <<"F::m "; j();}
 };
 
-B*p1 = new E();
+//B*p1 = new E();
 //B*p2 = new C();
-B*p3 = new D();
-C*p4 = new E();
+//B*p3 = new D();
+//C*p4 = new E();
 //const B*p5 = new D();
-const B*p6 = new E();
+//const B*p6 = new E();
 //const B*p7 = new F();
-//F f;
+F f;
 
 int main() {
+cout << std::endl;
 //	p4->f();										// STAMPA: B::f E::g E::j
-	(p4->n()).m();									// STAMPA: E::n B::m E::g E::j      ERRORE(corretto)
+//	(p4->n()).m();									// STAMPA: E::n B::m E::g E::j
 //	p3->k();										// STAMPA: B::k D::j B::m B::g D::j
 //	(p3->n()).m();									// STAMPA: B::n B::m B::g D::j
-	(dynamic_cast<D&>(p3->n())).g();				// STAMPA: B::n	D::g					ERRORE
+//	(dynamic_cast<D&>(p3->n())).g();				// STAMPA: B::n D::g
 //	p2->f();										// STAMPA: B::f C::g B::j
 //	p2->m();										// STAMPA: B::m C::g B::j
 //	(p2->j())->g();									// STAMPA: B::j C::g
-//	(p5->n()).g();									// STAMPA: NON COMPILA (non c'è match per const B*)
+//	(p5->n()).g();									// STAMPA: non compila(perde const)
 //	F x;											// STAMPA: B() C() D() E() F()
-//	C*p = new F(f);									// STAMPA: B() Fc					ERRORE
+	C*p = new F(f);									// STAMPA: C() D() E() Fc                       ERRORE
 //	p1->m();										// STAMPA: B::m E::g E::j
-//	(p1->j()->k());									// STAMPA: E::j C::k B::n           ERRORE
-//	(dynamic_cast<const F*>(p1->j()))->g();			// STAMPA: E::j B::g				ERRORE
-//	(dynamic_cast<E*>(p6))->j();					// STAMPA: NON COMPILA				
-//	(dynamic_cast<C*>(const_cast<B*>(p7)))->k();	// STAMPA: C::k B::n				ERRORE
+//	(p1->j())->k();									// STAMPA: errore, perdita const
+//	(dynamic_cast<const F*>(p1->j()))->g();         // STAMPA: Non compila
+//	(dynamic_cast<E*>(p6))->j();					// STAMPA: Non compila
+//	(dynamic_cast<C*>(const_cast<B*>(p7)))->k();    // STAMPA: F::k E::g
 //	delete p7;										// STAMPA: ~F() ~E() ~D() ~C() ~B()
 }
 
 //RISULTATO 11/17
+//RISULTATO: 16/17

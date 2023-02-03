@@ -1,5 +1,6 @@
 #include <iostream>
 using std::cout;
+using std::endl;
 
 class Z {
 public:
@@ -52,34 +53,34 @@ public:
 	F*f(Z){cout <<"F::f(Z) "; return this;}
 };
 
-//B*pb = new B;
-//C*pc = new C;
-//D*pd = new D;
-//E*pe = new E;
-//F*pf = new F;
-B*pb1= new F;
-//A*pa1=pb;
-//A*pa2=pc;
-//A*pa3=pd;
-//A*pa4=pe;
-//A*pa5=pf;
+B*pb = new B;
+C*pc = new C;
+D*pd = new D;
+E*pe = new E;
+F*pf = new F;
+B*pb1 = new F;
+A*pa1=pb;
+A*pa2=pc;
+A*pa3=pd;
+A*pa4=pe;
+A*pa5=pf;
 
 int main() {
-//	pa3->f(3);								//STAMPA: A::f(int) A::f(bool)								/
-//	pa5->f(3);								//STAMPA: A::f(int) F::f(bool)								/
-//	pb1->f(true);							//STAMPA: B::f(const bool&)									/
-//	pa4->f(true);							//STAMPA: A::f(bool)										/
-//	pa2->f(Z(2));							//STAMPA: C::f(Z)											ERRORE(corretto)
-//	pa5->f(Z(2));							//STAMPA: F::f(Z)											ERRORE(corretto)
-//	(dynamic_cast<E*>(pa4))->f(Z(2));		//STAMPA: E::f(Z)											/
-//	(dynamic_cast<C*>(pa5))->f(Z(2));		//STAMPA: F::f(Z)											ERRORE(corretto)
-//	pb->f(3);								//STAMPA: B::f(const int&)									/
-//	pc->f(3);								//STAMPA: C::f(Z)											ERRORE(corretto)
-//	(pa4->f(Z(3)))->f(4);					//STAMPA: E::f(Z) A::f(int) A::f(bool)						ERRORE(corretto)
-//	(pc->f(Z(3)))->f(4);					//STAMPA: C::f(Z) C::f(Z)									ERRORE(corretto)
-//	E*puntE = new F;						//STAMPA: A() B() C() E() D() F()							/
-//	delete pa5;								//STAMPA: 													ERRORE(corretto)
-	delete pb1;								//STAMPA: ~F() ~D() ~E() ~B()								/
+	pa3->f(3);						        //STAMPA: A::f(int) A::f(bool)
+	pa5->f(3);						        //STAMPA: A::f(int) F::f(bool)
+	pb1->f(true);					        //STAMPA: B::f(const bool&)
+	pa4->f(true);					        //STAMPA: A::f(bool)
+	pa2->f(Z(2));					        //STAMPA: C::f(Z)
+	pa5->f(Z(2));					        //STAMPA: F::f(Z)
+	(dynamic_cast<E*>(pa4))->f(Z(2));       //STAMPA: E::f(Z)
+	(dynamic_cast<C*>(pa5))->f(Z(2));       //STAMPA: F::f(Z)
+	pb->f(3);						        //STAMPA: B::f(const int&)
+	pc->f(3);						        //STAMPA: C::f(Z)
+	(pa4->f(Z(3)))->f(4);                   //STAMPA: E::f(Z) A::f(int) A::f(bool)
+	(pc->f(Z(3)))->f(4);                    //STAMPA: C::f(Z) C::f(Z)
+	E*puntE = new F;				        //STAMPA: A() B() C() E() D() F()
+	delete pa5;						        //STAMPA: 
+	delete pb1;						        //STAMPA: ~F() ~E() ~D()
 }
 
-// RISULTATO: 8/15
+//RISULTATO: 12/15

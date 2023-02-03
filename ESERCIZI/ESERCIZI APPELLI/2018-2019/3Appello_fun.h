@@ -13,10 +13,10 @@ public:
 
 class QWidget {
 private:
-    QSize dimension;
+    unsigned int dimension;
 public:
     virtual ~QWidget() {}
-    virtual QSize sizeHint() const {}
+    virtual unsigned int sizeHint() const {}
     virtual QWidget* clone() const {}
 };
 
@@ -27,12 +27,12 @@ public:
 
     class QCheckBox : public QAbstractButton {
     public:
-        QSize sizeHint() const override {} 
+        unsigned int sizeHint() const override {} 
     };
 
     class QPushButton : public QAbstractButton {
     public:
-        QSize sizeHint() const override {} 
+        unsigned int sizeHint() const override {} 
     };
 
 
@@ -43,12 +43,12 @@ public:
 
     class QScrollBar : public QAbstractSlider {
     public:
-        QSize sizeHint() const override {}
+        unsigned int sizeHint() const override {}
     };
 
     class QSlider : public QAbstractSlider {
     public:
-        QSize sizeHint() const override {}
+        unsigned int sizeHint() const override {}
     };
 
 #endif

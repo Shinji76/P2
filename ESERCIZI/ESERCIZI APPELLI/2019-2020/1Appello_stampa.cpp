@@ -56,7 +56,7 @@ int main() {
 //	(p4->n())->m();						//STAMPA: D::n A::m B::g D::r			ERRORE(risolto)
 //	(p5->n())->g();						//STAMPA: NON COMPILA
 //	(dynamic_cast<B*>(p1))->m();		//STAMPA: D::m B::g D::r
-//	(static_cast<C*>(p2))->k();			//STAMPA: ERRORE
+	(static_cast<C*>(p2))->k();			//STAMPA: undef behaviour
 }
 
 // RISULTATO: 11/12

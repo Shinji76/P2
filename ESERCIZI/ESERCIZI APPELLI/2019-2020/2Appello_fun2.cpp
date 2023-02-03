@@ -35,6 +35,19 @@ char F(A*pa, B& rb) {
 
 int main() {
 	A a; B b; C c; D d; E e;
+
+    if(dynamic_cast<B*>(&d) == nullptr)
+        cout << "sbajà"; 
+
+
+
+
+
+
+
+
+
+
 	cout << F(&c, e) << F(&d, e) << F(&a, c) << F(&c, d) << F(&b, d) << F(&a, d); 
 	//			M			I			L			A			N			O
 }
