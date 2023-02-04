@@ -8,19 +8,18 @@
 
 class Mazzo {
 private:
-	Fixed_vector<int> numCopie;		//creare getsize di album
+	Fixed_vector<int> numCopie;
 	unsigned int counter;
 
-public:
-	Mazzo() : numCopie(), counter(0) {}
-	
 	void upCounter();
-	
 	void downCounter();
+
+public:
+	Mazzo(Fixed_vector<int> numCopie, unsigned int counter);
 	
-	void addCard(const Carta&);
+	void addCard(const AbstractCard&);
 	
-	void removeCard(const Carta&);
+	void removeCard(const AbstractCard&);
 };
 
 #endif  //MAZZO_H

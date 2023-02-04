@@ -1,4 +1,4 @@
-Spiegazione modello progetto: Lezione 24-12-2022 da min 1:05 a 21:50
+Spiegazione modello progetto: Lezione 22-12-2022 da min 1:05 a 21:50
 
 TIME STAMPS:
 Engine: 1:05 - 6:10

@@ -1,0 +1,518 @@
+{
+	"Album": [
+		{
+			"ID": 1,
+			"Nome": "Murloc Tinyfin",
+			"Effetto": "",
+			"Costo": 0,
+			"Rarita": "Comune",
+			"Classe": "Neutrale",
+			"Razza": "Murloc", 
+			"Attacco": 1,
+			"Difesa": 1
+		},
+		{
+			"ID": 2,
+			"Nome": "Snowflipper Penguin",
+			"Effetto": "",
+			"Costo": 0,
+			"Rarita": "Comune",
+			"Classe": "Neutrale",
+			"Razza": "Bestia",
+			"Attacco": 1,
+			"Difesa": 1
+		},
+		{
+			"ID": 3,
+			"Nome": "Wisp",
+			"Effetto": "",
+			"Costo":0,
+			"Rarita": "Comune",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 1,
+			"Difesa": 1
+		},
+		{
+			"ID": 4,
+			"Nome": "Elven Archer",
+			"Effetto": "Battlecry: Deal 1 damage.",
+			"Costo": 1,
+			"Rarita": "Comune",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 1,
+			"Difesa": 1
+		},
+		{
+			"ID": 5,
+			"Nome": "Helmet Hermit",
+			"Effetto": "Can't attack.",
+			"Costo": 1,
+			"Rarita": "Rara",
+			"Classe": "Neutrale",
+			"Razza": "Bestia",
+			"Attacco": 4,
+			"Difesa": 3
+		},
+		{
+			"ID": 6,
+			"Nome": "Sir Finley Mrrgglton",
+			"Effetto": "Battlecry: Discover a new basic Hero Power",
+			"Costo": 1,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Murloc",
+			"Attacco": 1,
+			"Difesa": 3
+		},
+		{
+			"ID": 7,
+			"Nome": "Acidic Swamp Ooze",
+			"Effetto": "Battlecry: Destroy your opponent weapon.",
+			"Costo": 2,
+			"Rarita": "Rara",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 3,
+			"Difesa": 2
+		},
+		{
+			"ID": 8,
+			"Nome": "Bloodmage Thalnos",
+			"Effetto": "effetto",
+			"Costo": 2,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 1,
+			"Difesa": 1
+		},
+		{
+			"ID": 9,
+			"Nome": "Doomsayer",
+			"Effetto": "effetto",
+			"Costo": 2,
+			"Rarita": "Epica",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 0,
+			"Difesa": 7
+		},
+		{
+			"ID": 10,
+			"Nome": "Acolyte of Pain",
+			"Effetto": "mioEffetto",
+			"Costo": 3,
+			"Rarita": "Comune",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 1,
+			"Difesa": 3
+		},
+		{
+			"ID": 11,
+			"Nome": "Brann BronzeBeard",
+			"Effetto": "mioEffetto",
+			"Costo": 3,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 2,
+			"Difesa": 4
+		},
+		{
+			"ID": 12,
+			"Nome": "Ironbeak Owl",
+			"Effetto": "mioEffetto",
+			"Costo": 3,
+			"Rarita": "Comune",
+			"Classe": "Neutrale",
+			"Razza": "Bestia",
+			"Attacco": 2,
+			"Difesa": 1
+		},
+		{
+			"ID": 13,
+			"Nome": "Southsea Captain",
+			"Effetto": "mioEffetto",
+			"Costo": 3,
+			"Rarita": "Epica",
+			"Classe": "Neutrale",
+			"Razza": "Pirata",
+			"Attacco": 3,
+			"Difesa": 3
+		},
+		{
+			"ID": 14,
+			"Nome": "Sneaky Devil",
+			"Effetto": "mioEffetto",
+			"Costo": 4,
+			"Rarita": "Comune",
+			"Classe": "Neutrale",
+			"Razza": "Demone",
+			"Attacco": 2,
+			"Difesa": 2
+		},
+		{
+			"ID": 15,
+			"Nome": "Big Game Hunter",
+			"Effetto": "mioEffetto",
+			"Costo": 4,
+			"Rarita": "Epica",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 4,
+			"Difesa": 2
+		},
+		{
+			"ID": 16,
+			"Nome": "Defender of Argus",
+			"Effetto": "mioEffetto",
+			"Costo": 4,
+			"Rarita": "Rara",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 3,
+			"Difesa": 3
+		},
+		{
+			"ID": 17,
+			"Nome": "Old Murk-Eye",
+			"Effetto": "mioEffetto",
+			"Costo": 4,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Murloc",
+			"Attacco": 2,
+			"Difesa": 4
+		},
+		{
+			"ID": 18,
+			"Nome": "Azure Drake",
+			"Effetto": "mioEffetto",
+			"Costo": 5,
+			"Rarita": "Rara",
+			"Classe": "Neutrale",
+			"Razza": "Drago",
+			"Attacco": 4,
+			"Difesa": 5
+		},
+		{
+			"ID": 19,
+			"Nome": "Burning Blade Acolyte",
+			"Effetto": "mioEffetto",
+			"Costo": 5,
+			"Rarita": "Rara",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 1,
+			"Difesa": 1
+		},
+		{
+			"ID": 20,
+			"Nome": "Prince Malchezaar",
+			"Effetto": "mioEffetto",
+			"Costo": 5,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Demone",
+			"Attacco": 4,
+			"Difesa": 5
+		},
+		{
+			"ID": 21,
+			"Nome": "Faceless Manipulator",
+			"Effetto": "mioEffetto",
+			"Costo": 5,
+			"Rarita": "Epica",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 3,
+			"Difesa": 3
+		},
+		{
+			"ID": 22,
+			"Nome": "Leeeeroyyy Jenkinssss",
+			"Effetto": "mioEffetto",
+			"Costo": 5,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 6,
+			"Difesa": 2
+		},
+		{
+			"ID": 23,
+			"Nome": "Maexxna",
+			"Effetto": "mioEffetto",
+			"Costo": 6,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Bestia",
+			"Attacco": 2,
+			"Difesa": 8
+		},
+		{
+			"ID": 24,
+			"Nome": "Reno Jackson",
+			"Effetto": "mioEffetto",
+			"Costo": 6,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 4,
+			"Difesa": 6
+		},
+		{
+			"ID": 25,
+			"Nome": "Sabeartooth Stalker",
+			"Effetto": "mioEffetto",
+			"Costo": 6,
+			"Rarita": "Comune",
+			"Classe": "Neutrale",
+			"Razza": "Bestia",
+			"Attacco": 8,
+			"Difesa": 2
+		},
+		{
+			"ID": 26,
+			"Nome": "Baron Geddon",
+			"Effetto": "mioEffetto",
+			"Costo": 7,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Elementale",
+			"Attacco": 7,
+			"Difesa": 7
+		},
+		{
+			"ID": 27,
+			"Nome": "Primordial Drake",
+			"Effetto": "mioEffetto",
+			"Costo": 8,
+			"Rarita": "Epica",
+			"Classe": "Neutrale",
+			"Razza": "Drago",
+			"Attacco": 4,
+			"Difesa": 8
+		},
+		{
+			"ID": 28,
+			"Nome": "Majordomo ExeQTus",
+			"Effetto": "mioEffetto",
+			"Costo": 9,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Comune",
+			"Attacco": 9,
+			"Difesa": 7
+		},
+		{
+			"ID": 29,
+			"Nome": "Deathwing",
+			"Effetto": "mioEffetto",
+			"Costo": 10,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Drago",
+			"Attacco": 12,
+			"Difesa": 12
+		},
+		{
+			"ID": 30,
+			"Nome": "Lokholar the Ice Lord",
+			"Effetto": "mioEffetto",
+			"Costo": 10,
+			"Rarita": "Leggendaria",
+			"Classe": "Neutrale",
+			"Razza": "Elementale",
+			"Attacco": 8,
+			"Difesa": 8
+		},
+		{
+			"ID": 31,
+			"Nome": "Alleycat",
+		 	"Effetto": "effetto",
+		 	"Costo": 1,
+		 	"Rarita": "Comune",
+		 	"Classe": "Cacciatore",
+		 	"Razza": "Bestia",
+		 	"Attacco": 1,
+		 	"Difesa": 1
+		},
+		{
+			"ID": 32,
+		 	"Nome": "Armorsmith",
+		 	"Effetto": "effetto",
+		 	"Costo": 2,
+		 	"Rarita": "Rara",
+		 	"Classe": "Guerriero",
+		 	"Razza": "Comune",
+		 	"Attacco": 1,
+		 	"Difesa": 4
+		},
+		{
+			"ID": 33,
+		 	"Nome": "Defias Cannoneer",
+		 	"Effetto": "effetto",
+		 	"Costo": 3,
+		 	"Rarita": "Comune",
+		 	"Classe": "Guerriero",
+		 	"Razza": "Pirata",
+		 	"Attacco": 3,
+		 	"Difesa": 3
+		},
+		{
+			"ID": 34,
+		 	"Nome": "Tidal Revenant",
+		 	"Effetto": "effetto",
+		 	"Costo": 8,
+		 	"Rarita": "Comune",
+		 	"Classe": "Guerriero",
+		 	"Razza": "Elementale",
+		 	"Attacco": 5,
+		 	"Difesa": 8
+		},
+		{
+			"ID": 35,
+		 	"Nome": "Edwin VanCleef",
+		 	"Effetto": "effetto",
+		 	"Costo": 3,
+		 	"Rarita": "Leggendaria",
+		 	"Classe": "Ladro",
+		 	"Razza": "Comune",
+		 	"Attacco": 2,
+		 	"Difesa": 2
+		},
+		{
+			"ID": 36,
+		 	"Nome": "SIU:7 Agent",
+		 	"Effetto": "effetto",
+		 	"Costo": 3,
+		 	"Rarita": "Rara",
+		 	"Classe": "Ladro",
+		 	"Razza": "Comune",
+		 	"Attacco": 3,
+		 	"Difesa": 3
+		},
+		{
+			"ID": 37,
+		 	"Nome": "Hullbreaker",
+		 	"Effetto": "effetto",
+		 	"Costo": 4,
+		 	"Rarita": "Rara",
+		 	"Classe": "Ladro",
+		 	"Razza": "Demone",
+		 	"Attacco": 4,
+		 	"Difesa": 3
+		},
+		{
+			"ID": 48,
+		 	"Nome": "Voidwalker",
+		 	"Effetto": "effetto",
+		 	"Costo": 1,
+		 	"Rarita": "Comune",
+		 	"Classe": "Ladro",
+		 	"Razza": "Demone",
+		 	"Attacco": 1,
+		 	"Difesa": 3
+		},
+		{
+			"ID": 39,
+		 	"Nome": "Snake Trap",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 2,
+		 	"Rarita": "Epica",
+		 	"Classe": "Cacciatore"
+		},
+		{
+			"ID": 40,
+		 	"Nome": "Bear Trap",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 2,
+		 	"Rarita": "Comune",
+		 	"Classe": "Cacciatore"
+		},
+		{
+			"ID": 41,
+		 	"Nome": "Ice Block",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 3,
+		 	"Rarita": "Epica",
+		 	"Classe": "Mago"
+		},
+		{
+			"ID": 42,
+		 	"Nome": "Animal Companion",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 3,
+		 	"Rarita": "Comune",
+		 	"Classe": "Cacciatore"
+		},
+		{
+			"ID": 43,
+		 	"Nome": "Brawl",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 5,
+		 	"Rarita": "Epica",
+		 	"Classe": "Guerriero"
+		},
+		{
+			"ID": 44,
+		 	"Nome": "Backstab",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 0,
+		 	"Rarita": "Comune",
+		 	"Classe": "Ladro"
+		},
+		{
+			"ID": 45,
+		 	"Nome": "Sprint",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 5,
+		 	"Rarita": "Rara",
+		 	"Classe": "Ladro"
+		},
+		{
+			"ID": 46,
+		 	"Nome": "Arcane Intellect",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 3,
+		 	"Rarita": "Comune",
+		 	"Classe": "Mago"
+		},
+		{
+			"ID": 47,
+		 	"Nome": "Shattering Blast",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 3,
+		 	"Rarita": "Rara",
+		 	"Classe": "Mago"
+		},
+		{
+			"ID": 48,
+		 	"Nome": "Fireball",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 4,
+		 	"Rarita": "Comune",
+		 	"Classe": "Mago"
+		},
+		{
+			"ID": 49,
+		 	"Nome": "Mortal Coil",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 1,
+		 	"Rarita": "Comune",
+		 	"Classe": "Ladro"
+		},
+		{
+			"ID": 50,
+		 	"Nome": "Drain Soul",
+		 	"Effetto": "mioEffetto",
+		 	"Costo": 2,
+		 	"Rarita": "Comune",
+		 	"Classe": "Ladro"
+		}
+	]
+}

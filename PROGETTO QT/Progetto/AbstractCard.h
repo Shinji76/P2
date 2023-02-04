@@ -9,8 +9,7 @@ public:     //definisco enum
         Comune, Rara, Epica, Leggendaria
     };
     enum Classe {
-        Cacciatore, Guerriero, Druido, Ladro, Mago, 
-        Paladino, Sacerdote, Sciamano, Stregone
+        Neutrale, Cacciatore, Guerriero, Ladro, Mago, Stregone
     };
 private:
     const unsigned int ID;
@@ -19,7 +18,6 @@ private:
     unsigned int manaCost;
     Rarita rarita;
     Classe classe;
-
 public:
     //costruttore card
     AbstractCard(
