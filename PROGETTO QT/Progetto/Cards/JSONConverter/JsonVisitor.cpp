@@ -2,7 +2,6 @@
 
 #include <QJsonArray>
 
-
 QJsonObject JsonVisitor::getObject() const {
     return object;
 }
