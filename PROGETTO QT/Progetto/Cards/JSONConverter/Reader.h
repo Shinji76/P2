@@ -2,7 +2,7 @@
 #define JSONCONVERTER_READER_H
 
 #include "IReader.h"
-#include <QJsonObject>
+//#include <QJsonObject>
 #include <map>
 
 class Reader: public IReader {

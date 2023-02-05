@@ -7,11 +7,11 @@
 #include "../Cards/Segreto.h"
 
 class FilterVisitor: public IConstVisitor {
-  private:
+private:
     const Query& query;
     bool match;
 
-  public:
+ public:
     FilterVisitor(const Query& query);
     const Query& getQuery() const;
     bool hasMatch() const;
@@ -19,6 +19,5 @@ class FilterVisitor: public IConstVisitor {
     virtual void visit(const Magia& magia);
     virtual void visit(const Segreto& segreto);
 };
-
 
 #endif

@@ -4,13 +4,13 @@
 #include <string>
 
 class Query {
-  private:
+private:
     const std::string text;
     const std::string filter;
     const unsigned int offset;
     const unsigned int size;
 
-  public:
+public:
     Query(
         const std::string text,
         const std::string filter,
@@ -23,6 +23,5 @@ class Query {
     unsigned int getOffset() const;
     unsigned int getSize() const;
 };
-
 
 #endif  //QUERY_H

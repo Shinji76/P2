@@ -25,4 +25,6 @@ DOMANDE:
 12. Perchè c'è l'interfaccia IEngine? Non basta la classe concreta direttamente?
 13. Nella conversione in "Reader.cpp", le enum vanno convertite in unsigned int o stringhe?
 14. Come creo dei mock?
+15. In FilterVisitor come posso fare ricerca per interi? e come devo comportarmi con le enum?
+16. Per aggiungere le funzioni di ordinamento devo usare un visitor?
 */

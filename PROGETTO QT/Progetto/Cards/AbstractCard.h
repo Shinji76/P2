@@ -20,7 +20,7 @@ private:
     unsigned int manaCost;
     Rarita rarita;
     Classe classe;
-protected:
+public:
     //costruttore card protetto
     AbstractCard (
         unsigned int ID,
@@ -42,7 +42,6 @@ protected:
     virtual unsigned int getManaCost() const;
     virtual Rarita getRarita() const;
     virtual Classe getClasse() const;
-
 };
 
 #endif // CARD_H
