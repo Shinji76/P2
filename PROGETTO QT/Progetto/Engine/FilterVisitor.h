@@ -2,29 +2,23 @@
 #define ENGINE_FILTER_VISITOR_H
 
 #include "Query.h"
-#include "../Item/IConstVisitor.h"
-#include "../Item/WebPage.h"
-#include "../Item/Simple.h"
-#include "../Item/Virtual.h"
-#include "../Item/Bundle.h"
+#include "../Cards/Magia.h"
+#include "../Cards/Mostro.h"
+#include "../Cards/Segreto.h"
 
-namespace Engine {
-
-class FilterVisitor: public Item::IConstVisitor {
+class FilterVisitor: public IConstVisitor {
   private:
     const Query& query;
-    bool has_match;
+    bool match;
 
   public:
     FilterVisitor(const Query& query);
     const Query& getQuery() const;
     bool hasMatch() const;
-    virtual void visit(const Item::WebPage& web_page);
-    virtual void visit(const Item::Simple& simple);
-    virtual void visit(const Item::Virtual& virtual_item);
-    virtual void visit(const Item::Bundle& bundle);
+    virtual void visit(const Mostro& mostro);
+    virtual void visit(const Magia& magia);
+    virtual void visit(const Segreto& segreto);
 };
 
-}
 
 #endif

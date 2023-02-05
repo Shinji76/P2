@@ -5,7 +5,7 @@ AbstractCard::~AbstractCard()
     delete this;
 }
 
-/*
+
 unsigned int AbstractCard::getID() const {
     return ID;
 }
@@ -28,4 +28,3 @@ AbstractCard::Rarita AbstractCard::getRarita() const {
 AbstractCard::Classe AbstractCard::getClasse() const {
     return classe;
 }
-*/

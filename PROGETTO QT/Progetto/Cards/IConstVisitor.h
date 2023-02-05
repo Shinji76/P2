@@ -1,7 +1,6 @@
 #ifndef I_CONST_VISITOR_H
 #define I_CONST_VISITOR_H
 
-
 class Mostro;
 class Magia;
 class Segreto;

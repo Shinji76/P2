@@ -9,3 +9,11 @@ Segreto::Segreto(
     const Classe classe
     )
     : AbstractCard(ID, nome, effetto, mana, rarita, classe) {}
+
+void Segreto::accept(IConstVisitor& visitor) const {
+    visitor.visit(*this);
+}
+
+void Segreto::accept(IVisitor& visitor) {
+    visitor.visit(*this);
+}

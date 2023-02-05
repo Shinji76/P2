@@ -38,7 +38,7 @@ ResultSet Memory::search(const Query& query) const {
     for (auto cit = cards.begin(); cit != cards.end(); cit++) {
         (*cit)->accept(filter_visitor);
         if (filter_visitor.hasMatch()) {
-            results.push_back(*cit);
+            results.push_back(*(*cit));
         }
     }
     std::sort(results.begin(), results.end());
@@ -51,7 +51,6 @@ ResultSet Memory::search(const Query& query) const {
         }
         result_set.add(results[i]);
     }
-
     return result_set;
 }
 

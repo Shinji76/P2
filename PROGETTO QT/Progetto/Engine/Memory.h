@@ -1,5 +1,5 @@
 #include "Progetto/AbstractCard.h"
-#include "Engine/ResultSet.h"
+#include "ResultSet.h"
 #include <vector>
 
 class Memory {

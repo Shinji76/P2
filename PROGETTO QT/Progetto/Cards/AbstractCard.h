@@ -20,9 +20,9 @@ private:
     unsigned int manaCost;
     Rarita rarita;
     Classe classe;
-public:
-    //costruttore card
-    AbstractCard(
+protected:
+    //costruttore card protetto
+    AbstractCard (
         unsigned int ID,
         std::string nome,
         std::string effetto,
@@ -36,12 +36,12 @@ public:
     virtual void accept(IConstVisitor& visitor) const = 0;
     virtual void accept(IVisitor& visitor) = 0;
 
-    virtual unsigned int getID() const = 0;
-    virtual std::string getNome() const = 0;
-    virtual std::string getEffetto() const = 0;
-    virtual unsigned int getManaCost() const = 0;
-    virtual Rarita getRarita() const = 0;
-    virtual Classe getClasse() const = 0;
+    virtual unsigned int getID() const;
+    virtual std::string getNome() const;
+    virtual std::string getEffetto() const;
+    virtual unsigned int getManaCost() const;
+    virtual Rarita getRarita() const;
+    virtual Classe getClasse() const;
 
 };
 

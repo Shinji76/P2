@@ -26,13 +26,10 @@ public:
 		const unsigned int attacco,
 		const unsigned int difesa
 	);
-
-	unsigned int getID() const override;
-	std::string getNome() const override;
-	std::string getEffetto() const override;
-	unsigned int getManaCost() const override;
-	Rarita getRarita() const override;
-	Classe getClasse() const override;
+ 
+    virtual void accept(IConstVisitor& visitor) const;
+    virtual void accept(IVisitor& visitor);
+    
 	Razza getRazza() const;
 	unsigned int getAttacco() const;
 	unsigned int getDifesa() const;    

@@ -14,12 +14,8 @@ Segreto(
     const Classe classe
     );
 
-    unsigned int getID() const override;
-    std::string getNome() const override;
-    std::string getEffetto() const override;
-    unsigned int getManaCost() const override;
-    Rarita getRarita() const override;
-    Classe getClasse() const override;
+virtual void accept(IConstVisitor& visitor) const;
+virtual void accept(IVisitor& visitor);
 
 };
 
