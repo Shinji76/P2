@@ -884,7 +884,7 @@ B& rb = d;      //conversione D& => B&
 
 Se si vuole rendere un campo dati accessibile alle classe derivate va dichiarato come ***protected***.  
 Un membro **protected** non è accessibile dall'esterno.  
-Ad esmepio:  
+Ad esempio:  
 
 ```cpp
 dataora::set2k() {
