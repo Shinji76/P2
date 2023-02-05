@@ -1,7 +1,9 @@
 #ifndef ABSTRACT_CARD_H
 #define ABSTRACT_CARD_H
 
-#include <iostream>
+#include "IConstVisitor.h"
+#include "IVisitor.h"
+#include <string>
 
 class AbstractCard {
 public:     //definisco enum
@@ -30,6 +32,9 @@ public:
     );
 
     virtual ~AbstractCard() = 0;
+
+    virtual void accept(IConstVisitor& visitor) const = 0;
+    virtual void accept(IVisitor& visitor) = 0;
 
     virtual unsigned int getID() const = 0;
     virtual std::string getNome() const = 0;

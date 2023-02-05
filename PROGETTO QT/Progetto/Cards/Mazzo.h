@@ -11,9 +11,6 @@ private:
 	Fixed_vector<int> numCopie;
 	unsigned int counter;
 
-	void upCounter();
-	void downCounter();
-
 public:
 	Mazzo(Fixed_vector<int> numCopie, unsigned int counter);
 	
