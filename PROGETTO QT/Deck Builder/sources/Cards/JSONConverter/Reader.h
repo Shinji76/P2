@@ -2,7 +2,10 @@
 #define JSON_CONVERTER_READER_H
 
 #include "IReader.h"
-//#include <QJsonObject>
+#include "../Mostro.h"
+#include "../Magia.h"
+#include "../Segreto.h"
+#include <QJsonObject>
 #include <map>
 
 class Reader: public IReader {

@@ -1,7 +1,5 @@
 #include "FilterVisitor.h"
 
-#include "../Cards/AbstractCard.h"
-
 FilterVisitor::FilterVisitor(const Query& query) : query(query), match(false) {}
 
 const Query& FilterVisitor::getQuery() const {

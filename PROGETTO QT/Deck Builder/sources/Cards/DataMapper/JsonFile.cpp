@@ -1,6 +1,5 @@
 #include "JsonFile.h"
-//#include "../../Service/Logger/Singleton.h"
-#include "../JSONConverter/Reader.h"
+
 
 #include <iostream>
 #include <QFile>

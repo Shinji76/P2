@@ -15,9 +15,11 @@ void JsonVisitor::visit(const Mostro& mostro) {
     mostro_object.insert("Mana", QJsonValue::fromVariant(mostro.getManaCost()));
     mostro_object.insert("Rarita", QJsonValue::fromVariant(mostro.getRarita().c_str()));
     mostro_object.insert("Classe", QJsonValue::fromVariant(mostro.getClasse().c_str()));
+    mostro_object.insert("Path", QJsonValue::fromVariant(mostro.getPath().c_str()));
     mostro_object.insert("Razza", QJsonValue::fromVariant(mostro.getRazza().c_str()));
     mostro_object.insert("Attacco", QJsonValue::fromVariant(mostro.getAttacco()));
     mostro_object.insert("Difesa", QJsonValue::fromVariant(mostro.getDifesa()));
+    
     object = mostro_object;
 }
 
@@ -30,6 +32,8 @@ void JsonVisitor::visit(const Magia& magia) {
     magia_object.insert("Mana", QJsonValue::fromVariant(magia.getManaCost()));
     magia_object.insert("Rarita", QJsonValue::fromVariant(magia.getRarita().c_str()));
     magia_object.insert("Classe", QJsonValue::fromVariant(magia.getClasse()));
+    magia_object.insert("Path", QJsonValue::fromVariant(magia.getPath().c_str()));
+
     object = magia_object;
 }
 
@@ -42,5 +46,7 @@ void JsonVisitor::visit(const Segreto& segreto) {
     segreto_object.insert("Mana", QJsonValue::fromVariant(segreto.getManaCost()));
     segreto_object.insert("Rarita", QJsonValue::fromVariant(segreto.getRarita().c_str()));
     segreto_object.insert("Classe", QJsonValue::fromVariant(segreto.getClasse()));
+    segreto_object.insert("Path", QJsonValue::fromVariant(segreto.getPath().c_str()));
+
     object = segreto_object;
 }

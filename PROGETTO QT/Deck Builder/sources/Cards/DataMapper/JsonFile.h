@@ -2,7 +2,9 @@
 #define JSON_FILE_H
 
 #include "../AbstractCard.h"
-#include "JSONConverter/Json.h"
+#include "../JSONConverter/Json.h"
+#include "../JSONConverter/Reader.h"
+//#include "../../Service/Logger/Singleton.h"
 
 #include <string>
 #include <vector>

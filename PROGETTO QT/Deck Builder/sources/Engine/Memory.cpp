@@ -1,9 +1,7 @@
 #include <algorithm>
 
 #include "Memory.h"
-#include "ItemDecorator.h"
-#include "ScoreVisitor.h"
-#include "FilterVisitor.h"
+
 
 Memory::Memory() {
 }

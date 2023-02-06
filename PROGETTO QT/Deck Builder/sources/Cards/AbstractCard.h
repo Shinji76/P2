@@ -20,7 +20,7 @@ private:
     unsigned int manaCost;
     Rarita rarita;
     Classe classe;
-    std::string image;
+    std::string image_path;
 public:
     AbstractCard(
         unsigned int ID,

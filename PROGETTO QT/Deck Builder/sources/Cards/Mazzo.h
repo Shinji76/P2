@@ -14,9 +14,7 @@ private:
 public:
 	Mazzo(AbstractCard::Classe classe, Fixed_vector<int> numCopie, unsigned int counter);
 	
-	AbstractCard::Classe getClasse() const {
-		return classe;
-	}
+	AbstractCard::Classe getClasse() const;
 
 	void addCard(const AbstractCard&);
 	void removeCard(const AbstractCard&);

@@ -1,6 +1,5 @@
 #include "Json.h"
-#include "JsonVisitor.h"
-#include "../AbstractCard.h"
+
 
 Json::Json(IReader& reader) : reader(reader) {}
 

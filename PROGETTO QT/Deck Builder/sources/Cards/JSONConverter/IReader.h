@@ -5,7 +5,7 @@
 #include "../Cards/AbstractCard.h"
 
 class IReader {
-  public:
+public:
     virtual ~IReader() {};
     virtual AbstractCard* read(const QJsonObject& object) = 0;
 };

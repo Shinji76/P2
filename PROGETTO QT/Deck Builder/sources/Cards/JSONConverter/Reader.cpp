@@ -1,6 +1,3 @@
-#include "../Mostro.h"
-#include "../Magia.h"
-#include "../Segreto.h"
 #include "Reader.h"
 
 #include <stdexcept>

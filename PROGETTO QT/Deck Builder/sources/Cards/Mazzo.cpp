@@ -21,3 +21,6 @@ void Mazzo::removeCard(const AbstractCard& c) {
     }
 }
 
+AbstractCard::Classe AbstractCard::getClasse() const {
+    return classe;
+}
