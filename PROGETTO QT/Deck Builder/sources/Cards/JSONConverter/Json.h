@@ -11,7 +11,7 @@ class Json {
 private:
 	IReader& reader;
 
-public:
+public: 
 	Json(IReader& reader);
 	const IReader& getReader() const;
 	QJsonObject fromObject(const AbstractCard& card) const;

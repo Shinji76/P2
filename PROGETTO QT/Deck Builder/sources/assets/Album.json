@@ -8,7 +8,7 @@
 			"Mana": 0,
 			"Rarita": "Comune",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0001",
 			"Razza": "Murloc", 
 			"Attacco": 1,
 			"Difesa": 1
@@ -21,7 +21,7 @@
 			"Mana": 0,
 			"Rarita": "Comune",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0002",
 			"Razza": "Bestia",
 			"Attacco": 1,
 			"Difesa": 1
@@ -34,7 +34,7 @@
 			"Mana":0,
 			"Rarita": "Comune",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0003",
 			"Razza": "Comune",
 			"Attacco": 1,
 			"Difesa": 1
@@ -47,7 +47,7 @@
 			"Mana": 1,
 			"Rarita": "Comune",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0004",
 			"Razza": "Comune",
 			"Attacco": 1,
 			"Difesa": 1
@@ -60,7 +60,7 @@
 			"Mana": 1,
 			"Rarita": "Rara",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0005",
 			"Razza": "Bestia",
 			"Attacco": 4,
 			"Difesa": 3
@@ -73,7 +73,7 @@
 			"Mana": 1,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0006",
 			"Razza": "Murloc",
 			"Attacco": 1,
 			"Difesa": 3
@@ -86,7 +86,7 @@
 			"Mana": 2,
 			"Rarita": "Rara",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0007",
 			"Razza": "Comune",
 			"Attacco": 3,
 			"Difesa": 2
@@ -99,7 +99,7 @@
 			"Mana": 2,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0008",
 			"Razza": "Comune",
 			"Attacco": 1,
 			"Difesa": 1
@@ -112,7 +112,7 @@
 			"Mana": 2,
 			"Rarita": "Epica",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0009",
 			"Razza": "Comune",
 			"Attacco": 0,
 			"Difesa": 7
@@ -125,7 +125,7 @@
 			"Mana": 3,
 			"Rarita": "Comune",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0010",
 			"Razza": "Comune",
 			"Attacco": 1,
 			"Difesa": 3
@@ -138,7 +138,7 @@
 			"Mana": 3,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0011",
 			"Razza": "Comune",
 			"Attacco": 2,
 			"Difesa": 4
@@ -151,7 +151,7 @@
 			"Mana": 3,
 			"Rarita": "Comune",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0012",
 			"Razza": "Bestia",
 			"Attacco": 2,
 			"Difesa": 1
@@ -164,7 +164,7 @@
 			"Mana": 3,
 			"Rarita": "Epica",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0013",
 			"Razza": "Pirata",
 			"Attacco": 3,
 			"Difesa": 3
@@ -177,7 +177,7 @@
 			"Mana": 4,
 			"Rarita": "Comune",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0014",
 			"Razza": "Demone",
 			"Attacco": 2,
 			"Difesa": 2
@@ -190,7 +190,7 @@
 			"Mana": 4,
 			"Rarita": "Epica",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0015",
 			"Razza": "Comune",
 			"Attacco": 4,
 			"Difesa": 2
@@ -203,7 +203,7 @@
 			"Mana": 4,
 			"Rarita": "Rara",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0016",
 			"Razza": "Comune",
 			"Attacco": 3,
 			"Difesa": 3
@@ -216,7 +216,7 @@
 			"Mana": 4,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0017",
 			"Razza": "Murloc",
 			"Attacco": 2,
 			"Difesa": 4
@@ -229,7 +229,7 @@
 			"Mana": 5,
 			"Rarita": "Rara",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0018",
 			"Razza": "Drago",
 			"Attacco": 4,
 			"Difesa": 5
@@ -242,7 +242,7 @@
 			"Mana": 5,
 			"Rarita": "Rara",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0019",
 			"Razza": "Comune",
 			"Attacco": 1,
 			"Difesa": 1
@@ -255,7 +255,7 @@
 			"Mana": 5,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0020",
 			"Razza": "Demone",
 			"Attacco": 4,
 			"Difesa": 5
@@ -268,7 +268,7 @@
 			"Mana": 5,
 			"Rarita": "Epica",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0021",
 			"Razza": "Comune",
 			"Attacco": 3,
 			"Difesa": 3
@@ -281,7 +281,7 @@
 			"Mana": 5,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0022",
 			"Razza": "Comune",
 			"Attacco": 6,
 			"Difesa": 2
@@ -294,7 +294,7 @@
 			"Mana": 6,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0023",
 			"Razza": "Bestia",
 			"Attacco": 2,
 			"Difesa": 8
@@ -307,7 +307,7 @@
 			"Mana": 6,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0024",
 			"Razza": "Comune",
 			"Attacco": 4,
 			"Difesa": 6
@@ -315,12 +315,12 @@
 		{
 			"Type": "Mostro",
 			"ID": 25,
-			"Nome": "Sabeartooth Stalker",
+			"Nome": "Sabretooth Stalker",
 			"Effetto": "",
 			"Mana": 6,
 			"Rarita": "Comune",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0025",
 			"Razza": "Bestia",
 			"Attacco": 8,
 			"Difesa": 2
@@ -333,7 +333,7 @@
 			"Mana": 7,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0026",
 			"Razza": "Elementale",
 			"Attacco": 7,
 			"Difesa": 7
@@ -346,7 +346,7 @@
 			"Mana": 8,
 			"Rarita": "Epica",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0027",
 			"Razza": "Drago",
 			"Attacco": 4,
 			"Difesa": 8
@@ -359,7 +359,7 @@
 			"Mana": 9,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0028",
 			"Razza": "Comune",
 			"Attacco": 9,
 			"Difesa": 7
@@ -372,7 +372,7 @@
 			"Mana": 10,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0029",
 			"Razza": "Drago",
 			"Attacco": 12,
 			"Difesa": 12
@@ -385,7 +385,7 @@
 			"Mana": 10,
 			"Rarita": "Leggendaria",
 			"Classe": "Neutrale",
-            "Path": "",
+            "Path": "/0030",
 			"Razza": "Elementale",
 			"Attacco": 8,
 			"Difesa": 8
@@ -398,7 +398,7 @@
 		 	"Mana": 1,
 		 	"Rarita": "Comune",
 		 	"Classe": "Cacciatore",
-            "Path": "",
+            "Path": "/0031",
 		 	"Razza": "Bestia",
 		 	"Attacco": 1,
 		 	"Difesa": 1
@@ -411,7 +411,7 @@
 		 	"Mana": 2,
 		 	"Rarita": "Rara",
 		 	"Classe": "Guerriero",
-            "Path": "",
+            "Path": "/0032",
 		 	"Razza": "Comune",
 		 	"Attacco": 1,
 		 	"Difesa": 4
@@ -424,7 +424,7 @@
 		 	"Mana": 3,
 		 	"Rarita": "Comune",
 		 	"Classe": "Guerriero",
-            "Path": "",
+            "Path": "/0033",
 		 	"Razza": "Pirata",
 		 	"Attacco": 3,
 		 	"Difesa": 3
@@ -437,7 +437,7 @@
 		 	"Mana": 8,
 		 	"Rarita": "Comune",
 		 	"Classe": "Guerriero",
-            "Path": "",
+            "Path": "/0034",
 		 	"Razza": "Elementale",
 		 	"Attacco": 5,
 		 	"Difesa": 8
@@ -450,7 +450,7 @@
 		 	"Mana": 3,
 		 	"Rarita": "Leggendaria",
 		 	"Classe": "Ladro",
-            "Path": "",
+            "Path": "/0035",
 		 	"Razza": "Comune",
 		 	"Attacco": 2,
 		 	"Difesa": 2
@@ -463,7 +463,7 @@
 		 	"Mana": 3,
 		 	"Rarita": "Rara",
 		 	"Classe": "Ladro",
-            "Path": "",
+            "Path": "/0036",
 		 	"Razza": "Comune",
 		 	"Attacco": 3,
 		 	"Difesa": 3
@@ -476,7 +476,7 @@
 		 	"Mana": 4,
 		 	"Rarita": "Rara",
 		 	"Classe": "Stregone",
-            "Path": "",
+            "Path": "/0037",
 		 	"Razza": "Demone",
 		 	"Attacco": 4,
 		 	"Difesa": 3
@@ -489,7 +489,7 @@
 		 	"Mana": 1,
 		 	"Rarita": "Comune",
 		 	"Classe": "Stregone",
-            "Path": "",
+            "Path": "/0038",
 		 	"Razza": "Demone",
 		 	"Attacco": 1,
 		 	"Difesa": 3
@@ -502,7 +502,7 @@
 		 	"Mana": 2,
 		 	"Rarita": "Epica",
 		 	"Classe": "Cacciatore",
-            "Path": ""
+            "Path": "/0039"
 		},
 		{
 			"Type": "Segreto",
@@ -512,7 +512,7 @@
 		 	"Mana": 2,
 		 	"Rarita": "Comune",
 		 	"Classe": "Cacciatore",
-            "Path": ""
+            "Path": "/0040"
 		},
 		{
 			"Type": "Segreto",
@@ -522,7 +522,7 @@
 		 	"Mana": 3,
 		 	"Rarita": "Epica",
 		 	"Classe": "Mago",
-            "Path": ""
+            "Path": "/0041"
 		},
 		{
 			"Type": "Magia",
@@ -532,7 +532,7 @@
 		 	"Mana": 3,
 		 	"Rarita": "Comune",
 		 	"Classe": "Cacciatore",
-            "Path": ""
+            "Path": "/0042"
 		},
 		{
 			"Type": "Magia",
@@ -542,7 +542,7 @@
 		 	"Mana": 5,
 		 	"Rarita": "Epica",
 		 	"Classe": "Guerriero",
-            "Path": ""
+            "Path": "/0043"
 		},
 		{
 			"Type": "Magia",
@@ -552,17 +552,17 @@
 		 	"Mana": 0,
 		 	"Rarita": "Comune",
 		 	"Classe": "Ladro",
-            "Path": ""
+            "Path": "/0044"
 		},
 		{
 			"Type": "Magia",
 			"ID": 45,
 		 	"Nome": "Sprint",
 		 	"Effetto": "",
-		 	"Mana": 5,
-		 	"Rarita": "Rara",
+		 	"Mana": 6,
+		 	"Rarita": "Comune",
 		 	"Classe": "Ladro",
-            "Path": ""
+            "Path": "/0045"
 		},
 		{
 			"Type": "Magia",
@@ -572,7 +572,7 @@
 		 	"Mana": 3,
 		 	"Rarita": "Comune",
 		 	"Classe": "Mago",
-            "Path": ""
+            "Path": "/0046"
 		},
 		{
 			"Type": "Magia",
@@ -582,7 +582,7 @@
 		 	"Mana": 3,
 		 	"Rarita": "Rara",
 		 	"Classe": "Mago",
-            "Path": ""
+            "Path": "/0047"
 		},
 		{
 			"Type": "Magia",
@@ -592,7 +592,7 @@
 		 	"Mana": 4,
 		 	"Rarita": "Comune",
 		 	"Classe": "Mago",
-            "Path": ""
+            "Path": "/0048"
 		},
 		{
 			"Type": "Magia",
@@ -602,7 +602,7 @@
 		 	"Mana": 1,
 		 	"Rarita": "Comune",
 		 	"Classe": "Stregone",
-            "Path": ""
+            "Path": "/0049"
 		},
 		{
 			"Type": "Magia",
@@ -612,7 +612,7 @@
 		 	"Mana": 2,
 		 	"Rarita": "Comune",
 		 	"Classe": "Stregone",
-            "Path": ""
+            "Path": "/0050"
 		}
 	]
 }
