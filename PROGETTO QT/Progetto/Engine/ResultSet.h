@@ -1,5 +1,5 @@
-#ifndef ENGINE_RESULT_SET_H
-#define ENGINE_RESULT_SET_H
+#ifndef RESULT_SET_H
+#define RESULT_SET_H
 
 #include "../Cards/AbstractCard.h"
 
@@ -8,13 +8,13 @@
 class ResultSet {
 private:
     const unsigned int total;
-    std::vector<AbstractCard> cards;
+    std::vector<const AbstractCard*> cards;
 
 public:
     ResultSet(const unsigned int total);
     unsigned int getTotal() const;
-    const std::vector<AbstractCard>& getCards() const;
-    ResultSet& add(const AbstractCard card);
+    const std::vector<const AbstractCard*>& getCards() const;
+    ResultSet& add(const AbstractCard* card);
 };
 
-#endif
+#endif  //RESULT_SET_H

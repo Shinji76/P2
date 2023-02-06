@@ -21,8 +21,7 @@ private:
     Rarita rarita;
     Classe classe;
 public:
-    //costruttore card protetto
-    AbstractCard (
+    AbstractCard(
         unsigned int ID,
         std::string nome,
         std::string effetto,

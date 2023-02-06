@@ -1,5 +1,5 @@
-#ifndef ENGINE_FILTER_VISITOR_H
-#define ENGINE_FILTER_VISITOR_H
+#ifndef FILTER_VISITOR_H
+#define FILTER_VISITOR_H
 
 #include "Query.h"
 #include "../Cards/Magia.h"
@@ -10,9 +10,10 @@ class FilterVisitor: public IConstVisitor {
 private:
     const Query& query;
     bool match;
+    unsigned int numeric_filter;
 
  public:
-    FilterVisitor(const Query& query);
+    FilterVisitor(const Query& query);    
     const Query& getQuery() const;
     bool hasMatch() const;
     virtual void visit(const Mostro& mostro);

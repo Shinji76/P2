@@ -1,15 +1,15 @@
 #include "Mazzo.h"
 
-Mazzo::Mazzo(Fixed_vector<int> n, unsigned int c=1) : numCopie(n), counter(c) {}
+Mazzo::Mazzo(AbstractCard::Classe cl, Fixed_vector<int> n, unsigned int c=1) : classe(cl), numCopie(n), counter(c) {}
 
 void Mazzo::addCard(const AbstractCard& c) {
-    if(counter < 20) {
-        if(c.getRarita() == "Leggendaria" && numCopie[c.getID()] < 1 || c.getRarita() != "Leggendaria" && numCopie[c.getID()] < 2) {
+    if(counter < 20 && getClasse() == c.getClasse()) {
+        // Rarita 3 = Leggendaria
+        if(c.getRarita() == 3 && numCopie[c.getID()] < 1 || c.getRarita() != 3 && numCopie[c.getID()] < 2) {
             numCopie[c.getID()]++;
             counter++;
         }
-    }
-    else {      
+    } else {      
         //throw qualche errore
     }
 }

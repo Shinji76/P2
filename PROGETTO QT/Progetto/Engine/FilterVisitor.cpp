@@ -2,7 +2,7 @@
 
 #include "../Cards/AbstractCard.h"
 
-FilterVisitor::FilterVisitor(const Query& query) : query(query), match(false) {}
+FilterVisitor::FilterVisitor(const Query& query) : query(query), match(false), numeric_filter() {}
 
 const Query& FilterVisitor::getQuery() const {
     return query;
@@ -14,8 +14,8 @@ bool FilterVisitor::hasMatch() const {
 
 void FilterVisitor::visit(const Mostro& mostro) {
     match = mostro.getNome().find(query.getFilter()) != std::string::npos
-        || mostro.getDescription().find(query.getFilter()) != std::string::npos
-        || mostro.getSku().find(query.getFilter()) != std::string::npos
+        || mostro.getClasse().find(query.getFilter()) != std::string::npos
+        || mostro.getAttacco().find(query.getFilter()) != std::string::npos
     ;
 }
 

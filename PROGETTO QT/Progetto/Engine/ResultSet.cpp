@@ -6,11 +6,11 @@ unsigned int ResultSet::getTotal() const {
     return total;
 }
 
-const std::vector<AbstractCard>& ResultSet::getCards() const {
+const std::vector<const AbstractCard*>& ResultSet::getCards() const {
     return cards;
 }
 
-ResultSet& ResultSet::add(const AbstractCard card) {
+ResultSet& ResultSet::add(const AbstractCard* card) {
     cards.push_back(card);
     return *this;
 }

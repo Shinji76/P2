@@ -12,13 +12,13 @@ private:
 	std::string path;
 	Json& converter;
 
-  public:
+public:
 	JsonFile(const std::string& path, Json& Jconverter);
 	static JsonFile fromPath(const std::string& path);
 	const std::string& getPath() const;
 	JsonFile& setPath(const std::string& path);
 	const Json& getConverter() const;
-	JsonFile& store(const std::vector<AbstractCard*> cards);
+	JsonFile& store(const std::vector<AbstractCard*> cards);	//salvataggio in Json
 	std::vector<AbstractCard*> load();
 };
 

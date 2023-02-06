@@ -21,10 +21,9 @@ DOMANDE:
 8. Per usare sort per implementare la funzione di ordinamento conviene creare un vettore da tenere in memoria con i nomi delle carte corrispondenti all ID oppure conviene crearsi ogni volta che usiamo il programma un vettore di appoggio.
 9. è necessario creare namespace per ogni cartella o serve solo per chiarezza?
 10. Ha senso definire dei getter virtuali puri e poi overridarli nella derivata?
-11. Come gestisco i getter? si possono fare virtuali puri e overridare o è nonsense?
-12. Perchè c'è l'interfaccia IEngine? Non basta la classe concreta direttamente?
-13. Nella conversione in "Reader.cpp", le enum vanno convertite in unsigned int o stringhe?
-14. Come creo dei mock?
-15. In FilterVisitor come posso fare ricerca per interi? e come devo comportarmi con le enum?
-16. Per aggiungere le funzioni di ordinamento devo usare un visitor?
+11. Perchè c'è l'interfaccia IEngine? Non basta la classe concreta direttamente?
+12. Nella conversione in "Reader.cpp", le enum vanno convertite in unsigned int o stringhe?
+13. Come creo dei mock in modo efficiente?
+14. In FilterVisitor come posso fare ricerca per interi? e come devo comportarmi con le enum?
+15. Per aggiungere le funzioni di ordinamento devo usare un visitor?
 */

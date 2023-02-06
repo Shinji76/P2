@@ -5,8 +5,6 @@
 #include "ScoreVisitor.h"
 #include "FilterVisitor.h"
 
-namespace Engine {
-
 Memory::Memory() {
 }
 
@@ -33,12 +31,12 @@ Memory& Memory::clear() {
 
 ResultSet Memory::search(const Query& query) const {
     FilterVisitor filter_visitor(query);
-    std::vector<AbstractCard> results;
+    std::vector<const AbstractCard*> results;
 
     for (auto cit = cards.begin(); cit != cards.end(); cit++) {
         (*cit)->accept(filter_visitor);
-        if (filter_visitor.hasMatch()) {
-            results.push_back(*(*cit));
+        if(filter_visitor.hasMatch()) {
+            results.push_back(*cit);
         }
     }
     std::sort(results.begin(), results.end());
@@ -52,6 +50,4 @@ ResultSet Memory::search(const Query& query) const {
         result_set.add(results[i]);
     }
     return result_set;
-}
-
 }

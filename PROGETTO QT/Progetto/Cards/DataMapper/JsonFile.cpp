@@ -8,10 +8,7 @@
 #include <QJsonArray>
 
 
-JsonFile::JsonFile(const std::string& path, Json& converter)
-    : path(path), converter(converter)
-{
-}
+JsonFile::JsonFile(const std::string& path, Json& converter) : path(path), converter(converter) {}
 
 JsonFile JsonFile::fromPath(const std::string& path) {
     Reader reader;

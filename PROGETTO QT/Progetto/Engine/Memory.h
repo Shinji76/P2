@@ -1,4 +1,4 @@
-#include "Progetto/AbstractCard.h"
+#include "../Cards/AbstractCard.h"
 #include "ResultSet.h"
 #include <vector>
 

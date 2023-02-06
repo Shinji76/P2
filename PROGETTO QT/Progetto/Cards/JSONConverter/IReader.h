@@ -1,5 +1,5 @@
-#ifndef JSONCONVERTER_IREADER_H
-#define JSONCONVERTER_IREADER_H
+#ifndef JSON_CONVERTER_IREADER_H
+#define JSON_CONVERTER_IREADER_H
 
 //#include <QJsonObject>
 #include "../Cards/AbstractCard.h"
@@ -10,4 +10,4 @@ class IReader {
     virtual AbstractCard* read(const QJsonObject& object) = 0;
 };
 
-#endif //CONVERTER_JSON_IREADER_H
+#endif //JSON_CONVERTER_IREADER_H

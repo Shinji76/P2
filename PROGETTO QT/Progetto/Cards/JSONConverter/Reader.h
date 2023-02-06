@@ -1,5 +1,5 @@
-#ifndef JSONCONVERTER_READER_H
-#define JSONCONVERTER_READER_H
+#ifndef JSON_CONVERTER_READER_H
+#define JSON_CONVERTER_READER_H
 
 #include "IReader.h"
 //#include <QJsonObject>
