@@ -47,8 +47,8 @@ JsonRepository& JsonRepository::create(AbstractCard* card) {
     return *this;
 }
 
-AbstractCard* JsonRepository::read(const unsigned int identifier) const {
-    std::map<unsigned int, AbstractCard*>::const_iterator cit = repository.find(identifier);
+AbstractCard* JsonRepository::read(const unsigned int ID) const {
+    std::map<unsigned int, AbstractCard*>::const_iterator cit = repository.find(ID);
     if (cit == repository.end()) {
         throw std::out_of_range("Trying to read an undefined id.");
     }
@@ -59,8 +59,8 @@ JsonRepository& JsonRepository::update(AbstractCard* card) {
     return create(card);
 }
 
-JsonRepository& JsonRepository::remove(const unsigned int identifier) {
-    std::map<unsigned int, AbstractCard*>::const_iterator cit = repository.find(identifier);
+JsonRepository& JsonRepository::remove(const unsigned int ID) {
+    std::map<unsigned int, AbstractCard*>::const_iterator cit = repository.find(ID);
     if (cit != repository.end()) {
         delete cit->second;
         repository.erase(cit);

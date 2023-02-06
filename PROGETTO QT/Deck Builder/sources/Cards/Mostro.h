@@ -22,6 +22,7 @@ public:
 		const unsigned int mana,
 		const Rarita rarita,
 		const Classe classe,
+        const std::string image_path,
 		const Razza razza,
 		const unsigned int attacco,
 		const unsigned int difesa

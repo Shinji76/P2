@@ -8,10 +8,11 @@ Mostro::Mostro(
     const unsigned int mana,
     const Rarita rarita,
     const Classe classe,
+    const std::string image_path,
     const Razza razza = Comune,
     const unsigned int attacco = 0,
     const unsigned int difesa = 0
-    ) : AbstractCard(ID, nome, effetto, mana, rarita, classe), razza(razza), attacco(attacco), difesa(difesa) {}
+    ) : AbstractCard(ID, nome, effetto, mana, rarita, classe, image_path), razza(razza), attacco(attacco), difesa(difesa) {}
 
 //getters
 Mostro::Razza Mostro::getRazza() const {

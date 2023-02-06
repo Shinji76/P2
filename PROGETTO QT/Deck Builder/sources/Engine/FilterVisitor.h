@@ -10,12 +10,12 @@ class FilterVisitor: public IConstVisitor {
 private:
     const Query& query;
     bool match;
-    unsigned int numeric_filter;
 
  public:
     FilterVisitor(const Query& query);    
     const Query& getQuery() const;
     bool hasMatch() const;
+    
     virtual void visit(const Mostro& mostro);
     virtual void visit(const Magia& magia);
     virtual void visit(const Segreto& segreto);

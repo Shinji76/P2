@@ -11,7 +11,8 @@ Segreto(
     const std::string effetto,
     const unsigned int mana,
     const Rarita rarita,
-    const Classe classe
+    const Classe classe,
+    std::string image_path
     );
 
 virtual void accept(IConstVisitor& visitor) const;

@@ -20,6 +20,7 @@ private:
     unsigned int manaCost;
     Rarita rarita;
     Classe classe;
+    std::string image;
 public:
     AbstractCard(
         unsigned int ID,
@@ -27,7 +28,8 @@ public:
         std::string effetto,
         unsigned int mana,
         Rarita rarita,
-        Classe classe
+        Classe classe,
+        std::string image_path
     );
 
     virtual ~AbstractCard() = 0;
@@ -41,6 +43,7 @@ public:
     virtual unsigned int getManaCost() const;
     virtual Rarita getRarita() const;
     virtual Classe getClasse() const;
+    virtual std::string getPath() const;
 };
 
 #endif // CARD_H
