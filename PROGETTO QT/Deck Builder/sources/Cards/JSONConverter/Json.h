@@ -3,7 +3,7 @@
 
 #include "IReader.h"
 #include "../AbstractCard.h"
-//#include <QJsonObject>
+#include <QJsonObject>
 class Json {
 private:
 	IReader& reader;

@@ -2,7 +2,7 @@
 #define JSON_FILE_H
 
 #include "../AbstractCard.h"
-#include "../JSONConverter/Json.h"
+#include "JSONConverter/Json.h"
 
 #include <string>
 #include <vector>
@@ -13,12 +13,16 @@ private:
 	Json& converter;
 
 public:
-	JsonFile(const std::string& path, Json& Jconverter);
+	JsonFile(const std::string& path, Json& Jconverter);        //costruttore 
 	static JsonFile fromPath(const std::string& path);
+    
 	const std::string& getPath() const;
 	JsonFile& setPath(const std::string& path);
+    
 	const Json& getConverter() const;
+    
 	JsonFile& store(const std::vector<AbstractCard*> cards);	//salvataggio in Json
+
 	std::vector<AbstractCard*> load();
 };
 
