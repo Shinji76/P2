@@ -1,7 +1,7 @@
 #ifndef ALBUM_H
 #define ALBUM_H
 
-#include "Vector_template.h"
+#include "../Vector_template.h"
 #include "AbstractCard.h"
 
 class Album {

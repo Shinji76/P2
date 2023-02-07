@@ -4,8 +4,6 @@
 #include "AbstractCard.h"
 
 class Magia : public AbstractCard {
-private:
-
 public:
     //costruttore magia
     Magia(

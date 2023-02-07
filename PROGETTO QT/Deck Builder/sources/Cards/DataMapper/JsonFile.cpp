@@ -1,11 +1,9 @@
 #include "JsonFile.h"
 
-
 #include <iostream>
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonArray>
-
 
 JsonFile::JsonFile(const std::string& path, Json& converter) : path(path), converter(converter) {}
 

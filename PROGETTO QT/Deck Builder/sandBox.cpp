@@ -1,11 +1,40 @@
+#include "sources/vector_template.h"
+#include "sources/Cards/Album.h"
+#include "sources/Cards/Magia.h"
+
 #include <iostream>
-#include "vector_template.h"
-#include "album.h"
 
 using std::cout;
 using std::endl;
 
+class Card {
+private:
+        unsigned int ID;
+        std::string nome;
+        std::string effetto;
+        unsigned int mana;
+        Rarita rarita;
+        Classe classe;
+        std::string image_path;
+
+public:
+    Card(
+        const unsigned int ID,
+        const std::string nome,
+        const std::string effetto,
+        const unsigned int mana,
+        const Rarita rarita,
+        const Classe classe,
+        std::string image_path
+    ) : ID(ID), nome(nome), effetto(effetto), mana(mana), rarita(rarita), classe(classe), image_path(image_path) {}
+};
+
 int main() {
+    new Card(01,"nome", "effetto", 1, Rarita::Comune, Classe::Cacciatore, "image_path");
+
+    
+    Magia* ptr = new Magia(01,"nome", "effetto", 1, Rarita::Epica , Classe::Cacciatore, "image_path");
+        
 	Fixed_vector<int> prova;
 	Fixed_vector<int> prova2(5);
 	//Album nuovo;

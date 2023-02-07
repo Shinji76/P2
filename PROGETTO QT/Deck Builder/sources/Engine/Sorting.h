@@ -1,5 +1,4 @@
-#include "../JSONConverter/Json.h"
-#include "../Repository/JsonRepository.h"
+#include "../Cards/Repository/JsonRepository.h"
 
 #include <map>
 

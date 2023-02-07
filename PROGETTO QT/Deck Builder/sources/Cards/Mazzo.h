@@ -1,7 +1,7 @@
 #ifndef MAZZO_H
 #define MAZZO_H
 
-#include "vector_template.h"
+#include "../vector_template.h"
 #include "AbstractCard.h"
 #include "Album.h"
 
