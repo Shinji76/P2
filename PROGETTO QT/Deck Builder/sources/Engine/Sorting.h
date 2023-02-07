@@ -1,11 +1,11 @@
 #include "../JSONConverter/Json.h"
+#include "../Repository/JsonRepository.h"
 
 #include <map>
 
 class Sorting {
 private:
-    Json readAll;
-
+    JsonRepository read;
 public:
 
 };

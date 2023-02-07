@@ -32,8 +32,8 @@ const Json& JsonFile::getConverter() const {
 // @todo check errors
 JsonFile& JsonFile::store(const std::vector<AbstractCard*> cards) {
     QJsonArray json_items;
-    for (auto cit = items.begin(); cit != items.end(); cit++) {
-        json_items.push_back(converter.fromObject(**it));
+    for (auto cit = cards.begin(); cit != cards.end(); cit++) {
+        json_items.push_back(converter.fromObject(**cit));
     }
     QJsonDocument document(json_items);
     QFile json_file(path.c_str());

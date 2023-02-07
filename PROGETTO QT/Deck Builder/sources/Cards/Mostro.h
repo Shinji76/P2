@@ -14,7 +14,6 @@ private:
 	unsigned int difesa;
 
 public:
-	//costruttore magia
 	Mostro(
 		const unsigned int ID,
 		const std::string nome,

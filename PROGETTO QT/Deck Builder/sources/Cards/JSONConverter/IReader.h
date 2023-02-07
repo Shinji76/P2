@@ -2,7 +2,7 @@
 #define JSON_CONVERTER_IREADER_H
 
 //#include <QJsonObject>
-#include "../Cards/AbstractCard.h"
+#include "../AbstractCard.h"
 
 class IReader {
 public:

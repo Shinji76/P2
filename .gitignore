@@ -5,6 +5,7 @@ Esercizi Qt/
 PROGETTO QT/build*
 APPUNTI/
 search-engine/
+.vscode/
 
 #file
 *.dia

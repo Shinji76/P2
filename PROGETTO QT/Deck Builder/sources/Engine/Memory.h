@@ -1,7 +1,5 @@
 #include "../Cards/AbstractCard.h"
 #include "ResultSet.h"
-#include "ItemDecorator.h"
-#include "ScoreVisitor.h"
 #include "FilterVisitor.h"
 
 #include <vector>

@@ -6,14 +6,14 @@
 
 JsonRepository::JsonRepository(JsonFile data_mapper) : data_mapper(data_mapper) {
     std::vector<AbstractCard*> items(data_mapper.load());
-    for (auto cit = items.begin(); cit != items.end(); cit++) {
-        repository[(*cit)->getID()] = *cit;
+    for (auto it = items.begin(); it != items.end(); it++) {
+        repository[(*it)->getID()] = *it;
     }
 }
 
 JsonRepository::~JsonRepository() {
-    for (auto cit = repository.begin(); cit != repository.end(); cit++) {
-        delete cit->second;
+    for (auto it = repository.begin(); it != repository.end(); it++) {
+        delete it->second;
     }
 }
 
