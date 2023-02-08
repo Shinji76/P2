@@ -6,13 +6,14 @@
 #include <string>
 
 class AbstractCard {
-public:     //definisco enum
+public:
     enum Rarita {
         Comune, Rara, Epica, Leggendaria
     };
     enum Classe {
         Neutrale, Cacciatore, Guerriero, Ladro, Mago, Stregone
     };
+
 private:
     const unsigned int ID;
     std::string nome;
@@ -21,6 +22,7 @@ private:
     Rarita rarita;
     Classe classe;
     std::string image_path;
+    
 public:
     AbstractCard(
         unsigned int ID,

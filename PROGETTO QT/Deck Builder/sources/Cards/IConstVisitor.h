@@ -13,5 +13,4 @@ public:
 	virtual void visit(const Segreto& segreto) = 0;
 };
 
-
 #endif  //I_CONST_VISITOR_H

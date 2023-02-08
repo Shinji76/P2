@@ -49,6 +49,10 @@
         "sstream": "cpp",
         "stdexcept": "cpp",
         "typeinfo": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "filesystem": "cpp",
+        "xhash": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp"
     }  
 }
