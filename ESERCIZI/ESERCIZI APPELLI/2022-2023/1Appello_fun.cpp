@@ -5,7 +5,32 @@
 using std::vector;
 using std::list;
 
+list<const D* const> fun(const vector<const B*>& v) {
+    list<const D* const> aux;
+    vector<const B*> non_const_v = const_cast<vector<const B*>&>(v);
+    int counter = 0;
+    int i = 0;
+    for(auto it = v.begin(); it != v.end(); it++) {
+        if(dynamic_cast<C*>(const_cast<B*>(*it))) {
+                non_const_v.erase((it));
+                ++counter;
+                if(counter > 2 ) {
+                    throw C();
+                }
+            }
+            if(*it) {
+                A* ptr = (*it)->f();
+                if(!ptr)
+                throw std::string("nullptr");
+            else if(ptr && dynamic_cast<D*>(ptr) && !dynamic_cast<E*>(ptr))
+                aux.push_back(dynamic_cast<const D*>(ptr));
+        }
+    }
+    return aux;
+}
 
+
+/*
 list<const D* const> fun(const vector<const B*>& v) {
     list<const D* const> aux;
     int counter = 0;
@@ -28,3 +53,4 @@ list<const D* const> fun(const vector<const B*>& v) {
     }
     return aux;
 }
+*/

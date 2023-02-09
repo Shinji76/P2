@@ -37,7 +37,7 @@ public slots:
     void newDeck();
     void openDeck();
     void saveDeck();
-    void saveAsDeck();
+    void saveDeckAs();
     void showStatus(QString message);
     void search(Query query);
     void addCard(const AbstractCard* card);

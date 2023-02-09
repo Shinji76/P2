@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 JsonRepository::JsonRepository(JsonFile data_mapper) : data_mapper(data_mapper) {
-    std::vector<AbstractCard*> items(data_mapper.load());
+    std::vector<AbstractCard*> items(data_mapper.load());   //leggo tutte le carte 
     for (auto it = items.begin(); it != items.end(); it++) {
         repository[(*it)->getID()] = *it;
     }
@@ -72,6 +72,15 @@ std::vector<AbstractCard*> JsonRepository::readAll() const {
     std::vector<AbstractCard*> items;
     for(auto cit = repository.begin(); cit != repository.end(); cit++) {
         items.push_back(cit->second);
+    }
+    return items;
+}
+
+std::vector<AbstractCard*> JsonRepository::readClass(AbstractCard::Classe classe) const {
+    std::vector<AbstractCard*> items;
+    for(auto cit = repository.begin(); cit != repository.end(); cit++) {
+        if(cit->second->getClasse() == classe)
+            items.push_back(cit->second);
     }
     return items;
 }

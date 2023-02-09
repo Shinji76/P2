@@ -5,8 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 
-#include "ResultRenderer/List.h"
-#include "ResultRenderer/Grid.h"
+#include "ResultLayout/Grid.h"
 
 ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
     QVBoxLayout* vbox = new QVBoxLayout(this);
@@ -21,11 +20,11 @@ ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
 
     hbox->addStretch();
 
-    previous_page = new QPushButton(QIcon(QPixmap(":/assets/icons/left_arrow.svg")), "");
+    previous_page = new QPushButton(QIcon(QPixmap(":/Assets/Icons/left_arrow.svg")), "");
     previous_page->setEnabled(false);
     hbox->addWidget(previous_page);
 
-    next_page = new QPushButton(QIcon(QPixmap(":/assets/icons/right_arrow.svg")), "");
+    next_page = new QPushButton(QIcon(QPixmap(":/Assets/Icons/right_arrow.svg")), "");
     next_page->setEnabled(false);
     hbox->addWidget(next_page);
 
@@ -41,8 +40,6 @@ ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
     scroll_area->setWidgetResizable(true);
     scroll_area->setWidget(container);
     vbox->addWidget(scroll_area);
-
-    renderer = new ResultRenderer::List();
 
     // Connects signals
     connect(previous_page, &QPushButton::clicked, this, &ResultsWidget::previousPage);

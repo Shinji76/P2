@@ -28,6 +28,7 @@ public:
     virtual JsonRepository& update(AbstractCard* card);
     virtual JsonRepository& remove(const unsigned int ID);
     virtual std::vector<AbstractCard*> readAll() const;
+    virtual std::vector<AbstractCard*> readClass(AbstractCard::Classe classe) const;
     JsonRepository& store();
 };
 

@@ -1,0 +1,20 @@
+TODO:
+Modello:
+    1. Scrivere classe deck/mazzo con i metodi addCard removeCard equivalenti a view
+    2. Scrivere una classe Sorting per fare analisi sulle stringhe
+    3. Controllare include e dipendenze
+    4. Aggiungere setter a AbstractCard
+    5. Controllare classe query in base a quello che decido sulla view
+    6. Sistemare template vector e decidere dove usarlo
+    
+View:
+    1. Capire utilizzo di LookupWidget
+    2. Sistemare Grid su ResultLayout
+    3. Creare RecapWidget
+    4. Sistemare SearchWidget
+    5. Sistemare HomeWidget
+    6. Controllare MainWindow
+    7. Capire cosa fare con CardEditor
+    8. QSS
+
+Scrivere relazione sul progetto svolto

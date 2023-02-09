@@ -23,31 +23,31 @@ MainWindow::MainWindow(Engine::IEngine& engine, QWidget *parent)
     : QMainWindow(parent), has_unsaved_changes(false), engine(engine), repository(nullptr) {
     // Actions
     QAction* create = new QAction(
-        QIcon(QPixmap((":/assets/icons/new.svg"))),
+        QIcon(QPixmap((":/Assets/Icons/new.svg"))),
         "New Deck"
     );
     create->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_N));
 
     QAction* open = new QAction(
-        QIcon(QPixmap((":/assets/icons/open.svg"))),
+        QIcon(QPixmap((":/Assets/Icons/open.svg"))),
         "Open"
     );
     open->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_O));
 
     QAction* save = new QAction(
-        QIcon(QPixmap((":/assets/icons/save.svg"))),
+        QIcon(QPixmap((":/Assets/Icons/save.svg"))),
         "Save"
     );
     save->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_S));
 
     QAction* save_as = new QAction(
-        QIcon(QPixmap((":/assets/icons/save_as.svg"))),
+        QIcon(QPixmap((":/Assets/Icons/save_as.svg"))),
         "Save As"
     );
     save_as->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_S));
 
     QAction* close = new QAction(
-        QIcon(QPixmap((":/assets/icons/close.svg"))),
+        QIcon(QPixmap((":/Assets/Icons/close.svg"))),
         "Close"
     );
     close->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Q));
@@ -77,10 +77,10 @@ MainWindow::MainWindow(Engine::IEngine& engine, QWidget *parent)
     splitter->setSizes(QList<int>() << 1000 << 3000);
 
     // Connects signals
-    connect(create, &QAction::triggered, this, &MainWindow::newDataset);
-    connect(open, &QAction::triggered, this, &MainWindow::openDataset);
-    connect(save, &QAction::triggered, this, &MainWindow::saveDataset);
-    connect(save_as, &QAction::triggered, this, &MainWindow::saveAsDataset);
+    connect(create, &QAction::triggered, this, &MainWindow::newDeck);
+    connect(open, &QAction::triggered, this, &MainWindow::openDeck);
+    connect(save, &QAction::triggered, this, &MainWindow::saveDeck);
+    connect(save_as, &QAction::triggered, this, &MainWindow::saveDeckAs);
     connect(close, &QAction::triggered, this, &MainWindow::close);
     connect(search_widget, &SearchWidget::search_event, this, &MainWindow::search);
     connect(results_widget, &ResultsWidget::refreshResults, search_widget, &SearchWidget::search);
@@ -125,7 +125,7 @@ void MainWindow::clearStack() {
 
 
 void MainWindow::newDeck() {
-    QString path = QFileDialog::getSaveFileName(
+    QString path = QFileDialog::getSaveFileName (
         this,
         "Creates new Deck",  
         "./",
@@ -142,14 +142,13 @@ void MainWindow::newDeck() {
     JsonFile data_mapper(path.toStdString(), converter);
     repository = new JsonRepository(data_mapper);
     engine.clear();
-    create_item->setEnabled(true);
     showStatus("New Deck created.");
 }
 
 void MainWindow::openDeck() {
-    QString path = QFileDialog::getOpenFileName(
+    QString path = QFileDialog::getOpenFileName (
         this,
-        "Creates new Dataset",
+        "Creates new Deck",
         "./",
         "JSON files *.json"
     );

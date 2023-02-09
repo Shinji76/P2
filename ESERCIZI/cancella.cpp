@@ -1,26 +1,31 @@
-#include "ESERCIZI APPELLI/2021-2022/1Appello_fun.h"
-#include <iostream>
-#include <vector>
-#include <list>
-using std::vector;
-using std::list;
-using std::cout;
+//enum class per la rarità con underlying type definito (in teoria se non specificato dovrebbe essere comunque int, ma l'ho messo per sicurezza), le enum class Razza e Classe sono equivalenti a questa
+enum class Rarita : int {
+    Comune,
+    Rara,
+    Epica,
+    Leggendaria
+};
 
-vector<QWidget> fun(const vector<const QPaintDevice*>& v) {
-    vector<QWidget> aux;
-    for(auto cit = v.begin(); cit != v.end(); cit++) {
-        const QPaintDevice *ptr = *cit;
-        if(dynamic_cast<const QWidget*>(ptr)->width() > 80)
-            throw QString("TooBig");
-        else if(dynamic_cast<const QWidget*>(ptr)->width() < 80 && static_cast<const QWidget*>(ptr)->hasFocus())
-            static_cast<QWidget*>(const_cast<QPaintDevice*>(ptr))->clearFocus();
-        if(dynamic_cast<const QAbstractButton*>(ptr))
-            static_cast<QAbstractButton*>(const_cast<QPaintDevice*>(ptr))->setText("Button");
-        if(!dynamic_cast<const QAbstractButton*>(ptr) && dynamic_cast<const QWidget*>(ptr)) {
-            QWidget *insert = new QWidget();
-            insert = static_cast<QWidget*>(const_cast<QPaintDevice*>(ptr));
-            aux.push_back(*insert);
-        }
-    }
-    return aux;
+//Metodo readMostro per la creazione della classe concreta leggendo un QJsonObject
+AbstractCard* Reader::readMostro(const QJsonObject& object) const {
+    return new Mostro(
+        object.value("ID").toInt(),
+        object.value("Nome").toString().toStdString(),
+        object.value("Effetto").toString().toStdString(),
+        object.value("Mana").toInt(),
+        object.value("Rarita").toInt(),     //da sistemare con enum
+        object.value("Classe").toInt(),     //da sistemare con enum
+        object.value("Path").toString().toStdString(),
+        object.value("Razza").toInt(),      //da sistemare con enum
+        object.value("Attacco").toInt(),
+        object.value("Difesa").toInt(), 
+    );
 }
+
+//Esempio di costruttore funzionante di mostro
+new Mostro(01,"nome", "effetto", 1, Rarita::Epica , Classe::Cacciatore, "image_path", Razza::Murloc, 1, 1);
+
+//Esempio di cosa vorrei avere
+new Mostro(01,"nome", "effetto", 1, 0 , 1, "image_path", 5, 1, 1);
+
+//Oltre a questo problema principale del costruttore, nel file Album.json ho salvato i valori di Rarita Classe e Razza come stringhe per rendere come mi aveva detto a ricevimento il JSON leggibile senza per forza conoscere il contenuto del programma, quindi nel caso si riuscisse a chiamare il costruttore con gli interi, sarebbe meglio cambiare il JSON o dovrei scrivere un "interprete" che legge la stringa e ritorna un intero corrispondente?
