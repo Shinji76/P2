@@ -20,8 +20,7 @@
 #include "../Cards/JSONConverter/Json.h"
 
 MainWindow::MainWindow(Engine::IEngine& engine, QWidget *parent)
-    : QMainWindow(parent), has_unsaved_changes(false), engine(engine), repository(nullptr)
-{
+    : QMainWindow(parent), has_unsaved_changes(false), engine(engine), repository(nullptr) {
     // Actions
     QAction* create = new QAction(
         QIcon(QPixmap((":/assets/icons/new.svg"))),

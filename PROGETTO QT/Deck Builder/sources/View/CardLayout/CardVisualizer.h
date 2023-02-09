@@ -11,9 +11,8 @@
 class CardVisualizer: public IConstVisitor {
 public:
     virtual QWidget* getWidget() const = 0;
-    virtual QPushButton* getViewButton() const = 0;
-    virtual QPushButton* getEditButton() const = 0;
-    virtual QPushButton* getDeleteButton() const = 0;
+    virtual QPushButton* getAddButton() const = 0;
+    virtual QPushButton* getRemoveButton() const = 0;
 };
 
 #endif

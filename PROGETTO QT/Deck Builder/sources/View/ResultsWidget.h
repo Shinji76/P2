@@ -20,11 +20,10 @@ private:
 	QPushButton* next_page;
 	QVector<WidgetLookup> lookup;
 	QGridLayout* grid;
-	ResultRenderer::IResultRendererStrategy* renderer;
 
 public:
 	explicit ResultsWidget(QWidget* parent = 0);
-  
+
 signals:
 	void refreshResults();
 	void previousPage();

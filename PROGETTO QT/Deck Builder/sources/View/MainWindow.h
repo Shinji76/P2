@@ -4,15 +4,13 @@
 #include "../Cards/Repository/JsonRepository.h"
 #include "../Engine/Query.h"
 #include "../Engine/Memory.h"
+#include "HomeWidget.h"
 #include "SearchWidget.h"
 #include "ResultsWidget.h"
 #include "RecapWidget.h"
-#include "CardRenderer/Full.h"
 
 #include <QMainWindow>
 #include <QStackedWidget>
-
-namespace View {
 
 class MainWindow: public QMainWindow {
     Q_OBJECT
@@ -25,7 +23,8 @@ private:
     RecapWidget* recap_widget;
     QStackedWidget* stacked_widget;
     ResultsWidget* results_widget;
-    ItemRenderer::Full full_renderer;
+    HomeWidget* home_widget;
+    void clearStack();
   
 public:
     explicit MainWindow(Memory& engine, QWidget *parent = 0);
@@ -33,23 +32,17 @@ public:
     Memory& getEngine();
     MainWindow& reloadData();
     SearchWidget* getSearchWidget();
-  
-private:
-    void clearStack();
 
- public slots:
-    void newDataset();
-    void openDataset();
-    void saveDataset();
-    void saveAsDataset();
+public slots:
+    void newDeck();
+    void openDeck();
+    void saveDeck();
+    void saveAsDeck();
     void showStatus(QString message);
     void search(Query query);
     void addCard(const AbstractCard* card);
     void removeCard(const AbstractCard* card);
-    void showCard(const AbstractCard* card) const;
     void close();
 };
-
-}
 
 #endif

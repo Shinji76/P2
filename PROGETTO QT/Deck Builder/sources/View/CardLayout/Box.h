@@ -12,7 +12,6 @@
 class Box: public CardVisualizer {
 private:
     QWidget* widget;
-    QPushButton* view_button;
     QPushButton* add_button;
     QPushButton* remove_button;
 
