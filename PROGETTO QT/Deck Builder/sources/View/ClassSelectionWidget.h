@@ -7,7 +7,6 @@ class ClassSelectionWidget : public QWidget
     Q_OBJECT
 private:
     QGridLayout* gridLayout;
-    QPushButton* neutralButton;
     QPushButton* hunterButton;
     QPushButton* warriorButton;
     QPushButton* thiefButton;
@@ -18,7 +17,6 @@ public:
     ClassSelectionWidget(QWidget *parent = nullptr);
 
 private slots:
-    void NeutralButtonClick();
     void HunterButtonClick();
     void WarriorButtonClick();
     void ThiefButtonClick();

@@ -19,7 +19,6 @@ public:
 
 	void addCard(const AbstractCard&);
 	void removeCard(const AbstractCard&);
-
 };
 
 #endif  //MAZZO_H

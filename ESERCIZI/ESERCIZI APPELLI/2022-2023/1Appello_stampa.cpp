@@ -27,7 +27,7 @@ public:
 	D() {cout << "D() ";}
 	~D() {cout << "~D() ";}
 	virtual void g() {cout << "D::g ";}
-	const B* j() {cout << "D::j"; return this;}
+	const B* j() {cout << "D::j "; return this;}
 	void k() const {cout << "D::k "; k();}
 	void m() {cout << "D::m "; g(); j();}
 };
@@ -54,20 +54,20 @@ public:
 //	B* p1 = new E();
 //	B* p2 = new C();
 //	B* p3 = new D();
-	C* p4 = new E();
+//	C* p4 = new E();
 //	const B* p5 = new E();
-//	const B* p6 = new F();
+	const B* p6 = new F();
 
 int main() {
-	(p4->n()).m();      								//STAMPA: 
-//	p3->k();        									//STAMPA: 
-//	(p3->n()).m();      								//STAMPA: 
-//	p2->m();        									//STAMPA: 
-//	(p2->j())->g();     								//STAMPA: 
-//	C* p = new F(F());      							//STAMPA: 
+//	(p4->n()).m();      								//STAMPA: E::n B::m C::g E::j
+//	p3->k();        									//STAMPA: B::k D::j B::m UNDEFINED BEHAV
+//	(p3->n()).m();      								//STAMPA: B::n B::m B::g D::j
+//	p2->m();        									//STAMPA: B::m C::g B::j
+//	(p2->j())->g();     								//STAMPA: B::j C::g
+//	C* p = new F(F());      							//STAMPA: B() C() D() E() Fc
 //	(p1->j())->k();										//STAMPA: NON COMPILA 
 //	(dynamic_cast<const F*>(p1->j()))->g();             //STAMPA: NON COMPILA
 //	(dynamic_cast<E*>(p5))->j();						//STAMPA: NON COMPILA
-//	(dynamic_cast<C*>(const_cast<B*>(p6)))->k();		//STAMPA: 
+	(dynamic_cast<C*>(const_cast<B*>(p6)))->k();		//STAMPA: F::k C::g
 }
 

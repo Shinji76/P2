@@ -30,11 +30,11 @@ void Box::visit(const Mostro& mostro) {
     actions->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     hbox->addLayout(actions);
 
-    add_button = new QPushButton(QIcon(QPixmap(":/Assets/Icons/plus.svg")), "");        //sistemare url
+    add_button = new QPushButton(QIcon(QPixmap(":/Assets/Icons/plus.svg")), "");
     add_button->setObjectName("add-button");
     actions->addWidget(add_button);
 
-    remove_button = new QPushButton(QIcon(QPixmap(":/Assets/Icons/minus.svg")), "");   //sistemare url
+    remove_button = new QPushButton(QIcon(QPixmap(":/Assets/Icons/minus.svg")), "");
     remove_button->setObjectName("remove-button");
     actions->addWidget(remove_button);
 

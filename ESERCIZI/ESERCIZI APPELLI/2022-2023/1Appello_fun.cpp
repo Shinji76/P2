@@ -6,7 +6,7 @@ using std::vector;
 using std::list;
 
 list<const D* const> fun(const vector<const B*>& v) {
-    list<const D* const> aux;
+    list<D* const> aux;
     vector<const B*> non_const_v = const_cast<vector<const B*>&>(v);
     int counter = 0;
     int i = 0;
@@ -21,11 +21,11 @@ list<const D* const> fun(const vector<const B*>& v) {
             if(*it) {
                 A* ptr = (*it)->f();
                 if(!ptr)
-                throw std::string("nullptr");
+                    throw std::string("nullptr");
             else if(ptr && dynamic_cast<D*>(ptr) && !dynamic_cast<E*>(ptr))
-                aux.push_back(dynamic_cast<const D*>(ptr));
+                aux.push_back(dynamic_cast<D*>(ptr));
         }
-    }
+    } 
     return aux;
 }
 

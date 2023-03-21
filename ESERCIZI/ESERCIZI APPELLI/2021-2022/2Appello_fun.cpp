@@ -31,7 +31,7 @@ private:
 	Z*fz;
 public:
 	// ridefinizione del costruttore di copia profonda di F
-	F(const F& f): B(f), D(f), E(f), fz(f.fz != nullptr ? new Z(*f.fz) : nullptr)  {}
+	F(const F& f): B(f), D(f), E(f), fz(f.fz != nullptr ? new Z(*f.fz) : nullptr) {}
 	
 	~F() {						// ridefinizione del distruttore profondo di F
 		delete fz;

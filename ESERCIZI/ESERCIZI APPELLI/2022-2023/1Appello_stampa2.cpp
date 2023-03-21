@@ -10,8 +10,8 @@ vector<int> find_template(const vector<int>& v, Functor t) {
     for(auto it = v.begin(); it != v.end(); it++) {
         if(t(*it))
             r.push_back(*it);
-        return r;
     }
+        return r;
 }
 
 unsigned int find_1(const vector<int>& v, int k) {
@@ -28,7 +28,7 @@ int main() {
     vector<int> v2 = {-2,-6,4,4,2,5,0,4,2,3,2,0};
 
     cout << find_1(v1, 2); cout << endl;
-    cout <<find_1(v2, 2); cout << endl;
+    cout << find_1(v2, 2); cout << endl;
     cout << find_2(v1).size(); cout << endl;
-    cout <<find_2(v2).size(); cout << endl;
+    cout << find_2(v2).size(); cout << endl;
 }

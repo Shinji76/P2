@@ -9,7 +9,7 @@
 #include "../ResultsWidget.h"
 
 
-class Box: public CardVisualizer {
+class Box : public CardVisualizer {
 private:
     QWidget* widget;
     QPushButton* add_button;

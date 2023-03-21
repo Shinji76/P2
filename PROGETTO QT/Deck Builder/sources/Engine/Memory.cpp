@@ -15,8 +15,8 @@ Memory& Memory::add(const AbstractCard* card) {
 }
 
 Memory& Memory::remove(const AbstractCard* card) {
-    std::vector<const AbstractCard*>::iterator position = std::find(cards.begin(), cards.end(), card);
-    if (position != cards.end()) {
+    auto position = std::find(cards.begin(), cards.end(), card);
+    if(position != cards.end()) {
         cards.erase(position);
     }
     return *this;
@@ -31,7 +31,7 @@ ResultSet Memory::search(const Query& query) const {
     FilterVisitor filter_visitor(query);
     std::vector<const AbstractCard*> results;
 
-    for (auto cit = cards.begin(); cit != cards.end(); cit++) {
+    for(auto cit = cards.begin(); cit != cards.end(); cit++) {
         (*cit)->accept(filter_visitor);
         if(filter_visitor.hasMatch()) {
             results.push_back(*cit);
@@ -41,8 +41,8 @@ ResultSet Memory::search(const Query& query) const {
 
     // Populates result set
     ResultSet result_set(results.size());
-    for (unsigned int i = query.getOffset(); i < query.getOffset() + query.getSize(); i++) {
-        if (results.size() <= i) {
+    for(unsigned int i = query.getOffset(); i < query.getOffset() + query.getSize(); i++) {
+        if(results.size() <= i) {
             break;
         }
         result_set.add(results[i]);
