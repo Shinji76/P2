@@ -23,7 +23,6 @@ public:
 	const Json& getConverter() const;
     
 	JsonFile& store(const std::vector<AbstractCard*> cards);	//salvataggio in Json
-
 	std::vector<AbstractCard*> load();
 };
 

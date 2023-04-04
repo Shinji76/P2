@@ -101,10 +101,10 @@ AbstractCard* Reader::readMostro(const QJsonObject& object) const {
         object.value("Nome").toString().toStdString(),
         object.value("Effetto").toString().toStdString(),
         object.value("Mana").toInt(),
-        rarita,     //da sistemare con enum
-        classe,     //da sistemare con enum
+        rarita,
+        classe,
         object.value("Path").toString().toStdString(),
-        razza,      //da sistemare con enum
+        razza,
         object.value("Attacco").toInt(),
         object.value("Difesa").toInt()
     );
@@ -152,8 +152,8 @@ AbstractCard* Reader::readMagia(const QJsonObject& object) const {
         object.value("Nome").toString().toStdString(),
         object.value("Effetto").toString().toStdString(),
         object.value("Mana").toInt(),
-        rarita,    //da sistemare con enum
-        classe,    //da sistemare con enum
+        rarita,
+        classe,
         object.value("Path").toString().toStdString()
     );
 }
@@ -200,8 +200,8 @@ AbstractCard* Reader::readSegreto(const QJsonObject& object) const {
         object.value("Nome").toString().toStdString(),
         object.value("Effetto").toString().toStdString(),
         object.value("Mana").toInt(),
-        rarita,    //da sistemare con enum
-        classe,    //da sistemare con enum
+        rarita,
+        classe,
         object.value("Path").toString().toStdString()
     );
 }
