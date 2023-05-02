@@ -1,6 +1,6 @@
 #include "Mazzo.h"
 
-Mazzo::Mazzo(AbstractCard::Classe cl, Fixed_vector<int> n, unsigned int count = 0) : classe(cl), numCopie(n), counter(count) {}
+Mazzo::Mazzo(AbstractCard::Classe classe, Fixed_vector<int> n, unsigned int count = 0) : classe(classe), numCopie(n), counter(count) {}
 
 void Mazzo::addCard(const AbstractCard& card) {
     if(counter < 20 && (classe == card.getClasse() || card.getClasse() == 0) ) {
@@ -9,7 +9,7 @@ void Mazzo::addCard(const AbstractCard& card) {
             numCopie[card.getID()]++;
             counter++;
         }
-    } else {      
+    } else {
         //throw qualche errore
     }
 }

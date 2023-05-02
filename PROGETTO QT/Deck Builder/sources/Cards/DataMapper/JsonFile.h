@@ -2,6 +2,8 @@
 #define JSON_FILE_H
 
 #include "../AbstractCard.h"
+#include "../Mazzo.h"
+
 #include "../JSONConverter/Json.h"
 #include "../JSONConverter/Reader.h"
 

@@ -27,13 +27,14 @@ const Json& JsonFile::getConverter() const {
 	return converter;
 }
 
-// @todo check errors
-JsonFile& JsonFile::store(const std::vector<AbstractCard*> cards) {
-	QJsonArray json_items;
+// @todo modificare metodo per memorizzare classe del mazzo e counter
+JsonFile& JsonFile::store(const Mazzo deck) {
+    QJsonObject deck_type = deck.getClasse();
+	QJsonArray json_cards;
 	for(auto cit = cards.begin(); cit != cards.end(); cit++) {
-		json_items.push_back(converter.fromObject(**cit));
+		json_cards.push_back(converter.fromObject(**cit));
 	}
-	QJsonDocument document(json_items);
+	QJsonDocument document(json_cards);
 	QFile json_file(path.c_str());
 	json_file.open(QFile::WriteOnly);
 	json_file.write(document.toJson());
@@ -41,19 +42,19 @@ JsonFile& JsonFile::store(const std::vector<AbstractCard*> cards) {
 	return *this;
 }
 
-// @todo check errors
-std::vector<AbstractCard*> JsonFile::load() {
-	std::vector<AbstractCard*> items;
+// @todo modificare metodo per caricare classe del mazzo e counter
+Mazzo JsonFile::load() {
+	std::vector<AbstractCard*> cards;
 	QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);
 	QByteArray data = json_file.readAll();
 	json_file.close();
 	QJsonDocument document = QJsonDocument::fromJson(data);
-	QJsonArray json_items = document.array();
+	QJsonArray json_cards = document.array();
 
-	for(const QJsonValue& value : json_items) {
+	for(const QJsonValue& value : json_cards) {
 		QJsonObject json_object = value.toObject();
-		items.push_back(converter.toObject(json_object));
+		cards.push_back(converter.toObject(json_object));
 	}
-	return items;
+	return cards;
 }
