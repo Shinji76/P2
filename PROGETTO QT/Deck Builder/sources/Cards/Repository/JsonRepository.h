@@ -11,6 +11,7 @@ class JsonRepository {
 private:
     JsonFile data_mapper;
     std::map<unsigned int, AbstractCard*> repository;
+    //potrebbe essere il caso di sostituire la mappa con il fixed vector per gestire i mazzi
 
 public:
     JsonRepository(JsonFile data_mapper);

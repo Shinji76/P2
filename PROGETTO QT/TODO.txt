@@ -1,6 +1,10 @@
 TODO:
 Modello:
     1. Sistemare JsonFile per memorizzare classe del mazzo e counter carte
+    2. Capire se i metodi store e read di JsonFile possono andare bene sia per l'album che per i mazzi
+    3. Capire se i metodi create update e remove sono utilizzabili per Mazzo o sarebbero per l'Album e basta e andrebbero quindi rimossi
+    4. 
+    
 View:
     1. Capire utilizzo di LookupWidget
     2. Sistemare Grid su ResultLayout

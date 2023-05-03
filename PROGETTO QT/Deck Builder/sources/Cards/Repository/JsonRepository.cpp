@@ -5,14 +5,14 @@
 #include <stdexcept>
 
 JsonRepository::JsonRepository(JsonFile data_mapper) : data_mapper(data_mapper) {
-    std::vector<AbstractCard*> items(data_mapper.load());   //leggo tutte le carte 
-    for (auto it = items.begin(); it != items.end(); it++) {
+    std::vector<AbstractCard*> cards(data_mapper.load());   //leggo tutte le carte puntate dal datamapper 
+    for(auto it = cards.begin(); it != cards.end(); it++) {
         repository[(*it)->getID()] = *it;
     }
 }
 
 JsonRepository::~JsonRepository() {
-    for (auto it = repository.begin(); it != repository.end(); it++) {
+    for(auto it = repository.begin(); it != repository.end(); it++) {
         delete it->second;
     }
 }
@@ -49,7 +49,7 @@ JsonRepository& JsonRepository::create(AbstractCard* card) {
 
 AbstractCard* JsonRepository::read(const unsigned int ID) const {
     std::map<unsigned int, AbstractCard*>::const_iterator cit = repository.find(ID);
-    if (cit == repository.end()) {
+    if(cit == repository.end()) {
         throw std::out_of_range("Trying to read an undefined id.");
     }
     return cit->second;
@@ -61,7 +61,7 @@ JsonRepository& JsonRepository::update(AbstractCard* card) {
 
 JsonRepository& JsonRepository::remove(const unsigned int ID) {
     std::map<unsigned int, AbstractCard*>::const_iterator cit = repository.find(ID);
-    if (cit != repository.end()) {
+    if(cit != repository.end()) {
         delete cit->second;
         repository.erase(cit);
     }
@@ -69,20 +69,20 @@ JsonRepository& JsonRepository::remove(const unsigned int ID) {
 }
 
 std::vector<AbstractCard*> JsonRepository::readAll() const {
-    std::vector<AbstractCard*> items;
+    std::vector<AbstractCard*> cards;
     for(auto cit = repository.begin(); cit != repository.end(); cit++) {
-        items.push_back(cit->second);
+        cards.push_back(cit->second);
     }
-    return items;
+    return cards;
 }
 
 std::vector<AbstractCard*> JsonRepository::readClass(AbstractCard::Classe classe) const {
-    std::vector<AbstractCard*> items;
+    std::vector<AbstractCard*> cards;
     for(auto cit = repository.begin(); cit != repository.end(); cit++) {
         if(cit->second->getClasse() == classe)
-            items.push_back(cit->second);
+            cards.push_back(cit->second);
     }
-    return items;
+    return cards;
 }
 
 JsonRepository& JsonRepository::store() {
