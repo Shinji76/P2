@@ -15,10 +15,7 @@ ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
     hbox->setAlignment(Qt::AlignLeft | Qt::AlignTop);
     vbox->addLayout(hbox);
 
-    results_total = new QLabel();
-    hbox->addWidget(results_total);
-
-    hbox->addStretch();
+    hbox->addStretch();     //forse da rimuovere
 
     previous_page = new QPushButton(QIcon(QPixmap(":/Assets/Icons/left_arrow.svg")), "");
     previous_page->setEnabled(false);
@@ -51,21 +48,13 @@ void ResultsWidget::showResults(Engine::Query query, Engine::ResultSet results) 
     while (!lookup.isEmpty()) {
         WidgetLookup info = lookup.takeLast();
         delete info.getWidget();
-    }
-
-    // Shows new data
-    if (results.getTotal() > 0) {
-        results_total->setText(QString::number(results.getTotal()) + " results for \"" + QString::fromStdString(query.getText()) + "\":");
-    }
-    else {
-        results_total->setText("No results for \"" + QString::fromStdString(query.getText()) + "\".");
-    }    
+    } 
     previous_page->setEnabled(query.getOffset() > 0);
     next_page->setEnabled(results.getItems().size() == query.getSize());
     renderer->render(grid, results, &lookup);
 
     // Connects signals
-    for (auto cit = lookup.begin(); it != lookup.end(); it++) {
+    for (auto cit = lookup.begin(); cit != lookup.end(); cit++) {
         if (cit->getAddButton()) {
             connect(cit->getAddButton(), &QPushButton::clicked, std::bind(&addCard, this, cit->getCard()));
         }

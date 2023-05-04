@@ -3,16 +3,16 @@ Modello:
     1. Sistemare JsonFile per memorizzare classe del mazzo e counter carte
     2. Capire se i metodi store e read di JsonFile possono andare bene sia per l'album che per i mazzi
     3. Capire se i metodi create update e remove sono utilizzabili per Mazzo o sarebbero per l'Album e basta e andrebbero quindi rimossi
-    4. 
+    4. Decidere se cambiare map con vector in JsonRepository (eventualmente sistemare il .cpp)
+    5. 
     
 View:
     1. Capire utilizzo di LookupWidget
     2. Sistemare Grid su ResultLayout
     3. Creare RecapWidget
     4. Sistemare SearchWidget
-    5. Sistemare HomeWidget
+    5. Sistemare HomeWidget e capire se accorparlo a MainWindow oppure se tenerlo come widget separato e chiamarlo come unico widget all'interno di MainWindow.
     6. Controllare MainWindow
-    7. Capire cosa fare con CardEditor
-    8. QSS
+    7. QSS
 
 Scrivere relazione sul progetto svolto

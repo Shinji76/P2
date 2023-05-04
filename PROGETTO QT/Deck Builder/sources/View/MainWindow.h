@@ -38,10 +38,7 @@ public slots:
     void openDeck();
     void saveDeck();
     void saveDeckAs();
-    void showStatus(QString message);
     void search(Query query);
-    void addCard(const AbstractCard* card);
-    void removeCard(const AbstractCard* card);
     void close();
 };
 

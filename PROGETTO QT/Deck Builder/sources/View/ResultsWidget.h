@@ -15,7 +15,6 @@
 class ResultsWidget: public QWidget {
 Q_OBJECT
 private:
-	QLabel* results_total;
 	QPushButton* previous_page;
 	QPushButton* next_page;
 	QVector<WidgetLookup> lookup;
