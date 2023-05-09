@@ -41,7 +41,6 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
     );
     vbox->addWidget(search_input);
 
-    // Connects signals
     connect(search_input, &QPushButton::clicked, this, &SearchWidget::search);
 }
 
