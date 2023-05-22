@@ -10,11 +10,10 @@
 class SearchWidget: public QWidget {
 Q_OBJECT
 private:
-	QLineEdit* query_input;
-	QLineEdit* filter_input;
-	QSpinBox* numeric_filter_input;
+	QLineEdit* name_filter;
+    QspinBox* mana_filter;
+    QComboBox* type_filter;
 	QSpinBox* page_input;
-	QSpinBox* page_size;
 
 public:
 	explicit SearchWidget(QWidget* parent = 0);

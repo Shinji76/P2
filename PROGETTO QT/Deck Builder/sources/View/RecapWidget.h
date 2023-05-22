@@ -8,7 +8,7 @@ Q_OBJECT
 private:
 
 public:
-
+    
 }
 
 #endif //RECAP_WIDGET_H

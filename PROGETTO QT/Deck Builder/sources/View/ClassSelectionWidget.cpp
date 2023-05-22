@@ -24,26 +24,22 @@ ClassSelectionWidget::ClassSelectionWidget(QWidget *parent) : QWidget(parent) {
 	gridLayout->addWidget(sorcererButton, 1, 1);
 }
 
-void ClassSelectionWidget::HunterButtonClick()
-{
+void ClassSelectionWidget::HunterButtonClick(){
+
 }
 
-void ClassSelectionWidget::WarriorButtonClick()
-{
-	// In questa funz
+void ClassSelectionWidget::WarriorButtonClick(){
+
 }
 
-void ClassSelectionWidget::ThiefButtonClick()
-{
+void ClassSelectionWidget::ThiefButtonClick(){
+
+}
+
+void ClassSelectionWidget::MageButtonClick(){
 	// In questa funzione, puoi chiamare il metodo setter e la ricerca scritti in una classe esterna.
 }
 
-void ClassSelectionWidget::MageButtonClick()
-{
-	// In questa funzione, puoi chiamare il metodo setter e la ricerca scritti in una classe esterna.
-}
-
-void ClassSelectionWidget::SorcererButtonClick()
-{
+void ClassSelectionWidget::SorcererButtonClick(){
     
 }

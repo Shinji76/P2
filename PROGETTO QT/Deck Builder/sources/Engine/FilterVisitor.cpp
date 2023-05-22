@@ -11,20 +11,13 @@ bool FilterVisitor::hasMatch() const {
 }
 
 void FilterVisitor::visit(const Mostro& mostro) {
-	match = mostro.getNome().find(query.getFilter()) != std::string::npos
-		|| mostro.getClasse() == query.getNumericSearch()
-		|| mostro.getAttacco() == query.getNumericSearch()
-	;
+	match = mostro.getNome().find(query.getFilter()) != std::string::npos;
 }
 
 void FilterVisitor::visit(const Magia& magia) {
-	match = magia.getNome().find(query.getFilter()) != std::string::npos
-	|| magia.getClasse() == query.getNumericSearch()
-	;
+	match = magia.getNome().find(query.getFilter()) != std::string::npos;
 }
 
 void FilterVisitor::visit(const Segreto& segreto) {
-	match = segreto.getNome().find(query.getFilter()) != std::string::npos
-	|| segreto.getClasse() == query.getNumericSearch()
-	;
+	match = segreto.getNome().find(query.getFilter()) != std::string::npos;
 }

@@ -20,14 +20,31 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
     form->setLabelAlignment(Qt::AlignRight | Qt::AlignVCenter);
     vbox->addLayout(form);
 
-    query_input = new QLineEdit();
-    form->addRow("Filtro ricerca", query_input);
+    name_filter = new QLineEdit();
+    form->addRow("Nome", name_filter);
 
-    numeric_filter_input = new QSpinBox();
-    numeric_filter_input->setMinimum(0);
-    numeric_filter_input->setSingleStep(1);
-    numeric_filter_input->setMaximum(10);
-    form->addRow("Costo Mana", page_input);
+    mana_filter = new QComboBox();
+    mana_filter->addItem("Tutti");
+    mana_filter->addItem("0");
+    mana_filter->addItem("1");
+    mana_filter->addItem("2");
+    mana_filter->addItem("3");
+    mana_filter->addItem("4");
+    mana_filter->addItem("5");
+    mana_filter->addItem("6");
+    mana_filter->addItem("7+");
+
+    mana_filter->setCurrentText("Tutti");
+    form->addRow("Costo Mana", mana_filter);
+
+    type_filter = new QComboBox();
+    type_filter->addItem("Tutti");
+    type_filter->addItem("Mostro");
+    type_filter->addItem("Magia");
+    type_filter->addItem("Segreto");
+
+    type_filter->setCurrentText("Tutti");
+    form->addRow("Tipo Carta", type_filter);
 
     page_input = new QSpinBox();
     page_input->setMinimum(1);
@@ -46,9 +63,7 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
 
 void SearchWidget::search() {
     Query query(
-        query_input->text().toStdString(),
         filter_input->text().toStdString(),
-        numeric_filter_input->value(),
         (page_input->value() - 1) * page_size->value(),
         page_size->value()
     );

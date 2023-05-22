@@ -65,16 +65,21 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     QSplitter* splitter = new QSplitter(this);
     setCentralWidget(splitter);
 
+    home_widget = new HomeWidget();
+    splitter->addWidget(home_widget);
+
     search_widget = new SearchWidget();
     splitter->addWidget(search_widget);
 
     stacked_widget = new QStackedWidget(this);
     splitter->addWidget(stacked_widget);
 
+    //TODO: add histogram_widget when finished
+    
     results_widget = new ResultsWidget();
     stacked_widget->addWidget(results_widget);
 
-    splitter->setSizes(QList<int>() << 1000 << 3000);
+    splitter->setSizes(QList<int>() << 3000 << 1000);
 
     // Connects signals
     connect(create, &QAction::triggered, this, &MainWindow::newDeck);
