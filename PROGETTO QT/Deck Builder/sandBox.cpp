@@ -11,6 +11,13 @@ int main() {
 	FixedVector<int, 20> prova2;
 
     for(auto it = prova2.begin(); it != prova2.end(); ++it) {
+        cout << prova2[counter];
+        cout << *it << endl;
+        cout << counter << endl;
+        counter++;
+    }
+    counter = 101;
+    for(auto it = prova.begin(); it != prova.end(); ++it) {
         //cout << *it << endl;
         cout << counter << endl;
         counter++;
