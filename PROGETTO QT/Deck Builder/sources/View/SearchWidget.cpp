@@ -7,7 +7,6 @@
 #include <QPushButton>
 
 SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
-    // Creates widgets
     QVBoxLayout* vbox = new QVBoxLayout(this);
     vbox->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
 
@@ -37,6 +36,7 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
     mana_filter->setCurrentText("Tutti");
     form->addRow("Costo Mana", mana_filter);
 
+
     type_filter = new QComboBox();
     type_filter->addItem("Tutti");
     type_filter->addItem("Mostro");
@@ -45,6 +45,7 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
 
     type_filter->setCurrentText("Tutti");
     form->addRow("Tipo Carta", type_filter);
+
 
     page_input = new QSpinBox();
     page_input->setMinimum(1);
@@ -61,11 +62,13 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
     connect(search_input, &QPushButton::clicked, this, &SearchWidget::search);
 }
 
+//TODO: capire come sistemare search widget con la query corretta
 void SearchWidget::search() {
     Query query(
-        filter_input->text().toStdString(),
-        (page_input->value() - 1) * page_size->value(),
-        page_size->value()
+        name_fiter->text().toStdString(),
+        mana_filter->value(),
+        type_filter->value(),           //può essere sbagliato rispetto a ìlle enum
+        (page_input->value() - 1) * 9
     );
     emit search_event(query);
 }

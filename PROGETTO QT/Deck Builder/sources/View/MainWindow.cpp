@@ -20,7 +20,7 @@
 
 //Sistemare IEngine&
 MainWindow::MainWindow(Memory& engine, QWidget *parent)
-    : QMainWindow(parent), has_unsaved_changes(false), engine(engine), repository(nullptr) {
+    : QMainWindow(parent), has_unsaved_changes(false), engine(engine), repository(nullptr) {    //modificare nullptr per aprire direttamente l'album
     // Actions
     QAction* create = new QAction(
         QIcon(QPixmap((":/Assets/Icons/new.svg"))),
@@ -88,11 +88,17 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     connect(save_as, &QAction::triggered, this, &MainWindow::saveDeckAs);
     connect(close, &QAction::triggered, this, &MainWindow::close);
     connect(search_widget, &SearchWidget::search_event, this, &MainWindow::search);
-    connect(results_widget, &ResultsWidget::refreshResults, search_widget, &SearchWidget::search);
+    connect(results_widget, &ResultsWidget::refreshResults, search_widget, &SearchWidget::search);      //valutare se mantenere refresh o al massimo cambiarlo
     connect(results_widget, &ResultsWidget::previousPage, search_widget, &SearchWidget::previousPage);
     connect(results_widget, &ResultsWidget::nextPage, search_widget, &SearchWidget::nextPage);
-    connect(results_widget, &ResultsWidget::addCard, this, &MainWindow::addCard);
-    connect(results_widget, &ResultsWidget::removeCard, this, &MainWindow::removeCard);
+    connect(results_widget, &ResultsWidget::addCard, this, &RecapWidget::addCard);          //controllare se collegamento addCard e recapWidget funziona
+    connect(results_widget, &ResultsWidget::removeCard, this, &RecapWidget::removeCard);
+
+	void refreshResults();
+	void previousPage();
+	void nextPage();
+	void addCard(const AbstractCard* card);
+	void removeCard(const AbstractCard* card);
 
     // Status bar
     showStatus("Ready.");
@@ -128,7 +134,6 @@ void MainWindow::clearStack() {
     }
 }
 
-
 void MainWindow::newDeck() {
     QString path = QFileDialog::getSaveFileName (
         this,
@@ -140,7 +145,7 @@ void MainWindow::newDeck() {
         return;
     }
     if (repository != nullptr) {
-        delete repository;
+        delete repository;      //se ho degli elementi nel repository ma voglio annullare il salvataggio cancello il repository
     }
     Reader reader;
     Json converter(reader);
@@ -167,7 +172,6 @@ void MainWindow::openDeck() {
     JsonFile data_mapper(path.toStdString(), converter);
     repository = new JsonRepository(data_mapper);
     reloadData();
-    create_item->setEnabled(true);
 }
 
 void MainWindow::saveDeck() {

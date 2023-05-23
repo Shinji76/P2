@@ -4,7 +4,7 @@ Modello:
     2. Capire se i metodi store e read di JsonFile possono andare bene sia per l'album che per i mazzi
     3. Capire se i metodi create update e remove sono utilizzabili per Mazzo o sarebbero per l'Album e basta e andrebbero quindi rimossi
     4. Decidere se cambiare map con vector in JsonRepository (eventualmente sistemare il .cpp)
-    5. 
+    5. In searchWidget sistemare campi per far combaciare query
     
 View:
     1. Capire utilizzo di LookupWidget
