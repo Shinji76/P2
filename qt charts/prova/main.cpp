@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->legend()->hide(); // hide the legend
+    //chart->legend()->hide(); // hide the legend
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
@@ -35,29 +35,16 @@ int main(int argc, char *argv[])
     QLabel *tooltip = new QLabel(chartView);
     tooltip->setFixedSize(20, 20);
     tooltip->setAlignment(Qt::AlignCenter);
-    tooltip->setStyleSheet("QLabel { background-color : white; color : black; }");
+    tooltip->setStyleSheet("QLabel {font : 15; font : bold; color : gold;}");
 
 
-    // Set fixed font for labels inside bars
-    QFont font;
-    font.setPixelSize(12);
-    font.setBold(false);
 
-    QValueAxis *axisY = new QValueAxis();
-    axisY->setLabelsFont(font);
-    chart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
-    axisY->hide();
-
-    // Connect the hovered signal to a slot that updates the tooltip label
-    QObject::connect(barSet, &QBarSet::hovered, [=](bool status, int index) {
-        if (status) {
+    QObject::connect(barSet, &QBarSet::hovered, [=](bool hovered, int index) {
+        if (hovered) {
             tooltip->setText(QString::number(barSet->at(index)));
-            QPoint p = chartView->mapFromGlobal(QCursor::pos());
-            QPointF point = chart->mapToValue(chartView->mapToScene(p));
             qreal x = chart->plotArea().x() + chart->plotArea().width() * ((qreal)index + 0.5) / barSet->count();
-            qreal y = point.y();
-            tooltip->move(x - tooltip->width() / 2, y + 5);
+            qreal y = chart->plotArea().y() + chart->plotArea().height();
+            tooltip->move(x - tooltip->width() / 2, y - tooltip->height() * 1.2);
             tooltip->show();
         } else {
             tooltip->hide();
