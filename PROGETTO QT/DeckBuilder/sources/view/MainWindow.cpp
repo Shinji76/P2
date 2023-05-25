@@ -100,10 +100,6 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
 	void addCard(const AbstractCard* card);
 	void removeCard(const AbstractCard* card);
 
-    // Status bar
-    showStatus("Ready.");
-}
-
 Item::Repository::JsonRepository* MainWindow::getRepository() {
     return repository;
 }

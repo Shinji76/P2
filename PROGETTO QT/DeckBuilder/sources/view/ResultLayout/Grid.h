@@ -13,7 +13,7 @@ private:
 
 public:
     Grid(const unsigned int row_size);
-    virtual void render(QGridLayout* grid, ResultSet& result, QVector<WidgetLookup>* lookup);
+    virtual void render(QGridLayout* grid, ResultSet& result, QVector<LookupWidget>* lookup);
 };
 
 #endif  //GRID_H

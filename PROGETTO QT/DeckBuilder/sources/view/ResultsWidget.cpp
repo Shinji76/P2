@@ -46,7 +46,7 @@ ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
 void ResultsWidget::showResults(Engine::Query query, Engine::ResultSet results) {
     // Clears previous data
     while (!lookup.isEmpty()) {
-        WidgetLookup info = lookup.takeLast();
+        LookupWidget info = lookup.takeLast();
         delete info.getWidget();
     } 
     previous_page->setEnabled(query.getOffset() > 0);

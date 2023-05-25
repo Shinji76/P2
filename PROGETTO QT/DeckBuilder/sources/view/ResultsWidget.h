@@ -10,14 +10,14 @@
 #include "../Engine/Query.h"
 #include "../Engine/ResultSet.h"
 #include "ResultLayout/IResultLayoutStrategy.h"
-#include "WidgetLookup.h"
+#include "LookupWidget.h"
 
 class ResultsWidget: public QWidget {
 Q_OBJECT
 private:
 	QPushButton* previous_page;
 	QPushButton* next_page;
-	QVector<WidgetLookup> lookup;
+    QVector<LookupWidget> lookup;
 	QGridLayout* grid;
 
 public:

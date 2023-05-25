@@ -27,6 +27,7 @@ HEADERS += \
     view/ClassSelectionWidget.h \
     view/HomeWidget.h \
     view/MainWindow.h \
+    view/LookupWidget.h \
     view/RecapWidget.h \
     view/ResultsWidget.h \
     view/SearchWidget.h \
@@ -61,6 +62,7 @@ SOURCES += \
     \
     view/ClassSelectionWidget.cpp \
     view/HomeWidget.cpp \
+    view/LookupWidget.cpp \
     view/MainWindow.cpp \
     view/RecapWidget.cpp \
     view/ResultsWidget.cpp \
