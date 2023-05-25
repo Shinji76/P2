@@ -8,11 +8,11 @@
 class Mazzo {
 private:
 	AbstractCard::Classe classe;
-	Fixed_vector<int> numCopie;
+    FixedVector<int, 50> numCopie;
 	unsigned int counter;
 
 public:
-	Mazzo(AbstractCard::Classe classe, Fixed_vector<int> numCopie, unsigned int counter);
+    Mazzo(AbstractCard::Classe classe, FixedVector<int, 50> numCopie, unsigned int counter);
 	
 	AbstractCard::Classe getClasse() const;
     void setClasse(AbstractCard::Classe set);

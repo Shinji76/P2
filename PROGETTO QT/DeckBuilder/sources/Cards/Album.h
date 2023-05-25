@@ -6,7 +6,7 @@
 
 class Album {
 private:
-	Fixed_vector<AbstractCard*> cards;
+    FixedVector<AbstractCard*, 50> cards;
 	const unsigned int ASize = cards.getSize();
 public:
 	unsigned int getASize() const;

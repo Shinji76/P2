@@ -3,6 +3,7 @@ LEZIONI/
 Teoria/
 Esercizi Qt/
 PROGETTO QT/build*
+PROGETTO QT/DeckBuilder/build*
 qt charts/build*
 APPUNTI/
 search-engine/
@@ -14,3 +15,4 @@ search-engine/
 *.ova
 *.tex
 *.exe
+*.stash

@@ -5,6 +5,7 @@
 TEMPLATE = app
 TARGET = sources
 INCLUDEPATH += .
+QT += widgets
 
 # Input
 HEADERS += \
