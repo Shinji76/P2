@@ -3,19 +3,24 @@
 
 #include "../vector_template.h"
 #include "AbstractCard.h"
-#include "Album.h"
+#include <string>
 
 class Mazzo {
 private:
+    std::string nome;
 	AbstractCard::Classe classe;
     FixedVector<int, 50> numCopie;
 	unsigned int counter;
 
 public:
-    Mazzo(AbstractCard::Classe classe, FixedVector<int, 50> numCopie, unsigned int counter);
+    Mazzo(std::string nome, AbstractCard::Classe classe, FixedVector<int, 50> numCopie, unsigned int counter);
 	
+    std::string getNomeMazzo() const;
+    void setNomeMazzo(std::string);
 	AbstractCard::Classe getClasse() const;
     void setClasse(AbstractCard::Classe set);
+    FixedVector<int, 50> getNumCopie() const;
+    unsigned int getCounter() const;
 
 	void addCard(const AbstractCard&);
 	void removeCard(const AbstractCard&);

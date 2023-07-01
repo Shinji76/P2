@@ -9,6 +9,9 @@ private:
 
 public:
     
-}
+public slots:
+    void addCard();
+    void removeCard();
+};
 
 #endif //RECAP_WIDGET_H

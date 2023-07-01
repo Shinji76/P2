@@ -1,4 +1,7 @@
 #include "Reader.h"
+#include "Cards/Segreto.h"
+#include "Cards/Magia.h"
+#include "Cards/Mostro.h"
 
 #include <stdexcept>
 #include <QJsonArray>

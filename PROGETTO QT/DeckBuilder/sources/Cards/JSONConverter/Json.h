@@ -10,7 +10,7 @@
 class Json {
 private:
 	IReader& reader;
-
+    
 public: 
 	Json(IReader& reader);
 	const IReader& getReader() const;

@@ -74,7 +74,9 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     stacked_widget = new QStackedWidget(this);
     splitter->addWidget(stacked_widget);
 
+    class_selection_widget = new ClassSelectionWidget();
     //TODO: add histogram_widget when finished
+
     
     results_widget = new ResultsWidget();
     stacked_widget->addWidget(results_widget);
@@ -87,38 +89,44 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     connect(save, &QAction::triggered, this, &MainWindow::saveDeck);
     connect(save_as, &QAction::triggered, this, &MainWindow::saveDeckAs);
     connect(close, &QAction::triggered, this, &MainWindow::close);
+    connect(home_widget, &HomeWidget::CreateDeck, this, &MainWindow::newDeck);
+    connect(home_widget, &HomeWidget::OpenDeck, this, &MainWindow::openDeck);
     connect(search_widget, &SearchWidget::search_event, this, &MainWindow::search);
     connect(results_widget, &ResultsWidget::refreshResults, search_widget, &SearchWidget::search);      //valutare se mantenere refresh o al massimo cambiarlo
     connect(results_widget, &ResultsWidget::previousPage, search_widget, &SearchWidget::previousPage);
     connect(results_widget, &ResultsWidget::nextPage, search_widget, &SearchWidget::nextPage);
-    connect(results_widget, &ResultsWidget::addCard, this, &RecapWidget::addCard);          //controllare se collegamento addCard e recapWidget funziona
-    connect(results_widget, &ResultsWidget::removeCard, this, &RecapWidget::removeCard);
+    //connect(results_widget, &ResultsWidget::addCard, this, &RecapWidget::addCard);          //controllare se collegamento addCard e recapWidget funziona
+    //connect(results_widget, &ResultsWidget::removeCard, this, &RecapWidget::removeCard);
+    connect(class_selection_widget, &ClassSelectionWidget::HunterButtonClick, this, &MainWindow::newDeck);
+    connect(class_selection_widget, &ClassSelectionWidget::WarriorButtonClick, this, &MainWindow::newDeck);
+    connect(class_selection_widget, &ClassSelectionWidget::ThiefButtonClick, this, &MainWindow::newDeck);
+    connect(class_selection_widget, &ClassSelectionWidget::MageButtonClick, this, &MainWindow::newDeck);
+    connect(class_selection_widget, &ClassSelectionWidget::SorcererButtonClick, this, &MainWindow::newDeck);
+}
 
-	void refreshResults();
-	void previousPage();
-	void nextPage();
-	void addCard(const AbstractCard* card);
-	void removeCard(const AbstractCard* card);
-
-Item::Repository::JsonRepository* MainWindow::getRepository() {
+JsonRepository* MainWindow::getRepository() {
     return repository;
 }
 
-Engine::IEngine& MainWindow::getEngine() {
-    return engine;
+JsonAlbumRepository* MainWindow::getAlbumRepository() {
+    return album_repository;
 }
 
-MainWindow& MainWindow::reloadData() {
-    engine.clear();
-    std::vector<AbstractCard*> cards(repository->readAll());
-    for (auto cit = cards.begin(); cit != cards.end(); cit++) {
-        engine.add(*cit);
-    }
-    return *this;
+Memory& MainWindow::getEngine() {
+    return engine;
 }
 
 SearchWidget* MainWindow::getSearchWidget() {
     return search_widget;
+}
+
+MainWindow& MainWindow::reloadData() {
+    engine.clear();
+    std::vector<AbstractCard*> cards(album_repository->readAll());
+    for (auto cit = cards.begin(); cit != cards.end(); cit++) {
+        engine.add(*cit);
+    }
+    return *this;
 }
 
 void MainWindow::clearStack() {
@@ -135,7 +143,7 @@ void MainWindow::newDeck() {
         this,
         "Creates new Deck",  
         "./",
-        "JSON files *.json"     //tipo file salvataggio
+        "JSON files *.json"     
     );
     if (path.isEmpty()) {
         return;
@@ -147,16 +155,17 @@ void MainWindow::newDeck() {
     Json converter(reader);
     JsonFile data_mapper(path.toStdString(), converter);
     repository = new JsonRepository(data_mapper);
+    
     engine.clear();
 }
 
 void MainWindow::openDeck() {
     QString path = QFileDialog::getOpenFileName (
         this,
-        "Creates new Deck",
+        "Open existing Deck",
         "./",
         "JSON files *.json"
-    );
+    );  
     if (path.isEmpty()) {
         return;
     }
@@ -178,7 +187,7 @@ void MainWindow::saveDeck() {
     has_unsaved_changes = false;
 }
 
-void MainWindow::saveAsDeck() {
+void MainWindow::saveDeckAs() {
     QString path = QFileDialog::getSaveFileName(
         this,
         "Creates new Deck",

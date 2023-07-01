@@ -2,15 +2,14 @@
 #define JSON_CONVERTER_READER_H
 
 #include "IReader.h"
-#include "../Mostro.h"
-#include "../Magia.h"
-#include "../Segreto.h"
+
 #include <QJsonObject>
 #include <map>
 
 class Reader: public IReader {
 private:
-	std::map<unsigned int, AbstractCard*> cache;
+    AbstractCard::Classe classe;
+    std::map<unsigned int, AbstractCard*> cache;
 	
     AbstractCard* readMostro(const QJsonObject& object) const;
 	AbstractCard* readMagia(const QJsonObject& object) const;

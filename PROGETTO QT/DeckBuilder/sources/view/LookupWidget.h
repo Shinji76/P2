@@ -22,7 +22,7 @@ public:
     );
 
     const AbstractCard* getCard() const;
-    QPushButton* getWidget() const;
+    QWidget* getWidget() const;
     QPushButton* getAddButton() const;
     QPushButton* getRemoveButton() const;
 };

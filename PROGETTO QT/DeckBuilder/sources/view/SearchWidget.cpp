@@ -46,7 +46,15 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
     type_filter->setCurrentText("Tutti");
     form->addRow("Tipo Carta", type_filter);
 
+    sorting_type = new QComboBox();
+    sorting_type->addItem("A-Z");
+    sorting_type->addItem("Z-A");
+    sorting_type->addItem("1-10");
+    sorting_type->addItem("10-1");
 
+    sorting_type->setCurrenteText("A-Z");
+    form->addRow("Ordina per:", sorting_type);
+    
     page_input = new QSpinBox();
     page_input->setMinimum(1);
     page_input->setSingleStep(1);
@@ -65,9 +73,10 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
 //TODO: capire come sistemare search widget con la query corretta
 void SearchWidget::search() {
     Query query(
-        name_fiter->text().toStdString(),
+        name_filter->text().toStdString(),
         mana_filter->value(),
-        type_filter->value(),           //può essere sbagliato rispetto a ìlle enum
+        type_filter->text().toStdString(),           //può essere sbagliato rispetto alle enum
+        sorting_type->value(),
         (page_input->value() - 1) * 9
     );
     emit search_event(query);

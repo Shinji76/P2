@@ -33,11 +33,13 @@ HEADERS += \
     view/SearchWidget.h \
     \
     Cards/DataMapper/JsonFile.h \
+    Cards/DataMapper/JsonFileAlbum.h \
     Cards/JSONConverter/IReader.h \
     Cards/JSONConverter/Json.h \
     Cards/JSONConverter/JsonVisitor.h \
     Cards/JSONConverter/Reader.h \
     Cards/Repository/JsonRepository.h \
+    Cards/Repository/JsonAlbumRepository.h \
     \
     view/CardLayout/Box.h \
     view/CardLayout/CardVisualizer.h \
@@ -69,12 +71,14 @@ SOURCES += \
     view/SearchWidget.cpp \
     \
     Cards/DataMapper/JsonFile.cpp \
+    Cards/DataMapper/JsonFileAlbum.cpp \
     \
     Cards/JSONConverter/Json.cpp \
     Cards/JSONConverter/JsonVisitor.cpp \
     Cards/JSONConverter/Reader.cpp \
     \
     Cards/Repository/JsonRepository.cpp \
+    Cards/Repository/JsonAlbumRepository.cpp \
     \
     view/CardLayout/Box.cpp \
     \

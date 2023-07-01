@@ -4,15 +4,17 @@
 #include <QWidget>
 #include <QLineEdit>
 #include <QSpinBox>
+#include <QComboBox>
 
 #include "../Engine/Query.h"
 
 class SearchWidget: public QWidget {
 Q_OBJECT
 private:
-	QLineEdit* name_filter;
-    QspinBox* mana_filter;
-    QComboBox* type_filter;
+	QLineEdit* name_filter;     //string
+    QComboBox* mana_filter;     //int
+    QComboBox* type_filter;     //string/enum
+    QComboBox* sorting_type;    //int
 	QSpinBox* page_input;
 
 public:

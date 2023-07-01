@@ -1,11 +1,12 @@
 TODO:
 Modello:
-    1. Sistemare JsonFile per memorizzare classe del mazzo e counter carte
-    2. Capire se i metodi store e read di JsonFile possono andare bene sia per l'album che per i mazzi
-    3. Capire se i metodi create update e remove sono utilizzabili per Mazzo o sarebbero per l'Album e basta e andrebbero quindi rimossi
-    4. Decidere se cambiare map con vector in JsonRepository (eventualmente sistemare il .cpp)
-    5. In searchWidget sistemare campi per far combaciare query
-    
+    1. Capire se i metodi create update e remove (JsonRepository) sono utilizzabili per Mazzo o sarebbero per l'Album e basta e andrebbero quindi rimossi
+    2. In searchWidget sistemare campi per far combaciare query
+    3. Capire se effettivamente mi serve la classe Album o meno
+    4. spostare controllo sulla rarità (leggendaria) da mazzo a abstact card
+    5. distinguere permanenza mazzo (read write) e album (read)
+    6. aggiustare costruttore mazzo, prendere nomeMazzo per salvataggio in JSON
+    7. controllare costruttore Sorting.h/cpp
 View:
     1. Capire utilizzo di LookupWidget
     2. Sistemare Grid su ResultLayout

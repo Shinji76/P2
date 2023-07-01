@@ -1,6 +1,5 @@
 #include "Json.h"
 
-
 Json::Json(IReader& reader) : reader(reader) {}
 
 const IReader& Json::getReader() const {

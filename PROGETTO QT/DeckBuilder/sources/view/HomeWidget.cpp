@@ -1,27 +1,30 @@
 #include "HomeWidget.h"
-#include "MainWindow.h"
-
 #include <QHBoxLayout>
 
-HomeWidget::HomeWidget(QWidget *parent) : QWidget(parent) {
-    QPushButton* createDeckButton = new QPushButton("Crea mazzo", this);
-    connect(createDeckButton, &QPushButton::clicked, this, &HomeWidget::handleCreateDeckButtonClick);
-
-    QPushButton* openDeckButton = new QPushButton("Apri mazzo", this);
-    connect(openDeckButton, &QPushButton::clicked, this, &HomeWidget::handleOpenDeckButtonClick);
-
-    QHBoxLayout *layout = new QHBoxLayout(this);    //decidere se cambiare in Verticale
-    layout->addWidget(createDeckButton);
-    layout->addWidget(openDeckButton);
-}
-
-void HomeWidget::handleCreateDeckButtonClick()
+HomeWidget::HomeWidget(MainWindow* mainWindow, QWidget *parent)
+    : mainWindow(mainWindow), QWidget(parent)
 {
-    createDeckButton->addAction(newDeck);
+    QHBoxLayout *hbox = new QHBoxLayout(this);    //decidere se cambiare in Verticale
+    hbox->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+
+    QPushButton* createDeckButton = new QPushButton(
+        QIcon(QPixmap((":/Assets/Icons/new.svg"))),
+        "Crea mazzo"
+    );
+    hbox->addWidget(createDeckButton);
+
+    QPushButton* openDeckButton = new QPushButton(
+        QIcon(QPixmap((":/Assets/Icons/open.svg"))),
+        "Apri mazzo"
+    );
+    hbox->addWidget(openDeckButton);
+
+    connect(createDeckButton, &QPushButton::clicked, this, &HomeWidget::createDeckHandler);
+    connect(openDeckButton, &QPushButton::clicked, mainWindow, OpenDeck);
 }
 
-void HomeWidget::handleOpenDeckButtonClick()
-{
-    openDeckButton->addAction(openDeck);
-    // Aggiungere il codice "Apri mazzo".
+void HomeWidget::createDeckHandler() {
+    ClassSelectionWidget* classSelectionWidget = new ClassSelectionWidget(this);
+    classSelectionWidget->show();
 }
+

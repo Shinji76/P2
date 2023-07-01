@@ -17,11 +17,17 @@ ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
 
     hbox->addStretch();     //forse da rimuovere
 
-    previous_page = new QPushButton(QIcon(QPixmap(":/Assets/Icons/left_arrow.svg")), "");
+    previous_page = new QPushButton(
+        QIcon(QPixmap(":/Assets/Icons/left_arrow.svg")),
+        ""
+    );
     previous_page->setEnabled(false);
     hbox->addWidget(previous_page);
 
-    next_page = new QPushButton(QIcon(QPixmap(":/Assets/Icons/right_arrow.svg")), "");
+    next_page = new QPushButton(
+        QIcon(QPixmap(":/Assets/Icons/right_arrow.svg")),
+        ""
+    );
     next_page->setEnabled(false);
     hbox->addWidget(next_page);
 
@@ -43,23 +49,25 @@ ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
     connect(next_page, &QPushButton::clicked, this, &ResultsWidget::nextPage);
 }
 
-void ResultsWidget::showResults(Engine::Query query, Engine::ResultSet results) {
+void ResultsWidget::showResults(Query query, ResultSet results) {
     // Clears previous data
     while (!lookup.isEmpty()) {
         LookupWidget info = lookup.takeLast();
         delete info.getWidget();
-    } 
+    }
+    if(results.getTotal() == 0) {
+        results_total->setText("No results for \"" + QString::fromStdString(query.getName()) + "\".");
+    }
     previous_page->setEnabled(query.getOffset() > 0);
-    next_page->setEnabled(results.getItems().size() == query.getSize());
-    renderer->render(grid, results, &lookup);
+    next_page->setEnabled(results.getCards().size() == 9);
 
     // Connects signals
     for (auto cit = lookup.begin(); cit != lookup.end(); cit++) {
         if (cit->getAddButton()) {
-            connect(cit->getAddButton(), &QPushButton::clicked, std::bind(&addCard, this, cit->getCard()));
+            connect(cit->getAddButton(), &QPushButton::clicked, std::bind(&ResultsWidget::addCard, this, cit->getCard()));
         }
         if (cit->getRemoveButton()) {
-            connect(cit->getRemoveButton(), &QPushButton::clicked, std::bind(&removeCard, this, cit->getCard()));
+            connect(cit->getRemoveButton(), &QPushButton::clicked, std::bind(&ResultsWidget::removeCard, this, cit->getCard()));
         }
     }
 }

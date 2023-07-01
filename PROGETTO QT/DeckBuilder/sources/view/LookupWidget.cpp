@@ -1,6 +1,6 @@
 #include "LookupWidget.h"
 
-LookupWidget(
+LookupWidget::LookupWidget(
     const AbstractCard* card,
     QWidget* widget,
     QPushButton* add_button,

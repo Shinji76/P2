@@ -1,3 +1,6 @@
+#ifndef CLASS_SELECTION_WIDGET_H
+#define CLASS_SELECTION_WIDGET_H
+
 #include <QWidget>
 #include <QGridLayout>
 #include <QPushButton>
@@ -16,7 +19,7 @@ private:
 public:
     ClassSelectionWidget(QWidget *parent = nullptr);
 
-private slots:
+signals:
     void HunterButtonClick();
     void WarriorButtonClick();
     void ThiefButtonClick();
@@ -25,3 +28,4 @@ private slots:
 };
 
 
+#endif //CLASS_SELECTION_WIDGET_H
