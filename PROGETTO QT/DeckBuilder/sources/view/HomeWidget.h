@@ -1,7 +1,6 @@
 #ifndef HOME_WIDGET_H
 #define HOME_WIDGET_H
 
-#include "MainWindow.h"
 #include "ClassSelectionWidget.h"
 
 #include <QWidget>
@@ -10,21 +9,20 @@
 class HomeWidget : public QWidget {
 Q_OBJECT
 private:
-    MainWindow* mainWindow;
     QWidget* widget;
     QPushButton* createDeckButton;
     QPushButton* openDeckButton;
     ClassSelectionWidget* classSelectionWidget;
 
-public slots:
-    void createDeckHandler();
-
 public:
-    explicit HomeWidget(MainWindow *mainWindow, QWidget *parent = nullptr);
+    explicit HomeWidget(QWidget *parent = nullptr);
 
 signals:
     void CreateDeck();
     void OpenDeck();
+
+public slots:
+    void createDeckHandler();
 };
 
 #endif // HOME_WIDGET_H

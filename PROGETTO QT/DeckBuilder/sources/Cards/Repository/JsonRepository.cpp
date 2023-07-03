@@ -5,15 +5,15 @@
 #include <stdexcept>
 
 JsonRepository::JsonRepository(JsonFile data_mapper) : data_mapper(data_mapper) {
-    std::vector<AbstractCard*> cards(data_mapper.load());   //leggo tutte le carte puntate dal datamapper 
-    for(auto cit = cards.begin(); cit != cards.end(); cit++) {
+    Mazzo mazzo(data_mapper.load());   //leggo tutte le carte puntate dal datamapper 
+    for(auto cit = mazzo.getNumCopie().begin(); cit != mazzo.getNumCopie().end(); cit++) {
         repository[(*cit)->getID()] = *cit;
     }
 }
 
 JsonRepository::~JsonRepository() {
-    for(auto it = repository.begin(); it != repository.end(); it++) {
-        delete it->second;
+    for(auto it = repository.begin(); it != repository.end(); ++it) {
+        delete *it;
     }
 }
 
@@ -44,7 +44,7 @@ JsonRepository& JsonRepository::setPath(std::string set) {
 std::vector<AbstractCard*> JsonRepository::readAll() const {
     std::vector<AbstractCard*> cards;
     for(auto cit = repository.begin(); cit != repository.end(); cit++) {
-        cards.push_back(cit->second);
+        cards.push_back(*cit);
     }
     return cards;
 }

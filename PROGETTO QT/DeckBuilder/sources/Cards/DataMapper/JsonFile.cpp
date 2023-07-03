@@ -29,18 +29,13 @@ const Json& JsonFile::getConverter() const {
 
 // @todo modificare metodo per memorizzare classe del mazzo e counter
 JsonFile& JsonFile::store(const Mazzo mazzo) {
-    // aggiungere nomeMazzo
-    // salvare un vettore di int che salvi il numero di copie (ID è sottointeso)
-    // per la classe vedere reader.cpp (QJsonValue)
-    QJsonValue nome_mazzo = mazzo.getNomeMazzo();
-    QJsonValue counter = mazzo.getCounter();
-    QJsonValue classe = mazzo.getClasse().toInt();
-    // trasformare in int la classe
+    QJsonValue nome_mazzo(QString::fromStdString(mazzo.getNomeMazzo()));
+    QJsonValue counter(mazzo.getCounter());
+    QJsonValue classe(mazzo.getClasse());
 
 	QJsonArray json_cards;
-    for(auto cit = mazzo.getNumCopie().begin(); cit != mazzo.getNumCopie().end(); cit++) {
-        if()
-        json_cards.push_back(converter.fromObject(**cit));
+    for(auto cit = mazzo.getNumCopie().begin(); cit != mazzo.getNumCopie().end(); ++cit) {
+        json_cards.push_back(*cit);
 	}
 	QJsonDocument document(json_cards);
 	QFile json_file(path.c_str());
@@ -52,7 +47,7 @@ JsonFile& JsonFile::store(const Mazzo mazzo) {
 
 // @todo modificare metodo per caricare classe del mazzo e counter
 Mazzo JsonFile::load() {
-	FixedVector<AbstractCard*, 50> json_vector;
+	FixedVector<int, 50> json_vector;
 	QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);
 	QByteArray data = json_file.readAll();
@@ -62,7 +57,7 @@ Mazzo JsonFile::load() {
     std::string json_nome = document.object().value("Nome").toString().toStdString();
 
     AbstractCard::Classe json_classe;
-    switch (documert.object().value("Classe").toInt()) {
+    switch (document.object().value("Classe").toInt()) {
         case 0:
             json_classe = AbstractCard::Neutrale;
             break;
@@ -83,13 +78,13 @@ Mazzo JsonFile::load() {
             break;
     }
 
-    int json_counter = document.object().value("Counter").toInt();
+    unsigned int json_counter = document.object().value("Counter").toInt();
 	QJsonArray json_cards = document.array();
 
-	for(const QJsonValue& value : json_cards) {
-		QJsonObject json_object = value.toObject();
-		json_vector.push_back(converter.toObject(json_object));
+	for(int i = 0; i < json_cards.size(); ++i) {
+		QJsonValue json_value = json_cards.at(i);
+		json_vector.push_back(json_value.toInt());
 	}
-    Mazzo mazzo(json_nome, json_classe, json_vector, json_counter)
+    Mazzo mazzo(json_nome, json_classe, json_vector, json_counter);
 	return mazzo;
-}
+};

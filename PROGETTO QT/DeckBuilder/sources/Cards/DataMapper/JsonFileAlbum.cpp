@@ -22,7 +22,7 @@ const Json& JsonFileAlbum::getConverter() const {
 	return converter;
 }
 
-std::vector<AbstractCard*> JsonFileAlbum::loadAlbum() {
+std::vector<AbstractCard*> JsonFileAlbum::loadAlbum() const {
 	std::vector<AbstractCard*> album;
 	QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);

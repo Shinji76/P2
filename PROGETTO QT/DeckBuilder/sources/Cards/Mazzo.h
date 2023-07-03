@@ -10,7 +10,7 @@ private:
     std::string nome;
 	AbstractCard::Classe classe;
     FixedVector<int, 50> numCopie;
-	unsigned int counter;
+	int counter;
 
 public:
     Mazzo(std::string nome, AbstractCard::Classe classe, FixedVector<int, 50> numCopie, unsigned int counter);
@@ -20,7 +20,7 @@ public:
 	AbstractCard::Classe getClasse() const;
     void setClasse(AbstractCard::Classe set);
     FixedVector<int, 50> getNumCopie() const;
-    unsigned int getCounter() const;
+    int getCounter() const;
 
 	void addCard(const AbstractCard&);
 	void removeCard(const AbstractCard&);

@@ -46,6 +46,6 @@ FixedVector<int, 50> Mazzo::getNumCopie() const {
     return numCopie;
 }
 
-unsigned int Mazzo::getCounter() const {
+int Mazzo::getCounter() const {
     return counter;
 }

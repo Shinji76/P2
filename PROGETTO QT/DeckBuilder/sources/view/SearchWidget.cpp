@@ -52,7 +52,7 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
     sorting_type->addItem("1-10");
     sorting_type->addItem("10-1");
 
-    sorting_type->setCurrenteText("A-Z");
+    sorting_type->setCurrentText("A-Z");
     form->addRow("Ordina per:", sorting_type);
     
     page_input = new QSpinBox();
@@ -74,9 +74,9 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
 void SearchWidget::search() {
     Query query(
         name_filter->text().toStdString(),
-        mana_filter->value(),
-        type_filter->text().toStdString(),           //può essere sbagliato rispetto alle enum
-        sorting_type->value(),
+        mana_filter->currentText().toInt(),
+        type_filter->currentText().toStdString(),           //può essere sbagliato rispetto alle enum
+        sorting_type->currentText().toInt(),
         (page_input->value() - 1) * 9
     );
     emit search_event(query);

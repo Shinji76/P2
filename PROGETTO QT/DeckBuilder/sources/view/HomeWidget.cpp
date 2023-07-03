@@ -1,8 +1,8 @@
 #include "HomeWidget.h"
 #include <QHBoxLayout>
 
-HomeWidget::HomeWidget(MainWindow* mainWindow, QWidget *parent)
-    : mainWindow(mainWindow), QWidget(parent)
+HomeWidget::HomeWidget(QWidget *parent)
+    : QWidget(parent)   
 {
     QHBoxLayout *hbox = new QHBoxLayout(this);    //decidere se cambiare in Verticale
     hbox->setAlignment(Qt::AlignLeft | Qt::AlignTop);
@@ -20,7 +20,7 @@ HomeWidget::HomeWidget(MainWindow* mainWindow, QWidget *parent)
     hbox->addWidget(openDeckButton);
 
     connect(createDeckButton, &QPushButton::clicked, this, &HomeWidget::createDeckHandler);
-    connect(openDeckButton, &QPushButton::clicked, mainWindow, OpenDeck);
+    //connect(openDeckButton, &QPushButton::clicked, this, );
 }
 
 void HomeWidget::createDeckHandler() {

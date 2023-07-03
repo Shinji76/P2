@@ -24,9 +24,24 @@ public:
 
         T& operator*();
         Iterator& operator++();
-        bool operator!=(const Iterator& other) const;
+        Iterator operator++(int);
+        bool operator!=(const Iterator& compare) const;
     };
 
+    class constIterator {
+    private:
+        const T* ptr;
+    public:
+        constIterator(const T* ptr) : ptr(ptr) {}
+
+        const T& operator*();
+        constIterator& operator++();	
+		constIterator operator++(int);
+        bool operator!=(const constIterator& compare) const;
+    };
+
+    constIterator begin() const;
+    constIterator end() const;
     Iterator begin();
     Iterator end();
 };
@@ -68,8 +83,19 @@ typename FixedVector<T,N>::Iterator& FixedVector<T,N>::Iterator::operator++() {
 }
 
 template<class T, int N>
-bool FixedVector<T,N>::Iterator::operator!=(const FixedVector<T,N>::Iterator& other) const {
-    return ptr != other.ptr;
+typename FixedVector<T,N>::Iterator FixedVector<T,N>::Iterator::operator++(int) {
+    ptr++;
+    return *this;
+}
+
+template<class T, int N>
+bool FixedVector<T,N>::Iterator::operator!=(const FixedVector<T,N>::Iterator& compare) const {
+    return ptr != compare.ptr;
+}
+
+template<class T, int N>
+bool FixedVector<T,N>::constIterator::operator!=(const FixedVector<T,N>::constIterator& compare) const {
+    return ptr != compare.ptr;
 }
 
 template<class T, int N>
@@ -80,6 +106,34 @@ typename FixedVector<T,N>::Iterator FixedVector<T,N>::begin() {
 template<class T, int N>
 typename FixedVector<T,N>::Iterator FixedVector<T,N>::end() {
     return Iterator(data + size);
+}
+
+
+template<class T, int N>
+const T& FixedVector<T,N>::constIterator::operator*() {
+    return *ptr;
+}
+
+template<class T, int N>
+typename FixedVector<T,N>::constIterator& FixedVector<T,N>::constIterator::operator++() {
+    ptr++;
+    return *this;
+}
+
+template<class T, int N>
+typename FixedVector<T,N>::constIterator FixedVector<T,N>::constIterator::operator++(int) {
+    ptr++;
+    return *this;
+}
+
+template<class T, int N>
+typename FixedVector<T,N>::constIterator FixedVector<T,N>::begin() const {
+    return constIterator(data);
+}
+
+template<class T, int N>
+typename FixedVector<T,N>::constIterator FixedVector<T,N>::end() const {
+    return constIterator(data + size);
 }
 
 #endif //F_VECTOR_H
