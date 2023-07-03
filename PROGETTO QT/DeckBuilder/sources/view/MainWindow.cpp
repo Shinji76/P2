@@ -104,11 +104,11 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     connect(class_selection_widget, &ClassSelectionWidget::SorcererButtonClick, this, &MainWindow::newDeck);
 }
 
-JsonRepository* MainWindow::getRepository() {
+JsonFile* MainWindow::getRepository() {
     return repository;
 }
 
-JsonAlbumRepository* MainWindow::getAlbumRepository() {
+JsonFileAlbum* MainWindow::getAlbumRepository() {
     return album_repository;
 }
 
@@ -149,13 +149,15 @@ void MainWindow::newDeck() {
         return;
     }
     if (repository != nullptr) {
-        delete repository;      //se ho degli elementi nel repository ma voglio annullare il salvataggio cancello il repository
+        delete repository;      //se ho degli elementi nel repository cancello il repository
     }
     Reader reader;
     Json converter(reader);
     JsonFile data_mapper(path.toStdString(), converter);
-    repository = new JsonRepository(data_mapper);
-    
+    repository = new JsonFile(data_mapper);
+
+    // apertura album filtrato
+
     engine.clear();
 }
 
@@ -175,7 +177,7 @@ void MainWindow::openDeck() {
     Reader reader;
     Json converter(reader);
     JsonFile data_mapper(path.toStdString(), converter);
-    repository = new JsonRepository(data_mapper);
+    repository = new JsonFile(data_mapper);
     reloadData();
 }
 

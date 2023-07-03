@@ -8,12 +8,14 @@ private:
     T data[N];
     int size;
 public:
-    FixedVector() : size(N) {}
-
+    FixedVector();
+    ~FixedVector();
+    
     int getSize() const;
     int capacity() const;
     T& operator[](int index);
     void push_back(const T& value);
+    T& operator=(const T& copy);
 
     class Iterator {
     private:
@@ -47,6 +49,23 @@ public:
 };
 
 template<class T, int N>
+FixedVector<T,N>::FixedVector() : size(N) {
+    for(int i = 0; i < N; ++i) {
+        data[i] = 0;
+    }
+}
+
+template<class T, int N>
+FixedVector<T,N>::~FixedVector() {
+    if (data) {
+        for (int i = 0; i < size; i++) {
+            data[i].~T(); 
+        }
+        delete(data);
+    }
+}
+
+template<class T, int N>
 int FixedVector<T,N>::getSize() const {
     return size;
 }
@@ -55,7 +74,6 @@ template<class T, int N>
 int FixedVector<T,N>::capacity() const {
     return N;
 }
-
 
 template<class T, int N>
 T& FixedVector<T,N>::operator[](int index) {
@@ -68,6 +86,13 @@ void FixedVector<T,N>::push_back(const T& value) {
         data[size++] = value;
     } else {
         //qualche errore
+    }
+}
+
+template<class T, int N>
+T& FixedVector<T,N>::operator=(const T& copy) {
+    for(int i = 0; i < size; i++) {
+        data[i] = copy[i];
     }
 }
 

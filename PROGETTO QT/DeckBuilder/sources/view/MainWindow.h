@@ -1,8 +1,8 @@
 #ifndef VIEW_MAIN_WINDOW_H
 #define VIEW_MAIN_WINDOW_H
 
-#include "../Cards/Repository/JsonRepository.h"
-#include "../Cards/Repository/JsonAlbumRepository.h"
+#include "../Cards/DataMapper/JsonFile.h"
+#include "../Cards/DataMapper/JsonFileAlbum.h"
 #include "../Engine/Query.h"
 #include "../Engine/Memory.h"
 #include "HomeWidget.h"
@@ -20,8 +20,8 @@ private:
     bool has_unsaved_changes;
     QAction* create_deck;
     Memory engine;
-    JsonRepository* repository;
-    JsonAlbumRepository* album_repository;
+    JsonFile* repository;
+    JsonFileAlbum* album_repository;
     SearchWidget* search_widget;
     RecapWidget* recap_widget;
     QStackedWidget* stacked_widget;
@@ -32,8 +32,8 @@ private:
 
 public:
     explicit MainWindow(Memory& engine, QWidget *parent = 0);
-    JsonRepository* getRepository();
-    JsonAlbumRepository* getAlbumRepository();
+    JsonFile* getRepository();
+    JsonFileAlbum* getAlbumRepository();
     Memory& getEngine();
     MainWindow& reloadData();
     SearchWidget* getSearchWidget();

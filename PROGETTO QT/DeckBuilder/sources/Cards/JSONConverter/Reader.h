@@ -8,7 +8,6 @@
 
 class Reader: public IReader {
 private:
-    AbstractCard::Classe classe;
     std::map<unsigned int, AbstractCard*> cache;
 	
     AbstractCard* readMostro(const QJsonObject& object) const;
