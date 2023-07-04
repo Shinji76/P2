@@ -3,43 +3,44 @@
 ClassSelectionWidget::ClassSelectionWidget(QWidget *parent) : QWidget(parent) {
 	gridLayout = new QGridLayout(this);
 
-	hunterButton = new QPushButton("Cacciatore", this);
-	connect(hunterButton, &QPushButton::clicked, this, &ClassSelectionWidget::HunterButtonClick);
-	gridLayout->addWidget(hunterButton, 0, 0);
+	hunter_button = new QPushButton("Cacciatore", this);
+	gridLayout->addWidget(hunter_button, 0, 0);
 
-	warriorButton = new QPushButton("Guerriero", this);
-	connect(warriorButton, &QPushButton::clicked, this, &ClassSelectionWidget::WarriorButtonClick);
-	gridLayout->addWidget(warriorButton, 0, 1);
+	warrior_button = new QPushButton("Guerriero", this);
+	gridLayout->addWidget(warrior_button, 0, 1);
 
-	thiefButton = new QPushButton("Ladro", this);
-	connect(thiefButton, &QPushButton::clicked, this, &ClassSelectionWidget::ThiefButtonClick);
-	gridLayout->addWidget(thiefButton, 0, 2);
+	thief_button = new QPushButton("Ladro", this);
+	gridLayout->addWidget(thief_button, 0, 2);
 
-	mageButton = new QPushButton("Mago", this);
-	connect(mageButton, &QPushButton::clicked, this, &ClassSelectionWidget::MageButtonClick);
-	gridLayout->addWidget(mageButton, 1, 0);
+	mage_button = new QPushButton("Mago", this);
+	gridLayout->addWidget(mage_button, 1, 0);
 
-	sorcererButton = new QPushButton("Stregone", this);
-	connect(sorcererButton, &QPushButton::clicked, this, &ClassSelectionWidget::SorcererButtonClick);
-	gridLayout->addWidget(sorcererButton, 1, 1);
+	sorcerer_button = new QPushButton("Stregone", this);
+	gridLayout->addWidget(sorcerer_button, 1, 1);
+
+	connect(hunter_button, &QPushButton::clicked, this, &ClassSelectionWidget::setHunter);
+	connect(warrior_button, &QPushButton::clicked, this, &ClassSelectionWidget::SetWarrior);
+	connect(thief_button, &QPushButton::clicked, this, &ClassSelectionWidget::SetThief);
+	connect(mage_button, &QPushButton::clicked, this, &ClassSelectionWidget::SetMage);
+	connect(sorcerer_button, &QPushButton::clicked, this, &ClassSelectionWidget::SetSorcerer);
 }
 
-void ClassSelectionWidget::HunterButtonClick(){
-
+void ClassSelectionWidget::SetHunter() {
+    classe = AbstractCard::Classe::Cacciatore;
 }
 
-void ClassSelectionWidget::WarriorButtonClick(){
-
+void ClassSelectionWidget::SetWarrior() {
+    classe = AbstractCard::Classe::Guerriero;
 }
 
-void ClassSelectionWidget::ThiefButtonClick(){
-
+void ClassSelectionWidget::SetThief() {
+    classe = AbstractCard::Classe::Ladro;
 }
 
-void ClassSelectionWidget::MageButtonClick(){
-	// In questa funzione, puoi chiamare il metodo setter e la ricerca scritti in una classe esterna.
+void ClassSelectionWidget::SetMage() {
+    classe = AbstractCard::Classe::Mago;
 }
 
-void ClassSelectionWidget::SorcererButtonClick(){
-    
+void ClassSelectionWidget::SetSorcerer() {
+    classe = AbstractCard::Classe::Stregone;
 }

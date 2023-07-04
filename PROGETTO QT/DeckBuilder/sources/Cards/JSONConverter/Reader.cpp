@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <QJsonArray>
 
-const std::map<unsigned int, AbstractCard*>& Reader::getCache() const {
+const FixedVector<AbstractCard*>& Reader::getCache() const {
     return cache;
 }
 
@@ -15,7 +15,7 @@ Reader& Reader::clear() {
     return *this;
 }
 
-AbstractCard* Reader::read(const QJsonObject& object) {
+AbstractCard* Reader::read(const QJsonObject& object) override {
     QJsonValue type = object.value("Type");
     //if (type.isUndefined()) {
     //    Service::Logger::Singleton::get().error("Missing item type.");

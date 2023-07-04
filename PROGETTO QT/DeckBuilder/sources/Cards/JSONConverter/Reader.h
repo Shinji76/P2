@@ -8,15 +8,15 @@
 
 class Reader: public IReader {
 private:
-    std::map<unsigned int, AbstractCard*> cache;
+    FixedVector<AbstractCard*, 50> cache;
 	
     AbstractCard* readMostro(const QJsonObject& object) const;
 	AbstractCard* readMagia(const QJsonObject& object) const;
 	AbstractCard* readSegreto(const QJsonObject& object) const;
 
 public:
-	const std::map<unsigned int, AbstractCard*>& getCache() const;
-	virtual AbstractCard* read(const QJsonObject& object);
+	const FixedVector<AbstractCard*>& getCache() const;
+	AbstractCard* read(const QJsonObject& object) override;
 	Reader& clear();
 };
 
