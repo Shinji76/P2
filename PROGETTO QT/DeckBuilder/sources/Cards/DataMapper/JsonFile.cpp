@@ -5,6 +5,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 
+//aggiugere mazzo a costruttore
 JsonFile::JsonFile(const std::string& path, Json& converter) : path(path), converter(converter) {}
 
 JsonFile JsonFile::fromPath(const std::string& path) {
@@ -18,8 +19,8 @@ const std::string& JsonFile::getPath() const {
 	return path;
 }
 
-JsonFile& JsonFile::setPath(const std::string& path) {
-	this->path = path;
+JsonFile& JsonFile::setPath(const std::string& new_path) {
+	path = new_path;
 	return *this;
 }
 

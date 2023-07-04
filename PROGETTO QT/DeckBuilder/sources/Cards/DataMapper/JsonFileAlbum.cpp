@@ -5,11 +5,11 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 
-JsonFileAlbum::JsonFileAlbum(const std::string& path, Json& converter) : path(path), converter(converter), album() {}
+JsonFileAlbum::JsonFileAlbum(const std::string& path, JsonAlbum& converter) : path(path), converter(converter), album() {}
 
 JsonFileAlbum JsonFileAlbum::fromPath(const std::string& path) {
 	Reader reader;
-	Json converter(reader);
+	JsonAlbum converter(reader);
     JsonFileAlbum data_mapper(path, converter);
 	return data_mapper;
 }
@@ -18,7 +18,7 @@ const std::string& JsonFileAlbum::getPath() const {
 	return path;
 }
 
-const Json& JsonFileAlbum::getConverter() const {
+const JsonAlbum& JsonFileAlbum::getConverter() const {
 	return converter;
 }
 
@@ -38,7 +38,7 @@ std::vector<AbstractCard*> JsonFileAlbum::loadAlbum() const {
 	return album;
 }
 
-FixedVector<AbstractCard*, 50> JsonFileAlbum::readClass(AbstractCard::Classe classe) const {
+FixedVector<AbstractCard*, 50> JsonFileAlbum::loadClass(AbstractCard::Classe classe) const {
     FixedVector<AbstractCard*, 50> cards;
     QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);

@@ -22,7 +22,7 @@ public:
 	const std::string& getPath() const;    
 	const Json& getConverter() const;
     std::vector<AbstractCard*> loadAlbum() const;
-    FixedVector<AbstractCard*, 50> readClass(AbstractCard::Classe classe) const;
+    FixedVector<AbstractCard*, 50> loadClass(AbstractCard::Classe classe) const;
 };
 
 #endif  //JSON_FILE_ALBUM_H
