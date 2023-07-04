@@ -1,5 +1,5 @@
-#ifndef JSON_H
-#define JSON_H
+#ifndef JSON_ALBUM_H
+#define JSON_ALBUM_H
 
 #include "IReader.h"
 #include "../AbstractCard.h"
@@ -7,15 +7,15 @@
 
 #include <QJsonObject>
 
-class Json {
+class JsonAlbum {
 private:
 	IReader& reader;
     
 public: 
-	Json(IReader& reader);
+	JsonAlbum(IReader& reader);
 	const IReader& getReader() const;
 	QJsonObject fromObject(const AbstractCard& card) const;
 	AbstractCard* toObject(const QJsonObject& json) const;
 };
 
-#endif //JSON_H
+#endif //JSON_ALBUM_H
