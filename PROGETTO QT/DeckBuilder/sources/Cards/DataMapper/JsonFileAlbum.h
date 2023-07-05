@@ -3,7 +3,7 @@
 
 #include "../AbstractCard.h"
 #include "../Mazzo.h"
-#include "../JSONConverter/Json.h"
+#include "../JSONConverter/JsonAlbum.h"
 #include "../JSONConverter/Reader.h"
 #include "../../Vector_template.h"
 
@@ -12,16 +12,16 @@
 class JsonFileAlbum {
 private:
 	std::string path;
-	Json& converter;
+	JsonAlbum& converter;
     FixedVector<AbstractCard*, 50> album;
 
 public:
-    JsonFileAlbum(const std::string& path, Json& Jconverter);
+    JsonFileAlbum(const std::string& path, JsonAlbum& Jconverter);
     
 	static JsonFileAlbum fromPath(const std::string& path);
 	const std::string& getPath() const;    
-	const Json& getConverter() const;
-    std::vector<AbstractCard*> loadAlbum() const;
+	const JsonAlbum& getConverter() const;
+    FixedVector<AbstractCard*,50> loadAlbum() const;
     FixedVector<AbstractCard*, 50> loadClass(AbstractCard::Classe classe) const;
 };
 

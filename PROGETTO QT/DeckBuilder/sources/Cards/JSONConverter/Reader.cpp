@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <QJsonArray>
 
-const FixedVector<AbstractCard*>& Reader::getCache() const {
+const FixedVector<AbstractCard*, 50>& Reader::getCache() const {
     return cache;
 }
 
@@ -17,16 +17,12 @@ Reader& Reader::clear() {
 
 AbstractCard* Reader::read(const QJsonObject& object) override {
     QJsonValue type = object.value("Type");
-    //if (type.isUndefined()) {
-    //    Service::Logger::Singleton::get().error("Missing item type.");
-    //    throw std::invalid_argument("Missing item type.");
-    //}
+    if (type.isUndefined()) {
+        throw std::invalid_argument("Missing item type.");
+    }
 
     const unsigned int identifier = object.value("ID").toInt();
-    if (cache.count(identifier) > 0) {
-        return cache[identifier];
-    }
-    else if (type.toString().compare("Mostro") == 0) {
+    if (type.toString().compare("Mostro") == 0) {
         cache[identifier] = readMostro(object);
     }
     else if (type.toString().compare("Magia") == 0) {

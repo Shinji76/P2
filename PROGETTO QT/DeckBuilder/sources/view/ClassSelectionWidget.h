@@ -23,18 +23,14 @@ public:
     ClassSelectionWidget(QWidget *parent = nullptr);
 
 signals:
-    void HunterButtonClick();
-    void WarriorButtonClick();
-    void ThiefButtonClick();
-    void MageButtonClick();
-    void SorcererButtonClick();
+    void classEmitter(AbstractCard::Classe classe);
 
 public slots:
-    void SetHunter();
-    void SetWarrior();
-    void SetThief();
-    void SetMage();
-    void SetSorcerer();
+    void HunterClick();
+    void WarriorClick();
+    void ThiefClick();
+    void MageClick();
+    void SorcererClick();
 
 };
 

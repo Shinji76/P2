@@ -6,12 +6,13 @@
 
 class Album {
 private:
-    FixedVector<AbstractCard*, 50> cards;
-	const unsigned int ASize = cards.getSize();
+    FixedVector<AbstractCard*, 50> album;
 public:
-	unsigned int getASize() const;
     Album();
+    Album(FixedVector<AbstractCard*, 50>);
     ~Album();
+
+    const AbstractCard* getCardFromID(int ID) const;
 };
 
 #endif //ALBUM_H

@@ -5,7 +5,8 @@
 TEMPLATE = app
 TARGET = sources
 INCLUDEPATH += .
-QT += widgets
+QT += widgets core gui charts
+
 
 # Input
 HEADERS += \
@@ -35,8 +36,7 @@ HEADERS += \
     Cards/DataMapper/JsonFile.h \
     Cards/DataMapper/JsonFileAlbum.h \
     Cards/JSONConverter/IReader.h \
-    Cards/JSONConverter/Json.h \
-    Cards/JSONConverter/JsonVisitor.h \
+    Cards/JSONConverter/JsonAlbum.h \
     Cards/JSONConverter/Reader.h \
     \
     view/CardLayout/Box.h \
@@ -71,8 +71,7 @@ SOURCES += \
     Cards/DataMapper/JsonFile.cpp \
     Cards/DataMapper/JsonFileAlbum.cpp \
     \
-    Cards/JSONConverter/Json.cpp \
-    Cards/JSONConverter/JsonVisitor.cpp \
+    Cards/JSONConverter/JsonAlbum.cpp \
     Cards/JSONConverter/Reader.cpp \
     \
     view/CardLayout/Box.cpp \

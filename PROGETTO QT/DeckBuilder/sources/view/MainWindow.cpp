@@ -14,9 +14,10 @@
 #include <QStackedWidget>
 #include <QScrollArea>
 
+#include "../Cards/Album.h"
 #include "../Cards/DataMapper/JsonFile.h"
 #include "../Cards/JSONConverter/Reader.h"
-#include "../Cards/JSONConverter/Json.h"
+#include "../Cards/JSONConverter/JsonAlbum.h"
 
 //Sistemare IEngine&
 MainWindow::MainWindow(Memory& engine, QWidget *parent)
@@ -97,11 +98,7 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     connect(results_widget, &ResultsWidget::nextPage, search_widget, &SearchWidget::nextPage);
     //connect(results_widget, &ResultsWidget::addCard, this, &RecapWidget::addCard);          //controllare se collegamento addCard e recapWidget funziona
     //connect(results_widget, &ResultsWidget::removeCard, this, &RecapWidget::removeCard);
-    connect(class_selection_widget, &ClassSelectionWidget::HunterButtonClick, this, &MainWindow::newDeck);
-    connect(class_selection_widget, &ClassSelectionWidget::WarriorButtonClick, this, &MainWindow::newDeck);
-    connect(class_selection_widget, &ClassSelectionWidget::ThiefButtonClick, this, &MainWindow::newDeck);
-    connect(class_selection_widget, &ClassSelectionWidget::MageButtonClick, this, &MainWindow::newDeck);
-    connect(class_selection_widget, &ClassSelectionWidget::SorcererButtonClick, this, &MainWindow::newDeck);
+    connect(class_selection_widget, SIGNAL(classEmitter(AbstractCard::Classe)), this, SLOT(&MainWindow::setClass(AbstractCard::Classe)));
 }
 
 JsonFile* MainWindow::getRepository() {
@@ -120,15 +117,6 @@ SearchWidget* MainWindow::getSearchWidget() {
     return search_widget;
 }
 
-MainWindow& MainWindow::reloadData() {
-    engine.clear();
-    std::vector<AbstractCard*> cards(album_repository->readAll());
-    for (auto cit = cards.begin(); cit != cards.end(); cit++) {
-        engine.add(*cit);
-    }
-    return *this;
-}
-
 void MainWindow::clearStack() {
     QWidget* widget = stacked_widget->widget(1);
     while (widget) {
@@ -136,6 +124,10 @@ void MainWindow::clearStack() {
         delete widget;
         widget = stacked_widget->widget(1);
     }
+}
+
+void MainWindow::setClass(AbstractCard::Classe classe) {
+    classe = classe;
 }
 
 void MainWindow::newDeck() {
@@ -151,13 +143,17 @@ void MainWindow::newDeck() {
     if (repository != nullptr) {
         delete repository;      //se ho degli elementi nel repository cancello il repository
     }
-    Reader reader;
-    Json converter(reader);
-    JsonFile data_mapper(path.toStdString(), converter);
-    repository = new JsonFile(data_mapper);
-
+    //creazione del mazzo
+    JsonFile data_mapper(path.toStdString());
+    
     // apertura album filtrato
+    Reader reader_album;
+    JsonAlbum converter_album(reader_album);
+    JsonFileAlbum album(path.toStdString(), converter_album);
 
+    AbstractCard::Classe classe;
+    setClass(classe);
+    album.loadClass(classe); //restituito da classSelection
     engine.clear();
 }
 
@@ -174,18 +170,24 @@ void MainWindow::openDeck() {
     if (repository != nullptr) {
         delete repository;
     }
-    Reader reader;
-    Json converter(reader);
-    JsonFile data_mapper(path.toStdString(), converter);
-    repository = new JsonFile(data_mapper);
-    reloadData();
+    engine.clear();
+    //apertura mazzo
+    JsonFile data_mapper(path.toStdString());
+    Mazzo mazzo = data_mapper.load();
+
+    //apertura album filtrato
+
+    Reader reader_album;
+    JsonAlbum converter_album(reader_album);
+    JsonFileAlbum json_album(path.toStdString(), converter_album);
+    Album* album = new Album(json_album.loadClass(mazzo.getClasse()));
 }
 
 void MainWindow::saveDeck() {
     if (repository == nullptr) {
         return;
     }
-    repository->store();
+    repository->store();    //passare mazzo 
     has_unsaved_changes = false;
 }
 
@@ -199,7 +201,7 @@ void MainWindow::saveDeckAs() {
     if (path.isEmpty() || repository == nullptr) {
         return;
     }
-    repository->setPath(path.toStdString()).store();
+    repository->setPath(path.toStdString()).store();    //mazzo
     has_unsaved_changes = false;
 }
 

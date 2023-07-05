@@ -5,6 +5,7 @@
 #include "../Cards/DataMapper/JsonFileAlbum.h"
 #include "../Engine/Query.h"
 #include "../Engine/Memory.h"
+
 #include "HomeWidget.h"
 #include "ClassSelectionWidget.h"
 #include "SearchWidget.h"
@@ -35,10 +36,10 @@ public:
     JsonFile* getRepository();
     JsonFileAlbum* getAlbumRepository();
     Memory& getEngine();
-    MainWindow& reloadData();
     SearchWidget* getSearchWidget();
 
 public slots:
+    void setClass(AbstractCard::Classe classe);
     void newDeck();
     void openDeck();
     void saveDeck();

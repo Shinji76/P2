@@ -17,30 +17,29 @@ ClassSelectionWidget::ClassSelectionWidget(QWidget *parent) : QWidget(parent) {
 
 	sorcerer_button = new QPushButton("Stregone", this);
 	gridLayout->addWidget(sorcerer_button, 1, 1);
-
-	connect(hunter_button, &QPushButton::clicked, this, &ClassSelectionWidget::setHunter);
-	connect(warrior_button, &QPushButton::clicked, this, &ClassSelectionWidget::SetWarrior);
-	connect(thief_button, &QPushButton::clicked, this, &ClassSelectionWidget::SetThief);
-	connect(mage_button, &QPushButton::clicked, this, &ClassSelectionWidget::SetMage);
-	connect(sorcerer_button, &QPushButton::clicked, this, &ClassSelectionWidget::SetSorcerer);
 }
 
-void ClassSelectionWidget::SetHunter() {
+void ClassSelectionWidget::HunterClick() {
     classe = AbstractCard::Classe::Cacciatore;
+    emit classEmitter(classe);
 }
 
-void ClassSelectionWidget::SetWarrior() {
+void ClassSelectionWidget::WarriorClick() {
     classe = AbstractCard::Classe::Guerriero;
+    emit classEmitter(classe);
 }
 
-void ClassSelectionWidget::SetThief() {
+void ClassSelectionWidget::ThiefClick() {
     classe = AbstractCard::Classe::Ladro;
+    emit classEmitter(classe);
 }
 
-void ClassSelectionWidget::SetMage() {
+void ClassSelectionWidget::MageClick() {
     classe = AbstractCard::Classe::Mago;
+    emit classEmitter(classe);
 }
 
-void ClassSelectionWidget::SetSorcerer() {
+void ClassSelectionWidget::SorcererClick() {
     classe = AbstractCard::Classe::Stregone;
+    emit classEmitter(classe);
 }

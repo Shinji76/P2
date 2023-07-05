@@ -3,7 +3,6 @@
 
 #include "IReader.h"
 #include "../AbstractCard.h"
-#include "JsonVisitor.h"
 
 #include <QJsonObject>
 
@@ -14,7 +13,6 @@ private:
 public: 
 	JsonAlbum(IReader& reader);
 	const IReader& getReader() const;
-	QJsonObject fromObject(const AbstractCard& card) const;
 	AbstractCard* toObject(const QJsonObject& json) const;
 };
 

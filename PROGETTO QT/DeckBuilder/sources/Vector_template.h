@@ -14,6 +14,7 @@ public:
     int getSize() const;
     int capacity() const;
     T& operator[](int index);
+    const T& operator[](int index) const;
     void push_back(const T& value);
     T& operator=(const T& copy);
 
@@ -77,6 +78,11 @@ int FixedVector<T,N>::capacity() const {
 
 template<class T, int N>
 T& FixedVector<T,N>::operator[](int index) {
+    return data[index];
+}
+
+template<class T, int N>
+const T& FixedVector<T,N>::operator[](int index) const {
     return data[index];
 }
 

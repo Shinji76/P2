@@ -2,9 +2,9 @@
 #define JSON_CONVERTER_READER_H
 
 #include "IReader.h"
+#include "../../Vector_template.h"
 
 #include <QJsonObject>
-#include <map>
 
 class Reader: public IReader {
 private:
@@ -15,7 +15,7 @@ private:
 	AbstractCard* readSegreto(const QJsonObject& object) const;
 
 public:
-	const FixedVector<AbstractCard*>& getCache() const;
+	const FixedVector<AbstractCard*, 50>& getCache() const;
 	AbstractCard* read(const QJsonObject& object) override;
 	Reader& clear();
 };

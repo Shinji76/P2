@@ -22,8 +22,8 @@ const JsonAlbum& JsonFileAlbum::getConverter() const {
 	return converter;
 }
 
-std::vector<AbstractCard*> JsonFileAlbum::loadAlbum() const {
-	std::vector<AbstractCard*> album;
+FixedVector<AbstractCard*, 50> JsonFileAlbum::loadAlbum() const {
+	FixedVector<AbstractCard*, 50> album;
 	QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);
 	QByteArray data = json_file.readAll();
