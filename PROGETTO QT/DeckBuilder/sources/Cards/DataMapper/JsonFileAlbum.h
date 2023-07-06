@@ -6,6 +6,7 @@
 #include "../JSONConverter/JsonAlbum.h"
 #include "../JSONConverter/Reader.h"
 #include "../../Vector_template.h"
+#include "../Album.h"
 
 #include <string>
 
@@ -21,8 +22,8 @@ public:
 	static JsonFileAlbum& fromPath(const std::string& path);
 	const std::string& getPath() const;    
 	const JsonAlbum& getConverter() const;
-    FixedVector<AbstractCard*,50> loadAlbum() const;
-    FixedVector<AbstractCard*, 50> loadClass(AbstractCard::Classe classe) const;
+    const Album& loadAlbum() const;
+    const Album& loadClass(AbstractCard::Classe classe) const;
 };
 
 #endif  //JSON_FILE_ALBUM_H
