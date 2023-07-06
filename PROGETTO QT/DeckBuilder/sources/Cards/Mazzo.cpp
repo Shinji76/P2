@@ -4,8 +4,10 @@ Mazzo::Mazzo(
     std::string nome,
     AbstractCard::Classe classe,
     FixedVector<int, 50> numCopie,
-    unsigned int count = 0
+    unsigned int count
     ) : nome(nome), classe(classe), numCopie(numCopie), counter(count) {}
+
+Mazzo::Mazzo() {}
 
 void Mazzo::addCard(const AbstractCard& card) {
     if(counter < 20 && (classe == card.getClasse() || card.getClasse() == 0) ) {
