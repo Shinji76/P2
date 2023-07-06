@@ -12,6 +12,7 @@ public:
     Album(FixedVector<AbstractCard*, 50>);
     ~Album();
 
+    FixedVector<AbstractCard*, 50> getAlbum();
     const AbstractCard* getCardFromID(int ID) const;
 };
 
