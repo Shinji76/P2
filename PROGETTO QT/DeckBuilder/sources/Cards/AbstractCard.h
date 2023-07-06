@@ -48,4 +48,4 @@ public:
     virtual std::string getPath() const;
 };
 
-#endif // CARD_H
+#endif // ABSTRACT_CARD_H
