@@ -18,7 +18,7 @@ public:
 	JsonFile& setPath(const std::string& path);
     
     JsonFile& store(const Mazzo mazzo);
-    Mazzo load();
+    Mazzo& load();
 };
 
 #endif  //JSON_FILE_H

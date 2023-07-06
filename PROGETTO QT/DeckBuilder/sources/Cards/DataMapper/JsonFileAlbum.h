@@ -18,7 +18,7 @@ private:
 public:
     JsonFileAlbum(const std::string& path, JsonAlbum& Jconverter);
     
-	static JsonFileAlbum fromPath(const std::string& path);
+	static JsonFileAlbum& fromPath(const std::string& path);
 	const std::string& getPath() const;    
 	const JsonAlbum& getConverter() const;
     FixedVector<AbstractCard*,50> loadAlbum() const;

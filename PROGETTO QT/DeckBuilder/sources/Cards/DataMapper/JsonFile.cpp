@@ -5,8 +5,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 
-//aggiugere mazzo a costruttore
-JsonFile::JsonFile(const std::string& path) : path(path) {}
+JsonFile::JsonFile(const std::string& path) : path(path), mazzo() {}
 
 const std::string& JsonFile::getPath() const {
 	return path;
@@ -17,7 +16,6 @@ JsonFile& JsonFile::setPath(const std::string& new_path) {
 	return *this;
 }
 
-// @todo modificare metodo per memorizzare classe del mazzo e counter
 JsonFile& JsonFile::store(const Mazzo mazzo) {
     QJsonValue nome_mazzo(QString::fromStdString(mazzo.getNomeMazzo()));
     QJsonValue counter(mazzo.getCounter());
@@ -35,8 +33,7 @@ JsonFile& JsonFile::store(const Mazzo mazzo) {
 	return *this;
 }
 
-// @todo modificare metodo per caricare classe del mazzo e counter
-Mazzo JsonFile::load() {
+Mazzo& JsonFile::load() {
 	FixedVector<int, 50> json_vector;
 	QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);
@@ -75,6 +72,6 @@ Mazzo JsonFile::load() {
 		QJsonValue json_value = json_cards.at(i);
 		json_vector.push_back(json_value.toInt());
 	}
-    Mazzo mazzo(json_nome, json_classe, json_vector, json_counter);
-	return mazzo;
+    Mazzo* mazzo = new Mazzo(json_nome, json_classe, json_vector, json_counter);
+	return *mazzo;
 };

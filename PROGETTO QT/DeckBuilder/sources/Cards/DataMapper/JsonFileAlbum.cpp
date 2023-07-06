@@ -7,11 +7,11 @@
 
 JsonFileAlbum::JsonFileAlbum(const std::string& path, JsonAlbum& converter) : path(path), converter(converter), album() {}
 
-JsonFileAlbum JsonFileAlbum::fromPath(const std::string& path) {
+JsonFileAlbum& JsonFileAlbum::fromPath(const std::string& path) {
 	Reader reader;
 	JsonAlbum converter(reader);
-    JsonFileAlbum data_mapper(path, converter);
-	return data_mapper;
+    JsonFileAlbum* data_mapper = new JsonFileAlbum(path, converter);
+	return *data_mapper;
 }
 
 const std::string& JsonFileAlbum::getPath() const {
@@ -22,8 +22,8 @@ const JsonAlbum& JsonFileAlbum::getConverter() const {
 	return converter;
 }
 
-FixedVector<AbstractCard*, 50> JsonFileAlbum::loadAlbum() const {
-	FixedVector<AbstractCard*, 50> album;
+const Album& JsonFileAlbum::loadAlbum() const {
+	Album* album = new Album();
 	QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);
 	QByteArray data = json_file.readAll();
@@ -33,13 +33,13 @@ FixedVector<AbstractCard*, 50> JsonFileAlbum::loadAlbum() const {
 
 	for(const QJsonValue& value : json_album) {
 		QJsonObject json_object = value.toObject();
-		album.push_back(converter.toObject(json_object));
+		album->getAlbum().push_back(converter.toObject(json_object));
 	}
-	return album;
+	return *album;
 }
 
-FixedVector<AbstractCard*, 50> JsonFileAlbum::loadClass(AbstractCard::Classe classe) const {
-    FixedVector<AbstractCard*, 50> cards;
+const Album& JsonFileAlbum::loadClass(AbstractCard::Classe classe) const {
+    Album* album = new Album();
     QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);
 	QByteArray data = json_file.readAll();
@@ -50,8 +50,8 @@ FixedVector<AbstractCard*, 50> JsonFileAlbum::loadClass(AbstractCard::Classe cla
     for(const QJsonValue& value : json_album) {
         QJsonObject json_object = value.toObject();
         if(json_object.value("Classe") == classe || json_object.value("Classe") == 0) {
-            cards.push_back(converter.toObject(json_object));
+            album->getAlbum().push_back(converter.toObject(json_object));
         }
     }
-    return cards;
+    return *album;
 }
