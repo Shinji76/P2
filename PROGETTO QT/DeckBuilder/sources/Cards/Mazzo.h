@@ -9,12 +9,12 @@ class Mazzo {
 private:
     std::string nome;
 	AbstractCard::Classe classe;
-    FixedVector<int, 50> numCopie;
+    FixedVector<int> numCopie;
 	int counter;
 
 public:
     Mazzo();
-    Mazzo(std::string nome, AbstractCard::Classe classe, FixedVector<int, 50> numCopie, unsigned int counter);
+    Mazzo(std::string nome, AbstractCard::Classe classe, FixedVector<int> numCopie, unsigned int counter);
 	
     std::string getNomeMazzo() const;
     void setNomeMazzo(std::string);
@@ -22,11 +22,13 @@ public:
 	AbstractCard::Classe getClasse() const;
     void setClasse(AbstractCard::Classe set);
     
-    FixedVector<int, 50> getNumCopie() const;
+    FixedVector<int> getNumCopie() const;
     int getCounter() const;
 
-	void addCard(const AbstractCard&);
-	void removeCard(const AbstractCard&);
+	void addCard(const AbstractCard* card);
+	void removeCard(const AbstractCard* card);
+
+    bool isFull(const AbstractCard* card);
 };
 
 #endif  //MAZZO_H

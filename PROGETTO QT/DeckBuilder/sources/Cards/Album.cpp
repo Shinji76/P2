@@ -1,18 +1,18 @@
 #include "Vector_template.h"
 #include "Album.h"
 
-Album::Album() : album(FixedVector<AbstractCard*,50>()) {
+Album::Album() : album(FixedVector<AbstractCard*>()) {
 
 }
 
-Album::Album(FixedVector<AbstractCard*, 50> album) : album(album) {
+Album::Album(FixedVector<AbstractCard*> album) : album(album) {
 
 }
 
-FixedVector<AbstractCard*, 50> Album::getAlbum() {
+FixedVector<AbstractCard*> Album::getAlbum() {
     return album;
 }
 
-const AbstractCard* Album::getCardFromID(int ID) const {
-    return album[ID];
+const AbstractCard& Album::getCardFromID(int ID) const {
+    return *album[ID];
 }

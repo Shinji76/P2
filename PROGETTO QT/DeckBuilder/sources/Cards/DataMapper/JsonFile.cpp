@@ -34,7 +34,7 @@ JsonFile& JsonFile::store(const Mazzo mazzo) {
 }
 
 Mazzo& JsonFile::load() {
-	FixedVector<int, 50> json_vector;
+	FixedVector<int> json_vector;
 	QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);
 	QByteArray data = json_file.readAll();

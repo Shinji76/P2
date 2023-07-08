@@ -6,14 +6,14 @@
 
 class Album {
 private:
-    FixedVector<AbstractCard*, 50> album;
+    FixedVector<AbstractCard*> album;
 public:
     Album();
-    Album(FixedVector<AbstractCard*, 50>);
+    Album(FixedVector<AbstractCard*>);
     ~Album();
 
-    FixedVector<AbstractCard*, 50> getAlbum();
-    const AbstractCard* getCardFromID(int ID) const;
+    FixedVector<AbstractCard*> getAlbum();
+    const AbstractCard& getCardFromID(int ID) const;
 };
 
 #endif //ALBUM_H

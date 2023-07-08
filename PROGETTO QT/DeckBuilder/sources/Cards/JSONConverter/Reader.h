@@ -8,16 +8,16 @@
 
 class Reader: public IReader {
 private:
-    FixedVector<AbstractCard*, 50> cache;
+    FixedVector<AbstractCard*> cache;
 	
     AbstractCard* readMostro(const QJsonObject& object) const;
 	AbstractCard* readMagia(const QJsonObject& object) const;
 	AbstractCard* readSegreto(const QJsonObject& object) const;
 
 public:
-	const FixedVector<AbstractCard*, 50>& getCache() const;
-	AbstractCard* read(const QJsonObject& object) override;
-	Reader& clear();
+	const FixedVector<AbstractCard*>& getCache() const;
+	AbstractCard* read(const QJsonObject& object);
+	//Reader& clear();
 };
 
 #endif //CONVERTER_JSON_READER_H

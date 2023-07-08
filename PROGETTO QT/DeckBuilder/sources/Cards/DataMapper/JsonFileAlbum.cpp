@@ -22,7 +22,7 @@ const JsonAlbum& JsonFileAlbum::getConverter() const {
 	return converter;
 }
 
-const Album& JsonFileAlbum::loadAlbum() const {
+const Album& JsonFileAlbum::loadAlbum() {
 	Album* album = new Album();
 	QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);
@@ -38,8 +38,8 @@ const Album& JsonFileAlbum::loadAlbum() const {
 	return *album;
 }
 
-const Album& JsonFileAlbum::loadClass(AbstractCard::Classe classe) const {
-    Album* album = new Album();
+const std::vector<const AbstractCard*>& JsonFileAlbum::loadClass(AbstractCard::Classe classe) const {
+    std::vector<const AbstractCard*> cards;
     QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);
 	QByteArray data = json_file.readAll();
@@ -50,8 +50,8 @@ const Album& JsonFileAlbum::loadClass(AbstractCard::Classe classe) const {
     for(const QJsonValue& value : json_album) {
         QJsonObject json_object = value.toObject();
         if(json_object.value("Classe") == classe || json_object.value("Classe") == 0) {
-            album->getAlbum().push_back(converter.toObject(json_object));
+            cards.push_back(converter.toObject(json_object));
         }
     }
-    return *album;
+    return cards;
 }

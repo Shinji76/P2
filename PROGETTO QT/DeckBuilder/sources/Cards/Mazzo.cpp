@@ -3,27 +3,27 @@
 Mazzo::Mazzo(
     std::string nome,
     AbstractCard::Classe classe,
-    FixedVector<int, 50> numCopie,
+    FixedVector<int> numCopie,
     unsigned int count
     ) : nome(nome), classe(classe), numCopie(numCopie), counter(count) {}
 
 Mazzo::Mazzo() {}
 
-void Mazzo::addCard(const AbstractCard& card) {
-    if(counter < 20 && (classe == card.getClasse() || card.getClasse() == 0) ) {
+void Mazzo::addCard(const AbstractCard* card) {
+    if(counter < 20) {
         // Rarita 3 = Leggendaria
-        if( (card.getRarita() == 3 && numCopie[card.getID()] < 1) || (card.getRarita() != 3 && numCopie[card.getID()] < 2) ) {
+        if( (card.getRarita() == 3 && numCopie[ID] < 1) || (card.getRarita() != 3 && numCopie[ID] < 2) ) {
             numCopie[card.getID()]++;
             counter++;
         }
     } else {
-        //throw qualche errore
+        throw std::exception();
     }
 }
 
-void Mazzo::removeCard(const AbstractCard& card) {
-    if(numCopie[card.getID()] > 0) {
-        numCopie[card.getID()]--;
+void Mazzo::removeCard(const AbstractCard* card) {
+    if(numCopie[ID] > 0) {
+        numCopie[ID]--;
         counter--;
     }
 }
@@ -44,10 +44,20 @@ void Mazzo::setClasse(AbstractCard::Classe set) {
     classe = set;
 }
 
-FixedVector<int, 50> Mazzo::getNumCopie() const {
+FixedVector<int> Mazzo::getNumCopie() const {
     return numCopie;
 }
 
 int Mazzo::getCounter() const {
     return counter;
+}
+
+bool Mazzo::isFull(const AbstractCard* card) {
+    if(card->getRarita() == AbstractCard::Rarita::Leggendaria && numCopie[card->getID()] == 1 ) {
+        return true;
+    }
+    else if(numCopie[card->getID()] == 2) {
+        return true;
+    }
+    return false;
 }
