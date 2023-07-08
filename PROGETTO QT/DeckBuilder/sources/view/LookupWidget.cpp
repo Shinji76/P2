@@ -22,3 +22,19 @@ QPushButton* LookupWidget::getAddButton() const {
 QPushButton* LookupWidget::getRemoveButton() const {
     return remove_button;
 }
+
+void LookupWidget::enableAddButton() {
+    add_button->setEnabled(true);
+}
+
+void LookupWidget::disableAddButton() {
+    add_button->setEnabled(false);
+}
+
+void LookupWidget::enableRemoveButton() {
+    remove_button->setEnabled(true);
+}
+
+void LookupWidget::disableRemoveButton() {
+    remove_button->setEnabled(false);
+}

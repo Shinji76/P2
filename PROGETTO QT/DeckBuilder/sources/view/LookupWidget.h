@@ -25,6 +25,10 @@ public:
     QWidget* getWidget() const;
     QPushButton* getAddButton() const;
     QPushButton* getRemoveButton() const;
+    void enableAddButton();
+    void enableRemoveButton();
+    void disableAddButton();
+    void disableRemoveButton();
 };
 
 #endif //LOOKUP_WIDGET_H
