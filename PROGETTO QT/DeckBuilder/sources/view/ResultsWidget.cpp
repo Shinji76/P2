@@ -37,14 +37,7 @@ ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
     grid->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
     QWidget* container = new QWidget();
     container->setLayout(grid);
-    QScrollArea* scroll_area = new QScrollArea();
-    scroll_area->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    scroll_area->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    scroll_area->setWidgetResizable(true);
-    scroll_area->setWidget(container);
-    vbox->addWidget(scroll_area);
 
-    // Connects signals
     connect(previous_page, &QPushButton::clicked, this, &ResultsWidget::previousPage);
     connect(next_page, &QPushButton::clicked, this, &ResultsWidget::nextPage);
 }
@@ -59,10 +52,12 @@ void ResultsWidget::showResults(Query query, ResultSet results) {
         results_total->setText("No results for \"" + QString::fromStdString(query.getName()) + "\".");
     }
     previous_page->setEnabled(query.getOffset() > 0);
-    next_page->setEnabled(results.getCards().size() == 9);
+    next_page->setEnabled(results.getResult().size() == 9);
 
     // Connects signals
     for (auto cit = lookup.begin(); cit != lookup.end(); cit++) {
+        cit->disableRemoveButton();
+        cit->enableAddButton();
         if (cit->getAddButton()) {
             connect(cit->getAddButton(), &QPushButton::clicked, std::bind(&ResultsWidget::addCard, this, cit->getCard()));
         }

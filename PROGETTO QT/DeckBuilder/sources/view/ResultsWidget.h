@@ -28,8 +28,12 @@ signals:
 	void refreshResults();
 	void previousPage();
 	void nextPage();
-	void addCard(const AbstractCard* card);
-	void removeCard(const AbstractCard* card);
+	void addCard(const int mana);
+	void removeCard(const int mana);
+    void enableLoookupAdd();
+    void disableLoookupAdd();
+    void enableLoookupRemove();
+    void disableLoookupRemove();
 
 public slots:
 	void showResults(Query query, ResultSet results);
