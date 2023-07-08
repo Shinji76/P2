@@ -32,6 +32,7 @@ HEADERS += \
     view/RecapWidget.h \
     view/ResultsWidget.h \
     view/SearchWidget.h \
+    view/HistogramWidget.h \
     \
     Cards/DataMapper/JsonFile.h \
     Cards/DataMapper/JsonFileAlbum.h \
@@ -67,6 +68,7 @@ SOURCES += \
     view/RecapWidget.cpp \
     view/ResultsWidget.cpp \
     view/SearchWidget.cpp \
+    view/HistogramWidget.cpp \
     \
     Cards/DataMapper/JsonFile.cpp \
     Cards/DataMapper/JsonFileAlbum.cpp \
