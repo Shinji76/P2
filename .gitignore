@@ -1,10 +1,10 @@
 # cartelle
 LEZIONI/
 Teoria/
+qt charts/
 Esercizi Qt/
 PROGETTO QT/build*
 PROGETTO QT/DeckBuilder/build*
-qt charts/build*
 APPUNTI/
 search-engine/
 .vscode/
