@@ -1,14 +1,12 @@
 TODO:
 Modello:
-    1. Capire se i metodi create update e remove (JsonRepository) sono utilizzabili per Mazzo o sarebbero per l'Album e basta e andrebbero quindi rimossi
-    2. In searchWidget sistemare campi per far combaciare query
-    3. Capire se effettivamente mi serve la classe Album o meno
-    4. spostare controllo sulla rarità (leggendaria) da mazzo a abstact card
-    5. distinguere permanenza mazzo (read write) e album (read)
-    6. aggiustare costruttore mazzo, prendere nomeMazzo per salvataggio in JSON
-    7. controllare costruttore Sorting.h/cpp
+    1. Capire dove inserire l'abilitazione/disabilitazione dei bottoni
+    2. Fare da zero RecapWidget utilizzando TableView
+    3. Sistemare le lable in HistrogramWidget e connettere segnali di aggiunta e rimozione
+    4. A seconda di come sistemato RecapWidget sistemare di conseguenza gli slot newDeck e openDeck in MainWindow
+    5. Sistemare ResultsWidget a seconda dell'abilitazione/disabilitazione dei pulsanti
+
 View:
-    1. Capire utilizzo di LookupWidget
     2. Sistemare Grid su ResultLayout
     3. Creare RecapWidget
     4. Sistemare SearchWidget
