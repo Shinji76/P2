@@ -21,7 +21,7 @@
 
 //Sistemare IEngine&
 MainWindow::MainWindow(Memory& engine, QWidget *parent)
-    : QMainWindow(parent), has_unsaved_changes(false), engine(engine), repository(nullptr) {    //modificare nullptr per aprire direttamente l'album
+    : QMainWindow(parent), has_unsaved_changes(false), engine(engine), deck_repository(nullptr) {
     // Actions
     QAction* create = new QAction(
         QIcon(QPixmap((":/Assets/Icons/new.svg"))),
@@ -96,13 +96,13 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     connect(results_widget, &ResultsWidget::refreshResults, search_widget, &SearchWidget::search);      //valutare se mantenere refresh o al massimo cambiarlo
     connect(results_widget, &ResultsWidget::previousPage, search_widget, &SearchWidget::previousPage);
     connect(results_widget, &ResultsWidget::nextPage, search_widget, &SearchWidget::nextPage);
-    //connect(results_widget, &ResultsWidget::addCard, this, &RecapWidget::addCard);          //controllare se collegamento addCard e recapWidget funziona
-    //connect(results_widget, &ResultsWidget::removeCard, this, &RecapWidget::removeCard);
+    connect(results_widget, &ResultsWidget::addCard, this, &MainWindow::addCard);          
+    connect(results_widget, &ResultsWidget::removeCard, this, &MainWindow::removeCard);
     connect(class_selection_widget, SIGNAL(classEmitter(AbstractCard::Classe)), this, SLOT(&MainWindow::setClass(AbstractCard::Classe)));
 }
 
-JsonFile* MainWindow::getRepository() {
-    return repository;
+JsonFile* MainWindow::getDeckRepository() {
+    return deck_repository;
 }
 
 JsonFileAlbum* MainWindow::getAlbumRepository() {
@@ -140,21 +140,21 @@ void MainWindow::newDeck() {
     if (path.isEmpty()) {
         return;
     }
-    if (repository != nullptr) {
-        delete repository;      //se ho degli elementi nel repository cancello il repository
+    if (deck_repository != nullptr) {
+        delete deck_repository;      //se ho degli elementi nel deck_repository cancello il deck_repository
     }
     //creazione del mazzo
-    JsonFile data_mapper(path.toStdString());
-    
+    deck_repository = new JsonFile(path.toStdString());
+
     // apertura album filtrato
     Reader reader_album;
     JsonAlbum converter_album(reader_album);
-    JsonFileAlbum album(path.toStdString(), converter_album);
+    album_repository = new JsonFileAlbum(path.toStdString(), converter_album);
 
     AbstractCard::Classe classe;
     setClass(classe);
-    album.loadClass(classe); //restituito da classSelection
-    engine.clear();
+    mazzo.setClasse(classe);
+    album_repository->loadClass(classe); //restituito da classSelection
 }
 
 void MainWindow::openDeck() {
@@ -167,27 +167,42 @@ void MainWindow::openDeck() {
     if (path.isEmpty()) {
         return;
     }
-    if (repository != nullptr) {
-        delete repository;
+    if (deck_repository != nullptr) {
+        delete deck_repository;
     }
-    engine.clear();
+    //engine.clear();
     //apertura mazzo
-    JsonFile data_mapper(path.toStdString());
-    Mazzo mazzo = data_mapper.load();
+    deck_repository = new JsonFile(path.toStdString());
+    mazzo = deck_repository->load();
 
     //apertura album filtrato
-
     Reader reader_album;
     JsonAlbum converter_album(reader_album);
     JsonFileAlbum json_album(path.toStdString(), converter_album);
-    Album* album = new Album(json_album.loadClass(mazzo.getClasse()));
+    engine = json_album.loadClass(mazzo.getClasse());
+    
+    // abilitazione bottoni
+    if(mazzo.getCounter() == 20) {
+        for(auto it = engine.getMemory().begin(); it != engine.getMemory().end(); it++) {
+            //disabilita addButton
+        }
+    }
+    for(int i = 0; i < mazzo.getNumCopie().getSize(); i++) {
+        const AbstractCard* temp_card = &album.getCardFromID(i);
+        if(mazzo.getCounter() < 20 && mazzo.isFull(temp_card)) {
+            //disabilita addButton
+        }
+        else if(mazzo.getCounter() < 20 && mazzo.isFull(temp_card)) {
+            //
+        }
+    }
 }
 
 void MainWindow::saveDeck() {
-    if (repository == nullptr) {
+    if (deck_repository == nullptr) {
         return;
     }
-    repository->store();    //passare mazzo 
+    deck_repository->store(mazzo);    //passare mazzo 
     has_unsaved_changes = false;
 }
 
@@ -198,10 +213,11 @@ void MainWindow::saveDeckAs() {
         "./",
         "JSON files *.json"
     );
-    if (path.isEmpty() || repository == nullptr) {
+    if (path.isEmpty() || deck_repository == nullptr) {
         return;
     }
-    repository->setPath(path.toStdString()).store();    //mazzo
+    mazzo.setNomeMazzo(path.toStdString());
+    deck_repository->setPath(path.toStdString()).store(mazzo);    //mazzo
     has_unsaved_changes = false;
 }
 
@@ -209,6 +225,20 @@ void MainWindow::search(Query query) {
     results_widget->showResults(query, engine.search(query));
     stacked_widget->setCurrentIndex(0);
     clearStack();
+}
+
+void MainWindow::buttonEnabler(const AbstractCard* card) {
+    if(mazzo.isFull(card))
+        
+}
+
+void MainWindow::addCard(const AbstractCard* card) {
+    if(mazzo.isFull(card))
+        
+}
+
+void MainWindow::removeCard(const AbstractCard* card) {
+
 }
 
 void MainWindow::close() {

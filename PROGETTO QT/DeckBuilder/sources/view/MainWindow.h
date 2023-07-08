@@ -21,7 +21,8 @@ private:
     bool has_unsaved_changes;
     QAction* create_deck;
     Memory engine;
-    JsonFile* repository;
+    Mazzo mazzo;
+    JsonFile* deck_repository;
     JsonFileAlbum* album_repository;
     SearchWidget* search_widget;
     RecapWidget* recap_widget;
@@ -30,10 +31,10 @@ private:
     HomeWidget* home_widget;
     ClassSelectionWidget* class_selection_widget;
     void clearStack();
-
+    
 public:
     explicit MainWindow(Memory& engine, QWidget *parent = 0);
-    JsonFile* getRepository();
+    JsonFile* getDeckRepository();
     JsonFileAlbum* getAlbumRepository();
     Memory& getEngine();
     SearchWidget* getSearchWidget();
@@ -45,6 +46,9 @@ public slots:
     void saveDeck();
     void saveDeckAs();
     void search(Query query);
+    void addCard(const AbstractCard* card);
+    void removeCard(const AbstractCard* card);
+    void buttonEnabler(const AbstractCard* card);
     void close();
 };
 
