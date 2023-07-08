@@ -1,17 +1,26 @@
-#ifndef RECAP_WIDGET_H
-#define RECAP_WIDGET_H
+#ifndef RECAPWIDGET_H
+#define RECAPWIDGET_H
+
+#include "lookupwidget.h" 
 
 #include <QWidget>
+#include <QTableView>
+#include <QPushButton>
+#include <vector>
 
-class RecapWidget: public QWidget {
-Q_OBJECT
+class RecapWidget : public QWidget {
+    Q_OBJECT
+
 private:
+    QTableView* tableView;
+    std::vector<LookupWidget> cells;
 
 public:
-    
-public slots:
-    void addCard();
-    void removeCard();
+    RecapWidget(QWidget* parent = nullptr);
+
+    void addCell(LookupWidget* lookpup);
+    void removeCell(int index);
+
 };
 
-#endif //RECAP_WIDGET_H
+#endif // RECAPWIDGET_H
