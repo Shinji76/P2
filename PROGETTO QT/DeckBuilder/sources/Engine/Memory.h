@@ -6,13 +6,13 @@
 
 class Memory {
 private:
-	std::vector<const AbstractCard*> cards;
+	std::vector<const AbstractCard*> memory;
 
 public:
 	Memory();
+	Memory(std::vector<const AbstractCard*>);
 	virtual ~Memory();
-	virtual Memory& add(const AbstractCard* card);
-	virtual Memory& remove(const AbstractCard* card);
-	virtual Memory& clear();
-	virtual ResultSet search(const Query& query) const;
+	//virtual Memory& clear();
+	virtual ResultSet& search(const Query& query) const;
+  	std::vector<const AbstractCard*> getMemory();
 };

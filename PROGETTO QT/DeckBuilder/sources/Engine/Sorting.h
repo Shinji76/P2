@@ -3,11 +3,7 @@
 
 #include "../Cards/AbstractCard.h"
 
-#include <vector>
-
 class Sorting {
-
-private:
 public:
     Sorting();
     ~Sorting();
