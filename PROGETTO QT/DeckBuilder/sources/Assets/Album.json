@@ -2,7 +2,7 @@
 	"Album": [
 		{
 			"Type": "Mostro",
-			"ID": 1,
+			"ID": 0,
 			"Nome": "Murloc Tinyfin",
 			"Effetto": "",
 			"Mana": 0,
@@ -15,7 +15,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 2,
+			"ID": 1,
 			"Nome": "Snowflipper Penguin",
 			"Effetto": "",
 			"Mana": 0,
@@ -28,7 +28,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 3,
+			"ID": 2,
 			"Nome": "Wisp",
 			"Effetto": "",
 			"Mana":0,
@@ -41,7 +41,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 4,
+			"ID": 3,
 			"Nome": "Elven Archer",
 			"Effetto": "",
 			"Mana": 1,
@@ -54,7 +54,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 5,
+			"ID": 4,
 			"Nome": "Helmet Hermit",
 			"Effetto": "",
 			"Mana": 1,
@@ -67,7 +67,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 6,
+			"ID": 5,
 			"Nome": "Sir Finley Mrrgglton",
 			"Effetto": "",
 			"Mana": 1,
@@ -80,7 +80,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 7,
+			"ID": 6,
 			"Nome": "Acidic Swamp Ooze",
 			"Effetto": "",
 			"Mana": 2,
@@ -93,7 +93,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 8,
+			"ID": 7,
 			"Nome": "Bloodmage Thalnos",
 			"Effetto": "",
 			"Mana": 2,
@@ -106,7 +106,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 9,
+			"ID": 8,
 			"Nome": "Doomsayer",
 			"Effetto": "",
 			"Mana": 2,
@@ -119,7 +119,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 10,
+			"ID": 9,
 			"Nome": "Acolyte of Pain",
 			"Effetto": "",
 			"Mana": 3,
@@ -132,7 +132,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 11,
+			"ID": 10,
 			"Nome": "Brann BronzeBeard",
 			"Effetto": "",
 			"Mana": 3,
@@ -145,7 +145,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 12,
+			"ID": 11,
 			"Nome": "Ironbeak Owl",
 			"Effetto": "",
 			"Mana": 3,
@@ -158,7 +158,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 13,
+			"ID": 12,
 			"Nome": "Southsea Captain",
 			"Effetto": "",
 			"Mana": 3,
@@ -171,7 +171,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 14,
+			"ID": 13,
 			"Nome": "Sneaky Devil",
 			"Effetto": "",
 			"Mana": 4,
@@ -184,7 +184,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 15,
+			"ID": 14,
 			"Nome": "Big Game Hunter",
 			"Effetto": "",
 			"Mana": 4,
@@ -197,7 +197,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 16,
+			"ID": 15,
 			"Nome": "Defender of Argus",
 			"Effetto": "",
 			"Mana": 4,
@@ -210,7 +210,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 17,
+			"ID": 16,
 			"Nome": "Old Murk-Eye",
 			"Effetto": "",
 			"Mana": 4,
@@ -223,7 +223,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 18,
+			"ID": 17,
 			"Nome": "Azure Drake",
 			"Effetto": "",
 			"Mana": 5,
@@ -236,7 +236,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 19,
+			"ID": 18,
 			"Nome": "Burning Blade Acolyte",
 			"Effetto": "",
 			"Mana": 5,
@@ -249,7 +249,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 20,
+			"ID": 19,
 			"Nome": "Prince Malchezaar",
 			"Effetto": "",
 			"Mana": 5,
@@ -262,7 +262,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 21,
+			"ID": 20,
 			"Nome": "Faceless Manipulator",
 			"Effetto": "",
 			"Mana": 5,
@@ -275,7 +275,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 22,
+			"ID": 21,
 			"Nome": "Leeeeroyyy Jenkinssss",
 			"Effetto": "",
 			"Mana": 5,
@@ -288,7 +288,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 23,
+			"ID": 22,
 			"Nome": "Maexxna",
 			"Effetto": "",
 			"Mana": 6,
@@ -301,7 +301,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 24,
+			"ID": 23,
 			"Nome": "Reno Jackson",
 			"Effetto": "",
 			"Mana": 6,
@@ -314,7 +314,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 25,
+			"ID": 24,
 			"Nome": "Sabretooth Stalker",
 			"Effetto": "",
 			"Mana": 6,
@@ -327,7 +327,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 26,
+			"ID": 25,
 			"Nome": "Baron Geddon",
 			"Effetto": "",
 			"Mana": 7,
@@ -340,7 +340,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 27,
+			"ID": 26,
 			"Nome": "Primordial Drake",
 			"Effetto": "",
 			"Mana": 8,
@@ -353,7 +353,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 28,
+			"ID": 27,
 			"Nome": "Majordomo ExeQTus",
 			"Effetto": "",
 			"Mana": 9,
@@ -366,7 +366,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 29,
+			"ID": 28,
 			"Nome": "Deathwing",
 			"Effetto": "",
 			"Mana": 10,
@@ -379,7 +379,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 30,
+			"ID": 29,
 			"Nome": "Lokholar the Ice Lord",
 			"Effetto": "",
 			"Mana": 10,
@@ -392,7 +392,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 31,
+			"ID": 30,
 			"Nome": "Alleycat",
 		 	"Effetto": "",
 		 	"Mana": 1,
@@ -405,7 +405,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 32,
+			"ID": 31,
 		 	"Nome": "Armorsmith",
 		 	"Effetto": "",
 		 	"Mana": 2,
@@ -418,7 +418,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 33,
+			"ID": 32,
 		 	"Nome": "Defias Cannoneer",
 		 	"Effetto": "",
 		 	"Mana": 3,
@@ -431,7 +431,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 34,
+			"ID": 33,
 		 	"Nome": "Tidal Revenant",
 		 	"Effetto": "",
 		 	"Mana": 8,
@@ -444,7 +444,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 35,
+			"ID": 34,
 		 	"Nome": "Edwin VanCleef",
 		 	"Effetto": "",
 		 	"Mana": 3,
@@ -457,7 +457,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 36,
+			"ID": 35,
 		 	"Nome": "SIU:7 Agent",
 		 	"Effetto": "",
 		 	"Mana": 3,
@@ -470,7 +470,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 37,
+			"ID": 36,
 		 	"Nome": "Hullbreaker",
 		 	"Effetto": "",
 		 	"Mana": 4,
@@ -483,7 +483,7 @@
 		},
 		{
 			"Type": "Mostro",
-			"ID": 48,
+			"ID": 37,
 		 	"Nome": "Voidwalker",
 		 	"Effetto": "",
 		 	"Mana": 1,
@@ -496,7 +496,7 @@
 		},
 		{
 			"Type": "Segreto",
-			"ID": 39,
+			"ID": 38,
 		 	"Nome": "Snake Trap",
 		 	"Effetto": "",
 		 	"Mana": 2,
@@ -506,7 +506,7 @@
 		},
 		{
 			"Type": "Segreto",
-			"ID": 40,
+			"ID": 39,
 		 	"Nome": "Bear Trap",
 		 	"Effetto": "",
 		 	"Mana": 2,
@@ -516,7 +516,7 @@
 		},
 		{
 			"Type": "Segreto",
-			"ID": 41,
+			"ID": 40,
 		 	"Nome": "Ice Block",
 		 	"Effetto": "",
 		 	"Mana": 3,
@@ -526,7 +526,7 @@
 		},
 		{
 			"Type": "Magia",
-			"ID": 42,
+			"ID": 41,
 		 	"Nome": "Animal Companion",
 		 	"Effetto": "",
 		 	"Mana": 3,
@@ -536,7 +536,7 @@
 		},
 		{
 			"Type": "Magia",
-			"ID": 43,
+			"ID": 42,
 		 	"Nome": "Brawl",
 		 	"Effetto": "",
 		 	"Mana": 5,
@@ -546,7 +546,7 @@
 		},
 		{
 			"Type": "Magia",
-			"ID": 44,
+			"ID": 43,
 		 	"Nome": "Backstab",
 		 	"Effetto": "",
 		 	"Mana": 0,
@@ -556,7 +556,7 @@
 		},
 		{
 			"Type": "Magia",
-			"ID": 45,
+			"ID": 44,
 		 	"Nome": "Sprint",
 		 	"Effetto": "",
 		 	"Mana": 6,
@@ -566,7 +566,7 @@
 		},
 		{
 			"Type": "Magia",
-			"ID": 46,
+			"ID": 45,
 		 	"Nome": "Arcane Intellect",
 		 	"Effetto": "",
 		 	"Mana": 3,
@@ -576,7 +576,7 @@
 		},
 		{
 			"Type": "Magia",
-			"ID": 47,
+			"ID": 46,
 		 	"Nome": "Shattering Blast",
 		 	"Effetto": "",
 		 	"Mana": 3,
@@ -586,7 +586,7 @@
 		},
 		{
 			"Type": "Magia",
-			"ID": 48,
+			"ID": 47,
 		 	"Nome": "Fireball",
 		 	"Effetto": "",
 		 	"Mana": 4,
@@ -596,7 +596,7 @@
 		},
 		{
 			"Type": "Magia",
-			"ID": 49,
+			"ID": 48,
 		 	"Nome": "Mortal Coil",
 		 	"Effetto": "",
 		 	"Mana": 1,
@@ -606,7 +606,7 @@
 		},
 		{
 			"Type": "Magia",
-			"ID": 50,
+			"ID": 49,
 		 	"Nome": "Drain Soul",
 		 	"Effetto": "",
 		 	"Mana": 2,
