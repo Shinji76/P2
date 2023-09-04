@@ -26,11 +26,11 @@ signals:
     void classEmitter(AbstractCard::Classe classe);
 
 public slots:
-    void HunterClick();
-    void WarriorClick();
-    void ThiefClick();
-    void MageClick();
-    void SorcererClick();
+    void hunterClick();
+    void warriorClick();
+    void thiefClick();
+    void mageClick();
+    void sorcererClick();
 
 };
 

@@ -18,7 +18,7 @@ private:
     const unsigned int ID;
     std::string nome;
     std::string effetto;
-    unsigned int manaCost;
+    unsigned int mana;
     Rarita rarita;
     Classe classe;
     std::string image_path;
@@ -45,7 +45,20 @@ public:
     virtual unsigned int getManaCost() const;
     virtual Rarita getRarita() const;
     virtual Classe getClasse() const;
-    virtual std::string getPath() const;
+    virtual const std::string getPath() const;
 };
 
 #endif // ABSTRACT_CARD_H
+
+/*
+undefined reference to `
+AbstractCard::AbstractCard(
+    unsigned int,
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >,
+    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >,
+    unsigned int,
+    AbstractCard::Rarita,
+    AbstractCard::Classe,
+    std::__cxx11::basic_string<char, std::char_traits<char>,std::allocator<char> >
+    )'
+*/

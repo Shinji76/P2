@@ -25,8 +25,8 @@ public:
     FixedVector<int> getNumCopie() const;
     int getCounter() const;
 
-	void addCard(const AbstractCard* card);
-	void removeCard(const AbstractCard* card);
+	void addCard(unsigned int id);
+	void removeCard(unsigned int id);
 
     bool isFull(const AbstractCard* card);
 };

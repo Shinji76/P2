@@ -3,6 +3,7 @@
 #include <iostream>
 #include <QFile>
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QJsonArray>
 
 JsonFile::JsonFile(const std::string& path) : path(path), mazzo() {}

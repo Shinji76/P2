@@ -3,9 +3,15 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = sources
+
+TARGET = Deck" "Builder
+
 INCLUDEPATH += .
+
 QT += widgets core gui charts
+
+RESOURCES += \
+    resources.qrc
 
 
 # Input
@@ -28,11 +34,9 @@ HEADERS += \
     view/ClassSelectionWidget.h \
     view/HomeWidget.h \
     view/MainWindow.h \
-    view/LookupWidget.h \
     view/RecapWidget.h \
     view/ResultsWidget.h \
     view/SearchWidget.h \
-    view/HistogramWidget.h \
     \
     Cards/DataMapper/JsonFile.h \
     Cards/DataMapper/JsonFileAlbum.h \
@@ -40,10 +44,7 @@ HEADERS += \
     Cards/JSONConverter/JsonAlbum.h \
     Cards/JSONConverter/Reader.h \
     \
-    view/CardLayout/Box.h \
-    view/CardLayout/CardVisualizer.h \
-    view/ResultLayout/Grid.h \
-    view/ResultLayout/IResultLayoutStrategy.h \
+    view/CardLayout/BoxWidget.h \
     \
     Vector_template.h \
 
@@ -63,12 +64,10 @@ SOURCES += \
     \
     view/ClassSelectionWidget.cpp \
     view/HomeWidget.cpp \
-    view/LookupWidget.cpp \
     view/MainWindow.cpp \
     view/RecapWidget.cpp \
     view/ResultsWidget.cpp \
     view/SearchWidget.cpp \
-    view/HistogramWidget.cpp \
     \
     Cards/DataMapper/JsonFile.cpp \
     Cards/DataMapper/JsonFileAlbum.cpp \
@@ -76,8 +75,6 @@ SOURCES += \
     Cards/JSONConverter/JsonAlbum.cpp \
     Cards/JSONConverter/Reader.cpp \
     \
-    view/CardLayout/Box.cpp \
-    \
-    view/ResultLayout/Grid.cpp \
+    view/CardLayout/BoxWidget.cpp \
     \
     main.cpp \

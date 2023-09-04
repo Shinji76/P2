@@ -1,5 +1,5 @@
-#ifndef VIEW_RESULTS_WIDGET_H
-#define VIEW_RESULTS_WIDGET_H
+#ifndef RESULTS_WIDGET_H
+#define RESULTS_WIDGET_H
 
 #include <QVector>
 #include <QGridLayout>
@@ -9,8 +9,9 @@
 
 #include "../Engine/Query.h"
 #include "../Engine/ResultSet.h"
-#include "ResultLayout/IResultLayoutStrategy.h"
-#include "LookupWidget.h"
+#include "CardLayout/BoxWidget.h"
+
+class BoxWidget;
 
 class ResultsWidget: public QWidget {
 Q_OBJECT
@@ -18,22 +19,18 @@ private:
     QLabel* results_total;
 	QPushButton* previous_page;
 	QPushButton* next_page;
-    QVector<LookupWidget> lookup;
+    QVector<const BoxWidget*> boxes;
 	QGridLayout* grid;
 
 public:
 	explicit ResultsWidget(QWidget* parent = 0);
 
+    const QVector<const BoxWidget*>& getBoxes() const;
+
 signals:
 	void refreshResults();
 	void previousPage();
 	void nextPage();
-	void addCard(const int mana);
-	void removeCard(const int mana);
-    void enableLoookupAdd();
-    void disableLoookupAdd();
-    void enableLoookupRemove();
-    void disableLoookupRemove();
 
 public slots:
 	void showResults(Query query, ResultSet results);

@@ -1,7 +1,21 @@
 #include "AbstractCard.h"
 
-AbstractCard::~AbstractCard()
+AbstractCard::AbstractCard(
+    unsigned int ID,
+    std::string nome,
+    std::string effetto,
+    unsigned int mana,
+    Rarita rarita,
+    Classe classe,
+    std::string image_path
+    ) : 
+    ID(ID), nome(nome), effetto(effetto),
+    mana(mana), rarita(rarita),
+    classe(classe), image_path(image_path)
 {
+}
+
+AbstractCard::~AbstractCard() {
     delete this;
 }
 
@@ -17,7 +31,7 @@ std::string AbstractCard::getEffetto() const {
 }
 
 unsigned int AbstractCard::getManaCost() const {
-    return manaCost;
+    return mana;
 }
 
 AbstractCard::Rarita AbstractCard::getRarita() const {
@@ -28,6 +42,6 @@ AbstractCard::Classe AbstractCard::getClasse() const {
     return classe;
 }
 
-std::string AbstractCard::getPath() const {
+const std::string AbstractCard::getPath() const {
     return image_path;
 }

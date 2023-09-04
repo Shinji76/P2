@@ -1,6 +1,5 @@
 #include "Magia.h"
 
-
 Magia::Magia(
     const unsigned int ID,
     const std::string nome,

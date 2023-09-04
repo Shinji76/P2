@@ -1,3 +1,6 @@
+#ifndef MEMORY_H
+#define MEMORY_H
+
 #include "../Cards/AbstractCard.h"
 #include "ResultSet.h"
 #include "FilterVisitor.h"
@@ -16,3 +19,4 @@ public:
 	virtual ResultSet& search(const Query& query) const;
   	std::vector<const AbstractCard*> getMemory();
 };
+#endif //MEMORY_H

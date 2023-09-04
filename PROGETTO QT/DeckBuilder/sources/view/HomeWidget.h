@@ -3,6 +3,7 @@
 
 #include "ClassSelectionWidget.h"
 
+#include <QLabel>
 #include <QWidget>
 #include <QPushButton>
 
@@ -12,17 +13,17 @@ private:
     QWidget* widget;
     QPushButton* createDeckButton;
     QPushButton* openDeckButton;
-    ClassSelectionWidget* classSelectionWidget;
 
 public:
     explicit HomeWidget(QWidget *parent = nullptr);
 
 signals:
-    void CreateDeck();
-    void OpenDeck();
+    void createDeck();
+    void openDeck();
 
 public slots:
     void createDeckHandler();
+    void openDeckHandler();
 };
 
 #endif // HOME_WIDGET_H

@@ -12,8 +12,8 @@ Memory::Memory(std::vector<const AbstractCard*> memory) {
 
 }
 
-
 Memory::~Memory() {
+    
 }
 
 /*

@@ -1,10 +1,11 @@
-#ifndef RECAPWIDGET_H
-#define RECAPWIDGET_H
+#ifndef RECAP_WIDGET_H
+#define RECAP_WIDGET_H
 
-#include "lookupwidget.h" 
+#include "CardLayout/BoxWidget.h"
 
 #include <QWidget>
-#include <QTableView>
+#include <QString>
+#include <QTableWidget>
 #include <QPushButton>
 #include <vector>
 
@@ -12,15 +13,15 @@ class RecapWidget : public QWidget {
     Q_OBJECT
 
 private:
-    QTableView* tableView;
-    std::vector<LookupWidget> cells;
+    QTableWidget* tableWidget;
 
 public:
     RecapWidget(QWidget* parent = nullptr);
 
-    void addCell(LookupWidget* lookpup);
-    void removeCell(int index);
-
+    void clearTable();
+    void deleteRow(const QString& name);
+    void addRow(AbstractCard* card, unsigned int copies);
+    void updateRow(const QString& name, unsigned int copies);
 };
 
 #endif // RECAPWIDGET_H

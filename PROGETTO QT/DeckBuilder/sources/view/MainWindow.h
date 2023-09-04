@@ -1,5 +1,5 @@
-#ifndef VIEW_MAIN_WINDOW_H
-#define VIEW_MAIN_WINDOW_H
+#ifndef MAIN_WINDOW_H
+#define MAIN_WINDOW_H
 
 #include "../Cards/DataMapper/JsonFile.h"
 #include "../Cards/DataMapper/JsonFileAlbum.h"
@@ -12,6 +12,7 @@
 #include "ResultsWidget.h"
 #include "RecapWidget.h"
 
+#include <QSplitter>
 #include <QMainWindow>
 #include <QStackedWidget>
 
@@ -27,6 +28,7 @@ private:
     SearchWidget* search_widget;
     RecapWidget* recap_widget;
     QStackedWidget* stacked_widget;
+    QSplitter* splitter;
     ResultsWidget* results_widget;
     HomeWidget* home_widget;
     ClassSelectionWidget* class_selection_widget;
@@ -40,15 +42,16 @@ public:
     SearchWidget* getSearchWidget();
 
 public slots:
+    //ricevitore segnali
     void setClass(AbstractCard::Classe classe);
+    void addCard(AbstractCard* card);
+    void removeCard(AbstractCard* card);
+
     void newDeck();
     void openDeck();
     void saveDeck();
     void saveDeckAs();
     void search(Query query);
-    void addCard(const AbstractCard* card);
-    void removeCard(const AbstractCard* card);
-    void buttonEnabler(const AbstractCard* card);
     void close();
 };
 

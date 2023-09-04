@@ -61,44 +61,47 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     file->addAction(save_as);
     file->addSeparator();
     file->addAction(close);
-
+    
     // Sets main panel
-    QSplitter* splitter = new QSplitter(this);
+    splitter = new QSplitter(this);
     setCentralWidget(splitter);
 
-    home_widget = new HomeWidget();
-    splitter->addWidget(home_widget);
-
-    search_widget = new SearchWidget();
-    splitter->addWidget(search_widget);
-
-    stacked_widget = new QStackedWidget(this);
+    QStackedWidget* stacked_widget = new QStackedWidget(this);
     splitter->addWidget(stacked_widget);
-
-    class_selection_widget = new ClassSelectionWidget();
-    //TODO: add histogram_widget when finished
-
     
-    results_widget = new ResultsWidget();
-    stacked_widget->addWidget(results_widget);
+    home_widget = new HomeWidget(this);
+    stacked_widget->addWidget(home_widget);
 
-    splitter->setSizes(QList<int>() << 3000 << 1000);
+    class_selection_widget = new ClassSelectionWidget(this);
+    stacked_widget->addWidget(class_selection_widget);
 
+    search_widget = new SearchWidget(this);
+    splitter->addWidget(search_widget);
+    search_widget->hide();
+
+    recap_widget = new RecapWidget(this);
+    splitter->addWidget(recap_widget);
+    recap_widget->hide();
+
+    results_widget = new ResultsWidget(this);
+    splitter->addWidget(results_widget);
+    results_widget->hide();
+
+
+    splitter->setSizes(QList<int>() << 3000 << 0);
+    
     // Connects signals
     connect(create, &QAction::triggered, this, &MainWindow::newDeck);
     connect(open, &QAction::triggered, this, &MainWindow::openDeck);
     connect(save, &QAction::triggered, this, &MainWindow::saveDeck);
     connect(save_as, &QAction::triggered, this, &MainWindow::saveDeckAs);
     connect(close, &QAction::triggered, this, &MainWindow::close);
-    connect(home_widget, &HomeWidget::CreateDeck, this, &MainWindow::newDeck);
-    connect(home_widget, &HomeWidget::OpenDeck, this, &MainWindow::openDeck);
+    //connect(home_widget, &HomeWidget::createDeck, this, &MainWindow::newDeck);
+    //connect(home_widget, &HomeWidget::openDeck, this, &MainWindow::openDeck);
     connect(search_widget, &SearchWidget::search_event, this, &MainWindow::search);
     connect(results_widget, &ResultsWidget::refreshResults, search_widget, &SearchWidget::search);      //valutare se mantenere refresh o al massimo cambiarlo
     connect(results_widget, &ResultsWidget::previousPage, search_widget, &SearchWidget::previousPage);
     connect(results_widget, &ResultsWidget::nextPage, search_widget, &SearchWidget::nextPage);
-    connect(results_widget, &ResultsWidget::addCard, this, &MainWindow::addCard);          
-    connect(results_widget, &ResultsWidget::removeCard, this, &MainWindow::removeCard);
-    connect(class_selection_widget, SIGNAL(classEmitter(AbstractCard::Classe)), this, SLOT(&MainWindow::setClass(AbstractCard::Classe)));
 }
 
 JsonFile* MainWindow::getDeckRepository() {
@@ -127,7 +130,52 @@ void MainWindow::clearStack() {
 }
 
 void MainWindow::setClass(AbstractCard::Classe classe) {
-    classe = classe;
+    mazzo.setClasse(classe);
+}
+
+void MainWindow::addCard(AbstractCard* card) {
+    //aggiungo carta a mazzo attraverso id
+    mazzo.addCard(card->getID());
+
+    //aggiungere riga a tabella RecapWidget
+    if(mazzo.getNumCopie()[card->getID()] == 0) {
+        recap_widget->addRow(card, mazzo.getNumCopie()[card->getID()]);
+    } else {
+        recap_widget->updateRow(QString::fromStdString(card->getNome()), mazzo.getNumCopie()[card->getID()]);
+    }   
+
+    //abilito bottone remove card
+    results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '-')->setEnabled(true);
+    recap_widget->findChild<QPushButton*>(QString::number(card->getID()) + '-')->setEnabled(true);
+
+    //controllo mazzo, se pieno blocco tutti plus
+    if(mazzo.getCounter() == 20) {
+        //emit segnale disabilita tutti i plus
+        for(auto it = results_widget->getBoxes().begin(); it != results_widget->getBoxes().end(); it++) {
+            (*it)->getRemoveButton()->setEnabled(false);
+        }
+    }
+
+    //controllo carta eventualmente blocco plus e abilito meno
+    else if( (card->getRarita() == 3) || (card->getRarita() != 3 && mazzo.getNumCopie()[card->getID()] == 2) ) {     // Rarita 3 = Leggendaria
+        //emit segnale disabilita plus per card
+        results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(false);
+        recap_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(false);
+    }
+}
+
+void MainWindow::removeCard(AbstractCard* card) {
+    //default removeButton bloccati
+    mazzo.removeCard(card->getID());
+    if(mazzo.getNumCopie()[card->getID()] == 0) {
+        //emit segnale disabilita remove e abilito add, elimino riga recapWidget
+        results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '-')->setEnabled(false);
+        results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(true);
+        recap_widget->deleteRow(QString::fromStdString(card->getNome()));
+    } else {
+        results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(true);
+        recap_widget->updateRow(QString::fromStdString(card->getNome()), mazzo.getNumCopie()[card->getID()]);
+    }
 }
 
 void MainWindow::newDeck() {
@@ -140,9 +188,13 @@ void MainWindow::newDeck() {
     if (path.isEmpty()) {
         return;
     }
+    if(home_widget) {
+        delete home_widget;
+    }
     if (deck_repository != nullptr) {
         delete deck_repository;      //se ho degli elementi nel deck_repository cancello il deck_repository
     }
+
     //creazione del mazzo
     deck_repository = new JsonFile(path.toStdString());
 
@@ -155,6 +207,14 @@ void MainWindow::newDeck() {
     setClass(classe);
     mazzo.setClasse(classe);
     album_repository->loadClass(classe); //restituito da classSelection
+    
+    if(!class_selection_widget) {   
+        results_widget->show();
+        search_widget->show();
+        recap_widget->show();
+    }
+
+    splitter->setSizes(QList<int>() << 3000 << 1000);
 }
 
 void MainWindow::openDeck() {
@@ -181,21 +241,6 @@ void MainWindow::openDeck() {
     JsonFileAlbum json_album(path.toStdString(), converter_album);
     engine = json_album.loadClass(mazzo.getClasse());
     
-    // abilitazione bottoni
-    if(mazzo.getCounter() == 20) {
-        for(auto it = engine.getMemory().begin(); it != engine.getMemory().end(); it++) {
-            //disabilita addButton
-        }
-    }
-    for(int i = 0; i < mazzo.getNumCopie().getSize(); i++) {
-        const AbstractCard* temp_card = &album.getCardFromID(i);
-        if(mazzo.getCounter() < 20 && mazzo.isFull(temp_card)) {
-            //disabilita addButton
-        }
-        else if(mazzo.getCounter() < 20 && mazzo.isFull(temp_card)) {
-            //
-        }
-    }
 }
 
 void MainWindow::saveDeck() {
@@ -225,20 +270,6 @@ void MainWindow::search(Query query) {
     results_widget->showResults(query, engine.search(query));
     stacked_widget->setCurrentIndex(0);
     clearStack();
-}
-
-void MainWindow::buttonEnabler(const AbstractCard* card) {
-    if(mazzo.isFull(card))
-        
-}
-
-void MainWindow::addCard(const AbstractCard* card) {
-    if(mazzo.isFull(card))
-        
-}
-
-void MainWindow::removeCard(const AbstractCard* card) {
-
 }
 
 void MainWindow::close() {

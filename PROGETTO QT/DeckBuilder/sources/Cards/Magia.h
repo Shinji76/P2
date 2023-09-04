@@ -1,7 +1,8 @@
 #ifndef MAGIA_H
 #define MAGIA_H
 
-#include "AbstractCard.h"
+#include "./AbstractCard.h"
+#include <string>
 
 class Magia : public AbstractCard {
 public:

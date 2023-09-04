@@ -9,23 +9,14 @@ Mazzo::Mazzo(
 
 Mazzo::Mazzo() {}
 
-void Mazzo::addCard(const AbstractCard* card) {
-    if(counter < 20) {
-        // Rarita 3 = Leggendaria
-        if( (card.getRarita() == 3 && numCopie[ID] < 1) || (card.getRarita() != 3 && numCopie[ID] < 2) ) {
-            numCopie[card.getID()]++;
-            counter++;
-        }
-    } else {
-        throw std::exception();
-    }
+void Mazzo::addCard(unsigned int id) {
+    numCopie[id]++;
+    counter++;
 }
 
-void Mazzo::removeCard(const AbstractCard* card) {
-    if(numCopie[ID] > 0) {
-        numCopie[ID]--;
-        counter--;
-    }
+void Mazzo::removeCard(unsigned int id) {
+    numCopie[id]--;
+    counter--;
 }
 
 std::string Mazzo::getNomeMazzo() const {
