@@ -4,14 +4,11 @@
 HomeWidget::HomeWidget(QWidget *parent)
     : QWidget(parent)   
 {
-    QVBoxLayout *vbox = new QVBoxLayout(this);    //decidere se cambiare in Verticale
+    QGridLayout *grid = new QGridLayout(this);    //decidere se cambiare in Verticale
 
     QLabel* title = new QLabel("Inizia il tuo percorso");
-    vbox->addWidget(title);
+    grid->addWidget(title, 0, 0, 1, 2);
     title->setAlignment(Qt::AlignTop | Qt::AlignCenter);
-
-    QHBoxLayout *hbox = new QHBoxLayout(this);    //decidere se cambiare in Verticale
-    vbox->addLayout(hbox);
 
     QPushButton* createDeckButton = new QPushButton(
         QIcon(QPixmap((":/Assets/Icons/new.svg"))),
@@ -19,7 +16,7 @@ HomeWidget::HomeWidget(QWidget *parent)
     );
     createDeckButton->setMinimumSize(300, 250);
     createDeckButton->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    hbox->addWidget(createDeckButton);
+    grid->addWidget(createDeckButton, 1, 0);
 
     QPushButton* openDeckButton = new QPushButton(
         QIcon(QPixmap((":/Assets/Icons/open.svg"))),
@@ -27,7 +24,7 @@ HomeWidget::HomeWidget(QWidget *parent)
     );
     openDeckButton->setMinimumSize(300, 250);
     openDeckButton->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    hbox->addWidget(openDeckButton);
+    grid->addWidget(openDeckButton, 1, 1);
 
     connect(createDeckButton, SIGNAL(clicked()), this, SLOT(createDeckHandler()));
     connect(openDeckButton, SIGNAL(clicked()), this, SLOT(openDeckHandler()));
