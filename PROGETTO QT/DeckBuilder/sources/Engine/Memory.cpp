@@ -5,11 +5,9 @@
 
 
 Memory::Memory() {
-
 }
 
-Memory::Memory(std::vector<const AbstractCard*> memory) {
-
+Memory::Memory(std::vector<const AbstractCard*> memory) : memory(memory) {
 }
 
 Memory::~Memory() {
@@ -57,6 +55,6 @@ ResultSet& Memory::search(const Query& query) const {
     return *result_set;
 }
 
-std::vector<const AbstractCard*> Memory::getMemory() {
+std::vector<const AbstractCard*> Memory::getMemory() const {
     return memory;
 }

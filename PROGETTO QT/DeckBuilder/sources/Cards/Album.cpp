@@ -2,11 +2,9 @@
 #include "Album.h"
 
 Album::Album() : album(FixedVector<AbstractCard*>()) {
-
 }
 
 Album::Album(FixedVector<AbstractCard*> album) : album(album) {
-
 }
 
 FixedVector<AbstractCard*> Album::getAlbum() {

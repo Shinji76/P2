@@ -14,7 +14,6 @@
 #include <QStackedWidget>
 #include <QScrollArea>
 
-#include "../Cards/Album.h"
 #include "../Cards/DataMapper/JsonFile.h"
 #include "../Cards/JSONConverter/Reader.h"
 #include "../Cards/JSONConverter/JsonAlbum.h"
@@ -23,34 +22,19 @@
 MainWindow::MainWindow(Memory& engine, QWidget *parent)
     : QMainWindow(parent), has_unsaved_changes(false), engine(engine), deck_repository(nullptr) {
     // Actions
-    QAction* create = new QAction(
-        QIcon(QPixmap((":/Assets/Icons/new.svg"))),
-        "New Deck"
-    ); 
+    QAction* create = new QAction("New Deck"); 
     create->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_N));
 
-    QAction* open = new QAction(
-        QIcon(QPixmap((":/Assets/Icons/open.svg"))),
-        "Open Deck"
-    );
+    QAction* open = new QAction("Open Deck");
     open->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_O));
 
-    QAction* save = new QAction(
-        QIcon(QPixmap((":/Assets/Icons/save.svg"))),
-        "Save"
-    );
+    QAction* save = new QAction("Save");
     save->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_S));
 
-    QAction* save_as = new QAction(
-        QIcon(QPixmap((":/Assets/Icons/save_as.svg"))),
-        "Save As"
-    );
+    QAction* save_as = new QAction("Save As");
     save_as->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_S));
 
-    QAction* close = new QAction(
-        QIcon(QPixmap((":/Assets/Icons/close.svg"))),
-        "Close"
-    );
+    QAction* close = new QAction("Close");
     close->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Q));
 
     // Sets menu bar
@@ -63,11 +47,8 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     file->addAction(close);
     
     // Sets main panel
-    splitter = new QSplitter(this);
-    setCentralWidget(splitter);
-
-    QStackedWidget* stacked_widget = new QStackedWidget(this);
-    splitter->addWidget(stacked_widget);
+    stacked_widget = new QStackedWidget(this);
+    setCentralWidget(stacked_widget);
     
     home_widget = new HomeWidget(this);
     stacked_widget->addWidget(home_widget);
@@ -75,20 +56,24 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     class_selection_widget = new ClassSelectionWidget(this);
     stacked_widget->addWidget(class_selection_widget);
 
+    splitter = new QSplitter(this);
+
+    results_widget = new ResultsWidget();
+    splitter->addWidget(results_widget);
+
+    QSplitter* v_splitter = new QSplitter(splitter);
+    v_splitter->setOrientation(Qt::Vertical);
+    splitter->addWidget(v_splitter);
+
     search_widget = new SearchWidget(this);
-    splitter->addWidget(search_widget);
-    search_widget->hide();
+    v_splitter->addWidget(search_widget);
 
     recap_widget = new RecapWidget(this);
-    splitter->addWidget(recap_widget);
-    recap_widget->hide();
+    v_splitter->addWidget(recap_widget);
 
-    results_widget = new ResultsWidget(this);
-    splitter->addWidget(results_widget);
-    results_widget->hide();
-
-
-    splitter->setSizes(QList<int>() << 3000 << 0);
+    splitter->setSizes(QList<int>() << 3000 << 1000);
+    v_splitter->setSizes(QList<int>() << 1000 << 3000);
+    stacked_widget->addWidget(splitter);
     
     // Connects signals
     connect(create, &QAction::triggered, this, &MainWindow::newDeck);
@@ -96,10 +81,9 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     connect(save, &QAction::triggered, this, &MainWindow::saveDeck);
     connect(save_as, &QAction::triggered, this, &MainWindow::saveDeckAs);
     connect(close, &QAction::triggered, this, &MainWindow::close);
-    //connect(home_widget, &HomeWidget::createDeck, this, &MainWindow::newDeck);
+    connect(home_widget, &HomeWidget::createDeck, this, &MainWindow::newDeck);
     //connect(home_widget, &HomeWidget::openDeck, this, &MainWindow::openDeck);
     connect(search_widget, &SearchWidget::search_event, this, &MainWindow::search);
-    connect(results_widget, &ResultsWidget::refreshResults, search_widget, &SearchWidget::search);      //valutare se mantenere refresh o al massimo cambiarlo
     connect(results_widget, &ResultsWidget::previousPage, search_widget, &SearchWidget::previousPage);
     connect(results_widget, &ResultsWidget::nextPage, search_widget, &SearchWidget::nextPage);
 }
@@ -131,6 +115,7 @@ void MainWindow::clearStack() {
 
 void MainWindow::setClass(AbstractCard::Classe classe) {
     mazzo.setClasse(classe);
+    stacked_widget->setCurrentWidget(splitter);
 }
 
 void MainWindow::addCard(AbstractCard* card) {
@@ -179,51 +164,35 @@ void MainWindow::removeCard(AbstractCard* card) {
 }
 
 void MainWindow::newDeck() {
-    QString path = QFileDialog::getSaveFileName (
-        this,
-        "Creates new Deck",  
-        "./",
-        "JSON files *.json"     
-    );
+    QString path = QFileDialog::getSaveFileName(this, "Creates new Deck", "./", "JSON files *.json");
     if (path.isEmpty()) {
         return;
     }
     if(home_widget) {
+        stacked_widget->removeWidget(home_widget);
         delete home_widget;
     }
     if (deck_repository != nullptr) {
-        delete deck_repository;      //se ho degli elementi nel deck_repository cancello il deck_repository
+        delete deck_repository;
     }
 
-    //creazione del mazzo
+    stacked_widget->setCurrentWidget(class_selection_widget);
+
+    //creazione del JsonFile con path nuovo/aggiornato
     deck_repository = new JsonFile(path.toStdString());
 
     // apertura album filtrato
     Reader reader_album;
     JsonAlbum converter_album(reader_album);
-    album_repository = new JsonFileAlbum(path.toStdString(), converter_album);
-
-    AbstractCard::Classe classe;
-    setClass(classe);
-    mazzo.setClasse(classe);
-    album_repository->loadClass(classe); //restituito da classSelection
+    album_repository = new JsonFileAlbum((":/Assets/Album.json"), converter_album);
+    engine = album_repository->loadClass(mazzo.getClasse()); //std::vector con classe filtrata
     
-    if(!class_selection_widget) {   
-        results_widget->show();
-        search_widget->show();
-        recap_widget->show();
-    }
-
-    splitter->setSizes(QList<int>() << 3000 << 1000);
+    //creo box per ogni carta dell'album filtrato
+    results_widget->createBoxes(engine.getMemory());
 }
 
 void MainWindow::openDeck() {
-    QString path = QFileDialog::getOpenFileName (
-        this,
-        "Open existing Deck",
-        "./",
-        "JSON files *.json"
-    );  
+    QString path = QFileDialog::getOpenFileName(this, "Open existing Deck", "./", "JSON files *.json");  
     if (path.isEmpty()) {
         return;
     }
@@ -239,25 +208,19 @@ void MainWindow::openDeck() {
     Reader reader_album;
     JsonAlbum converter_album(reader_album);
     JsonFileAlbum json_album(path.toStdString(), converter_album);
-    engine = json_album.loadClass(mazzo.getClasse());
-    
+    engine = json_album.loadClass(mazzo.getClasse());    
 }
 
 void MainWindow::saveDeck() {
     if (deck_repository == nullptr) {
         return;
     }
-    deck_repository->store(mazzo);    //passare mazzo 
+    deck_repository->store(mazzo);
     has_unsaved_changes = false;
 }
 
 void MainWindow::saveDeckAs() {
-    QString path = QFileDialog::getSaveFileName(
-        this,
-        "Creates new Deck",
-        "./",
-        "JSON files *.json"
-    );
+    QString path = QFileDialog::getSaveFileName(this, "Creates new Deck", "./", "JSON files *.json");
     if (path.isEmpty() || deck_repository == nullptr) {
         return;
     }

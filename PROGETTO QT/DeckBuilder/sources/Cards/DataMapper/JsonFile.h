@@ -10,7 +10,6 @@
 class JsonFile {
 private:
 	std::string path;
-    Mazzo mazzo;
 
 public:
 	JsonFile(const std::string& path);

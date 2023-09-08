@@ -14,8 +14,8 @@ int main(int argc, char *argv[]) {
     app.setStyleSheet(QLatin1String(stylesheet.readAll()));
 */
 
-    Memory search_engine;
-    MainWindow window(search_engine);
+    Memory engine;
+    MainWindow window(engine);
     window.resize(1024, 576);
     window.show();
 

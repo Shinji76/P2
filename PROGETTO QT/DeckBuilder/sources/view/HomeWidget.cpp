@@ -4,24 +4,18 @@
 HomeWidget::HomeWidget(QWidget *parent)
     : QWidget(parent)   
 {
-    QGridLayout *grid = new QGridLayout(this);    //decidere se cambiare in Verticale
+    QGridLayout *grid = new QGridLayout(this);
 
     QLabel* title = new QLabel("Inizia il tuo percorso");
     grid->addWidget(title, 0, 0, 1, 2);
     title->setAlignment(Qt::AlignTop | Qt::AlignCenter);
 
-    QPushButton* createDeckButton = new QPushButton(
-        QIcon(QPixmap((":/Assets/Icons/new.svg"))),
-        "Crea mazzo"
-    );
+    QPushButton* createDeckButton = new QPushButton(QIcon(QPixmap((":/Assets/Icons/new.svg"))), "Crea mazzo");
     createDeckButton->setMinimumSize(300, 250);
     createDeckButton->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     grid->addWidget(createDeckButton, 1, 0);
 
-    QPushButton* openDeckButton = new QPushButton(
-        QIcon(QPixmap((":/Assets/Icons/open.svg"))),
-        "Apri mazzo"
-    );
+    QPushButton* openDeckButton = new QPushButton(QIcon(QPixmap((":/Assets/Icons/open.svg"))), "Apri mazzo");
     openDeckButton->setMinimumSize(300, 250);
     openDeckButton->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     grid->addWidget(openDeckButton, 1, 1);

@@ -5,13 +5,9 @@
 #include <QHBoxLayout>
 #include <QPixmap>
 
-BoxWidget::BoxWidget(QWidget *parent) {
+BoxWidget::BoxWidget(QWidget *parent) : QWidget(parent) {
     QVBoxLayout* vbox = new QVBoxLayout();
     vbox->setAlignment(Qt::AlignCenter);
-
-    QHBoxLayout* hbox = new QHBoxLayout();
-    hbox->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    vbox->addLayout(hbox);
 
     QPixmap image_object(card->getPath().c_str());
     if (!image_object) {
@@ -21,6 +17,12 @@ BoxWidget::BoxWidget(QWidget *parent) {
     QLabel* image = new QLabel();
     image->setPixmap(image_object.scaled(256, 256, Qt::AspectRatioMode::KeepAspectRatio));
     vbox->addWidget(image, 0, Qt::AlignHCenter);
+
+    vbox->addStretch(8);
+
+    QHBoxLayout* hbox = new QHBoxLayout();
+    hbox->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    vbox->addLayout(hbox);
 
     remove_button = new QPushButton(QIcon(QPixmap(":/Assets/Icons/minus.svg")), "");
     remove_button->setObjectName(QString::number(card->getID()) + '-');

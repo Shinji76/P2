@@ -2,23 +2,33 @@
 
 #include <QHBoxLayout>
 #include <QHeaderView>
+#include <QIcon>
 
 RecapWidget::RecapWidget(QWidget* parent) : QWidget(parent) {
     tableWidget = new QTableWidget(0, 5, this);
 
+    QLabel* card_amount = new QLabel;
+    
     // Aggiunta della tabella al layout
     QHBoxLayout* layout = new QHBoxLayout(this);
     layout->addWidget(tableWidget);
 
     // Impostazione delle intestazioni delle colonne
-    QStringList labels;
-    labels << "Nome" << "Qta" << "Mana" << "-" << "+";
-    tableWidget->setHorizontalHeaderLabels(labels);
+    QTableWidgetItem* nome = new QTableWidgetItem("Nome");
+    QTableWidgetItem* copie = new QTableWidgetItem("#");
+    QTableWidgetItem* minus = new QTableWidgetItem("-");
+    QTableWidgetItem* plus = new QTableWidgetItem("+");
+    QTableWidgetItem* mana = new QTableWidgetItem(QIcon(QPixmap(":/Assets/Icons/mana.svg")), "");
 
     QHeaderView* header = new QHeaderView(Qt::Horizontal, tableWidget);
-    tableWidget->setHorizontalHeaderLabels(labels);
     tableWidget->setHorizontalHeader(header);
-    tableWidget->verticalHeader()->setVisible(false);
+    tableWidget->setHorizontalHeaderItem(0, nome);
+    tableWidget->setHorizontalHeaderItem(1, copie);
+    tableWidget->setHorizontalHeaderItem(2, mana);
+    tableWidget->setHorizontalHeaderItem(3, minus);
+    tableWidget->setHorizontalHeaderItem(4, plus);
+
+    tableWidget->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
 
     // Impostazione delle dimensioni delle colonne
     header->setSectionResizeMode(0, QHeaderView::Stretch);
@@ -27,10 +37,11 @@ RecapWidget::RecapWidget(QWidget* parent) : QWidget(parent) {
     header->setSectionResizeMode(3, QHeaderView::Fixed);
     header->setSectionResizeMode(4, QHeaderView::Fixed);
     
-    header->resizeSection(1, 50);  //cambiare valori in pixel se necessario
-    header->resizeSection(2, 50);  //cambiare valori in pixel se necessario
-    header->resizeSection(3, 50);  //cambiare valori in pixel se necessario
-    header->resizeSection(4, 50);  //cambiare valori in pixel se necessario
+    header->resizeSection(0, 100);
+    header->resizeSection(1, 35);
+    header->resizeSection(2, 35); 
+    header->resizeSection(3, 25); 
+    header->resizeSection(4, 25); 
 }
 
 // Aggiunge una nuova riga alla tabella

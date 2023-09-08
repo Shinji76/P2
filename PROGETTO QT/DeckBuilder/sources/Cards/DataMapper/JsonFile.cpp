@@ -6,7 +6,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-JsonFile::JsonFile(const std::string& path) : path(path), mazzo() {}
+JsonFile::JsonFile(const std::string& path) : path(path) {}
 
 const std::string& JsonFile::getPath() const {
 	return path;

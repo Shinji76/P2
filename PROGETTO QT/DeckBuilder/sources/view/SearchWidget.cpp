@@ -10,7 +10,7 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
     QVBoxLayout* vbox = new QVBoxLayout(this);
     vbox->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
 
-    QLabel* title_label = new QLabel("Deck Builder");
+    QLabel* title_label = new QLabel("Ricerca");
     title_label->setObjectName("title");
     title_label->setAlignment(Qt::AlignHCenter);
     vbox->addWidget(title_label);
@@ -36,7 +36,6 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
     mana_filter->setCurrentText("Tutti");
     form->addRow("Costo Mana", mana_filter);
 
-
     type_filter = new QComboBox();
     type_filter->addItem("Tutti");
     type_filter->addItem("Mostro");
@@ -61,16 +60,12 @@ SearchWidget::SearchWidget(QWidget* parent) : QWidget(parent) {
     page_input->setValue(1);
     form->addRow("Pagina", page_input);
 
-    QPushButton* search_input = new QPushButton(
-        QIcon(QPixmap((":/Assets/Icons/search.svg"))),
-        "Avvia ricerca"
-    );
-    vbox->addWidget(search_input);
+    QPushButton* search_button = new QPushButton(QIcon(QPixmap((":/Assets/Icons/search.svg"))), "Avvia ricerca");
+    vbox->addWidget(search_button);
 
-    connect(search_input, &QPushButton::clicked, this, &SearchWidget::search);
+    connect(search_button, &QPushButton::clicked, this, &SearchWidget::search);
 }
 
-//TODO: capire come sistemare search widget con la query corretta
 void SearchWidget::search() {
     Query query(
         name_filter->text().toStdString(),

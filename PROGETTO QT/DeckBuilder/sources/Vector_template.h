@@ -55,18 +55,15 @@ public:
 
 template<class T>
 FixedVector<T>::FixedVector() : capacity(0) {
-    for(int i = 0; i < SIZE; ++i) {
+    for(unsigned int i = 0; i < SIZE; ++i) {
         data[i] = 0;
     }
 }
 
 template<class T>
 FixedVector<T>::~FixedVector() {
-    if (data) {
-        for (int i = 0; i < SIZE; i++) {
-            data[i].~T(); 
-        }
-        delete(data);
+    for (unsigned int i = 0; i < SIZE; i++) {
+        data[i].~T(); 
     }
 }
 

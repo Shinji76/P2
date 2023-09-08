@@ -7,11 +7,11 @@
 
 class ResultSet {
 private:
-    const unsigned int total;
+    unsigned int total;
     std::vector<const AbstractCard*> result;
 
 public:
-    ResultSet(const unsigned int total);
+    ResultSet(unsigned int total);
     unsigned int getTotal() const;
     const std::vector<const AbstractCard*>& getResult() const;
     ResultSet& add(const AbstractCard* card);

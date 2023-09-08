@@ -17,6 +17,6 @@ public:
 	virtual ~Memory();
 	//virtual Memory& clear();
 	virtual ResultSet& search(const Query& query) const;
-  	std::vector<const AbstractCard*> getMemory();
+  	std::vector<const AbstractCard*> getMemory() const;
 };
 #endif //MEMORY_H

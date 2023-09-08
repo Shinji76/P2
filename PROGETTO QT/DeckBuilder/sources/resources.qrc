@@ -1,5 +1,8 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
+    <file>Assets/Album.json</file>
+    <file>Assets/Icons/mana.svg</file>
+    <file>Assets/Icons/mana.png</file>
     <file>Assets/Icons/card_icon.svg</file>
     <file>Assets/Icons/left_arrow.svg</file>
     <file>Assets/Icons/right_arrow.svg</file>

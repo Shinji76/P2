@@ -7,7 +7,7 @@
 #include <QString>
 #include <QTableWidget>
 #include <QPushButton>
-#include <vector>
+#include <QLabel>
 
 class RecapWidget : public QWidget {
     Q_OBJECT

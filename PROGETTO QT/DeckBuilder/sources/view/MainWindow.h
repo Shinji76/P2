@@ -25,13 +25,13 @@ private:
     Mazzo mazzo;
     JsonFile* deck_repository;
     JsonFileAlbum* album_repository;
-    SearchWidget* search_widget;
-    RecapWidget* recap_widget;
     QStackedWidget* stacked_widget;
     QSplitter* splitter;
-    ResultsWidget* results_widget;
     HomeWidget* home_widget;
     ClassSelectionWidget* class_selection_widget;
+    ResultsWidget* results_widget;
+    SearchWidget* search_widget;
+    RecapWidget* recap_widget;
     void clearStack();
     
 public:

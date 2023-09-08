@@ -6,63 +6,68 @@
 #include <QPushButton>
 
 ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
-    QVBoxLayout* vbox = new QVBoxLayout(this);
-    vbox->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 
+    QVBoxLayout* main_layout = new QVBoxLayout();
     QHBoxLayout* hbox = new QHBoxLayout();
-    hbox->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-    vbox->addLayout(hbox);
+    grid = new QGridLayout();
 
-    hbox->addStretch();     //forse da rimuovere
-
-    previous_page = new QPushButton(
-        QIcon(QPixmap(":/Assets/Icons/left_arrow.svg")),
-        ""
-    );
+    previous_page = new QPushButton(QIcon(QPixmap(":/Assets/Icons/left_arrow.svg")), "");
     previous_page->setEnabled(false);
     hbox->addWidget(previous_page);
 
-    next_page = new QPushButton(
-        QIcon(QPixmap(":/Assets/Icons/right_arrow.svg")),
-        ""
-    );
+    next_page = new QPushButton(QIcon(QPixmap(":/Assets/Icons/right_arrow.svg")), "");
     next_page->setEnabled(false);
     hbox->addWidget(next_page);
 
-    hbox->addStretch();
+    main_layout->addLayout(hbox);
+    main_layout->addStretch(1);
+    main_layout->addLayout(grid);
 
-    grid = new QGridLayout();
-    grid->setAlignment(Qt::AlignHCenter | Qt::AlignTop);
-    QWidget* container = new QWidget();
-    container->setLayout(grid);
+    setLayout(main_layout);
 
     connect(previous_page, &QPushButton::clicked, this, &ResultsWidget::previousPage);
     connect(next_page, &QPushButton::clicked, this, &ResultsWidget::nextPage);
 }
 
+void ResultsWidget::createBoxes(std::vector<const AbstractCard*> cards) {
+    for(auto it = cards.begin(); it != cards.end(); it++) {
+        BoxWidget* new_box = new BoxWidget(this);
+        new_box->setCard(**it);
+        boxes.push_back(new_box);
+    }
+    showInitialResults();
+}
+
+void ResultsWidget::showInitialResults() {
+    unsigned int index = 0;
+    for(auto it = boxes.begin(); it != boxes.end() && index; it++) {
+        (*it)->hide();
+    }
+    for(auto it = boxes.begin(); it != boxes.end() && index < 9; it++) {
+        grid->addWidget(*it, index / 3, index % 3);
+        (*it)->show();
+        index++;
+    }
+    previous_page->setEnabled(false);
+    next_page->setEnabled(true);
+}
+
 void ResultsWidget::showResults(Query query, ResultSet results) {
     unsigned int index = 0;
-    // Clears previous data
-    while (!boxes.isEmpty()) {
-        const BoxWidget* info = boxes.takeLast();
-        delete info;
-    }
+
     if(results.getTotal() == 0) {
         results_total->setText("No results for \"" + QString::fromStdString(query.getName()) + "\".");
     }
     previous_page->setEnabled(query.getOffset() > 0);
     next_page->setEnabled(results.getResult().size() == 9);
 
-    // Rinomino figli
-    for(auto it = results.getResult().begin(); it != results.getResult().end(); it++) {
-        BoxWidget* new_box = new BoxWidget(this);
-        new_box->setCard(**it);
-        boxes.push_back(new_box);
-        grid->addWidget(new_box, index / 3, index % 3); 
+    for(auto it = boxes.begin(); it != boxes.end(); it++) {
+        grid->addWidget(*it, index / 3, index % 3);
+        (*it)->show();
         index++;
     }
 }
 
-const QVector<const BoxWidget*>& ResultsWidget::getBoxes() const {
+const QVector<BoxWidget*>& ResultsWidget::getBoxes() const {
     return boxes;
 }
