@@ -20,7 +20,7 @@ public:
 
     void clearTable();
     void deleteRow(const QString& name);
-    void addRow(AbstractCard* card, unsigned int copies);
+    void addRow(const AbstractCard* card, unsigned int copies);
     void updateRow(const QString& name, unsigned int copies);
 };
 

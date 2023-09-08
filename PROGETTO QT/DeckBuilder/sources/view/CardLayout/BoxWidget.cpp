@@ -5,13 +5,14 @@
 #include <QHBoxLayout>
 #include <QPixmap>
 
-BoxWidget::BoxWidget(QWidget *parent) : QWidget(parent) {
+BoxWidget::BoxWidget(const AbstractCard* card, QWidget *parent) : QWidget(parent), card(card) {
     QVBoxLayout* vbox = new QVBoxLayout();
     vbox->setAlignment(Qt::AlignCenter);
 
-    QPixmap image_object(card->getPath().c_str());
+    QString path = QString::fromStdString(card->getPath());
+    QPixmap image_object(path);
     if (!image_object) {
-        image_object = QPixmap(":/Assets/images/not_found.svg");
+        image_object = QPixmap(":/Assets/Icons/not_found.svg");
     }
 
     QLabel* image = new QLabel();
@@ -33,8 +34,11 @@ BoxWidget::BoxWidget(QWidget *parent) : QWidget(parent) {
     add_button->setObjectName(QString::number(card->getID()) + '+');
     hbox->addWidget(add_button);
 
-    connect(this, SIGNAL(addEmitter(AbstractCard*)), parentWidget()->parentWidget(), SLOT(addCard(AbstractCard*)));
-    connect(this, SIGNAL(removeEmitter(AbstractCard*)), parentWidget()->parentWidget(), SLOT(removeCard(AbstractCard*)));
+
+    connect(add_button, SIGNAL(clicked()), this, SLOT(AddClick()));
+    connect(remove_button, SIGNAL(clicked()), this, SLOT(RemoveClick()));
+    connect(this, SIGNAL(addEmitter(const AbstractCard*)), parentWidget()->parentWidget()->parentWidget()->parentWidget(), SLOT(addCard(const AbstractCard*)));
+    connect(this, SIGNAL(removeEmitter(const AbstractCard*)), parentWidget()->parentWidget()->parentWidget()->parentWidget(), SLOT(removeCard(const AbstractCard*)));
 }
 
 void BoxWidget::AddClick() {
@@ -53,6 +57,3 @@ QPushButton* BoxWidget::getAddButton() const {
     return add_button;
 }
 
-void BoxWidget::setCard(const AbstractCard& setter) {
-    card = &setter;
-}

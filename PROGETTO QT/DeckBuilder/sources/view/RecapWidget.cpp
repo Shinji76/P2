@@ -45,7 +45,7 @@ RecapWidget::RecapWidget(QWidget* parent) : QWidget(parent) {
 }
 
 // Aggiunge una nuova riga alla tabella
-void RecapWidget::addRow(AbstractCard* card, unsigned int copies) {
+void RecapWidget::addRow(const AbstractCard* card, unsigned int copies) {
     tableWidget->insertRow(tableWidget->rowCount());
 
     QTableWidgetItem* item_name = new QTableWidgetItem(QString::fromStdString(card->getNome()));

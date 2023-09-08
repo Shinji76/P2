@@ -58,7 +58,7 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
 
     splitter = new QSplitter(this);
 
-    results_widget = new ResultsWidget();
+    results_widget = new ResultsWidget(this);
     splitter->addWidget(results_widget);
 
     QSplitter* v_splitter = new QSplitter(splitter);
@@ -118,7 +118,7 @@ void MainWindow::setClass(AbstractCard::Classe classe) {
     stacked_widget->setCurrentWidget(splitter);
 }
 
-void MainWindow::addCard(AbstractCard* card) {
+void MainWindow::addCard(const AbstractCard* card) {
     //aggiungo carta a mazzo attraverso id
     mazzo.addCard(card->getID());
 
@@ -149,7 +149,7 @@ void MainWindow::addCard(AbstractCard* card) {
     }
 }
 
-void MainWindow::removeCard(AbstractCard* card) {
+void MainWindow::removeCard(const AbstractCard* card) {
     //default removeButton bloccati
     mazzo.removeCard(card->getID());
     if(mazzo.getNumCopie()[card->getID()] == 0) {

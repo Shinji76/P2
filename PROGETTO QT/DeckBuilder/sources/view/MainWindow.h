@@ -44,8 +44,8 @@ public:
 public slots:
     //ricevitore segnali
     void setClass(AbstractCard::Classe classe);
-    void addCard(AbstractCard* card);
-    void removeCard(AbstractCard* card);
+    void addCard(const AbstractCard* card);
+    void removeCard(const AbstractCard* card);
 
     void newDeck();
     void openDeck();

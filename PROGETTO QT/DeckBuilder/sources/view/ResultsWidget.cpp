@@ -31,8 +31,7 @@ ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
 
 void ResultsWidget::createBoxes(std::vector<const AbstractCard*> cards) {
     for(auto it = cards.begin(); it != cards.end(); it++) {
-        BoxWidget* new_box = new BoxWidget(this);
-        new_box->setCard(**it);
+        BoxWidget* new_box = new BoxWidget(*it, this);
         boxes.push_back(new_box);
     }
     showInitialResults();
@@ -40,7 +39,7 @@ void ResultsWidget::createBoxes(std::vector<const AbstractCard*> cards) {
 
 void ResultsWidget::showInitialResults() {
     unsigned int index = 0;
-    for(auto it = boxes.begin(); it != boxes.end() && index; it++) {
+    for(auto it = boxes.begin(); it != boxes.end(); it++) {
         (*it)->hide();
     }
     for(auto it = boxes.begin(); it != boxes.end() && index < 9; it++) {

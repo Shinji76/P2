@@ -15,19 +15,18 @@ private:
     QPushButton* remove_button;
 
 public:
-    BoxWidget(QWidget *parent = nullptr);
+    BoxWidget(const AbstractCard* card, QWidget *parent = nullptr);
     
     QPushButton* getAddButton() const;
     QPushButton* getRemoveButton() const;
-    void setCard(const AbstractCard& setter);
-
-public slots:
-    void AddClick();
-    void RemoveClick();
 
 signals:
     void addEmitter(const AbstractCard* card);
     void removeEmitter(const AbstractCard* card);
+
+public slots:
+    void AddClick();
+    void RemoveClick();
 };
 
 #endif

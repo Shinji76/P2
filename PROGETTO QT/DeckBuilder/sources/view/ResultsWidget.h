@@ -2,6 +2,7 @@
 #define RESULTS_WIDGET_H
 
 #include <QVector>
+#include <QObject>
 #include <QGridLayout>
 #include <QWidget>
 #include <QLabel>
