@@ -44,12 +44,12 @@ const std::vector<const AbstractCard*>& JsonFileAlbum::loadClass(AbstractCard::C
 	json_file.open(QFile::ReadOnly);
 	QByteArray data = json_file.readAll();
 	json_file.close();
-	QJsonDocument document = QJsonDocument::fromJson(data);
+    QJsonDocument document = QJsonDocument::fromJson(data);
     QJsonArray json_album = document.array();
 
     for(const QJsonValue& value : json_album) {
         QJsonObject json_object = value.toObject();
-        if(json_object.value("Classe") == classe || json_object.value("Classe") == 0) {
+        if(json_object.value("Classe").toInt() == classe || json_object.value("Classe") == 0) {
             cards->push_back(converter.toObject(json_object));
         }
     }
