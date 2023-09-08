@@ -1,5 +1,4 @@
-{
-	"Album": [
+[
 		{
 			"Type": "Mostro",
 			"ID": 0,
@@ -615,4 +614,3 @@
             "Path": ":Assets/CardImages/0050.png"
 		}
 	]
-}
