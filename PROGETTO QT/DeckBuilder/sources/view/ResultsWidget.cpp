@@ -50,6 +50,7 @@ void ResultsWidget::showInitialResults() {
     next_page->setEnabled(true);
 }
 
+
 void ResultsWidget::showResults(Query query, ResultSet results) {
     unsigned int index = 0;
     
