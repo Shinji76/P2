@@ -49,7 +49,7 @@ const std::vector<const AbstractCard*>& JsonFileAlbum::loadClass(AbstractCard::C
 
     for(const QJsonValue& value : json_album) {
         QJsonObject json_object = value.toObject();
-        if(json_object.value("Classe").toInt() == classe || json_object.value("Classe") == 0) {
+        if(json_object.value("Classe").toInt() == classe || json_object.value("Classe").toInt() == 0) {
             cards->push_back(converter.toObject(json_object));
         }
     }

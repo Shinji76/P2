@@ -13,7 +13,6 @@ QT += widgets core gui charts
 RESOURCES += \
     resources.qrc
 
-
 # Input
 HEADERS += \
     Cards/AbstractCard.h \
