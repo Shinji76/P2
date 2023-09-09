@@ -12,8 +12,6 @@
 #include "../Engine/ResultSet.h"
 #include "CardLayout/BoxWidget.h"
 
-class BoxWidget;
-
 class ResultsWidget: public QWidget {
 Q_OBJECT
 private:

@@ -55,7 +55,7 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
 
     class_selection_widget = new ClassSelectionWidget(this);
     stacked_widget->addWidget(class_selection_widget);
-
+/*
     splitter = new QSplitter(this);
 
     results_widget = new ResultsWidget(this);
@@ -74,6 +74,27 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     splitter->setSizes(QList<int>() << 3000 << 1000);
     v_splitter->setSizes(QList<int>() << 1000 << 3000);
     stacked_widget->addWidget(splitter);
+*/  
+    container = new QWidget(this);
+
+    QHBoxLayout* hbox = new QHBoxLayout(container);
+    
+    results_widget = new ResultsWidget(container);
+    results_widget->setMinimumWidth(700);
+    hbox->addWidget(results_widget);
+    
+    QVBoxLayout* vbox = new QVBoxLayout();
+    hbox->addLayout(vbox);
+
+    search_widget = new SearchWidget(this);
+    search_widget->setMaximumWidth(400);
+    vbox->addWidget(search_widget);
+
+    recap_widget = new RecapWidget(this);
+    recap_widget->setMaximumWidth(400);
+    vbox->addWidget(recap_widget);
+
+    stacked_widget->addWidget(container);
     
     // Connects signals
     connect(create, &QAction::triggered, this, &MainWindow::newDeck);
@@ -82,7 +103,7 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     connect(save_as, &QAction::triggered, this, &MainWindow::saveDeckAs);
     connect(close, &QAction::triggered, this, &MainWindow::close);
     connect(home_widget, &HomeWidget::createDeck, this, &MainWindow::newDeck);
-    //connect(home_widget, &HomeWidget::openDeck, this, &MainWindow::openDeck);
+    connect(home_widget, &HomeWidget::openDeck, this, &MainWindow::openDeck);
     connect(search_widget, &SearchWidget::search_event, this, &MainWindow::search);
     connect(results_widget, &ResultsWidget::previousPage, search_widget, &SearchWidget::previousPage);
     connect(results_widget, &ResultsWidget::nextPage, search_widget, &SearchWidget::nextPage);
@@ -115,7 +136,7 @@ void MainWindow::clearStack() {
 
 void MainWindow::setClass(AbstractCard::Classe classe) {
     mazzo.setClasse(classe);
-    stacked_widget->setCurrentWidget(splitter);
+    stacked_widget->setCurrentWidget(container);
 }
 
 void MainWindow::addCard(const AbstractCard* card) {

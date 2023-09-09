@@ -15,6 +15,8 @@ private:
     QPushButton* remove_button;
 
 public:
+    BoxWidget(QWidget*parent = nullptr);
+
     BoxWidget(const AbstractCard* card, QWidget *parent = nullptr);
     
     QPushButton* getAddButton() const;

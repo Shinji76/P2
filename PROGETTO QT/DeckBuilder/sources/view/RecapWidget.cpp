@@ -6,8 +6,6 @@
 
 RecapWidget::RecapWidget(QWidget* parent) : QWidget(parent) {
     tableWidget = new QTableWidget(0, 5, this);
-
-    QLabel* card_amount = new QLabel;
     
     // Aggiunta della tabella al layout
     QHBoxLayout* layout = new QHBoxLayout(this);
@@ -44,7 +42,6 @@ RecapWidget::RecapWidget(QWidget* parent) : QWidget(parent) {
     header->resizeSection(4, 25); 
 }
 
-// Aggiunge una nuova riga alla tabella
 void RecapWidget::addRow(const AbstractCard* card, unsigned int copies) {
     tableWidget->insertRow(tableWidget->rowCount());
 
@@ -74,7 +71,6 @@ void RecapWidget::updateRow(const QString& name, unsigned int copies) {
     }
 }
 
-// Rimuove una riga dalla tabella
 void RecapWidget::deleteRow(const QString& name) {
     for(int i = 0; i < tableWidget->rowCount(); i++) {
         if(tableWidget->item(i, 0)->text() == name) {

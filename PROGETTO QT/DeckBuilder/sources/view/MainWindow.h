@@ -27,6 +27,7 @@ private:
     JsonFileAlbum* album_repository;
     QStackedWidget* stacked_widget;
     QSplitter* splitter;
+    QWidget* container;
     HomeWidget* home_widget;
     ClassSelectionWidget* class_selection_widget;
     ResultsWidget* results_widget;

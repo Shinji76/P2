@@ -70,7 +70,7 @@ void SearchWidget::search() {
     Query query(
         name_filter->text().toStdString(),
         mana_filter->currentText().toInt(),
-        type_filter->currentText().toStdString(),           //può essere sbagliato rispetto alle enum
+        type_filter->currentText().toStdString(),
         sorting_type->currentText().toInt(),
         (page_input->value() - 1) * 9
     );

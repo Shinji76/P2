@@ -18,11 +18,10 @@ ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
     next_page = new QPushButton(QIcon(QPixmap(":/Assets/Icons/right_arrow.svg")), "");
     next_page->setEnabled(false);
     hbox->addWidget(next_page);
-
+    
     main_layout->addLayout(hbox);
-    main_layout->addStretch(1);
     main_layout->addLayout(grid);
-
+    
     setLayout(main_layout);
 
     connect(previous_page, &QPushButton::clicked, this, &ResultsWidget::previousPage);
@@ -32,6 +31,8 @@ ResultsWidget::ResultsWidget(QWidget* parent) : QWidget(parent) {
 void ResultsWidget::createBoxes(std::vector<const AbstractCard*> cards) {
     for(auto it = cards.begin(); it != cards.end(); it++) {
         BoxWidget* new_box = new BoxWidget(*it, this);
+        new_box->setStyleSheet("border: 2px solid black;");
+        new_box->hide();
         boxes.push_back(new_box);
     }
     showInitialResults();
@@ -39,12 +40,14 @@ void ResultsWidget::createBoxes(std::vector<const AbstractCard*> cards) {
 
 void ResultsWidget::showInitialResults() {
     unsigned int index = 0;
+    /*
     for(auto it = boxes.begin(); it != boxes.end(); it++) {
         (*it)->hide();
     }
-    for(auto it = boxes.begin(); it != boxes.end() && index < 9; it++) {
-        grid->addWidget(*it, index / 3, index % 3);
+    */
+    for(auto it = boxes.begin(); index < 9; it++) {
         (*it)->show();
+        grid->addWidget(*it, index / 3, index % 3);
         index++;
     }
     previous_page->setEnabled(false);
@@ -53,12 +56,15 @@ void ResultsWidget::showInitialResults() {
 
 void ResultsWidget::showResults(Query query, ResultSet results) {
     unsigned int index = 0;
-
+    
+    for(auto it = boxes.begin(); it != boxes.end(); it++) {
+        (*it)->hide();
+    }
     if(results.getTotal() == 0) {
         results_total->setText("No results for \"" + QString::fromStdString(query.getName()) + "\".");
     }
     previous_page->setEnabled(query.getOffset() > 0);
-    next_page->setEnabled(results.getResult().size() == 9);
+    next_page->setEnabled(results.getTotal() == 9);
 
     for(auto it = boxes.begin(); it != boxes.end(); it++) {
         grid->addWidget(*it, index / 3, index % 3);
