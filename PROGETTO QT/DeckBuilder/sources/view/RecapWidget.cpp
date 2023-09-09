@@ -7,11 +7,19 @@
 RecapWidget::RecapWidget(QWidget* parent) : QWidget(parent) {
     tableWidget = new QTableWidget(0, 5, this);
     
-    // Aggiunta della tabella al layout
-    QHBoxLayout* layout = new QHBoxLayout(this);
-    layout->addWidget(tableWidget);
+    total_label = new QLabel();
 
-    // Impostazione delle intestazioni delle colonne
+    QVBoxLayout* vbox = new QVBoxLayout();
+    vbox->addWidget(total_label);
+    total_label->setText("Numero Carte: ");
+    total_label->setAlignment(Qt::AlignCenter);
+
+    QHBoxLayout* layout = new QHBoxLayout();
+    layout->addWidget(tableWidget);
+    vbox->addLayout(layout);
+    
+    setLayout(vbox);
+    
     QTableWidgetItem* nome = new QTableWidgetItem("Nome");
     QTableWidgetItem* copie = new QTableWidgetItem("#");
     QTableWidgetItem* minus = new QTableWidgetItem("-");
@@ -29,7 +37,6 @@ RecapWidget::RecapWidget(QWidget* parent) : QWidget(parent) {
     tableWidget->verticalHeader()->setVisible(false);
     tableWidget->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
 
-    // Impostazione delle dimensioni delle colonne
     header->setSectionResizeMode(0, QHeaderView::Stretch);
     header->setSectionResizeMode(1, QHeaderView::Fixed);
     header->setSectionResizeMode(2, QHeaderView::Fixed);
@@ -96,3 +103,7 @@ void RecapWidget::RemoveClick() {
     emit removeEmitterRecap(qobject_cast<QPushButton*>(QObject::sender())->objectName());
 }
 
+void RecapWidget::UpdateTotal(const unsigned int total) {
+    QString counter = QString::number(total);
+    total_label->setText("Numero carte: " + counter + "/20");
+}

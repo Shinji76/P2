@@ -109,6 +109,7 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     connect(results_widget, &ResultsWidget::nextPage, search_widget, &SearchWidget::nextPage);
     connect(this, SIGNAL(addCardRecapEmitter(const AbstractCard*)), this, SLOT(addCard(const AbstractCard*)), Qt::UniqueConnection);
     connect(this, SIGNAL(removeCardRecapEmitter(const AbstractCard*)), this, SLOT(removeCard(const AbstractCard*)), Qt::UniqueConnection);
+    connect(this, SIGNAL(updateTotalDeck(const unsigned int)), recap_widget, SLOT(UpdateTotal(const unsigned int)), Qt::UniqueConnection);
 }
 
 JsonFile* MainWindow::getDeckRepository() {
@@ -164,6 +165,7 @@ void MainWindow::addCard(const AbstractCard* card) {
         results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(false);
         recap_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(false);
     }
+    emit updateTotalDeck(mazzo.getCounter());
 }
 
 void MainWindow::removeCard(const AbstractCard* card) {
@@ -179,6 +181,7 @@ void MainWindow::removeCard(const AbstractCard* card) {
         recap_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(true);
         recap_widget->updateRow(QString::fromStdString(card->getNome()), mazzo.getNumCopie()[card->getID()]);
     }
+    emit updateTotalDeck(mazzo.getCounter());
 }
 
 void MainWindow::addCardRecap(QString button_name) {

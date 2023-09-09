@@ -18,8 +18,8 @@ BoxWidget::BoxWidget(const AbstractCard* card, QWidget *parent) : QWidget(parent
     }
 
     QLabel* image = new QLabel();
-    image->setPixmap(image_object.scaled(130, 130, Qt::AspectRatioMode::KeepAspectRatio));
-    vbox->addWidget(image, 0, Qt::AlignHCenter);
+    image->setPixmap(image_object.scaled(150, 150, Qt::AspectRatioMode::KeepAspectRatio));
+    vbox->addWidget(image, 0, Qt::AlignCenter);
 
     QHBoxLayout* hbox = new QHBoxLayout();
     hbox->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -27,11 +27,13 @@ BoxWidget::BoxWidget(const AbstractCard* card, QWidget *parent) : QWidget(parent
 
     remove_button = new QPushButton(QIcon(QPixmap(":/Assets/Icons/minus.svg")), "");
     remove_button->setObjectName(QString::number(card->getID()) + '-');
+    remove_button->setMinimumWidth(50);
     remove_button->setEnabled(false);
     hbox->addWidget(remove_button);
 
     add_button = new QPushButton(QIcon(QPixmap(":/Assets/Icons/plus.svg")), "");
     add_button->setObjectName(QString::number(card->getID()) + '+');
+    add_button->setMinimumWidth(50);
     hbox->addWidget(add_button);
 
     connect(add_button, SIGNAL(clicked()), this, SLOT(AddClick()));

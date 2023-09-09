@@ -13,6 +13,8 @@ class RecapWidget : public QWidget {
     Q_OBJECT
 
 private:
+
+    QLabel* total_label;
     QTableWidget* tableWidget;
 
 public:
@@ -30,6 +32,7 @@ signals:
 public slots:
     void AddClick();
     void RemoveClick();
+    void UpdateTotal(const unsigned int total);
 };
 
 #endif // RECAPWIDGET_H

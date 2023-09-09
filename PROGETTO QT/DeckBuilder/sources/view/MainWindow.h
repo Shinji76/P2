@@ -45,6 +45,7 @@ public:
 signals:
     void addCardRecapEmitter(const AbstractCard* card);
     void removeCardRecapEmitter(const AbstractCard* card);
+    void updateTotalDeck(const unsigned int total);
 
 public slots:
     //ricevitore segnali
