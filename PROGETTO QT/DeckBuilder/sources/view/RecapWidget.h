@@ -22,6 +22,14 @@ public:
     void deleteRow(const QString& name);
     void addRow(const AbstractCard* card, unsigned int copies);
     void updateRow(const QString& name, unsigned int copies);
+
+signals:
+    void addEmitterRecap(QString);
+    void removeEmitterRecap(QString);
+
+public slots:
+    void AddClick();
+    void RemoveClick();
 };
 
 #endif // RECAPWIDGET_H

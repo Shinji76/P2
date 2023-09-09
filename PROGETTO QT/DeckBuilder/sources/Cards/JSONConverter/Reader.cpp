@@ -38,65 +38,65 @@ AbstractCard* Reader::read(const QJsonObject& object) {
 
 AbstractCard* Reader::readMostro(const QJsonObject& object) const {
     AbstractCard::Rarita rarita;
-    switch (object.value("Rarita").toInt()) {
-        case 0:
+    std::string string_rarita = object.value("Rarita").toString().toStdString();
+        if(string_rarita == "Comune") {
             rarita = AbstractCard::Comune;
-            break;
-        case 1:
+        }
+        else if(string_rarita == "Rara") {
             rarita = AbstractCard::Rara;
-            break;
-        case 2:
+        }
+        else if(string_rarita == "Epica") {
             rarita = AbstractCard::Epica;
-            break;
-        case 3:
+        }
+        else if(string_rarita == "Leggendaria") {
             rarita = AbstractCard::Leggendaria;
-            break;
-    }
+        }
+
     AbstractCard::Classe classe;
-    switch (object.value("Classe").toInt()) {
-        case 0:
+    std::string string_classe = object.value("Classe").toString().toStdString();
+        if(string_classe == "Neutrale") {
             classe = AbstractCard::Neutrale;
-            break;
-        case 1:
+        }
+        else if(string_classe == "Cacciatore") {
             classe = AbstractCard::Cacciatore;
-            break;
-        case 2:
+        }
+        else if(string_classe == "Guerriero") {
             classe = AbstractCard::Guerriero;
-            break;
-        case 3:
+        }
+        else if(string_classe == "Ladro") {
             classe = AbstractCard::Ladro;
-            break;
-        case 4:
+        }
+        else if(string_classe == "Mago") {
             classe = AbstractCard::Mago;
-            break;
-        case 5:
+        }
+        else if(string_classe == "Stregone") {
             classe = AbstractCard::Stregone;
-            break;
-    }
+        }
+
     Mostro::Razza razza;
-    switch (object.value("Razza").toInt()) {
-        case 0:
+    std::string string_razza = object.value("Razza").toString().toStdString();
+        if(string_razza == "Comune") {
             razza = Mostro::Comune;
-            break;
-        case 1:
+        }
+        else if(string_razza == "Bestia") {
             razza = Mostro::Bestia;
-            break;
-        case 2:
+        }
+        else if(string_razza == "Demone") {
             razza = Mostro::Demone;
-            break;
-        case 3:
+        }
+        else if(string_razza == "Drago") {
             razza = Mostro::Drago;
-            break;
-        case 4:
+        }
+        else if(string_razza == "Elementale") {
             razza = Mostro::Elementale;
-            break;
-        case 5:
+        }
+        else if(string_razza == "Murloc") {
             razza = Mostro::Murloc;
-            break;
-        case 6:
+        }
+        else if(string_razza == "Pirata") {
             razza = Mostro::Pirata;
-            break;
-    }
+        }
+
     return new Mostro(
         object.value("ID").toInt(),
         object.value("Nome").toString().toStdString(),
@@ -113,41 +113,40 @@ AbstractCard* Reader::readMostro(const QJsonObject& object) const {
 
 AbstractCard* Reader::readMagia(const QJsonObject& object) const {
     AbstractCard::Rarita rarita;
-    switch (object.value("Rarita").toInt()) {
-        case 0:
+    std::string string_rarita = object.value("Rarita").toString().toStdString();
+        if(string_rarita == "Comune") {
             rarita = AbstractCard::Comune;
-            break;
-        case 1:
+        }
+        else if(string_rarita == "Rara") {
             rarita = AbstractCard::Rara;
-            break;
-        case 2:
+        }
+        else if(string_rarita == "Epica") {
             rarita = AbstractCard::Epica;
-            break;
-        case 3:
+        }
+        else if(string_rarita == "Leggendaria") {
             rarita = AbstractCard::Leggendaria;
-            break;
-    }
+        }
+
     AbstractCard::Classe classe;
-    switch (object.value("Classe").toInt()) {
-        case 0:
+    std::string string_classe = object.value("Classe").toString().toStdString();
+        if(string_classe == "Neutrale") {
             classe = AbstractCard::Neutrale;
-            break;
-        case 1:
+        }
+        else if(string_classe == "Cacciatore") {
             classe = AbstractCard::Cacciatore;
-            break;
-        case 2:
+        }
+        else if(string_classe == "Guerriero") {
             classe = AbstractCard::Guerriero;
-            break;
-        case 3:
+        }
+        else if(string_classe == "Ladro") {
             classe = AbstractCard::Ladro;
-            break;
-        case 4:
+        }
+        else if(string_classe == "Mago") {
             classe = AbstractCard::Mago;
-            break;
-        case 5:
+        }
+        else if(string_classe == "Stregone") {
             classe = AbstractCard::Stregone;
-            break;
-    }
+        }
     return new Magia(
         object.value("ID").toInt(),
         object.value("Nome").toString().toStdString(),
@@ -160,42 +159,41 @@ AbstractCard* Reader::readMagia(const QJsonObject& object) const {
 }
 
 AbstractCard* Reader::readSegreto(const QJsonObject& object) const {
-    AbstractCard::Rarita rarita;
-    switch (object.value("Rarita").toInt()) {
-        case 0:
+AbstractCard::Rarita rarita;
+    std::string string_rarita = object.value("Rarita").toString().toStdString();
+        if(string_rarita == "Comune") {
             rarita = AbstractCard::Comune;
-            break;
-        case 1:
+        }
+        else if(string_rarita == "Rara") {
             rarita = AbstractCard::Rara;
-            break;
-        case 2:
+        }
+        else if(string_rarita == "Epica") {
             rarita = AbstractCard::Epica;
-            break;
-        case 3:
+        }
+        else if(string_rarita == "Leggendaria") {
             rarita = AbstractCard::Leggendaria;
-            break;
-    }
+        }
+        
     AbstractCard::Classe classe;
-    switch (object.value("Classe").toInt()) {
-        case 0:
+    std::string string_classe = object.value("Classe").toString().toStdString();
+        if(string_classe == "Neutrale") {
             classe = AbstractCard::Neutrale;
-            break;
-        case 1:
+        }
+        else if(string_classe == "Cacciatore") {
             classe = AbstractCard::Cacciatore;
-            break;
-        case 2:
+        }
+        else if(string_classe == "Guerriero") {
             classe = AbstractCard::Guerriero;
-            break;
-        case 3:
+        }
+        else if(string_classe == "Ladro") {
             classe = AbstractCard::Ladro;
-            break;
-        case 4:
+        }
+        else if(string_classe == "Mago") {
             classe = AbstractCard::Mago;
-            break;
-        case 5:
+        }
+        else if(string_classe == "Stregone") {
             classe = AbstractCard::Stregone;
-            break;
-    }
+        }
     return new Segreto(
         object.value("ID").toInt(),
         object.value("Nome").toString().toStdString(),

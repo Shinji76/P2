@@ -17,6 +17,8 @@ private:
 	JsonAlbum& converter;
     FixedVector<AbstractCard*> album;
 
+    int parser(QJsonValue value);
+
 public:
     JsonFileAlbum(const std::string& path, JsonAlbum& Jconverter);
     

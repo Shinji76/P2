@@ -26,6 +26,7 @@ RecapWidget::RecapWidget(QWidget* parent) : QWidget(parent) {
     tableWidget->setHorizontalHeaderItem(3, minus);
     tableWidget->setHorizontalHeaderItem(4, plus);
 
+    tableWidget->verticalHeader()->setVisible(false);
     tableWidget->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
 
     // Impostazione delle dimensioni delle colonne
@@ -46,12 +47,15 @@ void RecapWidget::addRow(const AbstractCard* card, unsigned int copies) {
     tableWidget->insertRow(tableWidget->rowCount());
 
     QTableWidgetItem* item_name = new QTableWidgetItem(QString::fromStdString(card->getNome()));
+    item_name->setFlags(item_name->flags() ^ Qt::ItemIsEditable);
     tableWidget->setItem(tableWidget->rowCount()-1, 0, item_name);
 
-    QTableWidgetItem* item_copy = new QTableWidgetItem(copies);
+    QTableWidgetItem* item_copy = new QTableWidgetItem(QString::number(copies));
+    item_copy->setFlags(item_copy->flags() ^ Qt::ItemIsEditable);
     tableWidget->setItem(tableWidget->rowCount()-1, 1, item_copy);
     
-    QTableWidgetItem* item_mana = new QTableWidgetItem(card->getManaCost());
+    QTableWidgetItem* item_mana = new QTableWidgetItem(QString::number(card->getManaCost()));
+    item_mana->setFlags(item_mana->flags() ^ Qt::ItemIsEditable);
     tableWidget->setItem(tableWidget->rowCount()-1, 2, item_mana);
 
     QPushButton* item_minus = new QPushButton(QIcon(QPixmap(":/Assets/Icons/minus.svg")),"");
@@ -61,6 +65,11 @@ void RecapWidget::addRow(const AbstractCard* card, unsigned int copies) {
     QPushButton* item_plus = new QPushButton(QIcon(QPixmap(":/Assets/Icons/plus.svg")),"");
     item_plus->setObjectName(QString::number(card->getID()) + '+');
     tableWidget->setCellWidget(tableWidget->rowCount()-1, 4, item_plus);
+
+    connect(item_plus, SIGNAL(clicked()), this, SLOT(AddClick()));
+    connect(item_minus, SIGNAL(clicked()), this, SLOT(RemoveClick()));
+    connect(this, SIGNAL(addEmitterRecap(QString)), parentWidget()->parentWidget()->parentWidget(), SLOT(addCardRecap(QString)), Qt::UniqueConnection);
+    connect(this, SIGNAL(removeEmitterRecap(QString)), parentWidget()->parentWidget()->parentWidget(), SLOT(removeCardRecap(QString)), Qt::UniqueConnection);
 }
 
 void RecapWidget::updateRow(const QString& name, unsigned int copies) {
@@ -78,3 +87,12 @@ void RecapWidget::deleteRow(const QString& name) {
         }
     }
 }
+
+void RecapWidget::AddClick() {
+    emit addEmitterRecap(qobject_cast<QPushButton*>(QObject::sender())->objectName());
+}
+
+void RecapWidget::RemoveClick() {
+    emit removeEmitterRecap(qobject_cast<QPushButton*>(QObject::sender())->objectName());
+}
+

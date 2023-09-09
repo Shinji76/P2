@@ -42,11 +42,17 @@ public:
     Memory& getEngine();
     SearchWidget* getSearchWidget();
 
+signals:
+    void addCardRecapEmitter(const AbstractCard* card);
+    void removeCardRecapEmitter(const AbstractCard* card);
+
 public slots:
     //ricevitore segnali
     void setClass(AbstractCard::Classe classe);
     void addCard(const AbstractCard* card);
     void removeCard(const AbstractCard* card);
+    void addCardRecap(QString button_name);     //implementare cpp 
+    void removeCardRecap(QString button_name);
 
     void newDeck();
     void openDeck();

@@ -58,3 +58,7 @@ ResultSet& Memory::search(const Query& query) const {
 std::vector<const AbstractCard*> Memory::getMemory() const {
     return memory;
 }
+
+const AbstractCard* Memory::getCardFromID(int ID) const {
+    return memory[ID];
+}

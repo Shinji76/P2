@@ -2,7 +2,7 @@
 #include <QFile>
 
 #include "Engine/Memory.h"
-#include "View/MainWindow.h"
+#include "view/MainWindow.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);

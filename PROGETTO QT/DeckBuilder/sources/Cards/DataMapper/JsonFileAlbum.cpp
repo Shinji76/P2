@@ -38,7 +38,30 @@ const Album& JsonFileAlbum::loadAlbum() {
 	return *album;
 }
 
-const std::vector<const AbstractCard*>& JsonFileAlbum::loadClass(AbstractCard::Classe classe) const {
+const std::vector<const AbstractCard*>& JsonFileAlbum::loadClass(AbstractCard::Classe classe) const {    
+
+std::string class_string;
+switch (classe) {
+    case 0:
+        class_string = "Neutrale";
+        break;
+    case 1:
+        class_string = "Cacciatore";
+        break;
+    case 2:
+        class_string = "Guerriero";
+        break;
+    case 3:
+        class_string = "Ladro";
+        break;
+    case 4:
+        class_string = "Mago";
+        break;
+    case 5:
+        class_string = "Stregone";
+        break;
+}
+    
     auto cards = new std::vector<const AbstractCard*>;
     QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);
@@ -49,7 +72,7 @@ const std::vector<const AbstractCard*>& JsonFileAlbum::loadClass(AbstractCard::C
 
     for(const QJsonValue& value : json_album) {
         QJsonObject json_object = value.toObject();
-        if(json_object.value("Classe").toInt() == classe || json_object.value("Classe").toInt() == 0) {
+        if(json_object.value("Classe").toString().toStdString() == class_string || json_object.value("Classe") == AbstractCard::Neutrale) {
             cards->push_back(converter.toObject(json_object));
         }
     }

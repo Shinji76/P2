@@ -107,6 +107,8 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     connect(search_widget, &SearchWidget::search_event, this, &MainWindow::search);
     connect(results_widget, &ResultsWidget::previousPage, search_widget, &SearchWidget::previousPage);
     connect(results_widget, &ResultsWidget::nextPage, search_widget, &SearchWidget::nextPage);
+    connect(this, SIGNAL(addCardRecapEmitter(const AbstractCard*)), this, SLOT(addCard(const AbstractCard*)), Qt::UniqueConnection);
+    connect(this, SIGNAL(removeCardRecapEmitter(const AbstractCard*)), this, SLOT(removeCard(const AbstractCard*)), Qt::UniqueConnection);
 }
 
 JsonFile* MainWindow::getDeckRepository() {
@@ -140,13 +142,11 @@ void MainWindow::setClass(AbstractCard::Classe classe) {
 }
 
 void MainWindow::addCard(const AbstractCard* card) {
-    //aggiungo carta a mazzo attraverso id
-    mazzo.addCard(card->getID());
-
-    //aggiungere riga a tabella RecapWidget
     if(mazzo.getNumCopie()[card->getID()] == 0) {
+        mazzo.addCard(card->getID());
         recap_widget->addRow(card, mazzo.getNumCopie()[card->getID()]);
     } else {
+        mazzo.addCard(card->getID());
         recap_widget->updateRow(QString::fromStdString(card->getNome()), mazzo.getNumCopie()[card->getID()]);
     }   
 
@@ -154,17 +154,13 @@ void MainWindow::addCard(const AbstractCard* card) {
     results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '-')->setEnabled(true);
     recap_widget->findChild<QPushButton*>(QString::number(card->getID()) + '-')->setEnabled(true);
 
-    //controllo mazzo, se pieno blocco tutti plus
     if(mazzo.getCounter() == 20) {
-        //emit segnale disabilita tutti i plus
         for(auto it = results_widget->getBoxes().begin(); it != results_widget->getBoxes().end(); it++) {
             (*it)->getRemoveButton()->setEnabled(false);
         }
     }
 
-    //controllo carta eventualmente blocco plus e abilito meno
-    else if( (card->getRarita() == 3) || (card->getRarita() != 3 && mazzo.getNumCopie()[card->getID()] == 2) ) {     // Rarita 3 = Leggendaria
-        //emit segnale disabilita plus per card
+    if( (card->getRarita() == 3) || (mazzo.getNumCopie()[card->getID()] == 2) ) {     // Rarita 3 = Leggendaria
         results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(false);
         recap_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(false);
     }
@@ -180,8 +176,21 @@ void MainWindow::removeCard(const AbstractCard* card) {
         recap_widget->deleteRow(QString::fromStdString(card->getNome()));
     } else {
         results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(true);
+        recap_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(true);
         recap_widget->updateRow(QString::fromStdString(card->getNome()), mazzo.getNumCopie()[card->getID()]);
     }
+}
+
+void MainWindow::addCardRecap(QString button_name) {
+    button_name.chop(1);
+    int tmp_id = button_name.toInt();
+    emit addCardRecapEmitter(engine.getCardFromID(tmp_id));
+}
+
+void MainWindow::removeCardRecap(QString button_name) {
+    button_name.chop(1);
+    int tmp_id = button_name.toInt();
+    emit removeCardRecapEmitter(engine.getCardFromID(tmp_id));
 }
 
 void MainWindow::newDeck() {
