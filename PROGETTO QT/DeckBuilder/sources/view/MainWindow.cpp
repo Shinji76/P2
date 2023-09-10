@@ -242,11 +242,12 @@ void MainWindow::openDeck() {
     if (path.isEmpty()) {
         return;
     }
+    QString deck_name = QFileInfo(path).baseName();
     stacked_widget->setCurrentWidget(container);
 
     deck_repository = new JsonFile(path.toStdString());
     mazzo = deck_repository->load();
-    emit insertDeckName(QString::fromStdString(mazzo.getNome()));
+    emit insertDeckName(deck_name);
 
     Reader reader_album;
     JsonAlbum converter_album(reader_album);
