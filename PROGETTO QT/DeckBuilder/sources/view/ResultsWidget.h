@@ -15,6 +15,7 @@
 class ResultsWidget: public QWidget {
 Q_OBJECT
 private:
+    int page_index;
     QLabel* results_total;
 	QPushButton* previous_page;
 	QPushButton* next_page;
@@ -23,7 +24,6 @@ private:
 
 public:
 	explicit ResultsWidget(QWidget* parent = 0);
-
     const QVector<BoxWidget*>& getBoxes() const;
 
 signals:
@@ -32,8 +32,8 @@ signals:
 
 public slots:
     void showInitialResults();
-//    void showNextPage();
-//    void showPreviousPage();
+    void showNextPage();
+    void showPreviousPage();
     void createBoxes(std::vector<const AbstractCard*> cards);
 	void showResults(Query query, ResultSet results);
 };

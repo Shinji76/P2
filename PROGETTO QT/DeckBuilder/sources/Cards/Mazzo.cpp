@@ -1,11 +1,10 @@
 #include "Mazzo.h"
 
 Mazzo::Mazzo(
-    std::string nome,
     AbstractCard::Classe classe,
     FixedVector<int> numCopie,
     unsigned int count
-    ) : nome(nome), classe(classe), numCopie(numCopie), counter(count) {}
+    ) : classe(classe), numCopie(numCopie), counter(count) {}
 
 Mazzo::Mazzo() {}
 
@@ -17,14 +16,6 @@ void Mazzo::addCard(unsigned int id) {
 void Mazzo::removeCard(unsigned int id) {
     numCopie[id]--;
     counter--;
-}
-
-std::string Mazzo::getNomeMazzo() const {
-    return nome;
-}
-
-void Mazzo::setNomeMazzo(std::string set) {
-    nome = set;
 }
 
 AbstractCard::Classe Mazzo::getClasse() const {

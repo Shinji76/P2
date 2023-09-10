@@ -90,7 +90,7 @@ const T& FixedVector<T>::operator[](int index) const {
 template<class T>
 void FixedVector<T>::push_back(const T& value) {
     if (capacity < SIZE) {
-        data[capacity++] = value;
+        data[capacity] = value;
         capacity++;
     } else {
         throw std::out_of_range("exceeded vector capacity");
@@ -138,7 +138,7 @@ typename FixedVector<T>::Iterator FixedVector<T>::begin() {
 
 template<class T>
 typename FixedVector<T>::Iterator FixedVector<T>::end() {
-    return Iterator(data + SIZE);
+    return Iterator(data + capacity);
 }
 
 
@@ -166,7 +166,7 @@ typename FixedVector<T>::constIterator FixedVector<T>::begin() const {
 
 template<class T>
 typename FixedVector<T>::constIterator FixedVector<T>::end() const {
-    return constIterator(data + SIZE);
+    return constIterator(data + capacity);
 }
 
 #endif //F_VECTOR_H

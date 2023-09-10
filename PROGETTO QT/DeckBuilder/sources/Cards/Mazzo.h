@@ -7,17 +7,13 @@
 
 class Mazzo {
 private:
-    std::string nome;
 	AbstractCard::Classe classe;
     FixedVector<int> numCopie;
-	int counter;
+	int counter = 0;
 
 public:
     Mazzo();
-    Mazzo(std::string nome, AbstractCard::Classe classe, FixedVector<int> numCopie, unsigned int counter);
-	
-    std::string getNomeMazzo() const;
-    void setNomeMazzo(std::string);
+    Mazzo(AbstractCard::Classe classe, FixedVector<int> numCopie, unsigned int counter);
     
 	AbstractCard::Classe getClasse() const;
     void setClasse(AbstractCard::Classe set);

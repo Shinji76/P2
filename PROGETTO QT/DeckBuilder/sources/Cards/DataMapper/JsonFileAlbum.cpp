@@ -72,7 +72,7 @@ switch (classe) {
 
     for(const QJsonValue& value : json_album) {
         QJsonObject json_object = value.toObject();
-        if(json_object.value("Classe").toString().toStdString() == class_string || json_object.value("Classe") == AbstractCard::Neutrale) {
+        if(json_object.value("Classe").toString().toStdString() == class_string || json_object.value("Classe").toString().toStdString() == "Neutrale") {
             cards->push_back(converter.toObject(json_object));
         }
     }

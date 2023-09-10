@@ -54,6 +54,7 @@ public slots:
     void removeCard(const AbstractCard* card);
     void addCardRecap(QString button_name);     //implementare cpp 
     void removeCardRecap(QString button_name);
+    void createTable();
 
     void newDeck();
     void openDeck();

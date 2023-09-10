@@ -55,28 +55,8 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
 
     class_selection_widget = new ClassSelectionWidget(this);
     stacked_widget->addWidget(class_selection_widget);
-/*
-    splitter = new QSplitter(this);
 
-    results_widget = new ResultsWidget(this);
-    splitter->addWidget(results_widget);
-
-    QSplitter* v_splitter = new QSplitter(splitter);
-    v_splitter->setOrientation(Qt::Vertical);
-    splitter->addWidget(v_splitter);
-
-    search_widget = new SearchWidget(this);
-    v_splitter->addWidget(search_widget);
-
-    recap_widget = new RecapWidget(this);
-    v_splitter->addWidget(recap_widget);
-
-    splitter->setSizes(QList<int>() << 3000 << 1000);
-    v_splitter->setSizes(QList<int>() << 1000 << 3000);
-    stacked_widget->addWidget(splitter);
-*/  
     container = new QWidget(this);
-
     QHBoxLayout* hbox = new QHBoxLayout(container);
     
     results_widget = new ResultsWidget(container);
@@ -139,6 +119,13 @@ void MainWindow::clearStack() {
 
 void MainWindow::setClass(AbstractCard::Classe classe) {
     mazzo.setClasse(classe);
+    // apertura album filtrato
+    Reader reader_album;
+    JsonAlbum converter_album(reader_album);
+    album_repository = new JsonFileAlbum((":/Assets/Album.json"), converter_album);
+    engine = album_repository->loadClass(mazzo.getClasse()); //std::vector con classe filtrata
+    results_widget->createBoxes(engine.getMemory());
+
     stacked_widget->setCurrentWidget(container);
 }
 
@@ -157,7 +144,13 @@ void MainWindow::addCard(const AbstractCard* card) {
 
     if(mazzo.getCounter() == 20) {
         for(auto it = results_widget->getBoxes().begin(); it != results_widget->getBoxes().end(); it++) {
-            (*it)->getRemoveButton()->setEnabled(false);
+            (*it)->getAddButton()->setEnabled(false);
+        }
+        
+        for(int i = 0; i < mazzo.getNumCopie().getSize(); i++) {
+            if(mazzo.getNumCopie()[i] != 0) {
+                recap_widget->findChild<QPushButton*>(QString::number(i) + '+')->setEnabled(false);
+            }
         }
     }
 
@@ -166,13 +159,17 @@ void MainWindow::addCard(const AbstractCard* card) {
         recap_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(false);
     }
     emit updateTotalDeck(mazzo.getCounter());
+    has_unsaved_changes = true;
 }
 
 void MainWindow::removeCard(const AbstractCard* card) {
-    //default removeButton bloccati
     mazzo.removeCard(card->getID());
+
+//    if(mazzo.getCounter() == 19) {
+//        for()
+//    }
+    
     if(mazzo.getNumCopie()[card->getID()] == 0) {
-        //emit segnale disabilita remove e abilito add, elimino riga recapWidget
         results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '-')->setEnabled(false);
         results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(true);
         recap_widget->deleteRow(QString::fromStdString(card->getNome()));
@@ -182,6 +179,7 @@ void MainWindow::removeCard(const AbstractCard* card) {
         recap_widget->updateRow(QString::fromStdString(card->getNome()), mazzo.getNumCopie()[card->getID()]);
     }
     emit updateTotalDeck(mazzo.getCounter());
+    has_unsaved_changes = true;
 }
 
 void MainWindow::addCardRecap(QString button_name) {
@@ -209,19 +207,9 @@ void MainWindow::newDeck() {
         delete deck_repository;
     }
 
-    stacked_widget->setCurrentWidget(class_selection_widget);
+    stacked_widget->setCurrentWidget(class_selection_widget);    
 
-    //creazione del JsonFile con path nuovo/aggiornato
     deck_repository = new JsonFile(path.toStdString());
-
-    // apertura album filtrato
-    Reader reader_album;
-    JsonAlbum converter_album(reader_album);
-    album_repository = new JsonFileAlbum((":/Assets/Album.json"), converter_album);
-    engine = album_repository->loadClass(mazzo.getClasse()); //std::vector con classe filtrata
-    
-    //creo box per ogni carta dell'album filtrato
-    results_widget->createBoxes(engine.getMemory());
 }
 
 void MainWindow::openDeck() {
@@ -229,19 +217,45 @@ void MainWindow::openDeck() {
     if (path.isEmpty()) {
         return;
     }
+    if(home_widget) {
+        stacked_widget->removeWidget(home_widget);
+        delete home_widget;
+    }
     if (deck_repository != nullptr) {
         delete deck_repository;
     }
-    //engine.clear();
-    //apertura mazzo
+
+    stacked_widget->setCurrentWidget(container);
+
     deck_repository = new JsonFile(path.toStdString());
     mazzo = deck_repository->load();
 
-    //apertura album filtrato
     Reader reader_album;
     JsonAlbum converter_album(reader_album);
-    JsonFileAlbum json_album(path.toStdString(), converter_album);
-    engine = json_album.loadClass(mazzo.getClasse());    
+    album_repository = new JsonFileAlbum((":/Assets/Album.json"), converter_album);
+    engine = album_repository->loadClass(mazzo.getClasse());
+    results_widget->createBoxes(engine.getMemory());
+    createTable();
+}
+
+void MainWindow::createTable() {
+    for(int i = 0; i < mazzo.getNumCopie().getSize(); i++) {
+
+        if(mazzo.getNumCopie()[i] != 0) {    
+            const AbstractCard *tmp_card = engine.getCardFromID(i);
+            recap_widget->addRow(tmp_card, mazzo.getNumCopie()[i]);
+            
+            // Rarita 3 = Leggendaria
+            if( (tmp_card->getRarita() == 3) || (mazzo.getNumCopie()[i] == 2) ) {     
+                recap_widget->findChild<QPushButton*>(QString::number(i) + '+')->setEnabled(false);
+                recap_widget->findChild<QPushButton*>(QString::number(i) + '-')->setEnabled(true);
+            }
+            else {
+                recap_widget->findChild<QPushButton*>(QString::number(i) + '+')->setEnabled(true);
+                recap_widget->findChild<QPushButton*>(QString::number(i) + '-')->setEnabled(true);
+            }
+        }
+    }
 }
 
 void MainWindow::saveDeck() {
@@ -257,8 +271,7 @@ void MainWindow::saveDeckAs() {
     if (path.isEmpty() || deck_repository == nullptr) {
         return;
     }
-    mazzo.setNomeMazzo(path.toStdString());
-    deck_repository->setPath(path.toStdString()).store(mazzo);    //mazzo
+    deck_repository->setPath(path.toStdString()).store(mazzo);
     has_unsaved_changes = false;
 }
 

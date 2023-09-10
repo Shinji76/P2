@@ -13,7 +13,6 @@ class RecapWidget : public QWidget {
     Q_OBJECT
 
 private:
-
     QLabel* total_label;
     QTableWidget* tableWidget;
 

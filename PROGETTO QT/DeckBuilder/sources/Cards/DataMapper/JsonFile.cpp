@@ -18,15 +18,20 @@ JsonFile& JsonFile::setPath(const std::string& new_path) {
 }
 
 JsonFile& JsonFile::store(const Mazzo mazzo) {
-    QJsonValue nome_mazzo(QString::fromStdString(mazzo.getNomeMazzo()));
+    QJsonObject json_wrapper;
     QJsonValue counter(mazzo.getCounter());
     QJsonValue classe(mazzo.getClasse());
 
 	QJsonArray json_cards;
-    for(auto it = mazzo.getNumCopie().begin(); it != mazzo.getNumCopie().end(); ++it) {
-        json_cards.push_back(*it);
+    for(int i = 0; i < mazzo.getNumCopie().getSize(); ++i) {
+        json_cards.push_back(mazzo.getNumCopie()[i]);
 	}
-	QJsonDocument document(json_cards);
+
+    json_wrapper["counter"] = counter; 
+    json_wrapper["classe"] = classe;
+    json_wrapper["numCopie"] = json_cards;
+    
+	QJsonDocument document(json_wrapper);
 	QFile json_file(path.c_str());
 	json_file.open(QFile::WriteOnly);
 	json_file.write(document.toJson());
@@ -36,16 +41,17 @@ JsonFile& JsonFile::store(const Mazzo mazzo) {
 
 Mazzo& JsonFile::load() {
 	FixedVector<int> json_vector;
+    
 	QFile json_file(path.c_str());
 	json_file.open(QFile::ReadOnly);
 	QByteArray data = json_file.readAll();
 	json_file.close();
 	QJsonDocument document = QJsonDocument::fromJson(data);
 
-    std::string json_nome = document.object().value("Nome").toString().toStdString();
+    QJsonObject json_object = document.object();
 
     AbstractCard::Classe json_classe;
-    switch (document.object().value("Classe").toInt()) {
+    switch (json_object["classe"].toInt()) {
         case 0:
             json_classe = AbstractCard::Neutrale;
             break;
@@ -66,13 +72,13 @@ Mazzo& JsonFile::load() {
             break;
     }
 
-    unsigned int json_counter = document.object().value("Counter").toInt();
-	QJsonArray json_cards = document.array();
+    unsigned int json_counter = json_object["counter"].toInt();
+	QJsonArray json_cards = json_object["numCopie"].toArray();
 
 	for(int i = 0; i < json_cards.size(); ++i) {
 		QJsonValue json_value = json_cards.at(i);
 		json_vector.push_back(json_value.toInt());
 	}
-    Mazzo* mazzo = new Mazzo(json_nome, json_classe, json_vector, json_counter);
+    Mazzo* mazzo = new Mazzo(json_classe, json_vector, json_counter);
 	return *mazzo;
 };
