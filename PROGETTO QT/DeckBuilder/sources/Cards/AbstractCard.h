@@ -49,16 +49,3 @@ public:
 };
 
 #endif // ABSTRACT_CARD_H
-
-/*
-undefined reference to `
-AbstractCard::AbstractCard(
-    unsigned int,
-    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >,
-    std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >,
-    unsigned int,
-    AbstractCard::Rarita,
-    AbstractCard::Classe,
-    std::__cxx11::basic_string<char, std::char_traits<char>,std::allocator<char> >
-    )'
-*/

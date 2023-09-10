@@ -6,10 +6,16 @@
 
 RecapWidget::RecapWidget(QWidget* parent) : QWidget(parent) {
     tableWidget = new QTableWidget(0, 5, this);
-    
+
+    nome_label = new QLabel();    
     total_label = new QLabel();
 
     QVBoxLayout* vbox = new QVBoxLayout();
+    vbox->addWidget(nome_label);
+    nome_label->setAlignment(Qt::AlignCenter);
+    nome_label->setText(" awdadw ");
+    nome_label->setStyleSheet("font-size : 20px");
+    
     vbox->addWidget(total_label);
     total_label->setText("Numero Carte: ");
     total_label->setAlignment(Qt::AlignCenter);
@@ -107,6 +113,10 @@ void RecapWidget::clearTable() {
     disconnect(tableWidget, 0, 0, 0);
     tableWidget->clearContents();
     tableWidget->setRowCount(0);
+}
+
+void RecapWidget::InsertTitle(QString title) {
+    nome_label->setText(title);
 }
 
 void RecapWidget::UpdateTotal(const unsigned int total) {

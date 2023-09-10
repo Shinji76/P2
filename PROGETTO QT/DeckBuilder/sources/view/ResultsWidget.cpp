@@ -114,26 +114,6 @@ void ResultsWidget::clear() {
     boxes.clear();
 }
 
-
-void ResultsWidget::showResults(Query query, ResultSet results) {
-    unsigned int index = 0;
-    
-    for(auto it = boxes.begin(); it != boxes.end(); it++) {
-        (*it)->hide();
-    }
-    if(results.getTotal() == 0) {
-        results_total->setText("No results for \"" + QString::fromStdString(query.getName()) + "\".");
-    }
-    previous_page->setEnabled(query.getOffset() > 0);
-    next_page->setEnabled(results.getTotal() == 9);
-
-    for(auto it = boxes.begin(); it != boxes.end(); it++) {
-        grid->addWidget(*it, index / 3, index % 3);
-        (*it)->show();
-        index++;
-    }
-}
-
 const QVector<BoxWidget*>& ResultsWidget::getBoxes() const {
     return boxes;
 }

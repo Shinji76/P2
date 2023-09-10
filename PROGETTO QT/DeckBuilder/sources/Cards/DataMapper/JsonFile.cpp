@@ -18,6 +18,7 @@ JsonFile& JsonFile::setPath(const std::string& new_path) {
 }
 
 JsonFile& JsonFile::store(const Mazzo mazzo) {
+    QJsonObject nome;
     QJsonObject json_wrapper;
     QJsonValue counter(mazzo.getCounter());
     QJsonValue classe(mazzo.getClasse());
@@ -27,6 +28,7 @@ JsonFile& JsonFile::store(const Mazzo mazzo) {
         json_cards.push_back(mazzo.getNumCopie()[i]);
 	}
 
+    json_wrapper["nome"] = nome;
     json_wrapper["counter"] = counter; 
     json_wrapper["classe"] = classe;
     json_wrapper["numCopie"] = json_cards;
@@ -49,6 +51,8 @@ Mazzo& JsonFile::load() {
 	QJsonDocument document = QJsonDocument::fromJson(data);
 
     QJsonObject json_object = document.object();
+    
+    std::string json_nome = json_object["nome"].toString().toStdString();
 
     AbstractCard::Classe json_classe;
     switch (json_object["classe"].toInt()) {
@@ -79,6 +83,6 @@ Mazzo& JsonFile::load() {
 		QJsonValue json_value = json_cards.at(i);
 		json_vector.push_back(json_value.toInt());
 	}
-    Mazzo* mazzo = new Mazzo(json_classe, json_vector, json_counter);
+    Mazzo* mazzo = new Mazzo(json_nome, json_classe, json_vector, json_counter);
 	return *mazzo;
 };

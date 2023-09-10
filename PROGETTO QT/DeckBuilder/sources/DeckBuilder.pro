@@ -24,18 +24,14 @@ HEADERS += \
     Cards/Mostro.h \
     Cards/Segreto.h \
     \
-    Engine/FilterVisitor.h \
     Engine/Memory.h \
-    Engine/Query.h \
     Engine/ResultSet.h \
-    Engine/Sorting.h \
     \
     view/ClassSelectionWidget.h \
     view/HomeWidget.h \
     view/MainWindow.h \
     view/RecapWidget.h \
     view/ResultsWidget.h \
-    view/SearchWidget.h \
     \
     Cards/DataMapper/JsonFile.h \
     Cards/DataMapper/JsonFileAlbum.h \
@@ -55,18 +51,14 @@ SOURCES += \
     Cards/Mostro.cpp \
     Cards/Segreto.cpp \
     \
-    Engine/FilterVisitor.cpp \
     Engine/Memory.cpp \
-    Engine/Query.cpp \
     Engine/ResultSet.cpp \
-    Engine/Sorting.cpp \
     \
     view/ClassSelectionWidget.cpp \
     view/HomeWidget.cpp \
     view/MainWindow.cpp \
     view/RecapWidget.cpp \
     view/ResultsWidget.cpp \
-    view/SearchWidget.cpp \
     \
     Cards/DataMapper/JsonFile.cpp \
     Cards/DataMapper/JsonFileAlbum.cpp \

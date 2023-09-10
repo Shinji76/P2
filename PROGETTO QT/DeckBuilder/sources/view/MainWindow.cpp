@@ -66,10 +66,6 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     QVBoxLayout* vbox = new QVBoxLayout();
     hbox->addLayout(vbox);
 
-    search_widget = new SearchWidget(this);
-    search_widget->setMaximumWidth(400);
-    vbox->addWidget(search_widget);
-
     recap_widget = new RecapWidget(this);
     recap_widget->setMaximumWidth(400);
     vbox->addWidget(recap_widget);
@@ -84,12 +80,10 @@ MainWindow::MainWindow(Memory& engine, QWidget *parent)
     connect(close, &QAction::triggered, this, &MainWindow::close);
     connect(home_widget, &HomeWidget::createDeck, this, &MainWindow::newDeck);
     connect(home_widget, &HomeWidget::openDeck, this, &MainWindow::openDeck);
-    connect(search_widget, &SearchWidget::search_event, this, &MainWindow::search);
-    connect(results_widget, &ResultsWidget::previousPage, search_widget, &SearchWidget::previousPage);
-    connect(results_widget, &ResultsWidget::nextPage, search_widget, &SearchWidget::nextPage);
     connect(this, SIGNAL(addCardRecapEmitter(const AbstractCard*)), this, SLOT(addCard(const AbstractCard*)), Qt::UniqueConnection);
     connect(this, SIGNAL(removeCardRecapEmitter(const AbstractCard*)), this, SLOT(removeCard(const AbstractCard*)), Qt::UniqueConnection);
     connect(this, SIGNAL(updateTotalDeck(const unsigned int)), recap_widget, SLOT(UpdateTotal(const unsigned int)), Qt::UniqueConnection);
+    connect(this, SIGNAL(insertDeckName(QString)), recap_widget, SLOT(InsertTitle(QString)), Qt::UniqueConnection);
 }
 
 JsonFile* MainWindow::getDeckRepository() {
@@ -102,10 +96,6 @@ JsonFileAlbum* MainWindow::getAlbumRepository() {
 
 Memory& MainWindow::getEngine() {
     return engine;
-}
-
-SearchWidget* MainWindow::getSearchWidget() {
-    return search_widget;
 }
 
 void MainWindow::clearStack() {
@@ -138,7 +128,6 @@ void MainWindow::addCard(const AbstractCard* card) {
         recap_widget->updateRow(QString::fromStdString(card->getNome()), mazzo.getNumCopie()[card->getID()]);
     }   
 
-    //abilito bottone remove card
     results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '-')->setEnabled(true);
     recap_widget->findChild<QPushButton*>(QString::number(card->getID()) + '-')->setEnabled(true);
 
@@ -209,8 +198,12 @@ void MainWindow::newDeck() {
     if (path.isEmpty()) {
         return;
     }
-    stacked_widget->setCurrentWidget(class_selection_widget);    
 
+    QString deck_name = QFileInfo(path).baseName();
+    mazzo.setNome(deck_name.toStdString());
+
+    emit insertDeckName(deck_name);
+    stacked_widget->setCurrentWidget(class_selection_widget);    
     deck_repository = new JsonFile(path.toStdString());
 }
 
@@ -253,6 +246,7 @@ void MainWindow::openDeck() {
 
     deck_repository = new JsonFile(path.toStdString());
     mazzo = deck_repository->load();
+    emit insertDeckName(QString::fromStdString(mazzo.getNome()));
 
     Reader reader_album;
     JsonAlbum converter_album(reader_album);
@@ -300,12 +294,6 @@ void MainWindow::saveDeckAs() {
     has_unsaved_changes = false;
 }
 
-void MainWindow::search(Query query) {
-    results_widget->showResults(query, engine.search(query));
-    stacked_widget->setCurrentIndex(0);
-    clearStack();
-}
-
 void MainWindow::close() {
     if(has_unsaved_changes) {
         QMessageBox::StandardButton confirmation;
@@ -317,7 +305,5 @@ void MainWindow::close() {
             MainWindow::saveDeck();
         }
     }
-    else {
-        QApplication::quit();
-    }
+    QApplication::quit();
 }

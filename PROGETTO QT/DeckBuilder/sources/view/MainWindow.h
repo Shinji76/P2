@@ -3,12 +3,10 @@
 
 #include "../Cards/DataMapper/JsonFile.h"
 #include "../Cards/DataMapper/JsonFileAlbum.h"
-#include "../Engine/Query.h"
 #include "../Engine/Memory.h"
 
 #include "HomeWidget.h"
 #include "ClassSelectionWidget.h"
-#include "SearchWidget.h"
 #include "ResultsWidget.h"
 #include "RecapWidget.h"
 
@@ -30,7 +28,6 @@ private:
     HomeWidget* home_widget;
     ClassSelectionWidget* class_selection_widget;
     ResultsWidget* results_widget;
-    SearchWidget* search_widget;
     RecapWidget* recap_widget;
     void clearStack();
     
@@ -39,12 +36,12 @@ public:
     JsonFile* getDeckRepository();
     JsonFileAlbum* getAlbumRepository();
     Memory& getEngine();
-    SearchWidget* getSearchWidget();
 
 signals:
     void addCardRecapEmitter(const AbstractCard* card);
     void removeCardRecapEmitter(const AbstractCard* card);
     void updateTotalDeck(const unsigned int total);
+    void insertDeckName(QString nome);
 
 public slots:
     //ricevitore segnali
@@ -60,7 +57,6 @@ public slots:
     void openDeck();
     void saveDeck();
     void saveDeckAs();
-    void search(Query query);
     void close();
 };
 

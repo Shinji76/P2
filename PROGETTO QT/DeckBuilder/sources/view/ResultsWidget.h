@@ -8,7 +8,6 @@
 #include <QLabel>
 #include <QPushButton>
 
-#include "../Engine/Query.h"
 #include "../Engine/ResultSet.h"
 #include "CardLayout/BoxWidget.h"
 
@@ -36,8 +35,6 @@ public slots:
     void showNextPage();
     void showPreviousPage();
     void createBoxes(std::vector<const AbstractCard*> cards);
-        
-    	void showResults(Query query, ResultSet results);
-};
 
+};
 #endif
