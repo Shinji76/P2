@@ -154,7 +154,7 @@ void MainWindow::addCard(const AbstractCard* card) {
         }
     }
 
-    if( (card->getRarita() == 3) || (mazzo.getNumCopie()[card->getID()] == 2) ) {     // Rarita 3 = Leggendaria
+    if( (card->getRarita() == AbstractCard::Rarita::Leggendaria) || (mazzo.getNumCopie()[card->getID()] == 2) ) {
         results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(false);
         recap_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(false);
     }
@@ -165,10 +165,18 @@ void MainWindow::addCard(const AbstractCard* card) {
 void MainWindow::removeCard(const AbstractCard* card) {
     mazzo.removeCard(card->getID());
 
-//    if(mazzo.getCounter() == 19) {
-//        for()
-//    }
-    
+    if(mazzo.getCounter() == 19) {
+
+        for(int i = 0; i < engine.getMemory().size(); i++) {
+            if(mazzo.getNumCopie()[engine.getMemory().at(i)->getID()] == 0) {
+                results_widget->findChild<QPushButton*>(QString::number(engine.getMemory().at(i)->getID()) + '+')->setEnabled(true);
+            }
+            else if(mazzo.getNumCopie()[engine.getMemory().at(i)->getID()] == 1 && mazzo.getNumCopie()[engine.getMemory().at(i)->getRarita() != AbstractCard::Rarita::Leggendaria]) {
+                results_widget->findChild<QPushButton*>(QString::number(engine.getMemory().at(i)->getID()) + '+')->setEnabled(true);
+            }
+        }
+    }
+
     if(mazzo.getNumCopie()[card->getID()] == 0) {
         results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '-')->setEnabled(false);
         results_widget->findChild<QPushButton*>(QString::number(card->getID()) + '+')->setEnabled(true);
