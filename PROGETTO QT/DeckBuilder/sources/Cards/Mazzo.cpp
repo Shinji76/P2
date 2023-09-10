@@ -43,3 +43,10 @@ bool Mazzo::isFull(const AbstractCard* card) {
     }
     return false;
 }
+
+void Mazzo::clear() {
+    for(int i = 0; i < numCopie.getSize(); i++) {
+        numCopie[i] = 0;
+    }
+    counter = 0;
+}

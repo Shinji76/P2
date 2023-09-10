@@ -31,11 +31,13 @@ BoxWidget::BoxWidget(const AbstractCard* card, QWidget *parent) : QWidget(parent
     remove_button = new QPushButton(QIcon(QPixmap(":/Assets/Icons/minus.svg")), "");
     remove_button->setObjectName(QString::number(card->getID()) + '-');
     remove_button->setMinimumWidth(50);
+    remove_button->setStyleSheet("border: 1px solid black;");
     remove_button->setEnabled(false);
     hbox->addWidget(remove_button);
 
     add_button = new QPushButton(QIcon(QPixmap(":/Assets/Icons/plus.svg")), "");
     add_button->setObjectName(QString::number(card->getID()) + '+');
+    add_button->setStyleSheet("border: 1px solid black;");
     add_button->setMinimumWidth(50);
     hbox->addWidget(add_button);
 

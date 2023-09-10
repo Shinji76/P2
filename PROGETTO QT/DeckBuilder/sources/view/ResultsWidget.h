@@ -31,11 +31,13 @@ signals:
 	void nextPage();
 
 public slots:
+    void clear();
     void showInitialResults();
     void showNextPage();
     void showPreviousPage();
     void createBoxes(std::vector<const AbstractCard*> cards);
-	void showResults(Query query, ResultSet results);
+        
+    	void showResults(Query query, ResultSet results);
 };
 
 #endif

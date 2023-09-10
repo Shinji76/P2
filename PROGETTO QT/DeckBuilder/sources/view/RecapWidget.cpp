@@ -103,6 +103,12 @@ void RecapWidget::RemoveClick() {
     emit removeEmitterRecap(qobject_cast<QPushButton*>(QObject::sender())->objectName());
 }
 
+void RecapWidget::clearTable() {
+    disconnect(tableWidget, 0, 0, 0);
+    tableWidget->clearContents();
+    tableWidget->setRowCount(0);
+}
+
 void RecapWidget::UpdateTotal(const unsigned int total) {
     QString counter = QString::number(total);
     total_label->setText("Numero carte: " + counter + "/20");

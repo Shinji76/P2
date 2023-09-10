@@ -21,6 +21,7 @@ public:
     FixedVector<int> getNumCopie() const;
     int getCounter() const;
 
+    void clear();
 	void addCard(unsigned int id);
 	void removeCard(unsigned int id);
 

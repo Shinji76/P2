@@ -9,9 +9,9 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QTextEdit>
-#include <QSplitter>
 #include <QFileDialog>
 #include <QStackedWidget>
+#include <QMessageBox>
 #include <QScrollArea>
 
 #include "../Cards/DataMapper/JsonFile.h"
@@ -171,7 +171,7 @@ void MainWindow::removeCard(const AbstractCard* card) {
             if(mazzo.getNumCopie()[engine.getMemory().at(i)->getID()] == 0) {
                 results_widget->findChild<QPushButton*>(QString::number(engine.getMemory().at(i)->getID()) + '+')->setEnabled(true);
             }
-            else if(mazzo.getNumCopie()[engine.getMemory().at(i)->getID()] == 1 && mazzo.getNumCopie()[engine.getMemory().at(i)->getRarita() != AbstractCard::Rarita::Leggendaria]) {
+            else if(mazzo.getNumCopie()[engine.getMemory().at(i)->getID()] == 1 && mazzo.getNumCopie()[engine.getMemory().at(i)->getRarita() != AbstractCard::Leggendaria]) {
                 results_widget->findChild<QPushButton*>(QString::number(engine.getMemory().at(i)->getID()) + '+')->setEnabled(true);
             }
         }
@@ -203,36 +203,52 @@ void MainWindow::removeCardRecap(QString button_name) {
 }
 
 void MainWindow::newDeck() {
+    systemClear();
+
     QString path = QFileDialog::getSaveFileName(this, "Creates new Deck", "./", "JSON files *.json");
     if (path.isEmpty()) {
         return;
     }
-    if(home_widget) {
-        stacked_widget->removeWidget(home_widget);
-        delete home_widget;
-    }
-    if (deck_repository != nullptr) {
-        delete deck_repository;
-    }
-
     stacked_widget->setCurrentWidget(class_selection_widget);    
 
     deck_repository = new JsonFile(path.toStdString());
 }
 
-void MainWindow::openDeck() {
-    QString path = QFileDialog::getOpenFileName(this, "Open existing Deck", "./", "JSON files *.json");  
-    if (path.isEmpty()) {
-        return;
+void MainWindow::systemClear() {
+    if(has_unsaved_changes) {
+        QMessageBox::StandardButton confirmation;
+        confirmation = QMessageBox::question(
+            this, "Salvare", "Sono presenti modifiche non salvate\nVolete salvarle?",
+            QMessageBox::Yes | QMessageBox::No
+        );
+        if (confirmation == QMessageBox::Yes) {
+            MainWindow::saveDeck();
+        }
     }
+    if(results_widget) {
+        results_widget->clear();
+    }
+    if(recap_widget) {
+        recap_widget->clearTable();
+    }
+    mazzo.clear();
     if(home_widget) {
         stacked_widget->removeWidget(home_widget);
         delete home_widget;
+        home_widget = nullptr;
     }
     if (deck_repository != nullptr) {
         delete deck_repository;
     }
+}
 
+void MainWindow::openDeck() {
+    systemClear();
+
+    QString path = QFileDialog::getOpenFileName(this, "Open existing Deck", "./", "JSON files *.json");  
+    if (path.isEmpty()) {
+        return;
+    }
     stacked_widget->setCurrentWidget(container);
 
     deck_repository = new JsonFile(path.toStdString());
@@ -271,6 +287,7 @@ void MainWindow::saveDeck() {
         return;
     }
     deck_repository->store(mazzo);
+    QMessageBox::information(this, "Salvataggio completato", "Il salvataggio è avvenuto con successo.");
     has_unsaved_changes = false;
 }
 
@@ -290,14 +307,14 @@ void MainWindow::search(Query query) {
 }
 
 void MainWindow::close() {
-    if (has_unsaved_changes) {
+    if(has_unsaved_changes) {
         QMessageBox::StandardButton confirmation;
         confirmation = QMessageBox::question(
-            this, "Quit?", "There are unsaved changes.\nDo you really want to quit?",
+            this, "Salvare", "Sono presenti modifiche non salvate\nVolete salvarle?",
             QMessageBox::Yes | QMessageBox::No
         );
         if (confirmation == QMessageBox::Yes) {
-            QApplication::quit();
+            MainWindow::saveDeck();
         }
     }
     else {

@@ -26,7 +26,6 @@ private:
     JsonFile* deck_repository;
     JsonFileAlbum* album_repository;
     QStackedWidget* stacked_widget;
-    QSplitter* splitter;
     QWidget* container;
     HomeWidget* home_widget;
     ClassSelectionWidget* class_selection_widget;
@@ -55,6 +54,7 @@ public slots:
     void addCardRecap(QString button_name);     //implementare cpp 
     void removeCardRecap(QString button_name);
     void createTable();
+    void systemClear();
 
     void newDeck();
     void openDeck();
